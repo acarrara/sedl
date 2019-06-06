@@ -1,1 +1,98 @@
-/* You can add global styles to this file, and also import other style files */
+@import "style/reset";
+@import "style/decisions";
+@import "style/typography";
+@import "style/buttons";
+@import "style/dashboard";
+
+$m-color-foreground: #c8963e;
+$h-color-foreground: #e3c567;
+$p-color-foreground: #b6be9c;
+$w-color-foreground: #327cad;
+$f-color-foreground: #6ca285;
+
+.cell__svg {
+  fill: transparent;
+}
+
+.m {
+  stroke: $m-color-foreground;
+  background-color: rgba($m-color-foreground, .5);
+}
+
+.h {
+  stroke: $h-color-foreground;
+  background-color: rgba($h-color-foreground, .5);
+}
+
+.p {
+  stroke: $p-color-foreground;
+  background-color: rgba($p-color-foreground, .5);
+}
+
+.w {
+  stroke: $w-color-foreground;
+  background-color: rgba($w-color-foreground, .5);
+}
+
+.f {
+  stroke: $f-color-foreground;
+  background-color: rgba($f-color-foreground, .5);
+}
+
+.board-container {
+  flex-grow: 1;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: $background-color;
+}
+
+.board {
+  background-color: #fafafa;
+  display: grid;
+  grid-template-rows: repeat(var(--grid-dimension, 8), 1fr);
+  grid-template-columns: repeat(var(--grid-dimension, 8), 1fr);
+  width: 40em;
+  box-shadow: 0 4px 4px 0 #666;
+  padding: 6px;
+}
+
+.cell {
+  border-color: transparent;
+  border-width: 4px;
+  border-style: solid;
+  display: block;
+  border-radius: 4px;
+
+  transition: 175ms ease-in-out;
+  cursor: pointer;
+
+  &:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 4px 4px 0 #999;
+  }
+}
+
+@each $conqueror-name, $conqueror-color in $conqueror-colors {
+  @each $direction-name, $direction-value in $directions {
+    .d-#{$direction-name}--#{$conqueror-name} {
+      border-#{$direction-value}-color: $conqueror-color;
+    }
+  }
+}
+
+.visually-hidden {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip: rect(1px, 1px, 1px, 1px);
+  left: -9999px;
+}
+
+.wrapper {
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+  width: 100vw;
+}

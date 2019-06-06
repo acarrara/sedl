@@ -1,0 +1,23 @@
+
+$m-color-foreground: #c8963e;
+$h-color-foreground: #e3c567;
+$p-color-foreground: #b6be9c;
+$w-color-foreground: #327cad;
+$f-color-foreground: #6ca285;
+
+$conqueror-colors: (
+  //p1: #81abb6,
+  c1: #246799,
+  //p2: #d8918c
+  c2: #ad544d
+);
+
+$directions: (
+  north: 'top',
+  east: 'right',
+  south: 'bottom',
+  west: 'left'
+);
+
+$background-color: #ededed;
+$shadow-on-background-color: darken($background-color, 50%);

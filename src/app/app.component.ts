@@ -1,10 +1,23 @@
-import { Component } from '@angular/core';
+import {ChangeDetectionStrategy, Component} from '@angular/core';
+import {GameService} from './game.service';
 
 @Component({
-  selector: 'se-root',
-  templateUrl: './app.component.html',
-  styleUrls: ['./app.component.scss']
+  selector: 'se-app',
+  templateUrl: 'app.component.html',
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class AppComponent {
-  title = 'sedl';
+
+  constructor(private game: GameService) {
+  }
+
+  conquer(i: number) {
+    this.game.conquer(i);
+  }
+
+  conquerHover(i: number, $event: MouseEvent) {
+    if ($event.buttons === 1) {
+      this.conquer(i);
+    }
+  }
 }

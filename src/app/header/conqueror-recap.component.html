@@ -1,0 +1,15 @@
+<div class="conqueror__content">
+  <strong>{{conqueror.name}}</strong>
+  <dl class="conqueror__dominions">
+    <se-conqueror-dominion-element class="conqueror__dominion-element" seed="m"
+                                   [quantity]="game.dominions$ | async | seCount: 'm':conqueror.id"></se-conqueror-dominion-element>
+    <se-conqueror-dominion-element class="conqueror__dominion-element" seed="f"
+                                   [quantity]="game.dominions$ | async | seCount: 'f':conqueror.id"></se-conqueror-dominion-element>
+    <se-conqueror-dominion-element class="conqueror__dominion-element" seed="h"
+                                   [quantity]="game.dominions$ | async | seCount: 'h':conqueror.id"></se-conqueror-dominion-element>
+    <se-conqueror-dominion-element class="conqueror__dominion-element" seed="p"
+                                   [quantity]="game.dominions$ | async | seCount: 'p':conqueror.id"></se-conqueror-dominion-element>
+    <se-conqueror-dominion-element class="conqueror__dominion-element" seed="c"
+                                   [quantity]="conqueror.treasure"></se-conqueror-dominion-element>
+  </dl>
+</div>

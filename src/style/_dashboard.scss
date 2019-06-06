@@ -1,0 +1,38 @@
+.header {
+  flex-grow: 0;
+
+  width: 100vw;
+
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+
+  background-color: #fafafa;
+
+  box-shadow: 0 1px 4px 0 $shadow-on-background-color;
+
+  z-index: 900;
+}
+
+.conqueror__dominions {
+  display: flex;
+  gap: 16px;
+}
+
+.conqueror__dominion-element {
+  min-width: 5em;
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+
+.conqueror__content {
+  padding: 8px;
+  display: flex;
+  align-items: center;
+  gap: 1em;
+}
+
+.conqueror-recap--right {
+  direction: rtl;
+}

@@ -1,0 +1,6 @@
+<se-conqueror-recap [conqueror]="game.conquerors[0]"></se-conqueror-recap>
+<button class="button  button--primary" (click)="game.pass()"
+        [style.--conquerorColor]="(game.conqueror$ | async).color">
+  Pass
+</button>
+<se-conqueror-recap [conqueror]="game.conquerors[1]" class="conqueror-recap--right"></se-conqueror-recap>
