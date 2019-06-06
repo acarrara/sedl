@@ -8,7 +8,7 @@ import {GameService} from './game.service';
 })
 export class AppComponent {
 
-  constructor(private game: GameService) {
+  constructor(public game: GameService) {
   }
 
   conquer(i: number) {
