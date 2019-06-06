@@ -1,5 +1,5 @@
 <div class="wrapper" (document:keydown.space)="game.pass()">
-<se-header class="header"></se-header>
+<se-header class="header" [style.--conquerorColor]="(game.conqueror$ | async).color"></se-header>
 <div class="board-container">
   <main class="board" [seGrid]="game.dimension()">
     <se-cell [seDominion]="(game.dominions$ | async)[i]"
