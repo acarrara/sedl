@@ -1,4 +1,4 @@
-export class Conqueror {
+export class Lord {
 
   public id: string;
   public name: string;

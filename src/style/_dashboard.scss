@@ -8,32 +8,32 @@
   align-items: center;
 
   background-color: #fafafa;
-  border-top: 8px solid var(--conqueror-color);
+  border-top: 8px solid var(--lord-color);
 
   box-shadow: 0 1px 4px 0 $shadow-on-background-color;
 
   z-index: 900;
 }
 
-.conqueror__dominions {
+.lord__regions {
   display: flex;
   gap: 16px;
 }
 
-.conqueror__dominion-element {
+.lord__region-element {
   min-width: 5em;
   display: flex;
   align-items: center;
   gap: 4px;
 }
 
-.conqueror__content {
+.lord__content {
   padding: 8px;
   display: flex;
   align-items: center;
   gap: 1em;
 }
 
-.conqueror-recap--right {
+.lord-recap--right {
   direction: rtl;
 }

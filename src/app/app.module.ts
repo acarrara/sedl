@@ -2,10 +2,10 @@ import {BrowserModule} from '@angular/platform-browser';
 import {NgModule} from '@angular/core';
 import {AppComponent} from './app.component';
 import {CellComponent} from './cell.component';
-import {DominionDirective} from './dominion.directive';
+import {RegionDirective} from './region.directive';
 import {GridDirective} from './grid.directive';
-import {ConquerorViewComponent} from './header/conqueror-recap.component';
-import {ConquerorDominionElementComponent} from './header/conqueror-dominion-element.component';
+import {LordRecapComponent} from './header/lord-recap.component';
+import {LordRegionElementComponent} from './header/lord-region-element.component';
 import {GameService} from './game.service';
 import {CountPipe} from './header/seCount.pipe';
 import {HeaderComponent} from './header/header.component';
@@ -14,9 +14,9 @@ import {HeaderComponent} from './header/header.component';
   declarations: [
     AppComponent,
     CellComponent,
-    ConquerorViewComponent,
-    ConquerorDominionElementComponent,
-    DominionDirective,
+    LordRecapComponent,
+    LordRegionElementComponent,
+    RegionDirective,
     GridDirective,
     CountPipe,
     HeaderComponent

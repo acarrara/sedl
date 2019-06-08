@@ -1,17 +1,17 @@
 import {Board} from './Board';
 
-describe('Dominion', () => {
+describe('Board', () => {
 
-  const game = new Board(['r', 'b', 'r', 'u'], ['p', 'h', 'm', 'w']);
+  const board = new Board(['r', 'b', 'r', 'u'], ['p', 'h', 'm', 'w']);
 
   describe('borderNorth', () => {
 
     it('should return borders north', () => {
 
-      expect(game.borderNorth(0)).toBeTruthy();
-      expect(game.borderNorth(1)).toBeTruthy();
-      expect(game.borderNorth(2)).toBeFalsy();
-      expect(game.borderNorth(3)).toBeFalsy();
+      expect(board.borderNorth(0)).toBeTruthy();
+      expect(board.borderNorth(1)).toBeTruthy();
+      expect(board.borderNorth(2)).toBeFalsy();
+      expect(board.borderNorth(3)).toBeFalsy();
     });
   });
 
@@ -19,10 +19,10 @@ describe('Dominion', () => {
 
     it('should return borders south', () => {
 
-      expect(game.borderSouth(0)).toBeFalsy();
-      expect(game.borderSouth(1)).toBeTruthy();
-      expect(game.borderSouth(2)).toBeTruthy();
-      expect(game.borderSouth(3)).toBeFalsy();
+      expect(board.borderSouth(0)).toBeFalsy();
+      expect(board.borderSouth(1)).toBeTruthy();
+      expect(board.borderSouth(2)).toBeTruthy();
+      expect(board.borderSouth(3)).toBeFalsy();
     });
   });
 
@@ -30,10 +30,10 @@ describe('Dominion', () => {
 
     it('should return borders east', () => {
 
-      expect(game.borderEast(0)).toBeTruthy();
-      expect(game.borderEast(1)).toBeTruthy();
-      expect(game.borderEast(2)).toBeTruthy();
-      expect(game.borderEast(3)).toBeFalsy();
+      expect(board.borderEast(0)).toBeTruthy();
+      expect(board.borderEast(1)).toBeTruthy();
+      expect(board.borderEast(2)).toBeTruthy();
+      expect(board.borderEast(3)).toBeFalsy();
     });
   });
 
@@ -41,10 +41,10 @@ describe('Dominion', () => {
 
     it('should return borders west', () => {
 
-      expect(game.borderWest(0)).toBeTruthy();
-      expect(game.borderWest(1)).toBeTruthy();
-      expect(game.borderWest(2)).toBeTruthy();
-      expect(game.borderWest(3)).toBeFalsy();
+      expect(board.borderWest(0)).toBeTruthy();
+      expect(board.borderWest(1)).toBeTruthy();
+      expect(board.borderWest(2)).toBeTruthy();
+      expect(board.borderWest(3)).toBeFalsy();
     });
   });
 });

@@ -1,19 +1,19 @@
 import {Directive, ElementRef, Input, OnChanges, SimpleChanges} from '@angular/core';
-import {Dominion} from './models/Dominion';
+import {Region} from './models/Region';
 
 @Directive({
-  selector: '[seDominion]',
+  selector: '[seRegion]',
 })
-export class DominionDirective implements OnChanges {
+export class RegionDirective implements OnChanges {
 
   @Input()
-  public seDominion: Dominion;
+  public seRegion: Region;
 
   constructor(private el: ElementRef) {
   }
 
   public ngOnChanges(changes: SimpleChanges): void {
-    if (!changes.seDominion.currentValue.equals(changes.seDominion.previousValue)) {
+    if (!changes.seRegion.currentValue.equals(changes.seRegion.previousValue)) {
       this.removeBorderClasses();
       this.setBorder('north');
       this.setBorder('east');
@@ -23,13 +23,13 @@ export class DominionDirective implements OnChanges {
   }
 
   private setBorder(direction: string) {
-    if (this.seDominion.borders[direction]) {
+    if (this.seRegion.borders[direction]) {
       this.el.nativeElement.classList.add(this.className(direction));
     }
   }
 
   private className(direction: string) {
-    return 'd-' + direction + '--' + this.seDominion.conqueror;
+    return 'd-' + direction + '--' + this.seRegion.lord;
   }
 
   private removeBorderClasses() {

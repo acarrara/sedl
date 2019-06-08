@@ -1,16 +1,16 @@
 import {ChangeDetectionStrategy, Component, Input} from '@angular/core';
-import {Conqueror} from '../models/Conqueror';
+import {Lord} from '../models/Lord';
 import {GameService} from '../game.service';
 
 @Component({
-  selector: 'se-conqueror-recap',
-  templateUrl: 'conqueror-recap.component.html',
+  selector: 'se-lord-recap',
+  templateUrl: 'lord-recap.component.html',
   changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class ConquerorViewComponent {
+export class LordRecapComponent {
 
   @Input()
-  conqueror: Conqueror;
+  lord: Lord;
 
   constructor(public game: GameService) {
   }

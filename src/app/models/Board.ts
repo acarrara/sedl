@@ -1,7 +1,7 @@
-import {Dominion} from './Dominion';
+import {Region} from './Region';
 import {Borders} from './Borders';
 import {Grid} from './Grid';
-import {Conqueror} from './Conqueror';
+import {Lord} from './Lord';
 import {costOf} from './resources';
 
 export class Board {
@@ -9,39 +9,39 @@ export class Board {
   public grid: Grid;
 
   public map: string[];
-  public dominions: Dominion[];
+  public regions: Region[];
 
-  private source: string[];
+  private regionsAsStrings: string[];
 
-  constructor(source: string[], map: string[]) {
-    this.grid = new Grid(Math.sqrt(source.length));
-    this.source = source;
+  constructor(regionsAsStrings: string[], map: string[]) {
+    this.grid = new Grid(Math.sqrt(regionsAsStrings.length));
+    this.regionsAsStrings = regionsAsStrings;
     this.map = map;
-    this.arrangeDominions();
+    this.arrangeRegions();
   }
 
-  conquer(i: number, conqueror: Conqueror) {
-    const canConquer = this.canConquer(i, conqueror);
+  conquer(i: number, lord: Lord) {
+    const canConquer = this.canConquer(i, lord);
     if (canConquer) {
-      conqueror.treasure -= costOf(this.dominions[i].type);
-      this.source[i] = conqueror.id;
-      this.updateDominions(i);
+      lord.treasure -= costOf(this.regions[i].type);
+      this.regionsAsStrings[i] = lord.id;
+      this.updateRegions(i);
     }
     return canConquer;
   }
 
-  public arrangeDominions() {
-    this.dominions = this.source.map((conqueror, i) => new Dominion(conqueror, this.map[i]));
-    this.dominions.forEach((dominion, i) => dominion.borders = this.borders(i));
+  public arrangeRegions() {
+    this.regions = this.regionsAsStrings.map((lord, i) => new Region(lord, this.map[i]));
+    this.regions.forEach((region, i) => region.borders = this.borders(i));
   }
 
-  public updateDominions(i: number) {
+  public updateRegions(i: number) {
     const toUpdate = this.grid.getNeighbourhood(i);
     toUpdate.forEach(current => {
-      this.dominions[current] = new Dominion(this.source[current], this.map[current]);
+      this.regions[current] = new Region(this.regionsAsStrings[current], this.map[current]);
     });
     toUpdate.forEach(current => {
-      this.dominions[current].borders = this.borders(current);
+      this.regions[current].borders = this.borders(current);
     });
   }
 
@@ -62,11 +62,11 @@ export class Board {
   }
 
   public borderAt(position: number, other: number): boolean {
-    return this.dominions[position].hasSameOwner(this.getSafeDominion(other));
+    return this.regions[position].hasSameOwner(this.getSafeRegion(other));
   }
 
-  private getSafeDominion(other: number) {
-    return this.grid.outOfBoundaries(other) ? Dominion.UNCHARTED : this.dominions[other];
+  private getSafeRegion(other: number) {
+    return this.grid.outOfBoundaries(other) ? Region.UNCHARTED : this.regions[other];
   }
 
 
@@ -74,19 +74,19 @@ export class Board {
     return new Borders(this.borderNorth(position), this.borderEast(position), this.borderSouth(position), this.borderWest(position));
   }
 
-  private canConquer(i: number, conqueror: Conqueror) {
-    return this.dominions[i].type !== 's' &&
-      this.dominions[i].conqueror !== conqueror.id &&
-      this.getNeighbours(i).some(dominion => dominion.conqueror === conqueror.id) &&
-      conqueror.treasure >= costOf(this.dominions[i].type);
+  private canConquer(i: number, lord: Lord) {
+    return this.regions[i].type !== 's' &&
+      this.regions[i].lord !== lord.id &&
+      this.getNeighbours(i).some(region => region.lord === lord.id) &&
+      lord.treasure >= costOf(this.regions[i].type);
   }
 
   private getNeighbours(i: number) {
     return [
-      this.getSafeDominion(this.grid.north(i)),
-      this.getSafeDominion(this.grid.east(i)),
-      this.getSafeDominion(this.grid.south(i)),
-      this.getSafeDominion(this.grid.west(i))
+      this.getSafeRegion(this.grid.north(i)),
+      this.getSafeRegion(this.grid.east(i)),
+      this.getSafeRegion(this.grid.south(i)),
+      this.getSafeRegion(this.grid.west(i))
     ];
   }
 }

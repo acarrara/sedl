@@ -1,0 +1,15 @@
+<div class="lord__content">
+  <strong>{{lord.name}}</strong>
+  <dl class="lord__regions">
+    <se-lord-region-element class="lord__region-element" seed="m"
+                            [quantity]="game.regions$ | async | seCount: 'm':lord.id"></se-lord-region-element>
+    <se-lord-region-element class="lord__region-element" seed="f"
+                            [quantity]="game.regions$ | async | seCount: 'f':lord.id"></se-lord-region-element>
+    <se-lord-region-element class="lord__region-element" seed="h"
+                            [quantity]="game.regions$ | async | seCount: 'h':lord.id"></se-lord-region-element>
+    <se-lord-region-element class="lord__region-element" seed="p"
+                            [quantity]="game.regions$ | async | seCount: 'p':lord.id"></se-lord-region-element>
+    <se-lord-region-element class="lord__region-element" seed="c"
+                            [quantity]="lord.treasure"></se-lord-region-element>
+  </dl>
+</div>

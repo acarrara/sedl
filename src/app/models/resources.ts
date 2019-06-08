@@ -1,4 +1,4 @@
-export const yieldOf: (type: string) => number = (type: string) => {
+export const WorthOf: (type: string) => number = (type: string) => {
   switch (type) {
     case 'm':
       return 3;

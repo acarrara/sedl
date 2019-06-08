@@ -1,45 +1,45 @@
 import {Injectable} from '@angular/core';
-import {Conqueror} from './models/Conqueror';
+import {Lord} from './models/Lord';
 import {BehaviorSubject, Observable} from 'rxjs';
-import {Dominion} from './models/Dominion';
-import {yieldOf} from './models/resources';
-import {board, conquerors} from './models/game';
+import {Region} from './models/Region';
+import {WorthOf} from './models/resources';
+import {board, lords} from './models/game';
 
 @Injectable()
 export class GameService {
 
-  private conquerorIndex = 0;
+  private lordIndex = 0;
 
-  private dominionsSubject: BehaviorSubject<Dominion[]> = new BehaviorSubject(board.dominions);
-  private conquerorSubject: BehaviorSubject<Conqueror> = new BehaviorSubject(conquerors[0]);
+  private regionsSubject: BehaviorSubject<Region[]> = new BehaviorSubject(board.regions);
+  private lordSubject: BehaviorSubject<Lord> = new BehaviorSubject(lords[0]);
 
-  public readonly dominions$: Observable<Dominion[]> = this.dominionsSubject.asObservable();
-  public readonly conqueror$: Observable<Conqueror> = this.conquerorSubject.asObservable();
+  public readonly regions$: Observable<Region[]> = this.regionsSubject.asObservable();
+  public readonly lord$: Observable<Lord> = this.lordSubject.asObservable();
 
-  public conquerors: Conqueror[] = conquerors;
+  public lords: Lord[] = lords;
 
   conquer(i: number) {
-    if (board.conquer(i, this.currentConqueror())) {
-      this.dominionsSubject.next(board.dominions);
+    if (board.conquer(i, this.currentLord())) {
+      this.regionsSubject.next(board.regions);
     }
   }
 
   public pass(): void {
     this.harvest();
-    this.conquerorIndex = (this.conquerorIndex + 1) % conquerors.length;
-    this.conquerorSubject.next(conquerors[this.conquerorIndex]);
+    this.lordIndex = (this.lordIndex + 1) % lords.length;
+    this.lordSubject.next(lords[this.lordIndex]);
   }
 
-  private currentConqueror() {
-    return this.conquerorSubject.getValue();
+  private currentLord() {
+    return this.lordSubject.getValue();
   }
 
   private harvest() {
-    this.currentConqueror().treasure =
-      this.dominionsSubject.getValue()
-        .filter(dominion => dominion.conqueror === this.currentConqueror().id)
-        .map(dominion => yieldOf(dominion.type))
-        .reduce((previousValue, currentValue) => previousValue + currentValue, this.currentConqueror().treasure);
+    this.currentLord().treasure =
+      this.regionsSubject.getValue()
+        .filter(region => region.lord === this.currentLord().id)
+        .map(region => WorthOf(region.type))
+        .reduce((previousValue, currentValue) => previousValue + currentValue, this.currentLord().treasure);
   }
 
   public seeds(): string[] {
@@ -47,6 +47,6 @@ export class GameService {
   }
 
   public dimension(): number {
-    return Math.sqrt(board.dominions.length);
+    return Math.sqrt(board.regions.length);
   }
 }

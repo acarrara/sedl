@@ -1,11 +1,11 @@
 import {ChangeDetectionStrategy, Component, Input} from '@angular/core';
 
 @Component({
-  selector: 'se-conqueror-dominion-element',
-  templateUrl: 'conqueror-dominion-element.component.html',
+  selector: 'se-lord-region-element',
+  templateUrl: 'lord-region-element.component.html',
   changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class ConquerorDominionElementComponent {
+export class LordRegionElementComponent {
 
   @Input()
   public seed: string;

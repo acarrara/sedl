@@ -73,10 +73,10 @@ $f-color-foreground: #6ca285;
   }
 }
 
-@each $conqueror-name, $conqueror-color in $conqueror-colors {
+@each $lord-name, $lord-color in $lord-colors {
   @each $direction-name, $direction-value in $directions {
-    .d-#{$direction-name}--#{$conqueror-name} {
-      border-#{$direction-value}-color: $conqueror-color;
+    .d-#{$direction-name}--#{$lord-name} {
+      border-#{$direction-value}-color: $lord-color;
     }
   }
 }

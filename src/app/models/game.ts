@@ -1,12 +1,12 @@
-import {Conqueror} from './Conqueror';
-import conquerorsJson from '../../conquerors.json';
+import {Lord} from './Lord';
+import lordsJson from '../../lords.json';
 import {Board} from './Board';
 
-export const conquerors: Conqueror[] = conquerorsJson;
+export const lords: Lord[] = lordsJson;
 
 const U = 'u';
-const B = conquerors[0].id;
-const R = conquerors[1].id;
+const B = lords[0].id;
+const R = lords[1].id;
 
 const map: string[] = [
   'w', 'p', 'p', 'h', 'h', 'm', 'm', 'm', 'm', 'm', 'm', 'h', 'p', 'p', 'p', 'p',
@@ -27,7 +27,7 @@ const map: string[] = [
   'w', 'w', 'w', 'w', 'w', 'w', 'w', 'w', 'w', 'w', 'w', 'w', 'w', 'w', 'w', 'w',
 ];
 
-const dominions: string[] = [
+const regionsAsString: string[] = [
   U, U, U, U, U, U, U, U, U, U, U, U, U, U, U, U,
   U, U, U, U, U, U, U, U, U, U, U, U, U, U, U, U,
   U, U, U, U, U, U, U, U, U, U, U, U, U, U, U, U,
@@ -46,4 +46,4 @@ const dominions: string[] = [
   U, U, U, U, U, U, U, U, U, U, U, U, U, U, U, U,
 ];
 
-export const board: Board = new Board(dominions, map);
+export const board: Board = new Board(regionsAsString, map);
