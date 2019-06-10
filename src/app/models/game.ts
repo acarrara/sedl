@@ -2,11 +2,10 @@ import {Lord} from './Lord';
 import lordsJson from '../../lords.json';
 import {Board} from './Board';
 
-export const lords: Lord[] = lordsJson;
 
 const U = 'u';
-const B = lords[0].id;
-const R = lords[1].id;
+const B = lordsJson[0].id;
+const R = lordsJson[1].id;
 
 const map: string[] = [
   'w', 'p', 'p', 'h', 'h', 'm', 'm', 'm', 'm', 'm', 'm', 'h', 'p', 'p', 'p', 'p',
@@ -47,3 +46,5 @@ const regionsAsString: string[] = [
 ];
 
 export const board: Board = new Board(regionsAsString, map);
+
+export const lords: Lord[] = lordsJson.map(lordJson => new Lord(lordJson.id, lordJson.name, lordJson.color, lordJson.treasure, board));

@@ -2,8 +2,8 @@ import {Injectable} from '@angular/core';
 import {Lord} from './models/Lord';
 import {BehaviorSubject, Observable} from 'rxjs';
 import {Region} from './models/Region';
-import {WorthOf} from './models/resources';
 import {board, lords} from './models/game';
+import {Actions} from './models/Actions';
 
 @Injectable()
 export class GameService {
@@ -18,28 +18,25 @@ export class GameService {
 
   public lords: Lord[] = lords;
 
-  conquer(i: number) {
-    if (board.conquer(i, this.currentLord())) {
+  action(i: number) {
+    if (this.currentLord().activeAction(i)) {
       this.regionsSubject.next(board.regions);
     }
   }
 
+  public start() {
+    this.lordIndex = -1;
+    this.pass();
+  }
+
   public pass(): void {
-    this.harvest();
     this.lordIndex = (this.lordIndex + 1) % lords.length;
-    this.lordSubject.next(lords[this.lordIndex]);
+    Actions.getPassiveActions().forEach(action => this.currentLord().passiveAction(action));
+    this.lordSubject.next(this.currentLord());
   }
 
   private currentLord() {
-    return this.lordSubject.getValue();
-  }
-
-  private harvest() {
-    this.currentLord().treasure =
-      this.regionsSubject.getValue()
-        .filter(region => region.lord === this.currentLord().id)
-        .map(region => WorthOf(region.type))
-        .reduce((previousValue, currentValue) => previousValue + currentValue, this.currentLord().treasure);
+    return this.lords[this.lordIndex];
   }
 
   public seeds(): string[] {
@@ -48,5 +45,18 @@ export class GameService {
 
   public dimension(): number {
     return Math.sqrt(board.regions.length);
+  }
+
+  lordAt(i: number) {
+    const lordId = this.regionsSubject.getValue()[i].lord;
+    if (lordId === 'u') {
+      return Lord.UNKNOWN;
+    }
+    const lordIndex = this.lords.findIndex(lord => lord.id === lordId);
+    return this.lords[lordIndex];
+  }
+
+  sustenanceAt(i: number) {
+    return this.regionsSubject.getValue()[i].sustenance;
   }
 }

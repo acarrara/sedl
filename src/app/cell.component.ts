@@ -9,5 +9,11 @@ export class CellComponent {
 
   @Input()
   public seed: string;
+  @Input()
+  sustenance: boolean;
+  @Input()
+  color: string;
+  @Input()
+  i: number;
 
 }

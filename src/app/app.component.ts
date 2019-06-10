@@ -1,4 +1,4 @@
-import {ChangeDetectionStrategy, Component} from '@angular/core';
+import {ChangeDetectionStrategy, Component, OnInit} from '@angular/core';
 import {GameService} from './game.service';
 
 @Component({
@@ -6,18 +6,22 @@ import {GameService} from './game.service';
   templateUrl: 'app.component.html',
   changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class AppComponent {
+export class AppComponent implements OnInit {
 
   constructor(public game: GameService) {
   }
 
-  conquer(i: number) {
-    this.game.conquer(i);
+  action(i: number) {
+    this.game.action(i);
   }
 
-  conquerHover(i: number, $event: MouseEvent) {
+  actionHover(i: number, $event: MouseEvent) {
     if ($event.buttons === 1) {
-      this.conquer(i);
+      this.action(i);
     }
+  }
+
+  ngOnInit(): void {
+    this.game.start();
   }
 }

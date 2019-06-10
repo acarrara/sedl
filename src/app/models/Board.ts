@@ -1,8 +1,6 @@
 import {Region} from './Region';
 import {Borders} from './Borders';
 import {Grid} from './Grid';
-import {Lord} from './Lord';
-import {costOf} from './resources';
 
 export class Board {
 
@@ -11,23 +9,14 @@ export class Board {
   public map: string[];
   public regions: Region[];
 
-  private regionsAsStrings: string[];
+  regionsAsStrings: string[];
 
   constructor(regionsAsStrings: string[], map: string[]) {
     this.grid = new Grid(Math.sqrt(regionsAsStrings.length));
     this.regionsAsStrings = regionsAsStrings;
     this.map = map;
     this.arrangeRegions();
-  }
-
-  conquer(i: number, lord: Lord) {
-    const canConquer = this.canConquer(i, lord);
-    if (canConquer) {
-      lord.treasure -= costOf(this.regions[i].type);
-      this.regionsAsStrings[i] = lord.id;
-      this.updateRegions(i);
-    }
-    return canConquer;
+    this.arrangeSustenances();
   }
 
   public arrangeRegions() {
@@ -38,11 +27,15 @@ export class Board {
   public updateRegions(i: number) {
     const toUpdate = this.grid.getNeighbourhood(i);
     toUpdate.forEach(current => {
-      this.regions[current] = new Region(this.regionsAsStrings[current], this.map[current]);
+      this.regions[current] = new Region(this.regionsAsStrings[current], this.map[current], this.regions[current].sustenance);
     });
     toUpdate.forEach(current => {
       this.regions[current].borders = this.borders(current);
     });
+  }
+
+  public rebuildGrid() {
+    this.regions = [...this.regions];
   }
 
   public borderNorth(position: number): boolean {
@@ -69,24 +62,20 @@ export class Board {
     return this.grid.outOfBoundaries(other) ? Region.UNCHARTED : this.regions[other];
   }
 
-
   private borders(position: number): Borders {
     return new Borders(this.borderNorth(position), this.borderEast(position), this.borderSouth(position), this.borderWest(position));
   }
 
-  private canConquer(i: number, lord: Lord) {
-    return this.regions[i].type !== 's' &&
-      this.regions[i].lord !== lord.id &&
-      this.getNeighbours(i).some(region => region.lord === lord.id) &&
-      lord.treasure >= costOf(this.regions[i].type);
-  }
-
-  private getNeighbours(i: number) {
+  getNeighbours(i: number) {
     return [
       this.getSafeRegion(this.grid.north(i)),
       this.getSafeRegion(this.grid.east(i)),
       this.getSafeRegion(this.grid.south(i)),
       this.getSafeRegion(this.grid.west(i))
     ];
+  }
+
+  private arrangeSustenances() {
+    this.regions.forEach(region => region.sustenance = region.type === 's');
   }
 }

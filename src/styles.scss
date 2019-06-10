@@ -39,6 +39,10 @@ $f-color-foreground: #6ca285;
   background-color: rgba($f-color-foreground, .5);
 }
 
+.s .sustenance {
+  transform: translate(-32%, 20%);
+}
+
 .board-container {
   flex-grow: 1;
   display: flex;
@@ -70,6 +74,13 @@ $f-color-foreground: #6ca285;
   &:hover {
     transform: translateY(-4px);
     box-shadow: 0 4px 4px 0 #999;
+  }
+}
+
+@each $lord-name, $lord-color in $lord-colors {
+  .cell--sustenance-#{$lord-name} {
+    stroke: $lord-color;
+    fill: $lord-color;
   }
 }
 
