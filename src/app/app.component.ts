@@ -8,17 +8,27 @@ import {GameService} from './game.service';
 })
 export class AppComponent implements OnInit {
 
+  public availableAction = 'Unreachable';
+
   constructor(public game: GameService) {
   }
 
   action(i: number) {
     this.game.action(i);
+    this.updateAvailableAction(i);
   }
 
   actionEnter(i: number, $event: MouseEvent) {
     if ($event.buttons === 1) {
       this.action(i);
+    } else {
+      this.updateAvailableAction(i);
+
     }
+  }
+
+  private updateAvailableAction(i: number) {
+    this.availableAction = this.game.currentLord().activeActionOn(i).name();
   }
 
   ngOnInit(): void {

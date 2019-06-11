@@ -35,7 +35,7 @@ export class GameService {
     this.lordSubject.next(this.currentLord());
   }
 
-  private currentLord() {
+  currentLord() {
     return this.lords[this.lordIndex];
   }
 

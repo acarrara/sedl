@@ -2,15 +2,17 @@ import {Board} from './Board';
 import {Lord} from './Lord';
 import {costOf, sustenanceOf, worthOf} from './resources';
 
-export abstract class Action {
+export interface Action {
 
-  public abstract can(lord: Lord, board: Board, i: number);
+  can(lord: Lord, board: Board, i: number);
 
-  public abstract run(lord: Lord, board: Board, i?: number);
+  run(lord: Lord, board: Board, i?: number);
+
+  name();
 
 }
 
-export class ColonizeAction extends Action {
+export class ColonizeAction implements Action {
 
   public can(lord: Lord, board: Board, i: number) {
     return board.regions[i].lord !== lord.id &&
@@ -23,9 +25,17 @@ export class ColonizeAction extends Action {
     board.regionsAsStrings[i] = lord.id;
     board.updateRegions(i);
   }
+
+  name() {
+    return 'Colonize';
+  }
 }
 
-export class ConquerAction extends Action {
+export class ConquerAction implements Action {
+
+  name() {
+    return 'Conquer';
+  }
 
   run(lord: Lord, board: Board, i: number) {
     const region = board.regions[i];
@@ -44,7 +54,7 @@ export class ConquerAction extends Action {
   }
 }
 
-export class EmptyAction extends Action {
+export class EmptyAction implements Action {
   can(lord: Lord, board: Board, i: number) {
     return false;
   }
@@ -52,11 +62,16 @@ export class EmptyAction extends Action {
   run(lord: Lord, board: Board, i: number) {
     // do nothing
   }
+
+  name() {
+    return 'Unreachable';
+  }
 }
 
-export class FortifyAction extends Action {
+export class FortifyAction implements Action {
   can(lord: Lord, board: Board, i: number) {
-    return !board.regions[i].sustenance && lord.treasure >= costOf(board.regions[i]);
+    const region = board.regions[i];
+    return region.type !== 'w' && !region.sustenance && lord.treasure >= costOf(region);
   }
 
   run(lord: Lord, board: Board, i: number) {
@@ -64,9 +79,13 @@ export class FortifyAction extends Action {
     board.regions[i].sustenance = true;
     board.rebuildGrid();
   }
+
+  name() {
+    return 'Fortify';
+  }
 }
 
-export class HarvestAction extends Action {
+export class HarvestAction implements Action {
   can(lord: Lord, board: Board, i: number) {
     return true;
   }
@@ -77,10 +96,14 @@ export class HarvestAction extends Action {
       .map(region => worthOf(region.type))
       .reduce((previousValue, currentValue) => previousValue + currentValue, lord.treasure);
   }
+
+  name() {
+    return 'Harvest';
+  }
 }
 
 
-export class SustainAction extends Action {
+export class SustainAction implements Action {
   can(lord: Lord, board: Board, i: number) {
     return true;
   }
@@ -91,14 +114,22 @@ export class SustainAction extends Action {
       .map(region => costOf(region))
       .reduce((previousValue, currentValue) => previousValue - currentValue, lord.treasure);
   }
+
+  name() {
+    return 'Sustain';
+  }
 }
 
-export class WithdrawAction extends Action {
+export class WithdrawAction implements Action {
   can(lord: Lord, board: Board, i: number) {
     return board.regions[i].lord === lord.id && board.regions[i].type !== 's' && board.regions[i].sustenance;
   }
 
   run(lord: Lord, board: Board, i?: number) {
     board.regions[i].sustenance = false;
+  }
+
+  name() {
+    return 'Withdraw';
   }
 }

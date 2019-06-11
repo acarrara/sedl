@@ -10,7 +10,7 @@ export class Lord {
   constructor(public id: string, public name: string, public color: string, public treasure: number, public board: Board) {
   }
 
-  private activeActionOn(i: number) {
+  activeActionOn(i: number) {
     const region = this.board.regions[i];
     if (this.board.getNeighbours(i).every(neighbour => neighbour.lord !== this.id)) {
       return Actions.EMPTY;
