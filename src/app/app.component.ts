@@ -15,7 +15,7 @@ export class AppComponent implements OnInit {
     this.game.action(i);
   }
 
-  actionHover(i: number, $event: MouseEvent) {
+  actionEnter(i: number, $event: MouseEvent) {
     if ($event.buttons === 1) {
       this.action(i);
     }

@@ -15,11 +15,11 @@ export class ColonizeAction extends Action {
   public can(lord: Lord, board: Board, i: number) {
     return board.regions[i].lord !== lord.id &&
       board.getNeighbours(i).some(region => region.lord === lord.id) &&
-      lord.treasure >= costOf(board.regions[i].type);
+      lord.treasure >= costOf(board.regions[i]);
   }
 
   public run(lord: Lord, board: Board, i: number) {
-    lord.treasure -= costOf(board.regions[i].type);
+    lord.treasure -= costOf(board.regions[i]);
     board.regionsAsStrings[i] = lord.id;
     board.updateRegions(i);
   }
@@ -28,15 +28,19 @@ export class ColonizeAction extends Action {
 export class ConquerAction extends Action {
 
   run(lord: Lord, board: Board, i: number) {
-    lord.treasure -= costOf(board.regions[i].type) * 2;
+    const region = board.regions[i];
+    lord.treasure -= costOf(region) * 2;
     board.regionsAsStrings[i] = lord.id;
+    if (region.type !== 's') {
+      region.sustenance = false;
+    }
     board.updateRegions(i);
   }
 
   can(lord: Lord, board: Board, i: number) {
     return board.regions[i].lord !== lord.id &&
       board.getNeighbours(i).some(region => region.lord === lord.id) &&
-      lord.treasure >= costOf(board.regions[i].type) * 2;
+      lord.treasure >= costOf(board.regions[i]) * 2;
   }
 }
 
@@ -52,11 +56,11 @@ export class EmptyAction extends Action {
 
 export class FortifyAction extends Action {
   can(lord: Lord, board: Board, i: number) {
-    return !board.regions[i].sustenance && lord.treasure >= costOf(board.regions[i].type);
+    return !board.regions[i].sustenance && lord.treasure >= costOf(board.regions[i]);
   }
 
   run(lord: Lord, board: Board, i: number) {
-    lord.treasure -= sustenanceOf(board.regions[i].type);
+    lord.treasure -= sustenanceOf(board.regions[i]);
     board.regions[i].sustenance = true;
     board.rebuildGrid();
   }
@@ -84,7 +88,7 @@ export class SustainAction extends Action {
   run(lord: Lord, board: Board, i: number) {
     lord.treasure = board.regions
       .filter(region => region.lord === lord.id && region.sustenance)
-      .map(region => costOf(region.type))
+      .map(region => costOf(region))
       .reduce((previousValue, currentValue) => previousValue - currentValue, lord.treasure);
   }
 }

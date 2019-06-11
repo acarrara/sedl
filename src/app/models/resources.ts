@@ -1,3 +1,5 @@
+import {Region} from './Region';
+
 export const worthOf: (type: string) => number = (type: string) => {
   switch (type) {
     case 'm':
@@ -16,8 +18,9 @@ export const worthOf: (type: string) => number = (type: string) => {
       return 0;
   }
 };
-export const costOf: (type: string) => number = (type: string) => {
-  switch (type) {
+
+function baseCostOf(region: Region) {
+  switch (region.type) {
     case 'm':
       return 10;
     case 'f':
@@ -33,11 +36,16 @@ export const costOf: (type: string) => number = (type: string) => {
     default:
       return 0;
   }
+}
+
+export const costOf: (region: Region) => number = (region: Region) => {
+  return baseCostOf(region) * ((region.sustenance) as any + 1);
 };
-export const sustenanceOf: (type: string) => number = (type: string) => {
-  if (type === 's') {
+
+export const sustenanceOf: (region: Region) => number = (region: Region) => {
+  if (region.type === 's') {
     return 4;
   } else {
-    return costOf(type);
+    return costOf(region);
   }
 };

@@ -7,7 +7,7 @@
              [color]="game.lordAt(i).color"
              (click)="action(i)"
              [i]="i"
-             (mouseover)="actionHover(i, $event)"
+             (mouseenter)="actionEnter(i, $event)"
              class="cell" *ngFor="let seed of game.seeds(); let i = index" [seed]="seed"></se-cell>
   </main>
 </div>

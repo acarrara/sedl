@@ -13,6 +13,8 @@
   box-shadow: 0 1px 4px 0 $shadow-on-background-color;
 
   z-index: 900;
+
+  transition: 750ms ease-in-out;
 }
 
 .lord__regions {
@@ -21,7 +23,6 @@
 }
 
 .lord__region-element {
-  min-width: 5em;
   display: flex;
   align-items: center;
   gap: 4px;
