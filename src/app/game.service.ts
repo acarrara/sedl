@@ -40,7 +40,7 @@ export class GameService {
   }
 
   public seeds(): string[] {
-    return board.map;
+    return board.world;
   }
 
   public dimension(): number {

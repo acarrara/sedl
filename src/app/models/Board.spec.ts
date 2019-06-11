@@ -1,4 +1,5 @@
 import {Board} from './Board';
+import {Lord} from './Lord';
 
 describe('Board', () => {
 
@@ -46,5 +47,52 @@ describe('Board', () => {
       expect(board.borderWest(2)).toBeTruthy();
       expect(board.borderWest(3)).toBeFalsy();
     });
+  });
+
+  describe('canSettle', () => {
+
+    const settlingBoard = new Board([
+      'r', 'u', 'r', 'u',
+      'r', 'r', 'u', 'u',
+      'u', 'u', 'u', 'u',
+      'u', 'u', 'u', 'u'
+    ], [
+      'p', 'p', 'p', 'p',
+      's', 'p', 'p', 'p',
+      'p', 'p', 'p', 'p',
+      'p', 'p', 'p', 'p'
+    ]);
+    const lord = new Lord('r', '', '', 0, settlingBoard);
+
+    it('should return false', () => {
+      const canSettle = settlingBoard.reachableBy(lord, 11);
+
+      expect(canSettle).toBeFalsy();
+    });
+
+    it('should return true', () => {
+      const canSettle = settlingBoard.reachableBy(lord, 10);
+
+      expect(canSettle).toBeFalsy();
+    });
+
+    it('should return true', () => {
+      const canSettle = settlingBoard.reachableBy(lord, 1);
+
+      expect(canSettle).toBeTruthy();
+    });
+
+    it('should return false', () => {
+      const canSettle = settlingBoard.reachableBy(lord, 3);
+
+      expect(canSettle).toBeFalsy();
+    });
+
+    it('should return true', () => {
+      const canSettle = settlingBoard.reachableBy(lord, 0);
+
+      expect(canSettle).toBeTruthy();
+    });
+
   });
 });

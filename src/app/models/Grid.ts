@@ -34,7 +34,11 @@ export class Grid {
   }
 
   public getNeighbourhood(i: number) {
-    return [i, this.north(i), this.east(i), this.south(i), this.west(i)]
+    return [i, ...this.getNeighbours(i)];
+  }
+
+  public getNeighbours(i: number) {
+    return [this.north(i), this.east(i), this.south(i), this.west(i)]
       .filter(index => !this.outOfBoundaries(index));
   }
 }

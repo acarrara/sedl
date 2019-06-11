@@ -70,7 +70,11 @@ export class EmptyAction implements Action {
 export class FortifyAction implements Action {
   can(lord: Lord, board: Board, i: number) {
     const region = board.regions[i];
-    return region.isFortifiable() && !region.sustenance && lord.treasure >= region.cost();
+    return region.belongsTo(lord) &&
+      board.reachableBy(lord, i) &&
+      region.isFortifiable() &&
+      !region.sustenance &&
+      lord.treasure >= region.cost();
   }
 
   run(lord: Lord, board: Board, i: number) {
@@ -120,7 +124,10 @@ export class SustainAction implements Action {
 
 export class WithdrawAction implements Action {
   can(lord: Lord, board: Board, i: number) {
-    return board.regions[i].belongsTo(lord) && board.regions[i].isFortifiable() && board.regions[i].sustenance;
+    return board.regions[i].belongsTo(lord) &&
+      board.reachableBy(lord, i) &&
+      board.regions[i].isFortifiable() &&
+      board.regions[i].sustenance;
   }
 
   run(lord: Lord, board: Board, i?: number) {
