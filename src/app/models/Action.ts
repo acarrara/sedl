@@ -16,6 +16,7 @@ export class ColonizeAction implements Action {
   public can(lord: Lord, board: Board, i: number) {
     const region = board.regions[i];
     return !region.belongsTo(lord) &&
+      lord.canTame() &&
       board.reachableBy(lord, i) &&
       lord.treasure >= region.cost();
   }
@@ -48,6 +49,7 @@ export class ConquerAction implements Action {
   can(lord: Lord, board: Board, i: number) {
     const region = board.regions[i];
     return !region.belongsTo(lord) &&
+      lord.canTame() &&
       board.reachableBy(lord, i) &&
       lord.treasure >= region.conquerCost();
   }
