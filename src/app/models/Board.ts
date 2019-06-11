@@ -1,6 +1,7 @@
 import {Region} from './Region';
 import {Borders} from './Borders';
 import {Grid} from './Grid';
+import {Lord} from './Lord';
 
 export class Board {
 
@@ -16,7 +17,6 @@ export class Board {
     this.regionsAsStrings = regionsAsStrings;
     this.map = map;
     this.arrangeRegions();
-    this.arrangeSustenances();
   }
 
   public arrangeRegions() {
@@ -24,18 +24,16 @@ export class Board {
     this.regions.forEach((region, i) => region.borders = this.borders(i));
   }
 
-  public updateRegions(i: number) {
+  public updateNeighbourhood(i: number) {
     const toUpdate = this.grid.getNeighbourhood(i);
     toUpdate.forEach(current => {
-      this.regions[current] = new Region(this.regionsAsStrings[current], this.map[current], this.regions[current].sustenance);
-    });
-    toUpdate.forEach(current => {
+      this.regions[current] = this.regions[current].copy();
       this.regions[current].borders = this.borders(current);
     });
   }
 
-  public rebuildGrid() {
-    this.regions = [...this.regions];
+  public reachableBy(lord: Lord, i: number) {
+    return this.getNeighbours(i).some(neighbour => neighbour.belongsTo(lord));
   }
 
   public borderNorth(position: number): boolean {
@@ -75,7 +73,4 @@ export class Board {
     ];
   }
 
-  private arrangeSustenances() {
-    this.regions.forEach(region => region.sustenance = region.type === 's');
-  }
 }

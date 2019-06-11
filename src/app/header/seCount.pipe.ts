@@ -1,5 +1,6 @@
 import {Pipe, PipeTransform} from '@angular/core';
 import {Region} from '../models/Region';
+import {Lord} from '../models/Lord';
 
 @Pipe({
   name: 'seCount',
@@ -7,8 +8,8 @@ import {Region} from '../models/Region';
 })
 export class CountPipe implements PipeTransform {
 
-  transform(value: Region[], type: string, lord: string): any {
-    return value.filter(region => region.type === type && region.lord === lord).length;
+  transform(value: Region[], type: string, lord: Lord): any {
+    return value.filter(region => region.is(type) && region.belongsTo(lord)).length;
   }
 
 }

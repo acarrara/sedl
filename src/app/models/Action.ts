@@ -1,6 +1,5 @@
 import {Board} from './Board';
 import {Lord} from './Lord';
-import {costOf, sustenanceOf, worthOf} from './resources';
 
 export interface Action {
 
@@ -15,15 +14,17 @@ export interface Action {
 export class ColonizeAction implements Action {
 
   public can(lord: Lord, board: Board, i: number) {
-    return board.regions[i].lord !== lord.id &&
-      board.getNeighbours(i).some(region => region.lord === lord.id) &&
-      lord.treasure >= costOf(board.regions[i]);
+    const region = board.regions[i];
+    return !region.belongsTo(lord) &&
+      board.reachableBy(lord, i) &&
+      lord.treasure >= region.cost();
   }
 
   public run(lord: Lord, board: Board, i: number) {
-    lord.treasure -= costOf(board.regions[i]);
-    board.regionsAsStrings[i] = lord.id;
-    board.updateRegions(i);
+    const region = board.regions[i];
+    lord.treasure -= region.cost();
+    board.regions[i] = region.tamedBy(lord);
+    board.updateNeighbourhood(i);
   }
 
   name() {
@@ -39,18 +40,16 @@ export class ConquerAction implements Action {
 
   run(lord: Lord, board: Board, i: number) {
     const region = board.regions[i];
-    lord.treasure -= costOf(region) * 2;
-    board.regionsAsStrings[i] = lord.id;
-    if (region.type !== 's') {
-      region.sustenance = false;
-    }
-    board.updateRegions(i);
+    lord.treasure -= region.conquerCost();
+    board.regions[i] = region.tamedBy(lord);
+    board.updateNeighbourhood(i);
   }
 
   can(lord: Lord, board: Board, i: number) {
-    return board.regions[i].lord !== lord.id &&
-      board.getNeighbours(i).some(region => region.lord === lord.id) &&
-      lord.treasure >= costOf(board.regions[i]) * 2;
+    const region = board.regions[i];
+    return !region.belongsTo(lord) &&
+      board.reachableBy(lord, i) &&
+      lord.treasure >= region.conquerCost();
   }
 }
 
@@ -71,13 +70,12 @@ export class EmptyAction implements Action {
 export class FortifyAction implements Action {
   can(lord: Lord, board: Board, i: number) {
     const region = board.regions[i];
-    return region.type !== 'w' && !region.sustenance && lord.treasure >= costOf(region);
+    return region.isFortifiable() && !region.sustenance && lord.treasure >= region.cost();
   }
 
   run(lord: Lord, board: Board, i: number) {
-    lord.treasure -= sustenanceOf(board.regions[i]);
+    lord.treasure -= board.regions[i].sustenanceCost();
     board.regions[i].sustenance = true;
-    board.rebuildGrid();
   }
 
   name() {
@@ -92,8 +90,8 @@ export class HarvestAction implements Action {
 
   run(lord: Lord, board: Board, i: number) {
     lord.treasure = board.regions
-      .filter(region => region.lord === lord.id)
-      .map(region => worthOf(region.type))
+      .filter(region => region.belongsTo(lord))
+      .map(region => region.worth())
       .reduce((previousValue, currentValue) => previousValue + currentValue, lord.treasure);
   }
 
@@ -110,8 +108,8 @@ export class SustainAction implements Action {
 
   run(lord: Lord, board: Board, i: number) {
     lord.treasure = board.regions
-      .filter(region => region.lord === lord.id && region.sustenance)
-      .map(region => costOf(region))
+      .filter(region => region.belongsTo(lord) && region.sustenance)
+      .map(region => region.sustenanceCost())
       .reduce((previousValue, currentValue) => previousValue - currentValue, lord.treasure);
   }
 
@@ -122,7 +120,7 @@ export class SustainAction implements Action {
 
 export class WithdrawAction implements Action {
   can(lord: Lord, board: Board, i: number) {
-    return board.regions[i].lord === lord.id && board.regions[i].type !== 's' && board.regions[i].sustenance;
+    return board.regions[i].belongsTo(lord) && board.regions[i].isFortifiable() && board.regions[i].sustenance;
   }
 
   run(lord: Lord, board: Board, i?: number) {

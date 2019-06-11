@@ -12,13 +12,13 @@ export class Lord {
 
   activeActionOn(i: number) {
     const region = this.board.regions[i];
-    if (this.board.getNeighbours(i).every(neighbour => neighbour.lord !== this.id)) {
+    if (this.board.getNeighbours(i).every(neighbour => !neighbour.belongsTo(this))) {
       return Actions.EMPTY;
     } else if (region.lord === Region.UNCHARTED.lord) {
       return Actions.COLONIZE;
-    } else if (region.lord === this.id && !region.sustenance) {
+    } else if (region.belongsTo(this) && !region.sustenance) {
       return Actions.FORTIFY;
-    } else if (region.lord === this.id && region.sustenance) {
+    } else if (region.belongsTo(this) && region.sustenance) {
       return Actions.WITHDRAW;
     } else {
       return Actions.CONQUER;
