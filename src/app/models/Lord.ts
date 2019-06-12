@@ -8,7 +8,8 @@ export class Lord {
   public static UNKNOWN: Lord = new Lord('u', 'unknown', 'unknown', 0, null);
 
   private static REGIONS_PER_SETTLEMENT = 100;
-  private static MAX_SETTLEMENTS = 3;
+
+  availableSettlements = 2;
 
   constructor(public id: string, public name: string, public color: string, public treasure: number, public board: Board) {
   }
@@ -59,7 +60,11 @@ export class Lord {
     return canAct;
   }
 
-  canSettle() {
-    return this.board.regions.filter(region => region.belongsTo(this) && region.is('s')).length < Lord.MAX_SETTLEMENTS;
+  canSettle(): boolean {
+    return this.availableSettlements > 0;
+  }
+
+  canPlay(): boolean {
+    return this.board.regions.some(region => region.is('s') && region.belongsTo(this));
   }
 }

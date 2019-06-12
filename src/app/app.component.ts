@@ -14,7 +14,6 @@ export class AppComponent implements OnInit {
   }
 
   action(i: number, $event) {
-    console.log($event);
     this.game.action(i);
     this.updateAvailableAction(i);
   }

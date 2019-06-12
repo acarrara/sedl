@@ -34,6 +34,9 @@ export class GameService {
 
   public pass(): void {
     this.lordIndex = (this.lordIndex + 1) % lords.length;
+    if (!this.currentLord().canPlay()) {
+      console.log('You Lost!');
+    }
     Actions.getPassiveActions().forEach(action => this.currentLord().passiveAction(action));
     this.lordSubject.next(this.currentLord());
   }

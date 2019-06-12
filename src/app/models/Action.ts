@@ -90,11 +90,11 @@ export class FortifyAction implements Action {
 }
 
 export class HarvestAction implements Action {
-  can(lord: Lord, board: Board, i: number) {
+  can(lord: Lord, board: Board) {
     return true;
   }
 
-  run(lord: Lord, board: Board, i: number) {
+  run(lord: Lord, board: Board) {
     lord.treasure = board.regions
       .filter(region => region.belongsTo(lord))
       .map(region => region.worth())
@@ -108,15 +108,29 @@ export class HarvestAction implements Action {
 
 
 export class SustainAction implements Action {
-  can(lord: Lord, board: Board, i: number) {
+  can(lord: Lord, board: Board) {
     return true;
   }
 
-  run(lord: Lord, board: Board, i: number) {
-    lord.treasure = board.regions
-      .filter(region => region.belongsTo(lord) && region.sustenance)
+  run(lord: Lord, board: Board) {
+    let sustenanceCosts = this.calculateSustenanceCosts(board, lord);
+    if (sustenanceCosts > lord.treasure) {
+      this.abandonFortifications(board, lord);
+      sustenanceCosts = this.calculateSustenanceCosts(board, lord);
+    }
+    lord.treasure = Math.max(lord.treasure - sustenanceCosts, 0);
+  }
+
+  private abandonFortifications(board: Board, lord: Lord) {
+    board.regions.filter(region => region.sustenance && region.isFortifiable() && region.belongsTo(lord))
+      .forEach(region => region.sustenance = false);
+  }
+
+  private calculateSustenanceCosts(board: Board, lord: Lord) {
+    return board.regions
+      .filter(region => region.sustenance && region.belongsTo(lord))
       .map(region => region.sustenanceCost())
-      .reduce((previousValue, currentValue) => previousValue - currentValue, lord.treasure);
+      .reduce((previousValue, currentValue) => previousValue + currentValue, 0);
   }
 
   name() {
@@ -132,7 +146,7 @@ export class WithdrawAction implements Action {
       board.regions[i].sustenance;
   }
 
-  run(lord: Lord, board: Board, i?: number) {
+  run(lord: Lord, board: Board, i: number) {
     board.regions[i].sustenance = false;
   }
 
@@ -151,8 +165,24 @@ export class SettleAction implements Action {
     return 'Settle';
   }
 
-  run(lord: Lord, board: Board, i?: number) {
+  run(lord: Lord, board: Board, i: number) {
     board.regions[i] = board.regions[i].settle();
     board.world[i] = 's';
+    lord.availableSettlements--;
+  }
+}
+
+export class DesertAction implements Action {
+  can(lord: Lord, board: Board, i: number) {
+    return true;
+  }
+
+  name() {
+    return 'Desert';
+  }
+
+  run(lord: Lord, board: Board) {
+    board.regions.filter((region, i) => region.sustenance && region.belongsTo(lord) && !board.reachableBy(lord, i))
+      .forEach(region => region.sustenance = false);
   }
 }

@@ -2,6 +2,7 @@ import {
   Action,
   ColonizeAction,
   ConquerAction,
+  DesertAction,
   EmptyAction,
   FortifyAction,
   HarvestAction,
@@ -21,7 +22,8 @@ export class Actions {
 
   public static HARVEST: Action = new HarvestAction();
   public static SUSTAIN: Action = new SustainAction();
+  public static DESERT: Action = new DesertAction();
 
-  public static getPassiveActions = (): Action[] => [Actions.HARVEST, Actions.SUSTAIN];
+  public static getPassiveActions = (): Action[] => [Actions.DESERT, Actions.HARVEST, Actions.SUSTAIN];
 
 }
