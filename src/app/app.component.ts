@@ -8,24 +8,20 @@ import {GameService} from './game.service';
 })
 export class AppComponent implements OnInit {
 
-  private static PRESS_WAIT = 500;
-
   public availableAction = 'Unreachable';
-
-  private createTimeout: any;
-  private settle: boolean;
 
   constructor(public game: GameService) {
   }
 
-  action(i: number) {
+  action(i: number, $event) {
+    console.log($event);
     this.game.action(i);
     this.updateAvailableAction(i);
   }
 
   actionEnter(i: number, $event: MouseEvent) {
     if ($event.buttons === 1) {
-      this.action(i);
+      this.action(i, undefined);
     } else {
       this.updateAvailableAction(i);
 
@@ -34,25 +30,6 @@ export class AppComponent implements OnInit {
 
   ngOnInit(): void {
     this.game.start();
-  }
-
-  startInteraction(i: number) {
-    this.settle = false;
-    this.createTimeout = setTimeout(() => {
-      this.settle = true;
-      this.game.settle(i);
-    }, AppComponent.PRESS_WAIT);
-  }
-
-  stopInteraction(i: number) {
-    if (!this.settle) {
-      clearTimeout(this.createTimeout);
-      this.action(i);
-    }
-  }
-
-  resetInteraction() {
-    clearTimeout(this.createTimeout);
   }
 
   private updateAvailableAction(i: number) {

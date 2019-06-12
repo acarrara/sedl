@@ -6,13 +6,10 @@
                [sustenance]="game.sustenanceAt(i)"
                [color]="game.lordAt(i).color"
                [i]="i"
-               (mousedown)="startInteraction(i)"
-               (mouseup)="stopInteraction(i)"
-               (mousemove)="resetInteraction()"
-               (touchmove)="resetInteraction()"
-               (touchstart)="startInteraction(i); $event.preventDefault()"
-               (touchend)="stopInteraction(i); $event.preventDefault()"
+               (press)="game.settle(i)"
+               (tap)="action(i, $event)"
                (mouseenter)="actionEnter(i, $event)"
+               (contextmenu)="$event.preventDefault()"
                class="cell" *ngFor="let region of game.board.regions; let i = index" [seed]="game.world()[i]"></se-cell>
     </main>
   </div>
