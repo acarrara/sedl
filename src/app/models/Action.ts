@@ -140,3 +140,19 @@ export class WithdrawAction implements Action {
     return 'Withdraw';
   }
 }
+
+export class SettleAction implements Action {
+  can(lord: Lord, board: Board, i: number) {
+    const region = board.regions[i];
+    return region.isFortifiable() && region.belongsTo(lord) && lord.canSettle();
+  }
+
+  name() {
+    return 'Settle';
+  }
+
+  run(lord: Lord, board: Board, i?: number) {
+    board.regions[i] = board.regions[i].settle();
+    board.world[i] = 's';
+  }
+}

@@ -10,6 +10,9 @@ export class AppComponent implements OnInit {
 
   public availableAction = 'Unreachable';
 
+  private createTimeout: any;
+  private settle: boolean;
+
   constructor(public game: GameService) {
   }
 
@@ -33,5 +36,20 @@ export class AppComponent implements OnInit {
 
   ngOnInit(): void {
     this.game.start();
+  }
+
+  mouseDown(i: number) {
+    this.settle = false;
+    this.createTimeout = setTimeout(() => {
+      this.settle = true;
+      this.game.settle(i);
+    }, 500);
+  }
+
+  mouseUp(i) {
+    if (!this.settle) {
+      clearTimeout(this.createTimeout);
+      this.action(i);
+    }
   }
 }

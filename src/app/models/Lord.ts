@@ -8,6 +8,7 @@ export class Lord {
   public static UNKNOWN: Lord = new Lord('u', 'unknown', 'unknown', 0, null);
 
   private static REGIONS_PER_SETTLEMENT = 100;
+  private static MAX_SETTLEMENTS = 3;
 
   constructor(public id: string, public name: string, public color: string, public treasure: number, public board: Board) {
   }
@@ -48,5 +49,17 @@ export class Lord {
     const tamedRegions = this.board.regions.filter(region => region.belongsTo(this));
     const settlements = tamedRegions.filter(region => region.is('s')).length;
     return tamedRegions.length < settlements * Lord.REGIONS_PER_SETTLEMENT;
+  }
+
+  settle(i: number) {
+    const canAct = Actions.SETTLE.can(this, this.board, i);
+    if (canAct) {
+      this.runAction(Actions.SETTLE, i);
+    }
+    return canAct;
+  }
+
+  canSettle() {
+    return this.board.regions.filter(region => region.belongsTo(this) && region.is('s')).length < Lord.MAX_SETTLEMENTS;
   }
 }

@@ -4,6 +4,7 @@ import {BehaviorSubject, Observable} from 'rxjs';
 import {Region} from './models/Region';
 import {board, lords} from './models/game';
 import {Actions} from './models/Actions';
+import {Board} from './models/Board';
 
 @Injectable()
 export class GameService {
@@ -18,9 +19,11 @@ export class GameService {
 
   public lords: Lord[] = lords;
 
+  public board: Board = board;
+
   action(i: number) {
     if (this.currentLord().activeAction(i)) {
-      this.regionsSubject.next(board.regions);
+      this.regionsSubject.next(this.board.regions);
     }
   }
 
@@ -39,12 +42,12 @@ export class GameService {
     return this.lords[this.lordIndex];
   }
 
-  public seeds(): string[] {
-    return board.world;
+  public world(): string[] {
+    return this.board.world;
   }
 
   public dimension(): number {
-    return Math.sqrt(board.regions.length);
+    return Math.sqrt(this.board.regions.length);
   }
 
   lordAt(i: number) {
@@ -58,5 +61,11 @@ export class GameService {
 
   sustenanceAt(i: number) {
     return this.regionsSubject.getValue()[i].sustenance;
+  }
+
+  settle(i: number) {
+    if (this.currentLord().settle(i)) {
+      this.regionsSubject.next(board.regions);
+    }
   }
 }

@@ -1,16 +1,18 @@
 <div class="wrapper" (document:keydown.space)="game.pass()">
-<se-header class="header" [style.--lordColor]="(game.lord$ | async).color"></se-header>
-<div class="board-container">
-  <main class="board" [seGrid]="game.dimension()">
-    <se-cell [seRegion]="(game.regions$ | async)[i]"
-             [sustenance]="game.sustenanceAt(i)"
-             [color]="game.lordAt(i).color"
-             (click)="action(i)"
-             [i]="i"
-             (mouseenter)="actionEnter(i, $event)"
-             class="cell" *ngFor="let seed of game.seeds(); let i = index" [seed]="seed"></se-cell>
-  </main>
+  <se-header class="header" [style.--lordColor]="(game.lord$ | async).color"></se-header>
+  <div class="board-container">
+    <main class="board" [seGrid]="game.dimension()">
+      <se-cell [seRegion]="region"
+               [sustenance]="game.sustenanceAt(i)"
+               [color]="game.lordAt(i).color"
+               [i]="i"
+               (mousedown)="mouseDown(i)"
+               (mouseup)="mouseUp(i)"
+               (touchstart)="mouseDown(i)"
+               (touchend)="mouseUp(i)"
+               (mouseenter)="actionEnter(i, $event)"
+               class="cell" *ngFor="let region of game.board.regions; let i = index" [seed]="game.world()[i]"></se-cell>
+    </main>
+  </div>
 </div>
-</div>
-
-<div class="availableAction" >{{availableAction}}</div>
+<div class="availableAction">{{availableAction}}</div>

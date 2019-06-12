@@ -93,4 +93,10 @@ export class Region {
         return 0;
     }
   }
+
+  settle() {
+    const region = new Region(this.lord, 's');
+    region.borders = this.borders;
+    return region;
+  }
 }

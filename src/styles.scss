@@ -122,3 +122,17 @@ $f-color-foreground: #6ca285;
 
   background-color: #fafafa;
 }
+
+@media only screen and (max-width: 1024px) {
+  .header {
+    display: none;
+  }
+
+  .availableAction {
+    display: none;
+  }
+
+  .cell {
+    border-width: 1px;
+  }
+}
