@@ -8,6 +8,8 @@ import {GameService} from './game.service';
 })
 export class AppComponent implements OnInit {
 
+  private static PRESS_WAIT = 500;
+
   public availableAction = 'Unreachable';
 
   private createTimeout: any;
@@ -30,26 +32,31 @@ export class AppComponent implements OnInit {
     }
   }
 
-  private updateAvailableAction(i: number) {
-    this.availableAction = this.game.currentLord().activeActionOn(i).name();
-  }
-
   ngOnInit(): void {
     this.game.start();
   }
 
-  mouseDown(i: number) {
+  startInteraction(i: number) {
     this.settle = false;
     this.createTimeout = setTimeout(() => {
       this.settle = true;
       this.game.settle(i);
-    }, 500);
+    }, AppComponent.PRESS_WAIT);
   }
 
-  mouseUp(i) {
+  stopInteraction(i: number) {
     if (!this.settle) {
       clearTimeout(this.createTimeout);
       this.action(i);
     }
   }
+
+  resetInteraction() {
+    clearTimeout(this.createTimeout);
+  }
+
+  private updateAvailableAction(i: number) {
+    this.availableAction = this.game.currentLord().activeActionOn(i).name();
+  }
 }
+
