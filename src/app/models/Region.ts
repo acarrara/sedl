@@ -7,17 +7,22 @@ export class Region {
 
   public borders: Borders;
   public sustenance: boolean;
+  public impregnable = false;
 
   constructor(public lord: string, private type: string, sustenance?: boolean) {
     this.sustenance = type === 's' || !!sustenance;
   }
 
   public tamedBy(lord: Lord) {
-    return new Region(lord.id, this.type, !this.isFortifiable() && this.sustenance);
+    const region = new Region(lord.id, this.type, !this.isFortifiable() && this.sustenance);
+    region.impregnable = true;
+    return region;
   }
 
   public copy() {
-    return new Region(this.lord, this.type, this.sustenance);
+    const region = new Region(this.lord, this.type, this.sustenance);
+    region.impregnable = this.impregnable;
+    return region;
   }
 
   public hasSameOwner(other: Region) {

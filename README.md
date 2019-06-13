@@ -45,12 +45,12 @@ Harvesting happens before the sustenance payments, so it wont't affect the treas
 ### Colonize
 Every type of terrain has a different colonization cost. Lords can only colonize regions next to a domain containing at least a settlement.
 A colonized plot joins immediately the Lord's domain.
-Once colonized, a region is untouchable for three turns.
+Once colonized, a region is impregnable for one turn.
 
 ### Conquer
 Cost of conquer in a normal environment for regions is the colonization cost, double.
 Lords can only conquer enemy regions next to a domain containing at least a settlement.
-Once conquered, a region is untouchable for three turns.
+Once conquered, a region is impregnable for one turn.
 
 ### Fortify
 Lords can fortify every colonizable region in their domain — not settlements.

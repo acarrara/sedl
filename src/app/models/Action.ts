@@ -48,7 +48,7 @@ export class ConquerAction implements Action {
 
   can(lord: Lord, board: Board, i: number) {
     const region = board.regions[i];
-    return !region.belongsTo(lord) &&
+    return !region.impregnable && !region.belongsTo(lord) &&
       lord.canTame() &&
       board.reachableBy(lord, i) &&
       lord.treasure >= region.conquerCost();
@@ -182,6 +182,8 @@ export class DesertAction implements Action {
   }
 
   run(lord: Lord, board: Board) {
+    board.regions.filter(region => region.impregnable && region.belongsTo(lord))
+      .forEach(region => region.impregnable = false);
     board.regions.filter((region, i) => region.sustenance && region.belongsTo(lord) && !board.reachableBy(lord, i))
       .forEach(region => region.sustenance = false);
   }

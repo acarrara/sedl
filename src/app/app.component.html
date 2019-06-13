@@ -3,13 +3,14 @@
   <div class="board-container">
     <main class="board" [seGrid]="game.dimension()">
       <se-cell [seRegion]="region"
-               [sustenance]="game.sustenanceAt(i)"
+               [sustenance]="region.sustenance"
                [color]="game.lordAt(i).color"
                [i]="i"
                (press)="game.settle(i)"
                (tap)="action(i, $event)"
                (mouseenter)="actionEnter(i, $event)"
                (contextmenu)="$event.preventDefault()"
+               [impregnable]="region.impregnable"
                class="cell" *ngFor="let region of game.board.regions; let i = index" [seed]="game.world()[i]"></se-cell>
     </main>
   </div>

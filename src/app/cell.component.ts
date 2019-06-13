@@ -14,6 +14,8 @@ export class CellComponent {
   @Input()
   color: string;
   @Input()
+  impregnable: boolean;
+  @Input()
   i: number;
 
 }
