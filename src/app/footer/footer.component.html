@@ -1,0 +1,12 @@
+<aside class="region-details__content">
+  <se-cell class="cell" [seed]="region?.type"></se-cell>
+  <strong *ngIf="region">{{getLabel()}}</strong>
+  <span *ngIf="region">Cost: {{region.cost()}}</span>
+  <span *ngIf="region">Worth: {{region.worth()}}</span>
+  <span *ngIf="region?.impregnable">Impregnable</span>
+  <span *ngIf="region?.sustenance">Fortified</span>
+  <span *ngIf="region">{{canRun() ? 'You can' : 'You can\'t'}} {{getAction().name()| lowercase}}</span>
+  <button class="button  button--primary  passButton" (click)="game.pass()">
+    Pass
+  </button>
+</aside>

@@ -1,4 +1,4 @@
-.header {
+.controls {
   flex-grow: 0;
 
   width: 100%;
@@ -8,13 +8,25 @@
   align-items: center;
 
   background-color: #fafafa;
-  border-top: 8px solid var(--lord-color);
 
   box-shadow: 0 1px 4px 0 $shadow-on-background-color;
 
   z-index: 900;
 
   transition: 750ms ease-in-out;
+}
+
+.controls .cell {
+  width: 2rem;
+  display: block;
+}
+
+.controls--top {
+  border-top: 8px solid var(--lord-color);
+}
+
+.controls--bottom {
+  border-bottom: 8px solid var(--lord-color);
 }
 
 .lord__regions {
@@ -37,4 +49,17 @@
 
 .lord-recap--right {
   direction: rtl;
+}
+
+.region-details__content {
+  padding: 8px;
+  display: flex;
+  align-items: center;
+  gap: 1em;
+  width: 100%;
+
+}
+
+.passButton {
+  margin-left: auto;
 }

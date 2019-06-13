@@ -3,26 +3,21 @@ import {Lord} from './Lord';
 
 export class Region {
 
-  public static UNCHARTED: Region = new Region('u', '');
+  public static UNCHARTED: Region = new Region('u', '', false, true);
 
   public borders: Borders;
   public sustenance: boolean;
-  public impregnable = false;
 
-  constructor(public lord: string, private type: string, sustenance?: boolean) {
+  constructor(public lord: string, public type: string, sustenance: boolean, public impregnable: boolean) {
     this.sustenance = type === 's' || !!sustenance;
   }
 
   public tamedBy(lord: Lord) {
-    const region = new Region(lord.id, this.type, !this.isFortifiable() && this.sustenance);
-    region.impregnable = true;
-    return region;
+    return new Region(lord.id, this.type, !this.isFortifiable() && this.sustenance, true);
   }
 
   public copy() {
-    const region = new Region(this.lord, this.type, this.sustenance);
-    region.impregnable = this.impregnable;
-    return region;
+    return new Region(this.lord, this.type, this.sustenance, this.impregnable);
   }
 
   public hasSameOwner(other: Region) {
@@ -100,7 +95,7 @@ export class Region {
   }
 
   settle() {
-    const region = new Region(this.lord, 's');
+    const region = new Region(this.lord, 's', false, true);
     region.borders = this.borders;
     return region;
   }

@@ -1,31 +1,39 @@
 import {Board} from './Board';
 import {Lord} from './Lord';
+import {Region} from './Region';
 
-export interface Action {
-
-  can(lord: Lord, board: Board, i: number);
-
-  run(lord: Lord, board: Board, i?: number);
+interface SuperAction {
 
   name();
+}
+
+export interface PassiveAction {
+
+  run(lord: Lord, board: Board);
+}
+
+export interface ActiveAction extends SuperAction {
+
+  can(lord: Lord, board: Board, region: Region);
+
+  run(lord: Lord, board: Board, region: Region);
 
 }
 
-export class ColonizeAction implements Action {
+export class ColonizeAction implements ActiveAction {
 
-  public can(lord: Lord, board: Board, i: number) {
-    const region = board.regions[i];
+  public can(lord: Lord, board: Board, region: Region) {
     return !region.belongsTo(lord) &&
       lord.canTame() &&
-      board.reachableBy(lord, i) &&
+      board.reachableBy(lord, region) &&
       lord.treasure >= region.cost();
   }
 
-  public run(lord: Lord, board: Board, i: number) {
-    const region = board.regions[i];
+  public run(lord: Lord, board: Board, region: Region) {
     lord.treasure -= region.cost();
-    board.regions[i] = region.tamedBy(lord);
-    board.updateNeighbourhood(i);
+    const newRegion = region.tamedBy(lord);
+    board.change(region, newRegion);
+    board.updateNeighbourhood(newRegion);
   }
 
   name() {
@@ -33,55 +41,53 @@ export class ColonizeAction implements Action {
   }
 }
 
-export class ConquerAction implements Action {
+export class ConquerAction implements ActiveAction {
 
   name() {
     return 'Conquer';
   }
 
-  run(lord: Lord, board: Board, i: number) {
-    const region = board.regions[i];
+  run(lord: Lord, board: Board, region: Region) {
     lord.treasure -= region.conquerCost();
-    board.regions[i] = region.tamedBy(lord);
-    board.updateNeighbourhood(i);
+    const newRegion = region.tamedBy(lord);
+    board.change(region, newRegion);
+    board.updateNeighbourhood(newRegion);
   }
 
-  can(lord: Lord, board: Board, i: number) {
-    const region = board.regions[i];
+  can(lord: Lord, board: Board, region: Region) {
     return !region.impregnable && !region.belongsTo(lord) &&
       lord.canTame() &&
-      board.reachableBy(lord, i) &&
+      board.reachableBy(lord, region) &&
       lord.treasure >= region.conquerCost();
   }
 }
 
-export class EmptyAction implements Action {
-  can(lord: Lord, board: Board, i: number) {
+export class EmptyAction implements ActiveAction {
+  can(lord: Lord, board: Board, region: Region) {
     return false;
   }
 
-  run(lord: Lord, board: Board, i: number) {
+  run(lord: Lord, board: Board, region: Region) {
     // do nothing
   }
 
   name() {
-    return 'Unreachable';
+    return 'Reach';
   }
 }
 
-export class FortifyAction implements Action {
-  can(lord: Lord, board: Board, i: number) {
-    const region = board.regions[i];
+export class FortifyAction implements ActiveAction {
+  can(lord: Lord, board: Board, region: Region) {
     return region.belongsTo(lord) &&
-      board.reachableBy(lord, i) &&
+      board.reachableBy(lord, region) &&
       region.isFortifiable() &&
       !region.sustenance &&
       lord.treasure >= region.cost();
   }
 
-  run(lord: Lord, board: Board, i: number) {
-    lord.treasure -= board.regions[i].sustenanceCost();
-    board.regions[i].sustenance = true;
+  run(lord: Lord, board: Board, region: Region) {
+    lord.treasure -= region.sustenanceCost();
+    region.sustenance = true;
   }
 
   name() {
@@ -89,14 +95,11 @@ export class FortifyAction implements Action {
   }
 }
 
-export class HarvestAction implements Action {
-  can(lord: Lord, board: Board) {
-    return true;
-  }
+export class HarvestAction implements PassiveAction {
 
   run(lord: Lord, board: Board) {
     lord.treasure = board.regions
-      .filter(region => region.belongsTo(lord))
+      .filter(region => region.belongsTo(lord) && board.reachableBy(lord, region))
       .map(region => region.worth())
       .reduce((previousValue, currentValue) => previousValue + currentValue, lord.treasure);
   }
@@ -107,10 +110,7 @@ export class HarvestAction implements Action {
 }
 
 
-export class SustainAction implements Action {
-  can(lord: Lord, board: Board) {
-    return true;
-  }
+export class SustainAction implements PassiveAction {
 
   run(lord: Lord, board: Board) {
     let sustenanceCosts = this.calculateSustenanceCosts(board, lord);
@@ -138,16 +138,16 @@ export class SustainAction implements Action {
   }
 }
 
-export class WithdrawAction implements Action {
-  can(lord: Lord, board: Board, i: number) {
-    return board.regions[i].belongsTo(lord) &&
-      board.reachableBy(lord, i) &&
-      board.regions[i].isFortifiable() &&
-      board.regions[i].sustenance;
+export class WithdrawAction implements ActiveAction {
+  can(lord: Lord, board: Board, region: Region) {
+    return region.belongsTo(lord) &&
+      board.reachableBy(lord, region) &&
+      region.isFortifiable() &&
+      region.sustenance;
   }
 
-  run(lord: Lord, board: Board, i: number) {
-    board.regions[i].sustenance = false;
+  run(lord: Lord, board: Board, region: Region) {
+    region.sustenance = false;
   }
 
   name() {
@@ -155,9 +155,8 @@ export class WithdrawAction implements Action {
   }
 }
 
-export class SettleAction implements Action {
-  can(lord: Lord, board: Board, i: number) {
-    const region = board.regions[i];
+export class SettleAction implements ActiveAction {
+  can(lord: Lord, board: Board, region: Region) {
     return region.isFortifiable() && region.belongsTo(lord) && lord.canSettle();
   }
 
@@ -165,17 +164,13 @@ export class SettleAction implements Action {
     return 'Settle';
   }
 
-  run(lord: Lord, board: Board, i: number) {
-    board.regions[i] = board.regions[i].settle();
-    board.world[i] = 's';
+  run(lord: Lord, board: Board, region: Region) {
+    board.change(region, region.settle());
     lord.availableSettlements--;
   }
 }
 
-export class DesertAction implements Action {
-  can(lord: Lord, board: Board, i: number) {
-    return true;
-  }
+export class DesertAction implements PassiveAction {
 
   name() {
     return 'Desert';
@@ -184,7 +179,7 @@ export class DesertAction implements Action {
   run(lord: Lord, board: Board) {
     board.regions.filter(region => region.impregnable && region.belongsTo(lord))
       .forEach(region => region.impregnable = false);
-    board.regions.filter((region, i) => region.sustenance && region.belongsTo(lord) && !board.reachableBy(lord, i))
+    board.regions.filter(region => region.sustenance && region.belongsTo(lord) && !board.reachableBy(lord, region))
       .forEach(region => region.sustenance = false);
   }
 }

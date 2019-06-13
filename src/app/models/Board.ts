@@ -17,33 +17,35 @@ export class Board {
   }
 
   public arrangeRegions(regionsAsStrings: string[]) {
-    this.regions = regionsAsStrings.map((lord, i) => new Region(lord, this.world[i]));
+    this.regions = regionsAsStrings.map((lord, i) => new Region(lord, this.world[i], false, false));
     this.regions.forEach((region, i) => region.borders = this.borders(i));
   }
 
-  public updateNeighbourhood(i: number) {
+  public updateNeighbourhood(region: Region) {
+    const i: number = this.regions.indexOf(region);
     this.grid.getNeighbourhood(i).forEach(current => {
       this.regions[current] = this.regions[current].copy();
       this.regions[current].borders = this.borders(current);
     });
   }
 
-  public reachableBy(lord: Lord, i: number) {
-    return this.isReachable(lord, i, []);
+  public reachableBy(lord: Lord, region: Region) {
+    return this.isReachable(lord, region, []);
   }
 
-  private isReachable(lord: Lord, i: number, visited: number[]) {
-    if (visited.indexOf(i) !== -1) {
+  private isReachable(lord: Lord, region: Region, visited: Region[]) {
+    if (visited.indexOf(region) !== -1) {
       return false;
     }
-    if (this.regions[i].belongsTo(lord) && this.regions[i].is('s')) {
+    if (region.belongsTo(lord) && region.is('s')) {
       return true;
     }
-    if (this.regions[i].belongsTo(lord)) {
-      visited.push(i);
+    if (region.belongsTo(lord)) {
+      visited.push(region);
     }
-    return this.grid.getNeighbours(i)
-      .filter(current => this.regions[current].belongsTo(lord))
+    return this.grid.getNeighbours(this.regions.indexOf(region))
+      .map(current => this.regions[current])
+      .filter(current => current.belongsTo(lord))
       .some(current => this.isReachable(lord, current, visited));
   }
 
@@ -75,7 +77,8 @@ export class Board {
     return new Borders(this.borderNorth(position), this.borderEast(position), this.borderSouth(position), this.borderWest(position));
   }
 
-  getNeighbours(i: number) {
+  getNeighbours(region: Region) {
+    const i: number = this.regions.indexOf(region);
     return [
       this.getSafeRegion(this.grid.north(i)),
       this.getSafeRegion(this.grid.east(i)),
@@ -84,4 +87,9 @@ export class Board {
     ];
   }
 
+  change(region: Region, newRegion: Region) {
+    const i: number = this.regions.indexOf(region);
+    this.regions[i] = newRegion;
+    this.world[i] = newRegion.type;
+  }
 }

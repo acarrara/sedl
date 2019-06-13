@@ -1,11 +1,12 @@
 import {
-  Action,
+  ActiveAction,
   ColonizeAction,
   ConquerAction,
   DesertAction,
   EmptyAction,
   FortifyAction,
   HarvestAction,
+  PassiveAction,
   SettleAction,
   SustainAction,
   WithdrawAction
@@ -13,17 +14,17 @@ import {
 
 export class Actions {
 
-  public static COLONIZE: Action = new ColonizeAction();
-  public static CONQUER: Action = new ConquerAction();
-  public static EMPTY: Action = new EmptyAction();
-  public static FORTIFY: Action = new FortifyAction();
-  public static WITHDRAW: Action = new WithdrawAction();
-  public static SETTLE: Action = new SettleAction();
+  public static COLONIZE: ActiveAction = new ColonizeAction();
+  public static CONQUER: ActiveAction = new ConquerAction();
+  public static EMPTY: ActiveAction = new EmptyAction();
+  public static FORTIFY: ActiveAction = new FortifyAction();
+  public static WITHDRAW: ActiveAction = new WithdrawAction();
+  public static SETTLE: ActiveAction = new SettleAction();
 
-  public static HARVEST: Action = new HarvestAction();
-  public static SUSTAIN: Action = new SustainAction();
-  public static DESERT: Action = new DesertAction();
+  public static HARVEST: PassiveAction = new HarvestAction();
+  public static SUSTAIN: PassiveAction = new SustainAction();
+  public static DESERT: PassiveAction = new DesertAction();
 
-  public static getPassiveActions = (): Action[] => [Actions.DESERT, Actions.HARVEST, Actions.SUSTAIN];
+  public static getPassiveActions = (): PassiveAction[] => [Actions.DESERT, Actions.HARVEST, Actions.SUSTAIN];
 
 }

@@ -1,5 +1,7 @@
 <se-lord-recap [lord]="game.lords[0]"></se-lord-recap>
-<button class="button  button--primary" (click)="game.pass()">
-  Pass
-</button>
+<div style="display: flex; gap: 8px">
+  <se-cell class="cell" [seed]="'s'" i="-10" [sustenance]="true" [color]="game.lords[0].color"></se-cell>
+  <h1 class="logo">SEDL!</h1>
+  <se-cell class="cell" [seed]="'s'" i="-11" [sustenance]="true" [color]="game.lords[1].color"></se-cell>
+</div>
 <se-lord-recap [lord]="game.lords[1]" class="lord-recap--right"></se-lord-recap>

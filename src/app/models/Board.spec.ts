@@ -65,31 +65,31 @@ describe('Board', () => {
     const lord = new Lord('r', '', '', 0, settlingBoard);
 
     it('should return false', () => {
-      const canSettle = settlingBoard.reachableBy(lord, 11);
+      const canSettle = settlingBoard.reachableBy(lord, settlingBoard.regions[11]);
 
       expect(canSettle).toBeFalsy();
     });
 
     it('should return true', () => {
-      const canSettle = settlingBoard.reachableBy(lord, 10);
+      const canSettle = settlingBoard.reachableBy(lord, settlingBoard.regions[10]);
 
       expect(canSettle).toBeFalsy();
     });
 
     it('should return true', () => {
-      const canSettle = settlingBoard.reachableBy(lord, 1);
+      const canSettle = settlingBoard.reachableBy(lord, settlingBoard.regions[1]);
 
       expect(canSettle).toBeTruthy();
     });
 
     it('should return false', () => {
-      const canSettle = settlingBoard.reachableBy(lord, 3);
+      const canSettle = settlingBoard.reachableBy(lord, settlingBoard.regions[3]);
 
       expect(canSettle).toBeFalsy();
     });
 
     it('should return true', () => {
-      const canSettle = settlingBoard.reachableBy(lord, 0);
+      const canSettle = settlingBoard.reachableBy(lord, settlingBoard.regions[0]);
 
       expect(canSettle).toBeTruthy();
     });

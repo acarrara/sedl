@@ -1,7 +1,7 @@
 import {Region} from './Region';
 import {Actions} from './Actions';
 import {Board} from './Board';
-import {Action} from './Action';
+import {ActiveAction, PassiveAction} from './Action';
 
 export class Lord {
 
@@ -14,9 +14,8 @@ export class Lord {
   constructor(public id: string, public name: string, public color: string, public treasure: number, public board: Board) {
   }
 
-  activeActionOn(i: number) {
-    const region = this.board.regions[i];
-    if (this.board.getNeighbours(i).every(neighbour => !neighbour.belongsTo(this))) {
+  activeActionOn(region: Region) {
+    if (this.board.getNeighbours(region).every(neighbour => !neighbour.belongsTo(this))) {
       return Actions.EMPTY;
     } else if (region.lord === Region.UNCHARTED.lord) {
       return Actions.COLONIZE;
@@ -29,21 +28,21 @@ export class Lord {
     }
   }
 
-  public activeAction(i: number) {
-    const action: Action = this.activeActionOn(i);
-    const canAct = action.can(this, this.board, i);
+  public activeAction(region: Region) {
+    const action: ActiveAction = this.activeActionOn(region);
+    const canAct = action.can(this, this.board, region);
     if (canAct) {
-      this.runAction(action, i);
+      this.runAction(action, region);
     }
     return canAct;
   }
 
-  public passiveAction(action: Action) {
+  public passiveAction(action: PassiveAction) {
     action.run(this, this.board);
   }
 
-  private runAction(action: Action, i?: number) {
-    action.run(this, this.board, i);
+  private runAction(action: ActiveAction, region: Region) {
+    action.run(this, this.board, region);
   }
 
   canTame() {
@@ -52,10 +51,10 @@ export class Lord {
     return tamedRegions.length < settlements * Lord.REGIONS_PER_SETTLEMENT;
   }
 
-  settle(i: number) {
-    const canAct = Actions.SETTLE.can(this, this.board, i);
+  settle(region: Region) {
+    const canAct = Actions.SETTLE.can(this, this.board, region);
     if (canAct) {
-      this.runAction(Actions.SETTLE, i);
+      this.runAction(Actions.SETTLE, region);
     }
     return canAct;
   }

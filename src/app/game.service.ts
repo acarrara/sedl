@@ -21,8 +21,8 @@ export class GameService {
 
   public board: Board = board;
 
-  action(i: number) {
-    if (this.currentLord().activeAction(i)) {
+  action(region: Region) {
+    if (this.currentLord().activeAction(region)) {
       this.regionsSubject.next(this.board.regions);
     }
   }
@@ -53,8 +53,8 @@ export class GameService {
     return Math.sqrt(this.board.regions.length);
   }
 
-  lordAt(i: number) {
-    const lordId = this.regionsSubject.getValue()[i].lord;
+  lordAt(region: Region) {
+    const lordId = region.lord;
     if (lordId === 'u') {
       return Lord.UNKNOWN;
     }
@@ -62,12 +62,8 @@ export class GameService {
     return this.lords[lordIndex];
   }
 
-  sustenanceAt(i: number) {
-    return this.regionsSubject.getValue()[i].sustenance;
-  }
-
-  settle(i: number) {
-    if (this.currentLord().settle(i)) {
+  settle(region: Region) {
+    if (this.currentLord().settle(region)) {
       this.regionsSubject.next(board.regions);
     }
   }

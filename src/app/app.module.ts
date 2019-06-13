@@ -9,6 +9,7 @@ import {LordRegionElementComponent} from './header/lord-region-element.component
 import {GameService} from './game.service';
 import {CountPipe} from './header/seCount.pipe';
 import {HeaderComponent} from './header/header.component';
+import {FooterComponent} from './footer/footer.component';
 
 export class MyHammerConfig extends HammerGestureConfig {
   overrides = {
@@ -27,7 +28,8 @@ export class MyHammerConfig extends HammerGestureConfig {
     RegionDirective,
     GridDirective,
     CountPipe,
-    HeaderComponent
+    HeaderComponent,
+    FooterComponent
   ],
   imports: [
     BrowserModule

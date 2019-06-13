@@ -1,5 +1,6 @@
 import {ChangeDetectionStrategy, Component, OnInit} from '@angular/core';
 import {GameService} from './game.service';
+import {Region} from './models/Region';
 
 @Component({
   selector: 'se-app',
@@ -9,21 +10,20 @@ import {GameService} from './game.service';
 export class AppComponent implements OnInit {
 
   public availableAction = 'Unreachable';
+  currentRegion: Region;
 
   constructor(public game: GameService) {
   }
 
-  action(i: number, $event) {
-    this.game.action(i);
-    this.updateAvailableAction(i);
+  action(region: Region) {
+    this.game.action(region);
+    this.updateAvailableAction(region);
   }
 
-  actionEnter(i: number, $event: MouseEvent) {
+  actionEnter(region: Region, $event: MouseEvent) {
+    this.currentRegion = region;
     if ($event.buttons === 1) {
-      this.action(i, undefined);
-    } else {
-      this.updateAvailableAction(i);
-
+      this.action(region);
     }
   }
 
@@ -31,8 +31,8 @@ export class AppComponent implements OnInit {
     this.game.start();
   }
 
-  private updateAvailableAction(i: number) {
-    this.availableAction = this.game.currentLord().activeActionOn(i).name();
+  private updateAvailableAction(region: Region) {
+    this.availableAction = this.game.currentLord().activeActionOn(region).name();
   }
 }
 
