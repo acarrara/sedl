@@ -127,22 +127,41 @@ $f-color-foreground: #6ca285;
   fill: #ddcf52;
 }
 
+.logo__heading {
+  font-family: 'Uncial Antiqua', cursive;
+  font-size: 1.8rem;
+  margin: 0;
+}
+
+.logo {
+  display: flex;
+  gap: 8px;
+}
+
 @media only screen and (max-width: 1024px) {
-  .controls {
+  .region-details__content {
+    padding: 0;
+  }
+
+  .lord-recap {
     display: none;
   }
 
-  .availableAction {
+  .region-statistics {
     display: none;
+  }
+
+  .logo {
+    margin: 0 auto;
+    padding: 8px;
+  }
+
+  .passButton {
+    margin: 0;
+    width: 100%;
   }
 
   .cell {
     border-width: 1px;
   }
-}
-
-.logo {
-  font-family: 'Uncial Antiqua', cursive;
-  font-size: 1.8em;
-  margin: 0;
 }

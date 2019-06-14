@@ -1,7 +1,7 @@
-<se-lord-recap [lord]="game.lords[0]"></se-lord-recap>
-<div style="display: flex; gap: 8px">
+<se-lord-recap [lord]="game.lords[0]" class="lord-recap"></se-lord-recap>
+<div class="logo">
   <se-cell class="cell" [seed]="'s'" i="-10" [sustenance]="true" [color]="game.lords[0].color"></se-cell>
-  <h1 class="logo">SEDL!</h1>
+  <h1 class="logo__heading">SEDL!</h1>
   <se-cell class="cell" [seed]="'s'" i="-11" [sustenance]="true" [color]="game.lords[1].color"></se-cell>
 </div>
-<se-lord-recap [lord]="game.lords[1]" class="lord-recap--right"></se-lord-recap>
+<se-lord-recap [lord]="game.lords[1]" class="lord-recap  lord-recap--right"></se-lord-recap>

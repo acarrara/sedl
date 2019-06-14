@@ -55,9 +55,12 @@
   padding: 8px;
   display: flex;
   align-items: center;
-  gap: 1em;
   width: 100%;
-
+}
+.region-statistics {
+  display: flex;
+  align-items: center;
+  gap: 1em;
 }
 
 .passButton {
