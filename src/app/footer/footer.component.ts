@@ -30,8 +30,10 @@ export class FooterComponent {
         return 'Hill';
       case 'f':
         return 'Forest';
+      case 'm':
+        return 'Mountain';
       default:
-        return 'Unkwnown';
+        return 'Unknown';
     }
   }
 

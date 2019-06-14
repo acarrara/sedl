@@ -1,12 +1,15 @@
 <aside class="region-details__content">
   <div class="region-statistics">
-    <se-cell class="cell" [seed]="region?.type"></se-cell>
-    <strong *ngIf="region">{{getLabel()}}</strong>
-    <span *ngIf="region">Cost: {{region.cost()}}</span>
-    <span *ngIf="region">Worth: {{region.worth()}}</span>
-    <span *ngIf="region?.impregnable">Impregnable</span>
-    <span *ngIf="region?.sustenance">Fortified</span>
-    <span *ngIf="region">{{canRun() ? 'You can' : 'You can\'t'}} {{getAction().name()| lowercase}}</span>
+    <se-cell class="cell  region-statistics__element" [seed]="region?.type"></se-cell>
+    <strong class="region-statistics__element" *ngIf="region">{{getLabel()}}</strong>
+    <span class="region-statistics__element" *ngIf="region">(worth {{region.worth()}}
+      coin{{region.worth() === 1 ? '' : 's'}})</span>
+    <span class="region-statistics__element" *ngIf="region?.impregnable">Impregnable</span>
+    <span class="region-statistics__element" *ngIf="region?.sustenance">Fortified</span>
+    <span class="region-statistics__element" *ngIf="region">
+      {{canRun() ? 'You can' : 'You can\'t'}} {{getAction().name()| lowercase}} (cost is {{region.cost()}}
+      coin{{region.cost() === 1 ? '' : 's'}})
+    </span>
   </div>
   <button class="button  button--primary  passButton" (click)="game.pass()">
     Pass
