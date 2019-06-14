@@ -11,6 +11,11 @@ export class AppComponent implements OnInit {
 
   public availableAction = 'Unreachable';
   currentRegion: Region;
+  public backSeeds = [
+    'm', 'f', 'w', 'h', 'p', 'm', 'f', 'w', 'h',
+    'p', 'm', 'f', 'w', 'h', 'p', 'm', 'f', 'w',
+    'h', 'p', 'm', 'f', 'w', 'h', 'p', 'm', 'f',
+    'w', 'h', 'p'];
 
   constructor(public game: GameService) {
   }

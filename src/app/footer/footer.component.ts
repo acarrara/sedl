@@ -21,17 +21,17 @@ export class FooterComponent {
   getLabel() {
     switch (this.region.type) {
       case 's':
-        return 'Settlement';
+        return 'settlement';
       case 'w':
-        return 'Water';
+        return 'water';
       case 'p':
-        return 'Plain';
+        return 'plain';
       case 'h':
-        return 'Hill';
+        return 'hill';
       case 'f':
-        return 'Forest';
+        return 'forest';
       case 'm':
-        return 'Mountain';
+        return 'mountain';
       default:
         return 'Unknown';
     }

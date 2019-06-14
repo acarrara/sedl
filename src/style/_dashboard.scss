@@ -30,6 +30,7 @@
 }
 
 .lord__regions {
+  padding: 0 16px;
   display: flex;
 }
 
@@ -38,8 +39,8 @@
   align-items: center;
 }
 
-.lord__region-element + .lord__region-element {
-  padding-left: 16px;
+.lord__region-element {
+  padding: 0 4px;
 }
 
 .lord__content {
@@ -67,6 +68,15 @@
   margin-left: auto;
 }
 
+.region-statistics__element {
+  display: flex;
+  align-items: center;
+}
+
 .region-statistics__element + .region-statistics__element {
   padding-left: 8px;
+}
+
+.cell__svg.d {
+  fill: var(--lord-color);
 }

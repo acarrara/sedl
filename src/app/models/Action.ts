@@ -18,19 +18,25 @@ export interface ActiveAction extends SuperAction {
 
   run(lord: Lord, board: Board, region: Region);
 
+  cost(region: Region);
+
 }
 
 export class ColonizeAction implements ActiveAction {
+
+  cost(region: Region) {
+    return region.cost();
+  }
 
   public can(lord: Lord, board: Board, region: Region) {
     return !region.belongsTo(lord) &&
       lord.canTame() &&
       board.reachableBy(lord, region) &&
-      lord.treasure >= region.cost();
+      lord.treasure >= this.cost(region);
   }
 
   public run(lord: Lord, board: Board, region: Region) {
-    lord.treasure -= region.cost();
+    lord.treasure -= this.cost(region);
     const newRegion = region.tamedBy(lord);
     board.change(region, newRegion);
     board.updateNeighbourhood(newRegion);
@@ -43,12 +49,16 @@ export class ColonizeAction implements ActiveAction {
 
 export class ConquerAction implements ActiveAction {
 
+  cost(region: Region) {
+    return region.conquerCost();
+  }
+
   name() {
     return 'Conquer';
   }
 
   run(lord: Lord, board: Board, region: Region) {
-    lord.treasure -= region.conquerCost();
+    lord.treasure -= this.cost(region);
     const newRegion = region.tamedBy(lord);
     board.change(region, newRegion);
     board.updateNeighbourhood(newRegion);
@@ -58,11 +68,16 @@ export class ConquerAction implements ActiveAction {
     return !region.impregnable && !region.belongsTo(lord) &&
       lord.canTame() &&
       board.reachableBy(lord, region) &&
-      lord.treasure >= region.conquerCost();
+      lord.treasure >= this.cost(region);
   }
 }
 
 export class EmptyAction implements ActiveAction {
+
+  cost(region: Region) {
+    return 0;
+  }
+
   can(lord: Lord, board: Board, region: Region) {
     return false;
   }
@@ -77,12 +92,17 @@ export class EmptyAction implements ActiveAction {
 }
 
 export class FortifyAction implements ActiveAction {
+
+  cost(region: Region) {
+    return region.cost();
+  }
+
   can(lord: Lord, board: Board, region: Region) {
     return region.belongsTo(lord) &&
       board.reachableBy(lord, region) &&
       region.isFortifiable() &&
       !region.sustenance &&
-      lord.treasure >= region.cost();
+      lord.treasure >= this.cost(region);
   }
 
   run(lord: Lord, board: Board, region: Region) {
@@ -139,6 +159,11 @@ export class SustainAction implements PassiveAction {
 }
 
 export class WithdrawAction implements ActiveAction {
+
+  cost(region: Region) {
+    return 0;
+  }
+
   can(lord: Lord, board: Board, region: Region) {
     return region.belongsTo(lord) &&
       board.reachableBy(lord, region) &&
@@ -156,6 +181,11 @@ export class WithdrawAction implements ActiveAction {
 }
 
 export class SettleAction implements ActiveAction {
+
+  cost(region: Region) {
+    return 0;
+  }
+
   can(lord: Lord, board: Board, region: Region) {
     return region.isFortifiable() && region.belongsTo(lord) && lord.canSettle();
   }

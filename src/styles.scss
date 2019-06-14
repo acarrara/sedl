@@ -3,6 +3,7 @@
 @import "style/typography";
 @import "style/buttons";
 @import "style/dashboard";
+@import "style/background";
 
 $m-color-foreground: #c8963e;
 $h-color-foreground: #e3c567;
@@ -48,7 +49,6 @@ $f-color-foreground: #6ca285;
   display: flex;
   justify-content: center;
   align-items: center;
-  background-color: $background-color;
 }
 
 .board {
@@ -130,6 +130,7 @@ $f-color-foreground: #6ca285;
 .logo__heading {
   font-family: 'Uncial Antiqua', cursive;
   font-size: 1.8rem;
+  padding: 0 8px;
   margin: 0;
 }
 
@@ -143,17 +144,28 @@ $f-color-foreground: #6ca285;
     padding: 0;
   }
 
-  .lord-recap {
+  .region-statistics {
     display: none;
   }
 
-  .region-statistics {
-    display: none;
+  .controls {
+    width: 100%;
+    flex-direction: column;
+  }
+
+  .lord-recap--right {
+    direction: ltr;
+  }
+
+  .lord-recap {
+    order: 2;
   }
 
   .logo {
     margin: 0 auto;
     padding: 8px;
+
+    order: 1;
   }
 
   .passButton {

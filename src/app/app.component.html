@@ -1,6 +1,6 @@
 <div class="wrapper" (document:keydown.space)="game.pass()">
   <se-header class="controls  controls--top" [style.--lordColor]="(game.lord$ | async).color"></se-header>
-  <div class="board-container">
+  <div style="position: relative; overflow: hidden" class="board-container">
     <main class="board" [seGrid]="game.dimension()">
       <se-cell [seRegion]="region"
                [sustenance]="region.sustenance"
@@ -13,6 +13,9 @@
                [impregnable]="region.impregnable"
                class="cell" *ngFor="let region of game.board.regions; let i = index" [seed]="game.world()[i]"></se-cell>
     </main>
+    <div class="background">
+      <se-cell *ngFor="let seed of backSeeds" [seed]="seed"></se-cell>
+    </div>
   </div>
   <se-footer class="controls  controls--bottom" [region]="currentRegion" [lord]="game.lord$ | async"
              [style.--lordColor]="(game.lord$ | async).color"></se-footer>
