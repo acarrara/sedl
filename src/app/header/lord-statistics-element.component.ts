@@ -5,7 +5,7 @@ import {ChangeDetectionStrategy, Component, Input} from '@angular/core';
   templateUrl: 'lord-statistics-element.component.html',
   changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class LordRegionElementComponent {
+export class LordStatisticsElementComponent {
 
   @Input()
   public seed: string;

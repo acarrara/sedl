@@ -37,13 +37,12 @@
 
 .logo__heading {
   @include font-family-uncial();
-
   font-size: 1.8rem;
-  padding: 0 8px;
+
+  padding: 0 16px;
   margin: 0;
 }
 
 .logo {
   display: flex;
-  gap: 8px;
 }

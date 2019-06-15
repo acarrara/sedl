@@ -5,7 +5,7 @@ import {CellComponent} from './cell.component';
 import {RegionDirective} from './region.directive';
 import {GridDirective} from './grid.directive';
 import {LordStatisticsComponent} from './header/lord-statistics.component';
-import {LordRegionElementComponent} from './header/lord-region-element.component';
+import {LordStatisticsElementComponent} from './header/lord-statistics-element.component';
 import {GameService} from './game.service';
 import {HeaderComponent} from './header/header.component';
 import {FooterComponent} from './footer/footer.component';
@@ -14,6 +14,7 @@ export class MyHammerConfig extends HammerGestureConfig {
   overrides = {
     swipe: {direction: Hammer.DIRECTION_ALL}, // override default settings
     pan: {direction: Hammer.DIRECTION_ALL},
+    press: {time: 1001},
     pinch: {enable: true, direction: Hammer.DIRECTION_ALL}
   } as any;
 }
@@ -23,7 +24,7 @@ export class MyHammerConfig extends HammerGestureConfig {
     AppComponent,
     CellComponent,
     LordStatisticsComponent,
-    LordRegionElementComponent,
+    LordStatisticsElementComponent,
     RegionDirective,
     GridDirective,
     HeaderComponent,

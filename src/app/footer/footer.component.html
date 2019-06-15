@@ -17,7 +17,7 @@
       <span *ngIf="canRun()">{{getAction().cost(region)}}</span>
     </span>
   </div>
-  <button class="button  button--primary  pass-button" (click)="game.pass()">
+  <button class="button  button--primary  pass-button" (click)="game.pass()" [style.--lordColor]="lord.color">
     Pass
   </button>
 </aside>
