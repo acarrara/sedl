@@ -1,0 +1,49 @@
+.controls {
+  flex-grow: 0;
+
+  width: 100%;
+
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+
+  background-color: #fafafa;
+
+  box-shadow: 0 1px 4px 0 $shadow-on-background-color;
+
+  z-index: 900;
+
+  transition: 750ms ease-in-out;
+}
+
+.controls--top {
+  border-top: 8px solid var(--lord-color);
+}
+
+.controls--bottom {
+  border-bottom: 8px solid var(--lord-color);
+}
+
+.footer {
+  padding: 8px;
+  display: flex;
+  align-items: center;
+  width: 100%;
+}
+
+.pass-button {
+  margin-left: auto;
+}
+
+.logo__heading {
+  @include font-family-uncial();
+
+  font-size: 1.8rem;
+  padding: 0 8px;
+  margin: 0;
+}
+
+.logo {
+  display: flex;
+  gap: 8px;
+}

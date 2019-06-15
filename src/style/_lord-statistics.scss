@@ -1,0 +1,23 @@
+.lord-statistics {
+
+  .lord-statistics__data {
+    padding: 0 16px;
+    display: flex;
+  }
+
+  .lord-statistics__element {
+    display: flex;
+    align-items: center;
+    padding: 0 4px;
+  }
+
+  .lord-statistics__content {
+    padding: 8px;
+    display: flex;
+    align-items: center;
+  }
+
+  .lord-statistics--right {
+    direction: rtl;
+  }
+}

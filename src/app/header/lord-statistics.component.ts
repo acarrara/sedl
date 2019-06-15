@@ -4,11 +4,11 @@ import {GameService} from '../game.service';
 import {Subscription} from 'rxjs';
 
 @Component({
-  selector: 'se-lord-recap',
-  templateUrl: 'lord-recap.component.html',
+  selector: 'se-lord-statistics',
+  templateUrl: 'lord-statistics.component.html',
   changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class LordRecapComponent implements OnInit, OnDestroy {
+export class LordStatisticsComponent implements OnInit, OnDestroy {
 
   @Input()
   lord: Lord;

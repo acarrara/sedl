@@ -1,0 +1,13 @@
+.region-statistics {
+  display: flex;
+  align-items: center;
+}
+
+.region-statistics__element {
+  display: flex;
+  align-items: center;
+}
+
+.region-statistics__element + .region-statistics__element {
+  padding-left: 8px;
+}

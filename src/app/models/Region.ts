@@ -9,7 +9,7 @@ export class Region {
   public sustenance: boolean;
 
   constructor(public lord: string, public type: string, sustenance: boolean, public impregnable: boolean) {
-    this.sustenance = type === 's' || !!sustenance;
+    this.sustenance = this.isSettlement() || !!sustenance;
   }
 
   public tamedBy(lord: Lord) {
@@ -32,8 +32,8 @@ export class Region {
     return this.lord === lord.id;
   }
 
-  public is(type: string) {
-    return this.type === type;
+  public isSettlement() {
+    return this.type === 's';
   }
 
   public conquerCost() {

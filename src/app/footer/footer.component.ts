@@ -42,6 +42,6 @@ export class FooterComponent {
   }
 
   canRun() {
-    return this.lord.activeActionOn(this.region).can(this.lord, this.lord.board, this.region);
+    return this.getAction().can(this.lord, this.region);
   }
 }

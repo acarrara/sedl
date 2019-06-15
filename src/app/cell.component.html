@@ -1,11 +1,11 @@
 <svg class="cell__svg  {{seed}}" viewBox="0 0 1 1">
   <style type="text/css">
-    #sustenance-{{i}}:not(.impregnable) {
+    #sustenance-{{i}}:not(.cell--impregnable) {
     fill: {{color}};
     stroke: {{color}};
     }
   </style>
   <use [attr.href]="'#' + seed"></use>
   <use [ngClass]="{'impregnable': impregnable}"
-       class="sustenance" id="sustenance-{{i}}" *ngIf="sustenance || impregnable" href="#b"></use>
+       class="cell--sustenance" id="sustenance-{{i}}" *ngIf="sustenance || impregnable" href="#b"></use>
 </svg>

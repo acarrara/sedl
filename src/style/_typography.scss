@@ -1,5 +1,11 @@
-@mixin font-family() {
+@mixin font-family-fira() {
   font-family: 'Fira Sans', sans-serif;
+  font-weight: 400;
+  color: #555;
+}
+
+@mixin font-family-uncial() {
+  font-family: 'Uncial Antiqua', cursive;
   font-weight: 400;
   color: #555;
 }
@@ -9,7 +15,7 @@ html {
 }
 
 body {
-  @include font-family();
+  @include font-family-fira();
   line-height: 1.45;
 }
 
@@ -18,7 +24,7 @@ p {
 }
 
 h1, h2, h3, h4, h5 {
-  @include font-family();
+  @include font-family-fira();
   margin-bottom: 1rem;
   line-height: 1.15;
 }

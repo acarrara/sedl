@@ -30,7 +30,7 @@ export class Lord {
 
   public activeAction(region: Region) {
     const action: ActiveAction = this.activeActionOn(region);
-    const canAct = action.can(this, this.board, region);
+    const canAct = action.can(this, region);
     if (canAct) {
       this.runAction(action, region);
     }
@@ -38,21 +38,25 @@ export class Lord {
   }
 
   public passiveAction(action: PassiveAction) {
-    action.run(this, this.board);
+    action.run(this);
   }
 
   private runAction(action: ActiveAction, region: Region) {
-    action.run(this, this.board, region);
+    action.run(this, region);
   }
 
   canTame() {
     const tamedRegions = this.board.regions.filter(region => region.belongsTo(this));
-    const settlements = tamedRegions.filter(region => region.is('s')).length;
+    const settlements = tamedRegions.filter(region => region.isSettlement()).length;
     return tamedRegions.length < settlements * Lord.REGIONS_PER_SETTLEMENT;
   }
 
+  canReach(region: Region) {
+    return this.board.reachableBy(this, region);
+  }
+
   settle(region: Region) {
-    const canAct = Actions.SETTLE.can(this, this.board, region);
+    const canAct = Actions.SETTLE.can(this, region);
     if (canAct) {
       this.runAction(Actions.SETTLE, region);
     }
@@ -64,6 +68,26 @@ export class Lord {
   }
 
   canPlay(): boolean {
-    return this.board.regions.some(region => region.is('s') && region.belongsTo(this));
+    return this.board.regions.some(region => region.isSettlement() && region.belongsTo(this));
+  }
+
+  worth() {
+    return this.board.regions
+      .filter(region => region.belongsTo(this) && this.canReach(region))
+      .map(region => region.worth())
+      .reduce((previousValue, currentValue) => previousValue + currentValue, 0);
+  }
+
+  debt() {
+    return this.board.regions
+      .filter(region => region.sustenance && region.belongsTo(this))
+      .map(region => region.sustenanceCost())
+      .reduce((previousValue, currentValue) => previousValue + currentValue, 0);
+  }
+
+  settlements() {
+    return this.board.regions
+      .filter(region => region.isSettlement() && region.belongsTo(this))
+      .reduce(previousValue => previousValue + 1, 0);
   }
 }

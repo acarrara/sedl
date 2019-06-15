@@ -1,0 +1,13 @@
+<div class="lord-statistics__content">
+  <strong>{{lord.name}}</strong>
+  <dl class="lord-statistics__data">
+    <se-lord-statistics-element class="lord-statistics__element" seed="s"
+                                [quantity]="lord.settlements()"></se-lord-statistics-element>
+    <se-lord-statistics-element class="lord-statistics__element" seed="c"
+                                [quantity]="lord.treasure"></se-lord-statistics-element>
+    <se-lord-statistics-element class="lord-statistics__element" seed="g"
+                                [quantity]="lord.worth()"></se-lord-statistics-element>
+    <se-lord-statistics-element class="lord-statistics__element" seed="d" [style.--lordColor]="lord.color"
+                                [quantity]="lord.debt()"></se-lord-statistics-element>
+  </dl>
+</div>

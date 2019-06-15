@@ -37,7 +37,7 @@ export class Board {
     if (visited.indexOf(region) !== -1) {
       return false;
     }
-    if (region.belongsTo(lord) && region.is('s')) {
+    if (region.belongsTo(lord) && region.isSettlement()) {
       return true;
     }
     if (region.belongsTo(lord)) {

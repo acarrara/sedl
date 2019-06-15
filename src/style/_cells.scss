@@ -1,0 +1,71 @@
+.m {
+  stroke: $m-color-foreground;
+  background-color: rgba($m-color-foreground, .5);
+}
+
+.h {
+  stroke: $h-color-foreground;
+  background-color: rgba($h-color-foreground, .5);
+}
+
+.p {
+  stroke: $p-color-foreground;
+  background-color: rgba($p-color-foreground, .5);
+}
+
+.w {
+  stroke: $w-color-foreground;
+  background-color: rgba($w-color-foreground, .5);
+}
+
+.f {
+  stroke: $f-color-foreground;
+  background-color: rgba($f-color-foreground, .5);
+}
+
+.s .cell--sustenance {
+  transform: translate(-32%, 20%);
+}
+
+.cell--impregnable {
+  fill: #ddcf52;
+}
+
+.cell {
+  border-color: transparent;
+  border-width: 4px;
+  border-style: solid;
+  display: block;
+  border-radius: 4px;
+
+  transition: 175ms ease-in-out;
+  cursor: pointer;
+
+  &:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 4px 4px 0 #999;
+  }
+}
+
+.cell__svg {
+  fill: transparent;
+}
+
+.cell__svg.d {
+  fill: var(--lord-color);
+}
+
+@each $lord-name, $lord-color in $lord-colors {
+  .cell--sustenance-#{$lord-name} {
+    stroke: $lord-color;
+    fill: $lord-color;
+  }
+}
+
+@each $lord-name, $lord-color in $lord-colors {
+  @each $direction-name, $direction-value in $directions {
+    .d-#{$direction-name}--#{$lord-name} {
+      border-#{$direction-value}-color: $lord-color;
+    }
+  }
+}

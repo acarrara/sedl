@@ -1,6 +1,6 @@
 <div class="wrapper" (document:keydown.space)="game.pass()">
   <se-header class="controls  controls--top" [style.--lordColor]="(game.lord$ | async).color"></se-header>
-  <div style="position: relative; overflow: hidden" class="board-container">
+  <div class="board-container">
     <main class="board" [seGrid]="game.dimension()">
       <se-cell [seRegion]="region"
                [sustenance]="region.sustenance"
