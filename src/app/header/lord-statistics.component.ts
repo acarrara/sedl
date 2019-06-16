@@ -25,7 +25,7 @@ export class LordStatisticsComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit(): void {
-    this.subscription = this.game.lord$.subscribe(() => this.cdr.detectChanges());
+    this.subscription = this.game.actions$.subscribe(() => this.cdr.detectChanges());
   }
 
 }

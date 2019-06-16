@@ -118,7 +118,10 @@ export class FortifyAction implements ActiveAction {
 export class HarvestAction implements PassiveAction {
 
   run(lord: Lord) {
-    lord.treasure += lord.worth();
+    const worth = lord.worth();
+    const harvested = lord.rushed ? Math.floor(worth / 2) : worth;
+    lord.treasure += harvested;
+    lord.rushed = false;
   }
 
   name() {
@@ -198,5 +201,24 @@ export class DesertAction implements PassiveAction {
       .forEach(region => region.impregnable = false);
     lord.board.regions.filter(region => region.sustenance && region.belongsTo(lord) && !lord.canReach(region))
       .forEach(region => region.sustenance = false);
+  }
+}
+
+export class RushAction implements ActiveAction {
+  can(lord: Lord, region: Region) {
+    return !lord.rushed;
+  }
+
+  cost(region: Region) {
+    return 0;
+  }
+
+  name() {
+    return 'Rush';
+  }
+
+  run(lord: Lord, region: Region) {
+    lord.treasure += Math.floor(lord.worth() / 5);
+    lord.rushed = true;
   }
 }

@@ -7,6 +7,7 @@ import {
   FortifyAction,
   HarvestAction,
   PassiveAction,
+  RushAction,
   SettleAction,
   SustainAction,
   WithdrawAction
@@ -20,6 +21,7 @@ export class Actions {
   public static FORTIFY: ActiveAction = new FortifyAction();
   public static WITHDRAW: ActiveAction = new WithdrawAction();
   public static SETTLE: ActiveAction = new SettleAction();
+  public static RUSH: ActiveAction = new RushAction();
 
   public static HARVEST: PassiveAction = new HarvestAction();
   public static SUSTAIN: PassiveAction = new SustainAction();

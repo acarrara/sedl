@@ -92,4 +92,5 @@ export class Board {
     this.regions[i] = newRegion;
     this.world[i] = newRegion.type;
   }
+
 }

@@ -10,6 +10,7 @@ export class Lord {
   private static REGIONS_PER_SETTLEMENT = 100;
 
   availableSettlements = 2;
+  rushed: boolean;
 
   constructor(public id: string, public name: string, public color: string, public treasure: number, public board: Board) {
   }
@@ -67,6 +68,14 @@ export class Lord {
     return this.availableSettlements > 0;
   }
 
+  rush() {
+    const canAct = Actions.RUSH.can(this, undefined);
+    if (canAct) {
+      this.runAction(Actions.RUSH, undefined);
+    }
+    return canAct;
+  }
+
   canPlay(): boolean {
     return this.board.regions.some(region => region.isSettlement() && region.belongsTo(this));
   }
@@ -89,5 +98,9 @@ export class Lord {
     return this.board.regions
       .filter(region => region.isSettlement() && region.belongsTo(this))
       .reduce(previousValue => previousValue + 1, 0);
+  }
+
+  canRush() {
+    return Actions.RUSH.can(this, undefined);
   }
 }

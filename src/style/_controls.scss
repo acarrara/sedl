@@ -31,10 +31,6 @@
   width: 100%;
 }
 
-.pass-button {
-  margin-left: auto;
-}
-
 .logo__heading {
   @include font-family-uncial();
   font-size: 1.8rem;
@@ -45,4 +41,13 @@
 
 .logo {
   display: flex;
+}
+
+.footer__actions {
+  margin-left: auto;
+
+  * + * {
+    margin-left: 8px;
+  }
+
 }

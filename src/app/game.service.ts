@@ -13,9 +13,11 @@ export class GameService {
 
   private regionsSubject: BehaviorSubject<Region[]> = new BehaviorSubject(board.regions);
   private lordSubject: BehaviorSubject<Lord> = new BehaviorSubject(lords[0]);
+  private actionsSubject: BehaviorSubject<any> = new BehaviorSubject(null);
 
   public readonly regions$: Observable<Region[]> = this.regionsSubject.asObservable();
   public readonly lord$: Observable<Lord> = this.lordSubject.asObservable();
+  public readonly actions$: Observable<any> = this.actionsSubject.asObservable();
 
   public lords: Lord[] = lords;
 
@@ -24,6 +26,7 @@ export class GameService {
   action(region: Region) {
     if (this.currentLord().activeAction(region)) {
       this.regionsSubject.next(this.board.regions);
+      this.actionsSubject.next({});
     }
   }
 
@@ -39,6 +42,7 @@ export class GameService {
     }
     Actions.getPassiveActions().forEach(action => this.currentLord().passiveAction(action));
     this.lordSubject.next(this.currentLord());
+    this.actionsSubject.next(this.currentLord());
   }
 
   currentLord() {
@@ -65,6 +69,13 @@ export class GameService {
   settle(region: Region) {
     if (this.currentLord().settle(region)) {
       this.regionsSubject.next(board.regions);
+      this.actionsSubject.next({});
+    }
+  }
+
+  rush() {
+    if (this.currentLord().rush()) {
+      this.actionsSubject.next({});
     }
   }
 }

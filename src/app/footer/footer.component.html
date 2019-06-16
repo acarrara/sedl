@@ -17,7 +17,10 @@
       <span *ngIf="canRun()">{{getAction().cost(region)}}</span>
     </span>
   </div>
-  <button class="button  button--primary  pass-button" (click)="game.pass()" [style.--lordColor]="lord.color">
-    Pass
-  </button>
+  <div class="footer__actions">
+    <button class="button" (click)="game.rush()" [disabled]="!lord.canRush()">Rush</button>
+    <button class="button  button--primary" (click)="game.pass()" [style.--lordColor]="lord.color">
+      Pass
+    </button>
+  </div>
 </aside>
