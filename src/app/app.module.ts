@@ -9,6 +9,7 @@ import {LordStatisticsElementComponent} from './header/lord-statistics-element.c
 import {GameService} from './game.service';
 import {HeaderComponent} from './header/header.component';
 import {FooterComponent} from './footer/footer.component';
+import {LogoComponent} from './logo/logo.component';
 
 export class MyHammerConfig extends HammerGestureConfig {
   overrides = {
@@ -28,6 +29,7 @@ export class MyHammerConfig extends HammerGestureConfig {
     RegionDirective,
     GridDirective,
     HeaderComponent,
+    LogoComponent,
     FooterComponent
   ],
   imports: [

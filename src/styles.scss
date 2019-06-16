@@ -73,9 +73,14 @@
     order: 1;
   }
 
-  .pass-button {
+  .footer__actions, .button {
     margin: 0;
     width: 100%;
+    border-radius: 0;
+  }
+
+  .controls--bottom {
+    border-bottom: 0;
   }
 
   .cell {

@@ -69,3 +69,13 @@
     }
   }
 }
+
+.cel--icon {
+  border: 0;
+  transition: none;
+  width: 1.5em;
+  &:hover {
+    box-shadow: initial;
+    transform: none;
+  }
+}

@@ -18,9 +18,17 @@
     </span>
   </div>
   <div class="footer__actions">
-    <button class="button" (click)="game.rush()" [disabled]="!lord.canRush()">Rush</button>
+    <button class="button" (click)="game.rush()" [disabled]="!lord.canRush()">
+       <span class="button__content">
+        <se-cell seed="l" class="cell  cel--icon"></se-cell>
+        <span>Rush</span>
+      </span>
+    </button>
     <button class="button  button--primary" (click)="game.pass()" [style.--lordColor]="lord.color">
-      Pass
+      <span class="button__content">
+        <se-cell seed="o" class="cell  cel--icon"></se-cell>
+        <span>Pass</span>
+      </span>
     </button>
   </div>
 </aside>

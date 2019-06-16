@@ -3,7 +3,7 @@ $button-color-background-primary: #eee;
 .button {
   @include font-family-fira();
   font-size: 1em;
-  border: #999 solid 2px;
+  border: #999 solid 4px;
   border-radius: 4px;
   padding: 0.25em 2em 0.25em 2em;
   box-shadow: 0 1px 2px 0 #666;
@@ -15,6 +15,13 @@ $button-color-background-primary: #eee;
   &:focus {
     outline: 0;
     box-shadow: 0 0 4px 6px darken($button-color-background-primary, 40%);
+  }
+
+  &[disabled] {
+    background-color: #dfdfdf;
+    color: #888;
+
+    cursor: not-allowed;
   }
 }
 
@@ -29,5 +36,19 @@ $button-color-background-primary: #eee;
 
   &:active {
     background-color: darken($button-color-background-primary, 20%);
+  }
+}
+
+.button + .button {
+  margin-left: 8px;
+}
+
+.button__content {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  * + * {
+    padding-left: 4px;
   }
 }
