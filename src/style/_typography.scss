@@ -3,6 +3,11 @@
   font-weight: 400;
   color: #555;
 }
+@mixin font-family-fira-bold() {
+  font-family: 'Fira Sans', sans-serif;
+  font-weight: 600;
+  color: #555;
+}
 
 @mixin font-family-uncial() {
   font-family: 'Uncial Antiqua', cursive;
@@ -51,4 +56,8 @@ h5 {
 
 small, .text_small {
   font-size: 0.833em;
+}
+
+em {
+  @include font-family-fira-bold();
 }

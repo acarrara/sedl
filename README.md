@@ -3,7 +3,7 @@
 SEDL! is a turn-based game simulating a clash of civilizations.
 
 <p align="center">
-  <img src="https://github.com/acarrara/sedl/blob/master/SEDL.png" alt="SEDL" />
+  <img src="https://github.com/acarrara/sedl/blob/master/arc/assets/SEDL.png" alt="SEDL" />
 </p>
 
 There are two players, called *Lords*. They live in the same world and fight for survival. 
@@ -13,7 +13,7 @@ A *domain* is a set of adjacent regions. A region could be *plain*, *water*, *fo
 
 A Lord harvest their domains at the beginning of their turn. Goods provide coins. Lords spend coins to expand their domain.
 
-Lords can *colonize*, *conquer*, *settle* and *fortify* regions. They can do these only on regions next to a domain containing at least a settlement. Lords can *rally*, too.
+Lords can *colonize*, *conquer*, *settle* and *fortify* regions. They can do these only on regions next to a domain containing at least a settlement. Lords can *rush*, too.
 
 ## Terrains
 ### Plain
@@ -65,11 +65,11 @@ A Lord cannot fortify an already fortified region.
 Lord can build a settlement on a region. They can only do it twice — they can still own more than three by conquer. When a Lord owns all the settlements on the map, they win the game.
 The region is no more colonizable and doesn’t farm. Lords must sustain settlements.
 
-### Rally
-A Lord can rally whenever he wants in their turn, but only once per turn.
+### Rush
+A Lord can rush whenever he wants in their turn, but only once per turn.
 
-Rally means that a Lord harvest more for that turn, but ignoring a correct seeding for the next one.
-Rally adds 20% of the harvest income for that turn, but also halves the income of the following Lord's turn.
+Rush means that a Lord harvest more for that turn, but ignoring a correct seeding for the next one.
+Rush adds 20% of the harvest income for that turn, but also halves the income of the following Lord's turn.
 
 ## Coefficients
 

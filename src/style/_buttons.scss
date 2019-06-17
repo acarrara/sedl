@@ -8,6 +8,8 @@ $button-color-background-primary: #eee;
   padding: 0.25em 2em 0.25em 2em;
   box-shadow: 0 1px 2px 0 #666;
 
+  text-decoration: none;
+
   cursor: pointer;
 
   transition: 175ms ease-in-out;
@@ -51,4 +53,8 @@ $button-color-background-primary: #eee;
   * + * {
     padding-left: 4px;
   }
+}
+
+.button--small {
+  padding: 0.25em 1em 0.25em 1em;
 }
