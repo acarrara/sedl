@@ -10,6 +10,7 @@ import {GameService} from './game.service';
 import {HeaderComponent} from './header/header.component';
 import {FooterComponent} from './footer/footer.component';
 import {LogoComponent} from './logo/logo.component';
+import {PinchAndZoomDirective} from './pinch-and-zoom.directive';
 
 export class MyHammerConfig extends HammerGestureConfig {
   overrides = {
@@ -30,7 +31,8 @@ export class MyHammerConfig extends HammerGestureConfig {
     GridDirective,
     HeaderComponent,
     LogoComponent,
-    FooterComponent
+    FooterComponent,
+    PinchAndZoomDirective
   ],
   imports: [
     BrowserModule
