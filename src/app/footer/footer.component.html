@@ -17,8 +17,11 @@
       <span *ngIf="canRun()">{{getAction().cost(region)}}</span>
     </span>
   </div>
-  <div class="footer__actions">
+  <div class="footer__info">
     <a class="button  button--small" href="#help-modal"><span style="height: 2em">?</span></a>
+    <a class="button  button--small" href="#about-modal"><span style="height: 2em">!</span></a>
+  </div>
+  <div class="footer__actions">
     <button class="button" (click)="game.rush()" [disabled]="!lord.canRush()">
        <span class="button__content">
         <se-cell seed="l" class="cell  cel--icon"></se-cell>

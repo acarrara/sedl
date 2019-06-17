@@ -12,6 +12,7 @@ import {FooterComponent} from './footer/footer.component';
 import {LogoComponent} from './logo/logo.component';
 import {PinchAndZoomDirective} from './pinch-and-zoom.directive';
 import {HelpComponent} from './help/help.component';
+import {AboutComponent} from './about/about.component';
 
 export class MyHammerConfig extends HammerGestureConfig {
   overrides = {
@@ -34,6 +35,7 @@ export class MyHammerConfig extends HammerGestureConfig {
     LogoComponent,
     FooterComponent,
     HelpComponent,
+    AboutComponent,
     PinchAndZoomDirective
   ],
   imports: [

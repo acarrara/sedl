@@ -28,6 +28,7 @@
   padding: 8px;
   display: flex;
   align-items: center;
+  justify-content: space-between;
   width: 100%;
 }
 
@@ -44,6 +45,4 @@
 }
 
 .footer__actions {
-  margin-left: auto;
-  display: flex;
 }
