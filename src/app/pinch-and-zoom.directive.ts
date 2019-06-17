@@ -6,11 +6,11 @@ import {Directive, ElementRef, HostListener} from '@angular/core';
 export class PinchAndZoomDirective {
 
   private lastScale = 1;
-  private scale: number;
-  private lastPosX: number;
-  private lastPosY: number;
-  private maxPosY: number;
-  private maxPosX: number;
+  private scale = 1;
+  private lastPosX = 0;
+  private lastPosY = 0;
+  private maxPosY = 0;
+  private maxPosX = 0;
 
   constructor(private element: ElementRef) {
   }
@@ -37,7 +37,7 @@ export class PinchAndZoomDirective {
         posY = -this.maxPosY;
       }
       this.element.nativeElement.style.transform =
-        'scale3d(' + scale + ', ' + scale + ', 1) translate3d(' + posX + 'px,' + posY + 'px, 0) ';
+        'scale3d(' + scale + ', ' + scale + ', 1) translate3d(' + posX + 'px,' + posY + 'px, 0)';
     }
   }
 

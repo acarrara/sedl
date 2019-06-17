@@ -83,6 +83,10 @@
     border-bottom: 0;
   }
 
+  .button + .button {
+      margin-left: 0;
+  }
+
   .cell {
     border-width: 1px;
   }
