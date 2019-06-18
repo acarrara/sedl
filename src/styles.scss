@@ -63,21 +63,15 @@
     direction: ltr;
   }
 
-  .lord-statistics {
-    order: 2;
-  }
-
   .logo {
-    margin: 0 auto;
-    padding: 8px;
-
-    order: 1;
+    display: none;
   }
 
-  .footer__actions, .button {
+  .footer__right, .button {
     margin: 0;
     width: 100%;
     border-radius: 0;
+    flex-basis: initial;
   }
 
   .controls--bottom {
@@ -85,7 +79,11 @@
   }
 
   .button + .button {
-      margin-left: 0;
+    margin-left: 0;
+  }
+
+  .button--small + .button--small {
+    margin-left: 8px;
   }
 
   .cell {
@@ -96,8 +94,10 @@
     width: initial;
   }
 
-  .footer__info {
-    display: none;
+  .footer__center {
+    position: absolute;
+    top: 8rem;
+    left: 1rem;
   }
 }
 

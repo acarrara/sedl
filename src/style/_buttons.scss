@@ -19,6 +19,8 @@ $button-color-background-primary: #eee;
     box-shadow: 0 0 4px 6px darken($button-color-background-primary, 40%);
   }
 
+  background-color: #fafafa;
+
   &[disabled] {
     background-color: #dfdfdf;
     color: #888;

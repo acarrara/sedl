@@ -1,5 +1,5 @@
 <aside class="footer">
-  <div class="region-statistics">
+  <div class="region-statistics  footer__left">
     <se-cell class="cell    cell--statistics  region-statistics__element" [seed]="region?.type"></se-cell>
     <span class="region-statistics__element" *ngIf="region">
     <strong>
@@ -17,11 +17,11 @@
       <span *ngIf="canRun()">{{getAction().cost(region)}}</span>
     </span>
   </div>
-  <div class="footer__info">
+  <div class="footer__center">
     <a class="button  button--small" href="#help-modal"><span style="height: 2em">?</span></a>
-    <a class="button  button--small" href="#about-modal"><span style="height: 2em">!</span></a>
+    <a class="button  button--small" href="#about-modal"><span style="height: 2em">i</span></a>
   </div>
-  <div class="footer__actions">
+  <div class="footer__right">
     <button class="button" (click)="game.rush()" [disabled]="!lord.canRush()">
        <span class="button__content">
         <se-cell seed="l" class="cell  cel--icon"></se-cell>

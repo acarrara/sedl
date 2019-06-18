@@ -1,7 +1,9 @@
 <div class="wrapper" (document:keydown.space)="game.pass()">
   <se-header class="controls  controls--top" [style.--lordColor]="(game.lord$ | async).color"></se-header>
   <div class="board-container">
-    <main class="board" [seGrid]="game.dimension()" sePinchAndZoom>
+    <main
+      (mouseleave)="currentRegion = undefined"
+      class="board" [seGrid]="game.dimension()" sePinchAndZoom>
       <se-cell [seRegion]="region"
                [sustenance]="region.sustenance"
                [color]="game.lordAt(region).color"

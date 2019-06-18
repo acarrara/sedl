@@ -28,8 +28,21 @@
   padding: 8px;
   display: flex;
   align-items: center;
-  justify-content: space-between;
   width: 100%;
+}
+
+.footer__left {
+  flex-basis: 40%;
+}
+
+.footer__right {
+  flex-basis: 40%;
+  text-align: end;
+}
+
+.footer__center {
+  flex-basis: 20%;
+  text-align: center;
 }
 
 .logo__heading {
@@ -42,7 +55,4 @@
 
 .logo {
   display: flex;
-}
-
-.footer__actions {
 }
