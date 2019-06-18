@@ -1,7 +1,7 @@
 import {ChangeDetectionStrategy, Component, OnInit} from '@angular/core';
 import {GameService} from './game.service';
 import {Region} from './models/Region';
-import {game1} from './data/game1';
+import {game3} from './data/game3';
 
 @Component({
   selector: 'se-app',
@@ -34,7 +34,7 @@ export class AppComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.game.start(game1);
+    this.game.start(game3);
   }
 
   private updateAvailableAction(region: Region) {
