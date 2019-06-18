@@ -1,6 +1,7 @@
-import {Lord} from './Lord';
 import lordsJson from '../../lords.json';
-import {Board} from './Board';
+import {Game} from '../models/Game';
+import {Board} from '../models/Board';
+import {Lord} from '../models/Lord';
 
 
 const U = 'u';
@@ -45,6 +46,7 @@ const regionsAsString: string[] = [
   U, U, U, U, U, U, U, U, U, U, U, U, U, U, U, U,
 ];
 
-export const board: Board = new Board(regionsAsString, map);
+const board: Board = new Board(regionsAsString, map);
+const lords: Lord[] = lordsJson.map(lordJson => new Lord(lordJson.id, lordJson.name, lordJson.color, lordJson.treasure, board));
 
-export const lords: Lord[] = lordsJson.map(lordJson => new Lord(lordJson.id, lordJson.name, lordJson.color, lordJson.treasure, board));
+export const game1: Game = new Game(board, lords);

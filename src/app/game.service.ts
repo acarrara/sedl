@@ -2,26 +2,26 @@ import {Injectable} from '@angular/core';
 import {Lord} from './models/Lord';
 import {BehaviorSubject, Observable} from 'rxjs';
 import {Region} from './models/Region';
-import {board, lords} from './models/game';
 import {Actions} from './models/Actions';
 import {Board} from './models/Board';
+import {Game} from './models/Game';
 
 @Injectable()
 export class GameService {
 
+  public board: Board;
+  public lords: Lord[];
+
   private lordIndex = 0;
 
-  private regionsSubject: BehaviorSubject<Region[]> = new BehaviorSubject(board.regions);
-  private lordSubject: BehaviorSubject<Lord> = new BehaviorSubject(lords[0]);
-  private actionsSubject: BehaviorSubject<any> = new BehaviorSubject(null);
+  private regionsSubject: BehaviorSubject<Region[]>;
+  private lordSubject: BehaviorSubject<Lord>;
+  private actionsSubject: BehaviorSubject<any>;
 
-  public readonly regions$: Observable<Region[]> = this.regionsSubject.asObservable();
-  public readonly lord$: Observable<Lord> = this.lordSubject.asObservable();
-  public readonly actions$: Observable<any> = this.actionsSubject.asObservable();
+  public regions$: Observable<Region[]>;
+  public lord$: Observable<Lord>;
+  public actions$: Observable<any>;
 
-  public lords: Lord[] = lords;
-
-  public board: Board = board;
 
   action(region: Region) {
     if (this.currentLord().activeAction(region)) {
@@ -30,13 +30,25 @@ export class GameService {
     }
   }
 
-  public start() {
+  newGame(game: Game) {
+    this.board = game.board;
+    this.lords = game.lords;
+    this.regionsSubject = new BehaviorSubject(this.board.regions);
+    this.lordSubject = new BehaviorSubject(this.lords[0]);
+    this.actionsSubject = new BehaviorSubject(null);
+    this.regions$ = this.regionsSubject.asObservable();
+    this.lord$ = this.lordSubject.asObservable();
+    this.actions$ = this.actionsSubject.asObservable();
+  }
+
+  public start(game: Game) {
+    this.newGame(game);
     this.lordIndex = -1;
     this.pass();
   }
 
   public pass(): void {
-    this.lordIndex = (this.lordIndex + 1) % lords.length;
+    this.lordIndex = (this.lordIndex + 1) % this.lords.length;
     if (!this.currentLord().canPlay()) {
       console.log('You Lost!');
     }
@@ -68,7 +80,7 @@ export class GameService {
 
   settle(region: Region) {
     if (this.currentLord().settle(region)) {
-      this.regionsSubject.next(board.regions);
+      this.regionsSubject.next(this.board.regions);
       this.actionsSubject.next({});
     }
   }

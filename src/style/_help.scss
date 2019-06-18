@@ -27,27 +27,23 @@
 
 }
 
-.help__modal {
+.modal {
+  background-color: #fafafa;
+
+  display: flex;
+  flex-direction: column;
+}
+
+.modal--help {
   width: 60vw;
   height: 80vh;
-
-  background-color: #fafafa;
-
-  display: flex;
-  flex-direction: column;
 }
 
-.about__modal {
+.modal--about {
   width: 30vw;
-
-  background-color: #fafafa;
-
-  display: flex;
-  flex-direction: column;
 }
 
-
-.help__header {
+.modal__header {
 
   display: flex;
   flex-direction: column;
@@ -60,12 +56,12 @@
   border-top: 8px solid var(--lord-color, red);
 }
 
-.help_title {
+.modal__title {
   display: block;
   align-self: center;
 }
 
-.help__container {
+.modal__container {
   flex-grow: 1;
 
   padding: 16px;
@@ -73,11 +69,8 @@
   overflow: auto;
 }
 
-.help__content {
-}
-
 @media only screen and (max-width: 1024px) {
-  .help__modal, .about__modal {
+  .modal--help, .modal--about {
     width: 100%;
     height: 100%;
   }
