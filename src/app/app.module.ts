@@ -13,6 +13,9 @@ import {LogoComponent} from './logo/logo.component';
 import {PinchAndZoomDirective} from './pinch-and-zoom.directive';
 import {HelpComponent} from './help/help.component';
 import {AboutComponent} from './about/about.component';
+import {NewComponent} from './new/new.component';
+import {ServiceWorkerModule} from '@angular/service-worker';
+import {environment} from '../environments/environment';
 
 export class MyHammerConfig extends HammerGestureConfig {
   overrides = {
@@ -36,10 +39,12 @@ export class MyHammerConfig extends HammerGestureConfig {
     FooterComponent,
     HelpComponent,
     AboutComponent,
+    NewComponent,
     PinchAndZoomDirective
   ],
   imports: [
-    BrowserModule
+    BrowserModule,
+    ServiceWorkerModule.register('ngsw-worker.js', { enabled: environment.production })
   ],
   providers: [GameService, {
     provide: HAMMER_GESTURE_CONFIG,

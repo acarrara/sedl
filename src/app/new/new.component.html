@@ -1,0 +1,18 @@
+<div class="modal-container" id="new-modal">
+  <aside class="modal  modal--new">
+    <header class="modal__header">
+      <a href="#" class="button  button--small">
+        <se-cell class="cell  cel--icon" seed="e"></se-cell>
+      </a>
+      <se-logo class="modal__title"></se-logo>
+    </header>
+    <div class="modal__container">
+    <article>
+      <p>Choose a world:</p>
+      <button class="button" (click)="game.start(game3); app.tick()">Small</button>
+      <button class="button" (click)="game.start(game2); app.tick()">Normal</button>
+      <button class="button" (click)="game.start(game1); app.tick()">Large</button>
+    </article>
+    </div>
+  </aside>
+</div>
