@@ -4,20 +4,7 @@ import {Board} from '../models/Board';
 import {Lord} from '../models/Lord';
 import {B, R, U} from './lords';
 
-const board: Board = new Board([
-  U, U, U, U, U, U, U, U, U, U, U, U,
-  U, U, U, U, U, U, U, U, U, U, U, U,
-  U, U, U, U, U, U, U, U, U, U, U, U,
-  U, U, U, U, U, U, U, U, U, U, B, U,
-  U, U, U, U, U, U, U, U, U, B, B, B,
-  U, U, U, U, U, U, U, U, U, U, B, U,
-  U, R, U, U, U, U, U, U, U, U, U, U,
-  R, R, R, U, U, U, U, U, U, U, U, U,
-  U, R, U, U, U, U, U, U, U, U, U, U,
-  U, U, U, U, U, U, U, U, U, U, U, U,
-  U, U, U, U, U, U, U, U, U, U, U, U,
-  U, U, U, U, U, U, U, U, U, U, U, U
-], [
+export const world2 = [
   'h', 'p', 'p', 'p', 'f', 'f', 'w', 'p', 'p', 'h', 'm', 'm',
   'h', 'h', 'p', 'p', 'f', 'f', 'w', 'p', 'p', 'h', 'm', 'h',
   'm', 'h', 'p', 'p', 'w', 'w', 'w', 'p', 'p', 'p', 'h', 'h',
@@ -30,8 +17,27 @@ const board: Board = new Board([
   'f', 'f', 'f', 'p', 'p', 'p', 'p', 'w', 'p', 'p', 'p', 'h',
   'p', 'p', 'p', 'p', 'p', 'w', 'w', 'w', 'p', 'p', 'p', 'h',
   'p', 'p', 'p', 'p', 'p', 'w', 'p', 'p', 'p', 'p', 'p', 'p'
-]);
+];
+const board: () => Board = () => new Board([
+  U, U, U, U, U, U, U, U, U, U, U, U,
+  U, U, U, U, U, U, U, U, U, U, U, U,
+  U, U, U, U, U, U, U, U, U, U, U, U,
+  U, U, U, U, U, U, U, U, U, U, B, U,
+  U, U, U, U, U, U, U, U, U, B, B, B,
+  U, U, U, U, U, U, U, U, U, U, B, U,
+  U, R, U, U, U, U, U, U, U, U, U, U,
+  R, R, R, U, U, U, U, U, U, U, U, U,
+  U, R, U, U, U, U, U, U, U, U, U, U,
+  U, U, U, U, U, U, U, U, U, U, U, U,
+  U, U, U, U, U, U, U, U, U, U, U, U,
+  U, U, U, U, U, U, U, U, U, U, U, U
+], world2);
 
-const lords: Lord[] = lordsJson.map(lordJson => new Lord(lordJson.id, lordJson.name, lordJson.color, lordJson.treasure, board));
+const lords: (newBoard) => Lord[] =
+  (newBoard: Board) => lordsJson.map(lordJson => new Lord(lordJson.id, lordJson.name, lordJson.color, lordJson.treasure, newBoard));
 
-export const game2: Game = new Game(board, lords);
+export const game2: () => Game = () => {
+  const newBoard = board();
+  return new Game(newBoard, lords(newBoard));
+};
+

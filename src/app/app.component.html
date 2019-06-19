@@ -1,27 +1,4 @@
-<div class="wrapper" (document:keydown.space)="game.pass()">
-  <se-header class="controls  controls--top" [style.--lordColor]="(game.lord$ | async).color"></se-header>
-  <div class="board-container">
-    <main
-      (mouseleave)="currentRegion = undefined"
-      class="board" [seGrid]="game.dimension()" sePinchAndZoom>
-      <se-cell [seRegion]="region"
-               [sustenance]="region.sustenance"
-               [color]="game.lordAt(region).color"
-               [i]="i"
-               (press)="game.settle(region)"
-               (tap)="action(region)"
-               (mouseenter)="actionEnter(region, $event)"
-               (contextmenu)="$event.preventDefault()"
-               [impregnable]="region.impregnable"
-               class="cell" *ngFor="let region of game.board.regions; let i = index" [seed]="game.world()[i]"></se-cell>
-    </main>
-    <div class="background">
-      <se-cell *ngFor="let seed of backSeeds" [seed]="seed"></se-cell>
-    </div>
-  </div>
-  <se-footer class="controls  controls--bottom" [region]="currentRegion" [lord]="game.lord$ | async"
-             [style.--lordColor]="(game.lord$ | async).color"></se-footer>
-</div>
+<se-game [game]="game.game$ | async"></se-game>
 <se-help [style.--lordColor]="(game.lord$ | async).color"></se-help>
 <se-about [style.--lordColor]="(game.lord$ | async).color"></se-about>
 <se-new [style.--lordColor]="(game.lord$ | async).color"></se-new>

@@ -7,12 +7,23 @@
       <se-logo class="modal__title"></se-logo>
     </header>
     <div class="modal__container">
-    <article>
-      <p>Choose a world:</p>
-      <button class="button" (click)="game.start(game3); app.tick()">Small</button>
-      <button class="button" (click)="game.start(game2); app.tick()">Normal</button>
-      <button class="button" (click)="game.start(game1); app.tick()">Large</button>
-    </article>
+      <article>
+        <p>Choose a world:</p>
+        <div class="worlds">
+          <a class="worlds__card" href="#" (click)="game.newGame(game3())">
+            <span class="worlds__title">Small</span>
+            <se-world-preview [seGrid]="dimension(world3)" [world]="world3" class="worlds__preview"></se-world-preview>
+          </a>
+          <a class="worlds__card" href="#" (click)="game.newGame(game2())">
+            <span class="worlds__title">Medium</span>
+            <se-world-preview [seGrid]="dimension(world2)" [world]="world2" class="worlds__preview"></se-world-preview>
+          </a>
+          <a class="worlds__card" href="#" (click)="game.newGame(game1())">
+            <span class="worlds__title">Large</span>
+            <se-world-preview [seGrid]="dimension(world1)" [world]="world1" class="worlds__preview"></se-world-preview>
+          </a>
+        </div>
+      </article>
     </div>
   </aside>
 </div>

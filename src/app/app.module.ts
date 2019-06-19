@@ -16,6 +16,8 @@ import {AboutComponent} from './about/about.component';
 import {NewComponent} from './new/new.component';
 import {ServiceWorkerModule} from '@angular/service-worker';
 import {environment} from '../environments/environment';
+import {GameComponent} from './board/game.component';
+import {WorldPreviewComponent} from './world/world-preview.component';
 
 export class MyHammerConfig extends HammerGestureConfig {
   overrides = {
@@ -29,7 +31,9 @@ export class MyHammerConfig extends HammerGestureConfig {
 @NgModule({
   declarations: [
     AppComponent,
+    GameComponent,
     CellComponent,
+    WorldPreviewComponent,
     LordStatisticsComponent,
     LordStatisticsElementComponent,
     RegionDirective,
@@ -44,7 +48,7 @@ export class MyHammerConfig extends HammerGestureConfig {
   ],
   imports: [
     BrowserModule,
-    ServiceWorkerModule.register('ngsw-worker.js', { enabled: environment.production })
+    ServiceWorkerModule.register('ngsw-worker.js', {enabled: environment.production})
   ],
   providers: [GameService, {
     provide: HAMMER_GESTURE_CONFIG,
