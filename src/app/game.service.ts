@@ -3,44 +3,39 @@ import {Lord} from './models/Lord';
 import {BehaviorSubject, Observable} from 'rxjs';
 import {Region} from './models/Region';
 import {Actions} from './models/Actions';
-import {Board} from './models/Board';
 import {Game} from './models/Game';
 
 @Injectable()
 export class GameService {
-
-  public board: Board;
-  public lords: Lord[];
-
-
-  private lordIndex = 0;
-
-  private regionsSubject: BehaviorSubject<Region[]>;
-  private lordSubject: BehaviorSubject<Lord>;
-  private actionsSubject: BehaviorSubject<any>;
-  private gameSubject: BehaviorSubject<Game>;
 
   public regions$: Observable<Region[]>;
   public lord$: Observable<Lord>;
   public actions$: Observable<any>;
   public game$: Observable<Game>;
 
+  private regionsSubject: BehaviorSubject<Region[]>;
+  private lordSubject: BehaviorSubject<Lord>;
+  private actionsSubject: BehaviorSubject<any>;
+  private gameSubject: BehaviorSubject<Game>;
+
+  private lordIndex = 0;
+  private game: Game;
+
   public action(region: Region) {
     if (this.currentLord().activeAction(region)) {
-      this.regionsSubject.next(this.board.regions);
+      this.regionsSubject.next(this.game.board.regions);
       this.actionsSubject.next({});
     }
   }
 
   public newGame(game: Game) {
-    this.board = game.board;
-    this.lords = game.lords;
     this.gameSubject.next(game);
     this.lordSubject.next(game.lords[0]);
     this.regionsSubject.next(game.board.regions);
   }
 
   public start(game: Game) {
+    this.game = game;
     this.regionsSubject = new BehaviorSubject(game.board.regions);
     this.lordSubject = new BehaviorSubject(game.lords[0]);
     this.actionsSubject = new BehaviorSubject({});
@@ -55,10 +50,10 @@ export class GameService {
   }
 
   public pass(): void {
-    this.lordIndex = (this.lordIndex + 1) % this.lords.length;
+    this.lordIndex = (this.lordIndex + 1) % this.game.lords.length;
     if (!this.currentLord().canPlay()) {
-      const winnerIndex = (this.lordIndex + 1) % this.lords.length;
-      this.gameSubject.getValue().winner = this.lords[winnerIndex];
+      const winnerIndex = (this.lordIndex + 1) % this.game.lords.length;
+      this.gameSubject.getValue().winner = this.game.lords[winnerIndex];
     }
     Actions.getPassiveActions().forEach(action => this.currentLord().passiveAction(action));
     this.lordSubject.next(this.currentLord());
@@ -70,13 +65,13 @@ export class GameService {
     if (lordId === 'u') {
       return Lord.UNKNOWN;
     }
-    const lordIndex = this.lords.findIndex(lord => lord.id === lordId);
-    return this.lords[lordIndex];
+    const lordIndex = this.game.lords.findIndex(lord => lord.id === lordId);
+    return this.game.lords[lordIndex];
   }
 
   public settle(region: Region) {
     if (this.currentLord().settle(region)) {
-      this.regionsSubject.next(this.board.regions);
+      this.regionsSubject.next(this.game.board.regions);
       this.actionsSubject.next({});
     }
   }
@@ -88,6 +83,6 @@ export class GameService {
   }
 
   private currentLord() {
-    return this.lords[this.lordIndex];
+    return this.game.lords[this.lordIndex];
   }
 }
