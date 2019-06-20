@@ -1,18 +1,21 @@
 @mixin font-family-fira() {
   font-family: 'Fira Sans', sans-serif;
   font-weight: 400;
-  color: #555;
+  color: $text-color;
+  font-display: swap;
 }
 @mixin font-family-fira-bold() {
   font-family: 'Fira Sans', sans-serif;
   font-weight: 600;
-  color: #555;
+  color: $text-color;
+  font-display: swap;
 }
 
 @mixin font-family-uncial() {
   font-family: 'Uncial Antiqua', cursive;
   font-weight: 400;
-  color: #555;
+  color: $text-color;
+  font-display: swap;
 }
 
 html {

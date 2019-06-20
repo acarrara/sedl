@@ -4,17 +4,16 @@
 }
 
 .worlds__card {
-  width: 15vw;
-  display: flex;
+  width: $spacing-s-vw;
+  @include flex-align-center();
   flex-direction: column;
-  align-items: center;
 
   text-decoration: none;
-  color: #555;
+  color: $text-color;
 }
 
 .worlds__card + .worlds__card {
-  margin-left: 16px;
+  margin-left: $spacing-l;
 }
 
 .worlds__preview {
@@ -22,8 +21,8 @@
   display: grid;
   grid-template-rows: repeat(var(--grid-dimension, 8), 1fr);
   grid-template-columns: repeat(var(--grid-dimension, 8), 1fr);
-  box-shadow: 0 4px 4px 0 #666;
-  padding: 2px;
+
+  padding: $spacing-s;
 
   & .cell {
     border: none;
@@ -37,16 +36,16 @@
     }
   }
 
-  transition: 175ms ease-in-out;
+  @include transition-fast();
 
   &:hover {
-    transform: translateY(-4px);
-    box-shadow: 0 4px 4px 0 #444;
+    transform: translateY(-$spacing-s);
+    @include standard-shadow();
   }
 }
 
 .worlds__title {
-  margin-bottom: 16px;
+  margin-bottom: $spacing-l;
 }
 
 
@@ -62,6 +61,6 @@
 
   .worlds__card + .worlds__card {
     margin-left: 0;
-    margin-top: 16px;
+    margin-top: $spacing-l;
   }
 }

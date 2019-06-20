@@ -28,22 +28,23 @@
 }
 
 .cell--impregnable {
-  fill: #ddcf52;
+  fill: $impregnable-color;
 }
 
 .cell {
   border-color: transparent;
-  border-width: 4px;
+  border-width: $spacing-s;
   border-style: solid;
   display: block;
-  border-radius: 4px;
+  border-radius: $spacing-s;
 
-  transition: 175ms ease-in-out;
   cursor: pointer;
 
+  @include transition-fast();
+
   &:hover {
-    transform: translateY(-4px);
-    box-shadow: 0 4px 4px 0 #999;
+    transform: translateY(-$spacing-s);
+    @include standard-shadow();
   }
 }
 
@@ -70,12 +71,12 @@
   }
 }
 
-.cel--icon {
+.cell--icon {
   border: 0;
   transition: none;
   width: 1.5em;
   &:hover {
-    box-shadow: initial;
+    box-shadow: none;
     transform: none;
   }
 }

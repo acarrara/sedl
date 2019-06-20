@@ -1,16 +1,13 @@
 .region-statistics {
-
-  display: flex;
-  align-items: center;
+  @include flex-align-center();
 }
 
 .region-statistics__element {
-  display: flex;
-  align-items: center;
+  @include flex-align-center();
 }
 
 .region-statistics__element + .region-statistics__element {
-  padding-left: 8px;
+  padding-left: $spacing-m;
 }
 
 @media only screen and (max-width: 1024px) {

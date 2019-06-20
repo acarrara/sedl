@@ -1,26 +1,32 @@
+$board-size: 36em;
+
 .board-container {
+  @include flex-center();
+
   flex-grow: 1;
-  display: flex;
-  justify-content: center;
-  align-items: center;
 
   position: relative;
   overflow: hidden;
 }
 
 .board {
-  background-color: #fafafa;
+  background-color: $primary-color-background;
   display: grid;
   grid-template-rows: repeat(var(--grid-dimension, 8), 1fr);
   grid-template-columns: repeat(var(--grid-dimension, 8), 1fr);
-  width: 36em;
-  box-shadow: 0 4px 4px 0 #666;
-  padding: 6px;
+  width: $board-size;
+
+  @include standard-shadow();
+
+  padding: $spacing-m;
+
+  z-index: 100;
 }
 
 .wrapper {
   display: flex;
   flex-direction: column;
-  height: 100vh;
-  width: 100vw;
+
+  @include full-screen();
+
 }

@@ -1,20 +1,20 @@
 .lord-statistics {
 
   .lord-statistics__data {
-    padding: 0 16px;
+    padding-left: $spacing-l;
+    padding-right: $spacing-l;
     display: flex;
   }
 
   .lord-statistics__element {
-    display: flex;
-    align-items: center;
-    padding: 0 4px;
+    @include flex-align-center();
+    padding-left: $spacing-s;
+    padding-right: $spacing-s;
   }
 
   .lord-statistics__content {
-    padding: 8px;
-    display: flex;
-    align-items: center;
+    padding: $spacing-m;
+    @include flex-align-center();
   }
 }
 

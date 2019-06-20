@@ -5,11 +5,11 @@ $w-color-foreground: #327cad;
 $f-color-foreground: #6ca285;
 
 $lord-colors: (
-  //p1: #81abb6,
   c1: #246799,
-  //p2: #d8918c
   c2: #ad544d
 );
+
+$impregnable-color: #ddcf52;
 
 $directions: (
   north: 'top',
@@ -18,7 +18,14 @@ $directions: (
   west: 'left'
 );
 
+$text-color: #555;
+$border-color: #ccc;
+
+$text-color-disabled: #dfdfdf;
+$background-color-disabled: #888;
+
 $background-color: #ededed;
+$shadow-color: #666;
 
 $primary-color-background: #fafafa;
 
@@ -29,3 +36,12 @@ $h-color-foreground: #e3c567;
 $p-color-foreground: #b6be9c;
 $w-color-foreground: #327cad;
 $f-color-foreground: #6ca285;
+
+$spacing-s: 4px;
+$spacing-m: 8px;
+$spacing-l: 16px;
+$spacing-xl: 32px;
+
+$spacing-s-vw: 15vw;
+$spacing-m-vw: 30vw;
+$spacing-l-vw: 60vw;

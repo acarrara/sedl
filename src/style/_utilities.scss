@@ -6,3 +6,34 @@
   clip: rect(1px, 1px, 1px, 1px);
   left: -9999px;
 }
+
+@mixin transition-fast() {
+  transition: 175ms ease-in-out;
+}
+
+@mixin transition-slow() {
+  transition: 750ms ease-in-out;
+}
+
+@mixin standard-shadow() {
+  box-shadow: 0 $spacing-s $spacing-s 0 $shadow-color;
+}
+
+@mixin full-screen() {
+  width: 100vw;
+  height: 100vh;
+
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+
+@mixin flex-align-center() {
+  display: flex;
+  align-items: center;
+}
+
+@mixin flex-center() {
+  @include flex-align-center();
+  justify-content: center;
+}
