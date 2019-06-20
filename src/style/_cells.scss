@@ -79,3 +79,15 @@
     transform: none;
   }
 }
+
+.cell--statistics {
+  display: block;
+  width: 2em;
+}
+
+@media only screen and (max-width: 1024px) {
+
+  .cell {
+    border-width: 1px;
+  }
+}

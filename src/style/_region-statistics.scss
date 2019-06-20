@@ -12,3 +12,10 @@
 .region-statistics__element + .region-statistics__element {
   padding-left: 8px;
 }
+
+@media only screen and (max-width: 1024px) {
+
+  .region-statistics {
+    display: none;
+  }
+}

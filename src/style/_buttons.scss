@@ -70,3 +70,27 @@ $button-color-background-primary: #eee;
     line-height: 2;
   }
 }
+
+@media only screen and (max-width: 1024px) {
+
+  .button {
+    margin: 0;
+    width: 100%;
+    border-radius: 0;
+    flex-basis: initial;
+  }
+
+  .button + .button {
+    margin-left: 0;
+  }
+
+  .button--small + .button--small {
+    margin-left: 8px;
+  }
+
+  .button--small {
+    width: initial;
+    border-radius: 50%;
+  }
+
+}

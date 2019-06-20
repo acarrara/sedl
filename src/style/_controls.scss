@@ -7,7 +7,7 @@
   justify-content: space-between;
   align-items: center;
 
-  background-color: #fafafa;
+  background-color: $primary-color-background;
 
   box-shadow: 0 1px 4px 0 $shadow-on-background-color;
 
@@ -55,4 +55,36 @@
 
 .logo {
   display: flex;
+}
+
+@media only screen and (max-width: 1024px) {
+  .footer {
+    padding: 0;
+  }
+
+  .footer__center {
+    position: absolute;
+    top: 8rem;
+    left: 1rem;
+  }
+
+  .logo {
+    display: none;
+  }
+
+  .footer__right {
+    margin: 0;
+    width: 100%;
+    border-radius: 0;
+    flex-basis: initial;
+  }
+
+  .controls {
+    width: 100%;
+    flex-direction: column;
+  }
+
+  .controls--bottom {
+    border-bottom: 0;
+  }
 }
