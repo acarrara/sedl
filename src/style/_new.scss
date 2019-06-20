@@ -4,10 +4,13 @@
 }
 
 .worlds__card {
-  flex-grow: 1;
+  width: 15vw;
   display: flex;
   flex-direction: column;
   align-items: center;
+
+  text-decoration: none;
+  color: #555;
 }
 
 .worlds__card + .worlds__card {
@@ -43,8 +46,6 @@
 }
 
 .worlds__title {
-  text-decoration: none;
-  color: #555;
   margin-bottom: 16px;
 }
 
@@ -53,6 +54,10 @@
   .worlds {
     flex-direction: column;
     align-items: center;
+  }
+
+  .worlds__card {
+    width: initial;
   }
 
   .worlds__card + .worlds__card {

@@ -2,3 +2,4 @@
 <se-help [style.--lordColor]="(game.lord$ | async).color"></se-help>
 <se-about [style.--lordColor]="(game.lord$ | async).color"></se-about>
 <se-new [style.--lordColor]="(game.lord$ | async).color"></se-new>
+<se-win *ngIf="(game.game$ | async).winner" [winner]="(game.game$ | async).winner"></se-win>

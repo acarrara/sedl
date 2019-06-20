@@ -1,0 +1,23 @@
+.win {
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+}
+
+.win__element + .win__element {
+  margin-top: 16px;
+}
+
+.win__icon {
+  width: 10vw;
+
+  .cell__svg {
+    fill: var(--lord-color, red);
+  }
+}
+
+@media only screen and (max-width: 1024px) {
+  .win__icon {
+    width: 50vw;
+  }
+}

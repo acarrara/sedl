@@ -10,16 +10,16 @@
       <article>
         <p>Choose a world:</p>
         <div class="worlds">
-          <a class="worlds__card" href="#" (click)="game.newGame(game3())">
-            <span class="worlds__title">Small</span>
+          <a class="worlds__card" href="#" (click)="game.newGame(gameSmall())">
+            <em class="worlds__title">Small (8x8)</em>
             <se-world-preview [seGrid]="dimension(world3)" [world]="world3" class="worlds__preview"></se-world-preview>
           </a>
-          <a class="worlds__card" href="#" (click)="game.newGame(game2())">
-            <span class="worlds__title">Medium</span>
+          <a class="worlds__card" href="#" (click)="game.newGame(gameMedium())">
+            <em class="worlds__title">Medium (12x12)</em>
             <se-world-preview [seGrid]="dimension(world2)" [world]="world2" class="worlds__preview"></se-world-preview>
           </a>
-          <a class="worlds__card" href="#" (click)="game.newGame(game1())">
-            <span class="worlds__title">Large</span>
+          <a class="worlds__card" href="#" (click)="game.newGame(gameLarge())">
+            <em class="worlds__title">Large (16x16)</em>
             <se-world-preview [seGrid]="dimension(world1)" [world]="world1" class="worlds__preview"></se-world-preview>
           </a>
         </div>

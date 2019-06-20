@@ -12,9 +12,9 @@ import {world3} from '../data/game3';
 })
 export class NewComponent {
 
-  public game1: () => Game = game1;
-  public game2: () => Game = game2;
-  public game3: () => Game = game3;
+  public gameLarge: () => Game = game1;
+  public gameMedium: () => Game = game2;
+  public gameSmall: () => Game = game3;
 
   world1: string[] = world1;
   world2: string[] = world2;

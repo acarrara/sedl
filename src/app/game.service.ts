@@ -10,8 +10,8 @@ import {Game} from './models/Game';
 export class GameService {
 
   public board: Board;
+  public lords: Lord[];
 
-  private lords: Lord[];
 
   private lordIndex = 0;
 
@@ -57,7 +57,8 @@ export class GameService {
   public pass(): void {
     this.lordIndex = (this.lordIndex + 1) % this.lords.length;
     if (!this.currentLord().canPlay()) {
-      console.log('You Lost!');
+      const winnerIndex = (this.lordIndex + 1) % this.lords.length;
+      this.gameSubject.getValue().winner = this.lords[winnerIndex];
     }
     Actions.getPassiveActions().forEach(action => this.currentLord().passiveAction(action));
     this.lordSubject.next(this.currentLord());

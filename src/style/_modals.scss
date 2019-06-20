@@ -40,7 +40,10 @@
 }
 
 .modal--new {
-  width: 40vw;
+}
+
+.modal--win {
+  width: 30vw;
 }
 
 .modal--about {
@@ -48,7 +51,6 @@
 }
 
 .modal__header {
-
   display: flex;
   flex-direction: column;
   align-items: flex-end;
@@ -58,6 +60,12 @@
   flex-grow: 0;
 
   border-top: 8px solid var(--lord-color, red);
+
+  & .button {
+    border: none;
+    box-shadow: none;
+    background-color: transparent;
+  }
 }
 
 .modal__title {
@@ -74,8 +82,9 @@
 }
 
 @media only screen and (max-width: 1024px) {
-  .modal--help, .modal--about, .modal--new {
+  .modal--help, .modal--about, .modal--new, .modal--win {
     width: 100%;
     height: 100%;
   }
 }
+

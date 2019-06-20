@@ -18,6 +18,7 @@ import {ServiceWorkerModule} from '@angular/service-worker';
 import {environment} from '../environments/environment';
 import {GameComponent} from './board/game.component';
 import {WorldPreviewComponent} from './world/world-preview.component';
+import {WinComponent} from './win/win.component';
 
 export class MyHammerConfig extends HammerGestureConfig {
   overrides = {
@@ -34,6 +35,7 @@ export class MyHammerConfig extends HammerGestureConfig {
     GameComponent,
     CellComponent,
     WorldPreviewComponent,
+    WinComponent,
     LordStatisticsComponent,
     LordStatisticsElementComponent,
     RegionDirective,
