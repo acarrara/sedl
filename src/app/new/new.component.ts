@@ -1,9 +1,9 @@
 import {ChangeDetectionStrategy, Component} from '@angular/core';
 import {GameService} from '../game.service';
 import {Game} from '../models/Game';
-import {world1} from '../data/game1';
-import {world2} from '../data/game2';
-import {world3} from '../data/game3';
+import {world1, game1} from '../data/game1';
+import {world2, game2} from '../data/game2';
+import {world3, game3} from '../data/game3';
 
 @Component({
   selector: 'se-new',
