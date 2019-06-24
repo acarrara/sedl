@@ -1,29 +1,17 @@
-<div [style.--lord-color]="winner.color" class="modal-container" id="win-modal">
-  <aside class="modal  modal--win">
-    <header class="modal__header">
-      <a href="#" class="button  button--small">
-        <se-cell class="cell  cell--icon" seed="e"></se-cell>
-      </a>
-      <se-logo class="modal__title"></se-logo>
-    </header>
-    <div class="modal__container">
-      <article class="win">
-        <div class="win__element">
-          <se-cell class="cell  win__icon" seed="a"></se-cell>
-        </div>
-        <div class="win__element">
-          <p>Lord <em>{{winner.name}}</em> won the game!</p>
-        </div>
-        <div class="win__element">
-          <a class="button" href="#new-modal">
+<se-modal size="s" name="win">
+  <div class="win__element">
+    <se-cell class="cell  win__icon" seed="a"></se-cell>
+  </div>
+  <div class="win__element">
+    <p>Lord <em>{{winner.name}}</em> won the game!</p>
+  </div>
+  <div class="win__element">
+    <a class="button" href="#new-modal">
            <span class="button__content">
             <se-cell seed="n" class="cell  cell--icon"></se-cell>
             <span>New</span>
           </span>
-          </a>
-        </div>
-      </article>
-    </div>
-  </aside>
-</div>
+    </a>
+  </div>
+</se-modal>
 <a href="#win-modal" #winAnchor class="visually-hidden" aria-hidden="true">Win</a>

@@ -1,22 +1,5 @@
 <aside class="footer">
-  <div class="region-statistics  footer__left">
-    <se-cell class="cell    cell--statistics  region-statistics__element" [seed]="region?.type"></se-cell>
-    <span class="region-statistics__element" *ngIf="region">
-    <strong>
-        <span *ngIf="region?.impregnable">Impregnable</span>
-        <span *ngIf="!region?.impregnable && region?.sustenance">Fortified</span>
-      {{getLabel()}}</strong>
-    </span>
-    <span class="region-statistics__element" *ngIf="region">
-      <se-cell class="cell  cell--statistics" seed="g"></se-cell>
-      <span>{{region.worth()}}</span>
-    </span>
-    <span class="region-statistics__element" *ngIf="region">
-      <span>{{canRun() ? 'You can' : 'You can\'t'}} {{getAction().name()| lowercase}}</span>
-      <se-cell *ngIf="canRun()" class="cell  cell--statistics" seed="c"></se-cell>
-      <span *ngIf="canRun()">{{getAction().cost(region)}}</span>
-    </span>
-  </div>
+  <se-region-statistics [lord]="lord" [region]="region" class="footer__left"></se-region-statistics>
   <div class="footer__center">
     <a class="button  button--small" href="#help-modal"><span>?</span></a>
     <a class="button  button--small" href="#about-modal"><span>i</span></a>

@@ -26,12 +26,12 @@
   flex-direction: column;
 }
 
-.modal--help {
+.modal--l {
   width: $spacing-l-vw;
   height: 80vh;
 }
 
-.modal--win, modal--about {
+.modal--m {
   width: $spacing-m-vw;
 }
 
@@ -67,9 +67,8 @@
 }
 
 @media only screen and (max-width: 1024px) {
-  .modal--help, .modal--about, .modal--new, .modal--win {
+  .modal--s, modal--m, modal--l {
     width: 100%;
     height: 100%;
   }
 }
-
