@@ -4,11 +4,9 @@ import {AppComponent} from './app.component';
 import {CellComponent} from './cell.component';
 import {RegionDirective} from './region.directive';
 import {GridDirective} from './grid.directive';
-import {LordStatisticsComponent} from './header/lord-statistics.component';
-import {LordStatisticsElementComponent} from './header/lord-statistics-element.component';
+import {LordStatisticsComponent} from './lord-statistics/lord-statistics.component';
+import {LordStatisticsElementComponent} from './lord-statistics/lord-statistics-element.component';
 import {GameService} from './game.service';
-import {HeaderComponent} from './header/header.component';
-import {FooterComponent} from './footer/footer.component';
 import {LogoComponent} from './logo/logo.component';
 import {PinchAndZoomDirective} from './pinch-and-zoom.directive';
 import {HelpComponent} from './help/help.component';
@@ -21,8 +19,9 @@ import {WorldPreviewComponent} from './world/world-preview.component';
 import {WinComponent} from './win/win.component';
 import {ModalComponent} from './modal/modal.component';
 import {RegionStatisticsComponent} from './region-statistics/region-statistics.component';
-import {SupportComponent} from '../support/support.component';
+import {SupportComponent} from './support/support.component';
 import {ActionsComponent} from './actions/actions.component';
+import {ControlsComponent} from './controls/controls.component';
 
 export class MyHammerConfig extends HammerGestureConfig {
   overrides = {
@@ -44,9 +43,7 @@ export class MyHammerConfig extends HammerGestureConfig {
     LordStatisticsElementComponent,
     RegionDirective,
     GridDirective,
-    HeaderComponent,
     LogoComponent,
-    FooterComponent,
     HelpComponent,
     AboutComponent,
     NewComponent,
@@ -54,6 +51,7 @@ export class MyHammerConfig extends HammerGestureConfig {
     RegionStatisticsComponent,
     SupportComponent,
     ActionsComponent,
+    ControlsComponent,
     PinchAndZoomDirective
   ],
   imports: [

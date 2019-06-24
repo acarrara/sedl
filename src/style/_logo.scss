@@ -1,0 +1,19 @@
+.logo__heading {
+  @include font-family-uncial();
+  font-size: 1.8rem;
+
+  padding-left: $spacing-l;
+  padding-right: $spacing-l;
+  margin: 0;
+}
+
+.logo {
+  display: flex;
+}
+
+@media only screen and (max-width: 1024px) {
+
+  .logo {
+    display: none;
+  }
+}

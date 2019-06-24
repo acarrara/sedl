@@ -1,8 +1,9 @@
 <div class="wrapper" (document:keydown.space)="gameService.pass()">
-  <se-header class="controls  controls--top"
-             [lord0]="game.lords[0]"
-             [lord1]="game.lords[1]"
-             [style.--lordColor]="(gameService.lord$ | async).color"></se-header>
+  <se-controls side="top">
+    <se-logo></se-logo>
+    <se-actions [lord]="gameService.lord$ | async"></se-actions>
+    <se-support></se-support>
+  </se-controls>
   <div class="board-container">
     <main
       (mouseleave)="currentRegion = undefined"
@@ -16,12 +17,16 @@
                (mouseenter)="actionEnter(region, $event)"
                (contextmenu)="$event.preventDefault()"
                [impregnable]="region.impregnable"
-               class="cell" *ngFor="let region of game.board.regions; let i = index" [seed]="game.board.world[i]"></se-cell>
+               class="cell" *ngFor="let region of game.board.regions; let i = index"
+               [seed]="game.board.world[i]"></se-cell>
     </main>
     <div class="background">
       <se-cell *ngFor="let seed of backSeeds" [seed]="seed"></se-cell>
     </div>
   </div>
-  <se-footer class="controls  controls--bottom" [region]="currentRegion" [lord]="gameService.lord$ | async"
-             [style.--lordColor]="(gameService.lord$ | async).color"></se-footer>
+  <se-controls side="bottom">
+    <se-lord-statistics [lord]="game.lords[0]"></se-lord-statistics>
+    <se-region-statistics [lord]="gameService.lord$ | async" [region]="currentRegion"></se-region-statistics>
+    <se-lord-statistics [lord]="game.lords[1]" side="right"></se-lord-statistics>
+  </se-controls>
 </div>
