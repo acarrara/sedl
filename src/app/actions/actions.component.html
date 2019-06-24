@@ -1,10 +1,10 @@
-<button class="button  button--primary" (click)="game.pass()" [style.--lordColor]="lord.color">
+<button class="button  button--primary" (click)="game.pass(); clicked()" [style.--lordColor]="lord.color">
       <span class="button__content">
         <se-cell seed="o" class="cell  cell--icon"></se-cell>
         <span>Pass</span>
       </span>
 </button>
-<button class="button" (click)="game.rush()" [disabled]="!lord.canRush()">
+<button class="button" (click)="game.rush(); clicked()" [disabled]="!lord.canRush()">
        <span class="button__content">
         <se-cell seed="l" class="cell  cell--icon"></se-cell>
         <span>Rush</span>

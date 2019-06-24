@@ -1,4 +1,4 @@
-import {ChangeDetectionStrategy, Component} from '@angular/core';
+import {ChangeDetectionStrategy, Component, EventEmitter, Output} from '@angular/core';
 
 @Component({
   selector: 'se-support',
@@ -6,4 +6,11 @@ import {ChangeDetectionStrategy, Component} from '@angular/core';
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class SupportComponent {
+
+  @Output()
+  public selection: EventEmitter<any> = new EventEmitter(false);
+
+  clicked() {
+    this.selection.emit(null);
+  }
 }

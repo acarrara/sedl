@@ -36,7 +36,7 @@
 
 .button--primary {
 
-  border: $spacing-s solid var(--lord-color, $primary-color-background);
+  border: $spacing-xs solid var(--lord-color, $primary-color-background);
 }
 
 .button + .button {

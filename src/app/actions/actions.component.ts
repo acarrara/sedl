@@ -1,4 +1,4 @@
-import {ChangeDetectionStrategy, Component, Input} from '@angular/core';
+import {ChangeDetectionStrategy, Component, EventEmitter, Input, Output} from '@angular/core';
 import {GameService} from '../game.service';
 import {Lord} from '../models/Lord';
 
@@ -12,7 +12,14 @@ export class ActionsComponent {
   @Input()
   public lord: Lord;
 
+  @Output()
+  public selection: EventEmitter<any> = new EventEmitter(false);
+
   constructor(public game: GameService) {
+  }
+
+  clicked() {
+    this.selection.emit(null);
   }
 
 }

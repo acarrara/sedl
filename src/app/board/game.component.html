@@ -1,13 +1,17 @@
 <div class="wrapper" (document:keydown.space)="gameService.pass()">
   <se-controls side="top" [attr.data-collapsed]="collapsed">
-    <div  class="controls__section  controls__menu-container">
+    <div  class="controls__menu-container">
       <se-logo></se-logo>
-      <button class="button  controls__menu" (tap)="toggleMenu()">
+      <button class="button  controls__menu" (click)="toggleMenu()">
         <se-cell class="cell  cell--icon" seed="r"></se-cell>
       </button>
     </div>
-    <se-actions class="controls__section  controls--collapsible" [lord]="gameService.lord$ | async"></se-actions>
-    <se-support class="controls__section  controls--collapsible"></se-support>
+    <div class="controls__anchor">
+      <div class="controls__section">
+        <se-actions [lord]="gameService.lord$ | async" (selection)="toggleMenu()"></se-actions>
+        <se-support  (selection)="toggleMenu()"></se-support>
+      </div>
+    </div>
   </se-controls>
   <div class="board-container">
     <main
