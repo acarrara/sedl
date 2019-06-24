@@ -6,6 +6,8 @@
   @include flex-align-center();
   justify-content: space-between;
 
+  padding: $spacing-m;
+
   background-color: $primary-color-background;
 
   box-shadow: 0 1px $spacing-s 0 $shadow-on-background-color;
@@ -23,26 +25,6 @@
   border-bottom: $spacing-m solid var(--lord-color);
 }
 
-.footer {
-  @include flex-align-center();
-  padding: $spacing-m;
-  width: 100%;
-}
-
-.footer__left {
-  flex-basis: 40%;
-}
-
-.footer__right {
-  flex-basis: 40%;
-  text-align: end;
-}
-
-.footer__center {
-  flex-basis: 20%;
-  text-align: center;
-}
-
 .logo__heading {
   @include font-family-uncial();
   font-size: 1.8rem;
@@ -57,25 +39,9 @@
 }
 
 @media only screen and (max-width: 1024px) {
-  .footer {
-    padding: 0;
-  }
-
-  .footer__center {
-    position: absolute;
-    top: 8rem;
-    left: 1rem;
-  }
 
   .logo {
     display: none;
-  }
-
-  .footer__right {
-    margin: 0;
-    width: 100%;
-    border-radius: 0;
-    flex-basis: initial;
   }
 
   .controls {

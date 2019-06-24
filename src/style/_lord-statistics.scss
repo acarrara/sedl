@@ -1,5 +1,7 @@
 .lord-statistics {
 
+  @include flex-align-center();
+
   .lord-statistics__data {
     padding-left: $spacing-l;
     padding-right: $spacing-l;
@@ -10,11 +12,6 @@
     @include flex-align-center();
     padding-left: $spacing-s;
     padding-right: $spacing-s;
-  }
-
-  .lord-statistics__content {
-    padding: $spacing-m;
-    @include flex-align-center();
   }
 }
 

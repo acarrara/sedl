@@ -52,21 +52,6 @@
   }
 }
 
-.button--small {
-  padding: 0.25em;
-  display: inline-block;
-  border-radius: 50%;
-
-  & span {
-    vertical-align: middle;
-    text-align: center;
-    display: inline-block;
-    min-width: 2em;
-    min-height: 2em;
-    line-height: 2;
-  }
-}
-
 @media only screen and (max-width: 1024px) {
 
   .button {
@@ -79,14 +64,4 @@
   .button + .button {
     margin-left: 0;
   }
-
-  .button--small + .button--small {
-    margin-left: $spacing-m;
-  }
-
-  .button--small {
-    width: initial;
-    border-radius: 50%;
-  }
-
 }

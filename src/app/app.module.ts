@@ -21,6 +21,8 @@ import {WorldPreviewComponent} from './world/world-preview.component';
 import {WinComponent} from './win/win.component';
 import {ModalComponent} from './modal/modal.component';
 import {RegionStatisticsComponent} from './region-statistics/region-statistics.component';
+import {SupportComponent} from '../support/support.component';
+import {ActionsComponent} from './actions/actions.component';
 
 export class MyHammerConfig extends HammerGestureConfig {
   overrides = {
@@ -50,6 +52,8 @@ export class MyHammerConfig extends HammerGestureConfig {
     NewComponent,
     ModalComponent,
     RegionStatisticsComponent,
+    SupportComponent,
+    ActionsComponent,
     PinchAndZoomDirective
   ],
   imports: [

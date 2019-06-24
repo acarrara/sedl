@@ -1,27 +1,3 @@
-<aside class="footer">
-  <se-region-statistics [lord]="lord" [region]="region" class="footer__left"></se-region-statistics>
-  <div class="footer__center">
-    <a class="button  button--small" href="#help-modal"><span>?</span></a>
-    <a class="button  button--small" href="#about-modal"><span>i</span></a>
-  </div>
-  <div class="footer__right">
-    <a class="button" href="#new-modal">
-       <span class="button__content">
-        <se-cell seed="n" class="cell  cell--icon"></se-cell>
-        <span>New</span>
-      </span>
-    </a>
-    <button class="button" (click)="game.rush()" [disabled]="!lord.canRush()">
-       <span class="button__content">
-        <se-cell seed="l" class="cell  cell--icon"></se-cell>
-        <span>Rush</span>
-      </span>
-    </button>
-    <button class="button  button--primary" (click)="game.pass()" [style.--lordColor]="lord.color">
-      <span class="button__content">
-        <se-cell seed="o" class="cell  cell--icon"></se-cell>
-        <span>Pass</span>
-      </span>
-    </button>
-  </div>
-</aside>
+<se-region-statistics [lord]="lord" [region]="region" class="footer__left"></se-region-statistics>
+<se-support></se-support>
+<se-actions [lord]="lord"></se-actions>

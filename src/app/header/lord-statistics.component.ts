@@ -11,7 +11,9 @@ import {Subscription} from 'rxjs';
 export class LordStatisticsComponent implements OnInit, OnDestroy {
 
   @Input()
-  lord: Lord;
+  public lord: Lord;
+  @Input()
+  public side: string;
 
   private subscription: Subscription;
 
