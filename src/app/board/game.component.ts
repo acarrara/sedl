@@ -19,7 +19,7 @@ export class GameComponent {
     'p', 'm', 'f', 'w', 'h', 'p', 'm', 'f', 'w',
     'h', 'p', 'm', 'f', 'w', 'h', 'p', 'm', 'f',
     'w', 'h', 'p'];
-  public menuState = false;
+  public collapsed = true;
 
   constructor(public gameService: GameService) {
   }
@@ -40,7 +40,7 @@ export class GameComponent {
   }
 
   toggleMenu() {
-    this.menuState = !this.menuState;
-    console.log(this.menuState);
+    this.collapsed = !this.collapsed;
+    console.log(this.collapsed);
   }
 }

@@ -1,8 +1,8 @@
 <div class="wrapper" (document:keydown.space)="gameService.pass()">
-  <se-controls side="top" [attr.data-collapsed]="menuState">
+  <se-controls side="top" [attr.data-collapsed]="collapsed">
     <div  class="controls__section  controls__menu-container">
       <se-logo></se-logo>
-      <button class="button  controls__menu" (click)="toggleMenu()">
+      <button class="button  controls__menu" (tap)="toggleMenu()">
         <se-cell class="cell  cell--icon" seed="r"></se-cell>
       </button>
     </div>
