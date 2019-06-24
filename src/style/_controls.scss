@@ -25,6 +25,19 @@
   border-bottom: $spacing-m solid var(--lord-color);
 }
 
+.controls__menu {
+  display: none;
+}
+
+.controls__section {
+  display: block;
+}
+
+.controls__menu-container {
+  display: flex;
+  justify-content: space-between;
+}
+
 @media only screen and (max-width: 1024px) {
 
   .controls {
@@ -35,4 +48,31 @@
   .controls--bottom {
     border-bottom: 0;
   }
+
+  .controls--top {
+    position: absolute;
+  }
+
+  .controls__menu-container {
+    width: 100%;
+  }
+
+  .controls__menu {
+    width: initial;
+    display: inline-block;
+  }
+
+  [data-collapsed="true"] .controls--collapsible {
+    display: none;
+    height: 0;
+  }
+
+  .controls__section {
+    width: 100%;
+  }
+
+  .controls__section + .controls__section {
+    margin-top: $spacing-l;
+  }
+
 }

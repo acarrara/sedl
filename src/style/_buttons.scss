@@ -2,10 +2,9 @@
   @include font-family-fira();
   display: inline-block;
   font-size: 1em;
-  border: $border-color solid $spacing-s;
+  border: $border-color solid $spacing-xs;
   border-radius: $spacing-s;
-  padding: $spacing-s $spacing-xl;
-  box-shadow: 0 1px 2px 0 $shadow-color;
+  padding: $spacing-s $spacing-l;
 
   text-decoration: none;
 
@@ -59,6 +58,7 @@
     width: 100%;
     border-radius: 0;
     flex-basis: initial;
+    border: 0;
   }
 
   .button + .button {

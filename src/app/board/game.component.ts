@@ -1,4 +1,4 @@
-import {ChangeDetectionStrategy, ChangeDetectorRef, Component, Input} from '@angular/core';
+import {ChangeDetectionStrategy, Component, Input} from '@angular/core';
 import {GameService} from '../game.service';
 import {Region} from '../models/Region';
 import {Game} from '../models/Game';
@@ -19,8 +19,9 @@ export class GameComponent {
     'p', 'm', 'f', 'w', 'h', 'p', 'm', 'f', 'w',
     'h', 'p', 'm', 'f', 'w', 'h', 'p', 'm', 'f',
     'w', 'h', 'p'];
+  public menuState = false;
 
-  constructor(public gameService: GameService, private cdr: ChangeDetectorRef) {
+  constructor(public gameService: GameService) {
   }
 
   action(region: Region) {
@@ -36,5 +37,10 @@ export class GameComponent {
 
   dimension() {
     return Math.sqrt(this.game.board.regions.length);
+  }
+
+  toggleMenu() {
+    this.menuState = !this.menuState;
+    console.log(this.menuState);
   }
 }
