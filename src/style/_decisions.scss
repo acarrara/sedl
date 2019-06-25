@@ -49,8 +49,12 @@ $spacing-s-vw: 15vw;
 $spacing-m-vw: 30vw;
 $spacing-l-vw: 60vw;
 
-.colorful {
+@mixin lord-color() {
   --lord-color: hsl(var(--lord-hue), var(--saturation, 50%), var(--light, 40%));
+}
+
+.colorful {
+  @include lord-color();
 
   @each $lord-id in $lords {
     --#{$lord-id}-color: hsl(var(--#{$lord-id}-hue), var(--saturation, 50%), var(--light, 40%));

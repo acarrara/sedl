@@ -37,14 +37,15 @@
 
 .modal__header {
   display: flex;
-  flex-direction: column;
-  align-items: flex-end;
+  justify-content: space-between;
 
   padding: $spacing-l;
 
   flex-grow: 0;
 
-  border-top: $spacing-m solid var(--lord-color, red);
+  @include lord-color();
+
+  border-top: $spacing-m solid var(--lord-color);
 
   & .button {
     border: none;
