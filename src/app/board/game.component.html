@@ -2,7 +2,7 @@
   <se-controls side="top" [attr.data-collapsed]="collapsed">
     <div  class="controls__menu-container">
       <se-logo></se-logo>
-      <button class="button  controls__menu" (click)="toggleMenu()">
+      <button class="button  button--small  controls__menu" (click)="toggleMenu()">
         <se-cell class="cell  cell--icon" seed="r"></se-cell>
       </button>
     </div>
@@ -19,7 +19,7 @@
       class="board" [seGrid]="dimension()" sePinchAndZoom>
       <se-cell [seRegion]="region"
                [sustenance]="region.sustenance"
-               [color]="gameService.lordAt(region).color"
+               [id]="gameService.lordAt(region).id"
                [i]="i"
                (press)="gameService.settle(region)"
                (tap)="action(region)"

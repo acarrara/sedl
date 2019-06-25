@@ -4,9 +4,9 @@ $p-color-foreground: #b6be9c;
 $w-color-foreground: #327cad;
 $f-color-foreground: #6ca285;
 
-$lord-colors: (
-  c1: #246799,
-  c2: #ad544d
+$lords: (
+  c1,
+  c2
 );
 
 $impregnable-color: #ddcf52;
@@ -37,12 +37,22 @@ $p-color-foreground: #b6be9c;
 $w-color-foreground: #327cad;
 $f-color-foreground: #6ca285;
 
-$spacing-xs: 2px;
-$spacing-s: 4px;
-$spacing-m: 8px;
-$spacing-l: 16px;
-$spacing-xl: 32px;
+$spacing-unit: 1px;
+$spacing-xs: 2 * $spacing-unit;
+$spacing-s: 4 * $spacing-unit;
+$spacing-m: 8 * $spacing-unit;
+$spacing-l: 16 * $spacing-unit;
+$spacing-xl: 32 * $spacing-unit;
+$spacing-xxl: 64 * $spacing-unit;
 
 $spacing-s-vw: 15vw;
 $spacing-m-vw: 30vw;
 $spacing-l-vw: 60vw;
+
+.colorful {
+  --lord-color: hsl(var(--lord-hue), var(--saturation, 50%), var(--light, 40%));
+
+  @each $lord-id in $lords {
+    --#{$lord-id}-color: hsl(var(--#{$lord-id}-hue), var(--saturation, 50%), var(--light, 40%));
+  }
+}

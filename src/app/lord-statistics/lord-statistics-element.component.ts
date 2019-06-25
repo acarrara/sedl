@@ -10,6 +10,8 @@ export class LordStatisticsElementComponent {
   @Input()
   public seed: string;
   @Input()
+  public id: string;
+  @Input()
   public quantity: number;
 
 }

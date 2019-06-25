@@ -38,7 +38,7 @@
   @include transition-fast();
 
   & > * + * {
-    margin-left: $spacing-xl * 2;
+    margin-left: $spacing-xxl;
     display: block;
   }
 }
@@ -67,17 +67,22 @@
     border-bottom: 0;
   }
 
+  .controls__menu-container {
+    padding: $spacing-m;
+  }
+
   .controls--top {
     position: absolute;
+    padding: 0;
   }
 
   .controls__section {
     flex-direction: column;
 
     position: absolute;
-    left: -$spacing-m;
-    right: -$spacing-m;
-    top: $spacing-m;
+    left: 0;
+    right: 0;
+    top: 0;
 
     padding-top: $spacing-m;
 
@@ -98,8 +103,7 @@
   }
 
   .controls__menu {
-    width: initial;
-    display: inline-block;
+    display: initial;
   }
 
   [data-collapsed="true"] .controls__section {

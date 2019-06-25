@@ -1,5 +1,9 @@
-<se-game [game]="game.game$ | async"></se-game>
-<se-help [style.--lordColor]="(game.lord$ | async).color"></se-help>
-<se-about [style.--lordColor]="(game.lord$ | async).color"></se-about>
-<se-new [style.--lordColor]="(game.lord$ | async).color"></se-new>
-<se-win *ngIf="(game.game$ | async).winner" [winner]="(game.game$ | async).winner"></se-win>
+<div class="colorful" [style.--c1-hue]="(game.game$ | async).lords[0].color"
+     [style.--c2-hue]="(game.game$ | async).lords[1].color"
+     [style.--lord-hue]="(game.lord$ | async).color">
+  <se-game [game]="game.game$ | async"></se-game>
+  <se-help></se-help>
+  <se-about></se-about>
+  <se-new></se-new>
+  <se-win *ngIf="(game.game$ | async).winner" [winner]="(game.game$ | async).winner"></se-win>
+</div>

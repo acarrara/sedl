@@ -12,7 +12,7 @@ export class CellComponent {
   @Input()
   sustenance: boolean;
   @Input()
-  color: string;
+  id: string;
   @Input()
   impregnable: boolean;
   @Input()

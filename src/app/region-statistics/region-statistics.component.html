@@ -2,8 +2,8 @@
   <span class="region-statistics__element  region-statistics--fill" style="display: flex; justify-content: flex-end"
         *ngIf="region">
     <strong>
-        <span *ngIf="region?.impregnable">Impregnable</span>
-        <span *ngIf="!region?.impregnable && region?.sustenance">Fortified</span>
+        <span *ngIf="region?.impregnable">impregnable</span>
+        <span *ngIf="!region?.impregnable && region?.sustenance">fortified</span>
       {{getLabel()}}</strong>
     </span>
   <se-cell class="cell  cell--statistics  region-statistics__element" [seed]="region?.type"></se-cell>

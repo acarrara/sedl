@@ -1,5 +1,4 @@
 import {ChangeDetectionStrategy, Component, Input} from '@angular/core';
-import {GameService} from '../game.service';
 
 @Component({
   selector: 'se-controls',
@@ -7,10 +6,7 @@ import {GameService} from '../game.service';
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class ControlsComponent {
+
   @Input()
-  side: string;
-
-  constructor(public gameService: GameService) {
-  }
-
+  public side: string;
 }

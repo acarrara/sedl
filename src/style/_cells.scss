@@ -52,21 +52,23 @@
   fill: transparent;
 }
 
-.cell__svg.d {
-  fill: var(--lord-color);
-}
-
-@each $lord-name, $lord-color in $lord-colors {
-  .cell--sustenance-#{$lord-name} {
-    stroke: $lord-color;
-    fill: $lord-color;
+@each $lord-id in $lords {
+  .#{$lord-id} .cell__svg {
+    fill: var(--#{$lord-id}-color);
   }
 }
 
-@each $lord-name, $lord-color in $lord-colors {
+@each $lord-id in $lords {
+  .cell--sustenance-#{$lord-id} {
+    stroke: var(--#{$lord-id}-color);
+    fill: var(--#{$lord-id}-color);
+  }
+}
+
+@each $lord-id in $lords {
   @each $direction-name, $direction-value in $directions {
-    .d-#{$direction-name}--#{$lord-name} {
-      border-#{$direction-value}-color: $lord-color;
+    .d-#{$direction-name}--#{$lord-id} {
+      border-#{$direction-value}-color: var(--#{$lord-id}-color);
     }
   }
 }
@@ -75,6 +77,7 @@
   border: 0;
   transition: none;
   width: 1.5em;
+
   &:hover {
     box-shadow: none;
     transform: none;

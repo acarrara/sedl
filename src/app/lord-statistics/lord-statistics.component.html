@@ -7,7 +7,7 @@
                                 [quantity]="lord.treasure"></se-lord-statistics-element>
     <se-lord-statistics-element class="lord-statistics__element" seed="g"
                                 [quantity]="lord.worth()"></se-lord-statistics-element>
-    <se-lord-statistics-element class="lord-statistics__element" seed="d" [style.--lordColor]="lord.color"
+    <se-lord-statistics-element class="lord-statistics__element  {{lord.id}}" seed="d"
                                 [quantity]="lord.debt()"></se-lord-statistics-element>
   </dl>
 </div>

@@ -2,13 +2,13 @@
   {
     "id": "c1",
     "name": "Charle",
-    "color": "#246799",
+    "color": "210",
     "treasure": 20
   },
   {
     "id": "c2",
     "name": "Caesar",
-    "color": "#ad544d",
+    "color": "0",
     "treasure":  20
   }
 ]
