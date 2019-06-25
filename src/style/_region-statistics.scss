@@ -1,9 +1,13 @@
 .region-statistics {
-  @include flex-align-center();
+  @include flex-center();
 }
 
 .region-statistics__element {
   @include flex-align-center();
+}
+
+.region-statistics--fill {
+  flex-basis: 40%;
 }
 
 .region-statistics__element + .region-statistics__element {

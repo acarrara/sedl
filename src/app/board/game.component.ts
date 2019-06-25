@@ -41,6 +41,5 @@ export class GameComponent {
 
   toggleMenu() {
     this.collapsed = !this.collapsed;
-    console.log(this.collapsed);
   }
 }

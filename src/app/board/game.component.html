@@ -9,7 +9,7 @@
     <div class="controls__anchor">
       <div class="controls__section">
         <se-actions [lord]="gameService.lord$ | async" (selection)="toggleMenu()"></se-actions>
-        <se-support  (selection)="toggleMenu()"></se-support>
+        <se-support (selection)="toggleMenu()"></se-support>
       </div>
     </div>
   </se-controls>
@@ -34,8 +34,8 @@
     </div>
   </div>
   <se-controls side="bottom">
-    <se-lord-statistics [lord]="game.lords[0]"></se-lord-statistics>
-    <se-region-statistics [lord]="gameService.lord$ | async" [region]="currentRegion"></se-region-statistics>
-    <se-lord-statistics [lord]="game.lords[1]" side="right"></se-lord-statistics>
+    <se-lord-statistics style="flex-grow: 0" [lord]="game.lords[0]"></se-lord-statistics>
+    <se-region-statistics style="flex-grow: 1" [lord]="gameService.lord$ | async" [region]="currentRegion"></se-region-statistics>
+    <se-lord-statistics style="flex-grow: 0" [lord]="game.lords[1]" side="right"></se-lord-statistics>
   </se-controls>
 </div>

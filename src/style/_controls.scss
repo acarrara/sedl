@@ -38,7 +38,7 @@
   @include transition-fast();
 
   & > * + * {
-    margin-left: $spacing-l;
+    margin-left: $spacing-xl * 2;
     display: block;
   }
 }
