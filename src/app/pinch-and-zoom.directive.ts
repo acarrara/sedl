@@ -19,8 +19,7 @@ export class PinchAndZoomDirective {
 
   @HostListener('pinch', ['$event'])
   public onPinch($event: any) {
-    const scale = Math.max(.999, Math.min(this.lastScale * ($event.scale), 4));
-    this.scale = scale;
+    this.scale = Math.max(.999, Math.min(this.lastScale * ($event.scale), 4));
     this.transform($event);
   }
 
@@ -37,8 +36,8 @@ export class PinchAndZoomDirective {
 
   private transform($event: any) {
     if (this.scale !== 1) {
-      this.posX = this.lastPosX + $event.deltaX;
-      this.posY = this.lastPosY + $event.deltaY;
+      this.posX = this.lastPosX + ($event.deltaX / this.scale);
+      this.posY = this.lastPosY + ($event.deltaY / this.scale);
       this.maxPosX = Math.ceil((this.scale - 1) * this.element.nativeElement.clientWidth / 2);
       this.maxPosY = Math.ceil((this.scale - 1) * this.element.nativeElement.clientHeight / 2);
       if (this.posX > this.maxPosX) {
