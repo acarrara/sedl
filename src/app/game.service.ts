@@ -8,6 +8,8 @@ import {Game} from './models/Game';
 @Injectable()
 export class GameService {
 
+  private static WIN_BY_MONEY_THRESHOLD = 500;
+
   public regions$: Observable<Region[]>;
   public lord$: Observable<Lord>;
   public actions$: Observable<any>;
@@ -51,16 +53,23 @@ export class GameService {
 
   public pass(): void {
     if (this.otherLords().every(otherLord => !otherLord.canPlay())) {
-      this.gameSubject.getValue().winner = this.currentLord();
-      return;
+      this.winGame();
     }
     do {
       this.shiftLord();
     } while (!this.currentLord().canPlay());
 
     Actions.getPassiveActions().forEach(action => this.currentLord().passiveAction(action));
+    if (this.currentLord().treasure >= GameService.WIN_BY_MONEY_THRESHOLD) {
+      this.winGame();
+    }
     this.lordSubject.next(this.currentLord());
     this.actionsSubject.next(this.currentLord());
+  }
+
+  private winGame() {
+    this.gameSubject.getValue().winner = this.currentLord();
+    return;
   }
 
   private shiftLord() {
