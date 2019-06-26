@@ -6,7 +6,9 @@ $f-color-foreground: #6ca285;
 
 $lords: (
   c1,
-  c2
+  c2,
+  c3,
+  c4
 );
 
 $impregnable-color: #ddcf52;
@@ -25,7 +27,7 @@ $text-color-disabled: #dfdfdf;
 $background-color-disabled: #888;
 
 $background-color: #ededed;
-$shadow-color: #666;
+$shadow-color: #999;
 
 $primary-color-background: #fafafa;
 
@@ -38,6 +40,7 @@ $w-color-foreground: #327cad;
 $f-color-foreground: #6ca285;
 
 $spacing-unit: 1px;
+$spacing-xxs: 1 * $spacing-unit;
 $spacing-xs: 2 * $spacing-unit;
 $spacing-s: 4 * $spacing-unit;
 $spacing-m: 8 * $spacing-unit;
@@ -49,14 +52,20 @@ $spacing-s-vw: 15vw;
 $spacing-m-vw: 30vw;
 $spacing-l-vw: 60vw;
 
-@mixin lord-color() {
-  --lord-color: hsl(var(--lord-hue), var(--saturation, 50%), var(--light, 40%));
-}
+$saturation-base: 50%;
+$lightness-base: 40%;
+
+@mixin lord-color($variant: "") {
+  @if($variant != "") {
+    --lord-color-#{$variant}: hsl(var(--lord-hue), calc(#{$saturation-base} + var(--saturation-delta-#{$variant}, 0%)), calc(#{$lightness-base} + var(--lightness-delta-#{$variant}, 0%)));
+  } @else {
+    --lord-color: hsl(var(--lord-hue), calc(#{$saturation-base} + var(--saturation-delta, 0%)), calc(#{$lightness-base} + var(--lightness-delta, 0%)));
+  }}
 
 .colorful {
   @include lord-color();
 
   @each $lord-id in $lords {
-    --#{$lord-id}-color: hsl(var(--#{$lord-id}-hue), var(--saturation, 50%), var(--light, 40%));
+    --#{$lord-id}-color: hsl(var(--#{$lord-id}-hue), var(--saturation-delta, #{$saturation-base}), var(--lightness-delta, #{$lightness-base}));
   }
 }

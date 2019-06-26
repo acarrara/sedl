@@ -1,9 +1,13 @@
 .button {
   @include font-family-fira();
   display: inline-block;
+
   font-size: 1em;
-  border: $border-color solid $spacing-xs;
+  line-height: 1.15;
+
+  border: none;
   border-radius: $spacing-s;
+
   padding: $spacing-s $spacing-l;
 
   text-decoration: none;
@@ -11,32 +15,70 @@
   cursor: pointer;
 
   @include transition-fast();
-  background-color: $primary-color-background;
+  @include small-shadow();
 
-  &:hover {
-    background-color: darken($primary-color-background, 10%);
+  @include lord-color();
+  background-color: var(--lord-color);
+
+  &:hover, &[disabled] {
+    @include lord-color("hover");
+    background-color: var(--lord-color-hover);
   }
 
   &:active {
-    background-color: darken($primary-color-background, 20%);
+    @include lord-color("active");
+    background-color: var(--lord-color-active);
   }
 
   &:focus {
+    --saturation-delta-focus: 25%;
+    --lightness-delta-focus: 35%;
+
     outline: 0;
-    box-shadow: 0 0 $spacing-s $spacing-s darken($primary-color-background, 40%);
+
+    @include lord-color("focus");
+    box-shadow: 0 0 0 $spacing-s var(--lord-color-focus);
+
   }
 
   &[disabled] {
-    background-color: $text-color-disabled;
     color: $background-color-disabled;
+    box-shadow: none;
 
     cursor: not-allowed;
   }
 }
 
-.button--primary {
+.button--default {
+  --lightness-delta: 50%;
+  --saturation-delta: -50%;
 
-  border: $spacing-xs solid var(--lord-color, $primary-color-background);
+  &:hover, &[disabled] {
+    --lightness-delta-hover: 40%;
+    --saturation-delta-hover: -50%;
+  }
+
+  &:active {
+    --lightness-delta-active: 30%;
+    --saturation-delta-active: -50%;
+  }
+}
+
+.button--primary {
+  --saturation-delta: 0%;
+  --lightness-delta: 0%;
+
+  color: $background-color;
+
+  &:hover {
+    --saturation-delta-hover: -10%;
+    --lightness-delta-hover: -10%;
+  }
+
+  &:active {
+    --saturation-delta-active: -15%;
+    --lightness-delta-active: -15%;
+  }
 }
 
 .button + .button {
@@ -58,16 +100,23 @@
     width: 100%;
     border-radius: 0;
     flex-basis: initial;
-    border: 0;
+
+    box-shadow: none;
+
+    &.button--default {
+      --lightness-delta: 60%;
+    }
   }
 
   .button + .button {
     margin-left: 0;
   }
-
 }
 
 .button--small {
   width: initial;
+
   padding: $spacing-s;
+
+  background-color: initial;
 }

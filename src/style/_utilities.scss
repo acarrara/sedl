@@ -19,6 +19,10 @@
   box-shadow: 0 $spacing-s $spacing-s 0 $shadow-color;
 }
 
+@mixin small-shadow() {
+  box-shadow: 0 $spacing-xxs $spacing-xs 0 $shadow-color;
+}
+
 @mixin full-screen() {
   width: 100vw;
   height: 100vh;

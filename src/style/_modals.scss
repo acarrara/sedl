@@ -46,17 +46,6 @@
   @include lord-color();
 
   border-top: $spacing-m solid var(--lord-color);
-
-  & .button {
-    border: none;
-    box-shadow: none;
-    background-color: transparent;
-  }
-}
-
-.modal__title {
-  display: block;
-  align-self: center;
 }
 
 .modal__container {
