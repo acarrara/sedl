@@ -56,11 +56,16 @@ $saturation-base: 50%;
 $lightness-base: 40%;
 
 @mixin lord-color($variant: "") {
-  @if($variant != "") {
-    --lord-color-#{$variant}: hsl(var(--lord-hue), calc(#{$saturation-base} + var(--saturation-delta-#{$variant}, 0%)), calc(#{$lightness-base} + var(--lightness-delta-#{$variant}, 0%)));
+  @if ($variant != "") {
+    --lord-color-#{$variant}: hsl(
+        var(--lord-hue),
+        calc(#{$saturation-base} + var(--saturation-delta-#{$variant}, 0%)),
+        calc(#{$lightness-base} + var(--lightness-delta-#{$variant}, 0%))
+    );
   } @else {
     --lord-color: hsl(var(--lord-hue), calc(#{$saturation-base} + var(--saturation-delta, 0%)), calc(#{$lightness-base} + var(--lightness-delta, 0%)));
-  }}
+  }
+}
 
 .colorful {
   @include lord-color();

@@ -3,12 +3,24 @@
     "id": "c1",
     "name": "Charle",
     "color": "210",
-    "treasure": 20
+    "treasure": 50
   },
   {
     "id": "c2",
     "name": "Caesar",
     "color": "0",
-    "treasure":  20
+    "treasure":  50
+  },
+  {
+    "id": "c3",
+    "name": "Ivan",
+    "color": "150",
+    "treasure":  50
+  },
+  {
+    "id": "c4",
+    "name": "Peter",
+    "color": "180",
+    "treasure":  50
   }
 ]

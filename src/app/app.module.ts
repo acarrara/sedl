@@ -22,6 +22,7 @@ import {RegionStatisticsComponent} from './region-statistics/region-statistics.c
 import {SupportComponent} from './support/support.component';
 import {ActionsComponent} from './actions/actions.component';
 import {ControlsComponent} from './controls/controls.component';
+import {LordColorsDirective} from './lord-colors.directive';
 
 export class MyHammerConfig extends HammerGestureConfig {
   overrides = {
@@ -52,7 +53,8 @@ export class MyHammerConfig extends HammerGestureConfig {
     SupportComponent,
     ActionsComponent,
     ControlsComponent,
-    PinchAndZoomDirective
+    PinchAndZoomDirective,
+    LordColorsDirective
   ],
   imports: [
     BrowserModule,

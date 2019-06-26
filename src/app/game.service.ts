@@ -50,14 +50,21 @@ export class GameService {
   }
 
   public pass(): void {
-    this.lordIndex = (this.lordIndex + 1) % this.game.lords.length;
-    if (!this.currentLord().canPlay()) {
-      const winnerIndex = (this.lordIndex + 1) % this.game.lords.length;
-      this.gameSubject.getValue().winner = this.game.lords[winnerIndex];
+    if (this.otherLords().every(otherLord => !otherLord.canPlay())) {
+      this.gameSubject.getValue().winner = this.currentLord();
+      return;
     }
+    do {
+      this.shiftLord();
+    } while (!this.currentLord().canPlay());
+
     Actions.getPassiveActions().forEach(action => this.currentLord().passiveAction(action));
     this.lordSubject.next(this.currentLord());
     this.actionsSubject.next(this.currentLord());
+  }
+
+  private shiftLord() {
+    this.lordIndex = (this.lordIndex + 1) % this.game.lords.length;
   }
 
   public lordAt(region: Region) {
@@ -84,5 +91,9 @@ export class GameService {
 
   private currentLord() {
     return this.game.lords[this.lordIndex];
+  }
+
+  private otherLords() {
+    return this.game.lords.filter(lord => lord !== this.currentLord());
   }
 }
