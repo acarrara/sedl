@@ -64,3 +64,22 @@ small, .text_small {
 em {
   @include font-family-fira-bold();
 }
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+  table-layout: fixed;
+}
+
+td, th {
+  padding: $spacing-s;
+  text-align: right;
+}
+
+th {
+  font-weight: bold;
+}
+
+tr:nth-child(even) {
+  background-color: $background-color;
+}
