@@ -15,7 +15,6 @@
   </se-controls>
   <div class="board-container">
     <main
-      (mouseleave)="currentRegion = undefined"
       class="board" [seGrid]="dimension()" sePinchAndZoom>
       <se-cell [seRegion]="region"
                [sustenance]="region.sustenance"

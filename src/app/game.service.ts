@@ -29,13 +29,13 @@ export class GameService {
   }
 
   public newGame(game: Game) {
+    this.game = game;
     this.gameSubject.next(game);
     this.lordSubject.next(game.lords[0]);
     this.regionsSubject.next(game.board.regions);
   }
 
   public start(game: Game) {
-    this.game = game;
     this.regionsSubject = new BehaviorSubject(game.board.regions);
     this.lordSubject = new BehaviorSubject(game.lords[0]);
     this.actionsSubject = new BehaviorSubject({});

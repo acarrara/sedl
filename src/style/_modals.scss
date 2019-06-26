@@ -39,7 +39,7 @@
   display: flex;
   justify-content: space-between;
 
-  padding: $spacing-l;
+  padding: $spacing-m;
 
   flex-grow: 0;
 
@@ -62,7 +62,7 @@
 .modal__container {
   flex-grow: 1;
 
-  padding: $spacing-l;
+  padding: $spacing-m;
 
   overflow: auto;
 }
