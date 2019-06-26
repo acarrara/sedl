@@ -14,13 +14,13 @@
   {
     "id": "c3",
     "name": "Ivan",
-    "color": "150",
+    "color": "145",
     "treasure":  50
   },
   {
     "id": "c4",
     "name": "Napoleon",
-    "color": "180",
+    "color": "65",
     "treasure":  50
   }
 ]

@@ -1,20 +1,9 @@
 .region-statistics {
-  @include flex-center();
+  @include flex-align-center();
 }
 
 .region-statistics__element {
   @include flex-align-center();
-}
-
-.region-statistics--fill {
-  flex-basis: 40%;
-  overflow: hidden;
-
-  .region-statistics__text {
-    white-space: nowrap;
-    overflow: hidden;
-    text-overflow: ellipsis;
-  }
 }
 
 .region-statistics__element + .region-statistics__element {

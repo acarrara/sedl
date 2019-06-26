@@ -33,8 +33,7 @@
     </div>
   </div>
   <se-controls side="bottom">
-    <se-lord-statistics style="flex-grow: 0" [lord]="game.lords[0]"></se-lord-statistics>
     <se-region-statistics style="flex-grow: 1" [lord]="gameService.lord$ | async" [region]="currentRegion"></se-region-statistics>
-    <se-lord-statistics style="flex-grow: 0" [lord]="game.lords[1]" side="right"></se-lord-statistics>
+    <se-lord-statistics style="flex-grow: 0" [lord]="gameService.lord$ | async" ></se-lord-statistics>
   </se-controls>
 </div>
