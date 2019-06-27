@@ -23,6 +23,7 @@ import {SupportComponent} from './support/support.component';
 import {ActionsComponent} from './actions/actions.component';
 import {ControlsComponent} from './controls/controls.component';
 import {LordColorsDirective} from './lord-colors.directive';
+import {RankPipe} from './rank.pipe';
 
 export class MyHammerConfig extends HammerGestureConfig {
   overrides = {
@@ -54,7 +55,8 @@ export class MyHammerConfig extends HammerGestureConfig {
     ActionsComponent,
     ControlsComponent,
     PinchAndZoomDirective,
-    LordColorsDirective
+    LordColorsDirective,
+    RankPipe
   ],
   imports: [
     BrowserModule,

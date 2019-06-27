@@ -20,6 +20,7 @@ export class GameComponent {
     'h', 'p', 'm', 'f', 'w', 'h', 'p', 'm', 'f',
     'w', 'h', 'p'];
   public collapsed = true;
+  public rankingCollapsed = true;
 
   constructor(public gameService: GameService) {
   }
@@ -41,5 +42,9 @@ export class GameComponent {
 
   toggleMenu() {
     this.collapsed = !this.collapsed;
+  }
+
+  toggleRanking() {
+    this.rankingCollapsed = !this.rankingCollapsed;
   }
 }

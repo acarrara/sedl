@@ -1,0 +1,33 @@
+.lord-ranking {
+  display: none;
+  align-items: flex-start;
+
+  position: absolute;
+  bottom: 0;
+  right: 0;
+
+  background-color: $primary-color-background;
+  padding: $spacing-m;
+  z-index: 800;
+  border-bottom: var(--lord-color) solid $spacing-m;
+
+  box-shadow: 0 1px 4px 0 $shadow-color;
+
+  @include transition-slow();
+
+  &.is-active {
+    display: flex;
+  }
+}
+
+.lord-ranking__list {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end ;
+
+  padding-left: $spacing-m;
+}
+
+.lord-ranking__lord + .lord-ranking__lord {
+  padding-top: $spacing-m;
+}
