@@ -15,13 +15,10 @@
   }
 }
 
-.lord-statistics--right {
-  direction: rtl;
-}
 
 @media only screen and (max-width: 1024px) {
 
-  .lord-statistics--right {
-    direction: ltr;
+  .lord-statistics__name {
+    display: none;
   }
 }

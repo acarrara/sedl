@@ -31,3 +31,11 @@
 .lord-ranking__lord + .lord-ranking__lord {
   padding-top: $spacing-m;
 }
+
+@media only screen and (max-width: 1024px) {
+
+  .lord-ranking {
+    left: 0;
+    width: 100vh;
+  }
+}
