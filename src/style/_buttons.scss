@@ -94,6 +94,10 @@
 }
 
 .button--small {
+  width: initial;
+
+  padding: $spacing-s;
+
   box-shadow: none;
 }
 
@@ -116,30 +120,16 @@
     margin-left: 0;
   }
 
-  .button--raised {
-    position: fixed;
-    bottom: 5em;
-    right: $spacing-m;
-
+  .button--small {
     width: initial;
-    border-radius: 50%;
+    border-radius: $spacing-s;
+  }
 
-    min-height: 3em;
-
-    box-shadow: 0 0 3px 1px #999;
-
-    display: block;
-
-    & .button__label {
-      display: none;
-    }
+  .button--small + .button--small {
+    margin-left: $spacing-m;
   }
 }
 
-.button--small {
-  width: initial;
-
-  padding: $spacing-s;
-
+.button--small.button--default {
   background-color: initial;
 }

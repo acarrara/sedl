@@ -29,4 +29,5 @@ $board-size: 36em;
 
   @include full-screen();
 
+  overflow: hidden;
 }
