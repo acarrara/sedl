@@ -6,7 +6,7 @@
   @include flex-align-center();
   justify-content: space-between;
 
-  padding: $spacing-m;
+  padding: $spacing-l;
 
   background-color: $primary-color-background;
 
@@ -68,7 +68,7 @@
   }
 
   .controls__menu-container {
-    padding: $spacing-m;
+    padding: $spacing-l;
   }
 
   .controls--top {
@@ -84,7 +84,7 @@
     right: 0;
     top: 0;
 
-    padding-top: $spacing-m;
+    padding-top: $spacing-l;
 
     @include standard-shadow();
 

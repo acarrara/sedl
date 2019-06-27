@@ -33,10 +33,10 @@
     </div>
   </div>
   <se-controls side="bottom">
-    <se-region-statistics style="flex-grow: 1" [lord]="gameService.lord$ | async"
+    <se-region-statistics [lord]="gameService.lord$ | async"
                           [region]="currentRegion"></se-region-statistics>
-    <div style="flex-grow: 0; display: flex; width: 100%; justify-content: flex-end;">
-      <div class="lord-ranking" [class.is-active]="!rankingCollapsed">
+    <div class="lord-ranking">
+      <div class="lord-ranking__dropdown" [class.is-active]="!rankingCollapsed">
         <button class="button  button--default  button--small" (click)="toggleRanking()">
           <div class="button__content">
             <se-cell class="cell  cell--icon" seed="e"></se-cell>

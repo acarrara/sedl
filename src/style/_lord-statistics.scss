@@ -4,21 +4,21 @@
 
   .lord-statistics__data {
     padding-left: $spacing-l;
-    padding-right: $spacing-l;
     display: flex;
   }
 
   .lord-statistics__element {
     @include flex-align-center();
+  }
+
+  .lord-statistics__element + .lord-statistics__element {
     padding-left: $spacing-s;
-    padding-right: $spacing-s;
   }
 }
 
-
-@media only screen and (max-width: 1024px) {
-
-  .lord-statistics__name {
-    display: none;
-  }
+.lord-statistics__name {
+  max-width: 15vw;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
 }

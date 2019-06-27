@@ -115,6 +115,25 @@
   .button + .button {
     margin-left: 0;
   }
+
+  .button--raised {
+    position: fixed;
+    bottom: 5em;
+    right: $spacing-m;
+
+    width: initial;
+    border-radius: 50%;
+
+    min-height: 3em;
+
+    box-shadow: 0 0 3px 1px #999;
+
+    display: block;
+
+    & .button__label {
+      display: none;
+    }
+  }
 }
 
 .button--small {

@@ -1,15 +1,23 @@
 .lord-ranking {
+  display: flex;
+}
+
+.lord-ranking__dropdown {
   display: none;
   align-items: flex-start;
+  justify-content: space-between;
 
   position: absolute;
   bottom: 0;
   right: 0;
 
   background-color: $primary-color-background;
-  padding: $spacing-m;
-  z-index: 800;
+
   border-bottom: var(--lord-color) solid $spacing-m;
+
+  padding: $spacing-l;
+
+  z-index: 800;
 
   box-shadow: 0 1px 4px 0 $shadow-color;
 
@@ -29,13 +37,17 @@
 }
 
 .lord-ranking__lord + .lord-ranking__lord {
-  padding-top: $spacing-m;
+  padding-top: $spacing-l;
 }
 
 @media only screen and (max-width: 1024px) {
 
-  .lord-ranking {
+  .lord-ranking__dropdown {
     left: 0;
-    width: 100vh;
+   }
+
+  .lord-ranking {
+    width: 100%;
+    justify-content: space-between;
   }
 }
