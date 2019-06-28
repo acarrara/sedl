@@ -42,7 +42,7 @@
   padding-top: $spacing-l;
 }
 
-@media only screen and (max-width: 1024px) {
+@media only screen and (max-width: $breakpoint) {
 
   .lord-ranking__dropdown {
     left: 0;

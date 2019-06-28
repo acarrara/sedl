@@ -1,4 +1,4 @@
-import {ChangeDetectionStrategy, Component, ElementRef, Input, OnInit, ViewChild} from '@angular/core';
+import {AfterViewInit, ChangeDetectionStrategy, Component, Input} from '@angular/core';
 import {Lord} from '../models/Lord';
 
 @Component({
@@ -6,15 +6,12 @@ import {Lord} from '../models/Lord';
   templateUrl: 'win.component.html',
   changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class WinComponent implements OnInit {
+export class WinComponent implements AfterViewInit {
 
   @Input()
   public winner: Lord;
 
-  @ViewChild('winAnchor', {static: true})
-  public winAnchor: ElementRef;
-
-  ngOnInit(): void {
-    this.winAnchor.nativeElement.click();
+  ngAfterViewInit(): void {
+    window.location.href = '#win-modal';
   }
 }

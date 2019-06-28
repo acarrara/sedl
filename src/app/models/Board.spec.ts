@@ -1,5 +1,7 @@
 import {Board} from './Board';
 import {Lord} from './Lord';
+import {from} from 'rxjs';
+import {flatMap} from 'rxjs/operators';
 
 describe('Board', () => {
 
@@ -95,4 +97,22 @@ describe('Board', () => {
     });
 
   });
+
+  it('should compute needed header letters', () => {
+    const sources: string[] = ['SEDL!', 'Actions', 'Harvesting', 'Sustaining', 'Colonize', 'Conquer', 'Fortify',
+      'Settle', 'Rush', 'Terrain values', 'Plain', 'Water', 'Hill', 'Mountain', 'Settlement', 'Forest'];
+
+    const allChars: Set<string> = new Set<string>();
+
+    from(sources).pipe(
+      flatMap(source => from(source.split('')))
+    ).subscribe(char => allChars.add(char));
+
+    const set: string = [...allChars]
+      .filter(value => value !== ' ')
+      .reduce((previousValue, currentValue) => previousValue.concat(currentValue), '');
+
+    console.log(set);
+  });
+
 });

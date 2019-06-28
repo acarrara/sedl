@@ -57,9 +57,9 @@ export class GameService {
     }
     do {
       this.shiftLord();
+      Actions.getPassiveActions().forEach(action => this.currentLord().passiveAction(action));
     } while (!this.currentLord().canPlay());
 
-    Actions.getPassiveActions().forEach(action => this.currentLord().passiveAction(action));
     if (this.currentLord().treasure >= GameService.WIN_BY_MONEY_THRESHOLD) {
       this.winGame();
     }

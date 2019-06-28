@@ -74,3 +74,5 @@ $lightness-base: 40%;
     --#{$lord-id}-color: hsl(var(--#{$lord-id}-hue), var(--saturation-delta, #{$saturation-base}), var(--lightness-delta, #{$lightness-base}));
   }
 }
+
+$breakpoint: 1024px;

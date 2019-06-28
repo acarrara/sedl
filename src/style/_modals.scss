@@ -56,7 +56,7 @@
   overflow: auto;
 }
 
-@media only screen and (max-width: 1024px) {
+@media only screen and (max-width: $breakpoint) {
   .modal--s, .modal--m, .modal--l {
     width: 100%;
     height: 100%;
