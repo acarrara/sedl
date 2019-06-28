@@ -29,6 +29,21 @@ export class Board {
     });
   }
 
+  public getDomain(index: number, lord: Lord): number[] {
+    const visited: Set<number> = new Set();
+    this.visit(index, lord, visited);
+    return [...visited];
+  }
+
+  public visit(index: number, lord: Lord, visited: Set<number>) {
+    this.grid.getNeighbours(index)
+      .filter(current => !visited.has(current) && this.regions[current].belongsTo(lord))
+      .forEach(current => {
+        visited.add(current);
+        this.visit(current, lord, visited);
+      });
+  }
+
   public reachableBy(lord: Lord, region: Region) {
     return this.isReachable(lord, region, []);
   }

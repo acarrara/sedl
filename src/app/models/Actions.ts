@@ -7,9 +7,10 @@ import {
   FortifyAction,
   HarvestAction,
   PassiveAction,
+  RuleAction,
   RushAction,
   SettleAction,
-  SustainAction,
+  SustainAction, TriggeredAction,
   WithdrawAction
 } from './Action';
 
@@ -26,6 +27,8 @@ export class Actions {
   public static HARVEST: PassiveAction = new HarvestAction();
   public static SUSTAIN: PassiveAction = new SustainAction();
   public static DESERT: PassiveAction = new DesertAction();
+
+  public static RULE: TriggeredAction = new RuleAction();
 
   public static getPassiveActions = (): PassiveAction[] => [Actions.DESERT, Actions.HARVEST, Actions.SUSTAIN];
 

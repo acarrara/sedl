@@ -24,7 +24,8 @@ export class GameService {
   private game: Game;
 
   public action(region: Region) {
-    if (this.currentLord().activeAction(region)) {
+    const anotherLord: Lord = this.game.lords.find(lord => lord.id === region.lord);
+    if (this.currentLord().activeAction(region, anotherLord)) {
       this.regionsSubject.next(this.game.board.regions);
       this.actionsSubject.next({});
     }

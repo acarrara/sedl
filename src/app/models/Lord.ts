@@ -29,11 +29,11 @@ export class Lord {
     }
   }
 
-  public activeAction(region: Region) {
+  public activeAction(region: Region, anotherLord: Lord) {
     const action: ActiveAction = this.activeActionOn(region);
     const canAct = action.can(this, region);
     if (canAct) {
-      this.runAction(action, region);
+      this.runAction(action, region, anotherLord);
     }
     return canAct;
   }
@@ -42,8 +42,8 @@ export class Lord {
     action.run(this);
   }
 
-  private runAction(action: ActiveAction, region: Region) {
-    action.run(this, region);
+  private runAction(action: ActiveAction, region: Region, anotherLord: Lord) {
+    action.run(this, region, anotherLord);
   }
 
   canTame() {
@@ -59,7 +59,7 @@ export class Lord {
   settle(region: Region) {
     const canAct = Actions.SETTLE.can(this, region);
     if (canAct) {
-      this.runAction(Actions.SETTLE, region);
+      this.runAction(Actions.SETTLE, region, undefined);
     }
     return canAct;
   }
@@ -71,7 +71,7 @@ export class Lord {
   rush() {
     const canAct = Actions.RUSH.can(this, undefined);
     if (canAct) {
-      this.runAction(Actions.RUSH, undefined);
+      this.runAction(Actions.RUSH, undefined, undefined);
     }
     return canAct;
   }
