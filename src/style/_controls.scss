@@ -61,6 +61,10 @@
 
   .controls__anchor {
     width: 100%;
+
+    & .button--primary {
+      display: none;
+    }
   }
 
   .controls--bottom {

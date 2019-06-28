@@ -92,6 +92,6 @@
 @media only screen and (max-width: $breakpoint) {
 
   .cell {
-    border-width: 1px;
+    border-width: $spacing-xs;
   }
 }

@@ -35,7 +35,7 @@ export class Board {
     return [...visited];
   }
 
-  public visit(index: number, lord: Lord, visited: Set<number>) {
+  private visit(index: number, lord: Lord, visited: Set<number>) {
     this.grid.getNeighbours(index)
       .filter(current => !visited.has(current) && this.regions[current].belongsTo(lord))
       .forEach(current => {

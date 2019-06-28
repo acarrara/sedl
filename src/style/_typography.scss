@@ -4,6 +4,7 @@
   color: $text-color;
   font-display: swap;
 }
+
 @mixin font-family-fira-bold() {
   font-family: 'Fira Sans', sans-serif;
   font-weight: 600;
@@ -84,4 +85,42 @@ th {
 
 tr:nth-child(even) {
   background-color: $background-color;
+}
+
+
+@media only screen and (max-width: $breakpoint) {
+  table, thead, tbody, th, td, tr {
+    display: block;
+  }
+
+  thead tr {
+    position: absolute;
+    top: -9999px;
+    left: -9999px;
+  }
+
+  td {
+    text-align: start;
+  }
+
+  td:nth-of-type(1):before {
+    padding-right: $spacing-l;
+    content: "Worth";
+  }
+  td:nth-of-type(2):before {
+    padding-right: $spacing-l;
+    content: "Colonize";
+  }
+  td:nth-of-type(3):before {
+    padding-right: $spacing-l;
+    content: "Conquer";
+  }
+  td:nth-of-type(4):before {
+    padding-right: $spacing-l;
+    content: "Conquer fortified";
+  }
+  td:nth-of-type(5):before {
+    padding-right: $spacing-l;
+    content: "Sustain";
+  }
 }
