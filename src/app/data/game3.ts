@@ -27,7 +27,7 @@ const board: () => Board = () => new Board([
   U, R, U, U, U, U, U, U, V, U,
   R, R, R, U, U, U, U, V, V, V,
   U, R, U, U, U, U, U, U, V, U
-], world3);
+], [...world3]);
 
 const lords: (newBoard) => Lord[] =
   (newBoard: Board) => lordsJson.map(lordJson => new Lord(lordJson.id, lordJson.name, lordJson.color, lordJson.treasure, newBoard));
