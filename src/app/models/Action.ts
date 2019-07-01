@@ -1,7 +1,6 @@
 import {Lord} from './Lord';
 import {Region} from './Region';
 import {Board} from './Board';
-import {Actions} from './Actions';
 
 interface SuperAction {
 
@@ -11,6 +10,8 @@ interface SuperAction {
 export interface TriggeredAction extends SuperAction {
 
   run(rulingLord: Lord, ruledLord: Lord, index: number);
+
+  isTriggered(rulingLord: Lord, ruledLord: Lord, index: number);
 }
 
 export interface PassiveAction {
@@ -22,10 +23,11 @@ export interface ActiveAction extends SuperAction {
 
   can(lord: Lord, region: Region);
 
-  run(lord: Lord, region: Region, anotherLord?: Lord);
+  run(lord: Lord, region: Region);
 
   cost(region: Region);
 
+  triggered(): TriggeredAction[];
 }
 
 export class ColonizeAction implements ActiveAction {
@@ -51,9 +53,16 @@ export class ColonizeAction implements ActiveAction {
   name() {
     return 'Colonize';
   }
+
+  triggered(): TriggeredAction[] {
+    return [];
+  }
 }
 
 export class ConquerAction implements ActiveAction {
+
+  constructor(private triggeredActions: TriggeredAction[]) {
+  }
 
   cost(region: Region) {
     return region.conquerCost();
@@ -63,16 +72,11 @@ export class ConquerAction implements ActiveAction {
     return 'Conquer';
   }
 
-  run(lord: Lord, region: Region, ruledLord: Lord) {
-    const index = lord.board.regions.indexOf(region);
+  run(lord: Lord, region: Region) {
     lord.treasure -= this.cost(region);
     const newRegion = region.tamedBy(lord);
     lord.board.change(region, newRegion);
     lord.board.updateNeighbourhood(newRegion);
-
-    if (region.isSettlement()) {
-      Actions.RULE.run(lord, ruledLord, index);
-    }
   }
 
   can(lord: Lord, region: Region) {
@@ -80,6 +84,10 @@ export class ConquerAction implements ActiveAction {
       lord.canTame() &&
       lord.canReach(region) &&
       lord.treasure >= this.cost(region);
+  }
+
+  triggered(): TriggeredAction[] {
+    return this.triggeredActions;
   }
 }
 
@@ -99,6 +107,10 @@ export class EmptyAction implements ActiveAction {
 
   name() {
     return 'Reach';
+  }
+
+  triggered(): TriggeredAction[] {
+    return [];
   }
 }
 
@@ -124,6 +136,10 @@ export class FortifyAction implements ActiveAction {
 
   name() {
     return 'Fortify';
+  }
+
+  triggered(): TriggeredAction[] {
+    return [];
   }
 }
 
@@ -180,6 +196,10 @@ export class WithdrawAction implements ActiveAction {
   name() {
     return 'Withdraw';
   }
+
+  triggered(): TriggeredAction[] {
+    return [];
+  }
 }
 
 export class SettleAction implements ActiveAction {
@@ -199,6 +219,10 @@ export class SettleAction implements ActiveAction {
   run(lord: Lord, region: Region) {
     lord.board.change(region, region.settle());
     lord.availableSettlements--;
+  }
+
+  triggered(): TriggeredAction[] {
+    return [];
   }
 }
 
@@ -233,6 +257,10 @@ export class RushAction implements ActiveAction {
     lord.treasure += Math.floor(lord.worth() / 5);
     lord.rushed = true;
   }
+
+  triggered(): TriggeredAction[] {
+    return [];
+  }
 }
 
 export class RuleAction implements TriggeredAction {
@@ -243,14 +271,17 @@ export class RuleAction implements TriggeredAction {
 
   run(rulingLord: Lord, ruledLord: Lord, index: number) {
     const board: Board = rulingLord.board;
-    if (board.reachableBy(ruledLord, board.regions[index])) {
-      return;
-    }
     board.getDomain(index, ruledLord).forEach(current => {
       const region = board.regions[current];
       const newRegion = region.tamedBy(rulingLord);
       board.change(region, newRegion);
       board.updateNeighbourhood(newRegion);
     });
+  }
+
+  isTriggered(rulingLord: Lord, ruledLord: Lord, index: number) {
+    const {board: {regions: {[index]: region}}, board} = rulingLord;
+    return region.isSettlement() &&
+      !board.reachableBy(ruledLord, region);
   }
 }

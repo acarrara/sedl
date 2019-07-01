@@ -42,8 +42,13 @@ export class Lord {
     action.run(this);
   }
 
-  private runAction(action: ActiveAction, region: Region, anotherLord: Lord) {
-    action.run(this, region, anotherLord);
+  private runAction(action: ActiveAction, region: Region, currentLord?: Lord) {
+    const index = this.board.regions.indexOf(region);
+    action.run(this, region);
+
+    action.triggered()
+      .filter(current => current.isTriggered(this, currentLord, index))
+      .forEach(current => current.run(this, currentLord, index));
   }
 
   canTame() {
@@ -59,7 +64,7 @@ export class Lord {
   settle(region: Region) {
     const canAct = Actions.SETTLE.can(this, region);
     if (canAct) {
-      this.runAction(Actions.SETTLE, region, undefined);
+      this.runAction(Actions.SETTLE, region);
     }
     return canAct;
   }
@@ -71,7 +76,7 @@ export class Lord {
   rush() {
     const canAct = Actions.RUSH.can(this, undefined);
     if (canAct) {
-      this.runAction(Actions.RUSH, undefined, undefined);
+      this.runAction(Actions.RUSH, undefined);
     }
     return canAct;
   }

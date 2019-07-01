@@ -16,8 +16,10 @@ import {
 
 export class Actions {
 
+  public static RULE: TriggeredAction = new RuleAction();
+
   public static COLONIZE: ActiveAction = new ColonizeAction();
-  public static CONQUER: ActiveAction = new ConquerAction();
+  public static CONQUER: ActiveAction = new ConquerAction([Actions.RULE]);
   public static EMPTY: ActiveAction = new EmptyAction();
   public static FORTIFY: ActiveAction = new FortifyAction();
   public static WITHDRAW: ActiveAction = new WithdrawAction();
@@ -27,8 +29,6 @@ export class Actions {
   public static HARVEST: PassiveAction = new HarvestAction();
   public static SUSTAIN: PassiveAction = new SustainAction();
   public static DESERT: PassiveAction = new DesertAction();
-
-  public static RULE: TriggeredAction = new RuleAction();
 
   public static getPassiveActions = (): PassiveAction[] => [Actions.DESERT, Actions.HARVEST, Actions.SUSTAIN];
 
