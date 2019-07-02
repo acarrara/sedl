@@ -10,10 +10,10 @@ export class Board {
   public world: string[];
   public regions: Region[];
 
-  constructor(regions: string[], world: string[]) {
-    this.grid = new Grid(Math.sqrt(regions.length));
-    this.world = world;
-    this.arrangeRegions(regions);
+  constructor(world: string[], politics: string[]) {
+    this.grid = new Grid(Math.sqrt(politics.length));
+    this.world = [...world];
+    this.arrangeRegions(politics);
   }
 
   public arrangeRegions(regionsAsStrings: string[]) {

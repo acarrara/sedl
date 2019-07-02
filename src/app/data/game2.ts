@@ -1,8 +1,8 @@
 import lordsJson from '../../lords.json';
 import {Game} from '../models/Game';
-import {Board} from '../models/Board';
 import {Lord} from '../models/Lord';
 import {B, G, R, U, V} from './lords';
+import {Board} from '../models/Board';
 
 export const world2 = [
   'h', 'p', 'p', 'p', 'f', 'f', 'w', 'p', 'p', 'h', 'm', 'm',
@@ -18,7 +18,7 @@ export const world2 = [
   'p', 'p', 'p', 'p', 'p', 'w', 'w', 'w', 'p', 's', 'p', 'h',
   'p', 'p', 'p', 'p', 'p', 'w', 'p', 'p', 'p', 'p', 'p', 'p'
 ];
-const board: () => Board = () => new Board([
+const politics2: string[] = [
   U, U, U, V, U, U, U, U, U, U, U, U,
   U, U, V, V, V, U, U, U, U, U, U, U,
   U, U, U, V, U, U, U, U, U, U, U, U,
@@ -31,13 +31,12 @@ const board: () => Board = () => new Board([
   U, U, U, U, U, U, U, U, U, G, U, U,
   U, U, U, U, U, U, U, U, G, G, G, U,
   U, U, U, U, U, U, U, U, U, G, U, U
-], [...world2]);
+];
 
-const lords: (newBoard) => Lord[] =
-  (newBoard: Board) => lordsJson.map(lordJson => new Lord(lordJson.id, lordJson.name, lordJson.color, lordJson.treasure, newBoard));
+const lords: () => Lord[] =
+  () => lordsJson.map(lordJson => new Lord(lordJson.id, lordJson.name, lordJson.color, lordJson.treasure));
 
 export const game2: () => Game = () => {
-  const newBoard = board();
-  return new Game(newBoard, lords(newBoard));
+  return new Game(new Board(world2, politics2), lords());
 };
 

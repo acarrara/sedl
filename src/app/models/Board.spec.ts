@@ -5,7 +5,7 @@ import {flatMap} from 'rxjs/operators';
 
 describe('Board', () => {
 
-  const board = new Board(['r', 'b', 'r', 'u'], ['p', 'h', 'm', 'w']);
+  const board = new Board(['p', 'h', 'm', 'w'], ['r', 'b', 'r', 'u']);
 
   describe('borderNorth', () => {
 
@@ -54,17 +54,18 @@ describe('Board', () => {
   describe('canSettle', () => {
 
     const settlingBoard = new Board([
-      'r', 'u', 'r', 'u',
-      'r', 'r', 'u', 'u',
-      'u', 'u', 'u', 'u',
-      'u', 'u', 'u', 'u'
-    ], [
       'p', 'p', 'p', 'p',
       's', 'p', 'p', 'p',
       'p', 'p', 'p', 'p',
       'p', 'p', 'p', 'p'
+    ], [
+      'r', 'u', 'r', 'u',
+      'r', 'r', 'u', 'u',
+      'u', 'u', 'u', 'u',
+      'u', 'u', 'u', 'u'
     ]);
-    const lord = new Lord('r', '', '', 0, settlingBoard);
+    const lord = new Lord('r', '', '', 0);
+    lord.board = settlingBoard;
 
     it('should return false', () => {
       const canSettle = settlingBoard.reachableBy(lord, settlingBoard.regions[11]);

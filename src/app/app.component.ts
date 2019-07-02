@@ -13,7 +13,7 @@ export class AppComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.game.start(game3());
+    this.game.start();
   }
 }
 

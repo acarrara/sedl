@@ -24,6 +24,7 @@ import {ActionsComponent} from './actions/actions.component';
 import {ControlsComponent} from './controls/controls.component';
 import {LordColorsDirective} from './lord-colors.directive';
 import {RankPipe} from './rank.pipe';
+import {StorageService} from './storage.service';
 
 export class MyHammerConfig extends HammerGestureConfig {
   overrides = {
@@ -62,10 +63,13 @@ export class MyHammerConfig extends HammerGestureConfig {
     BrowserModule,
     ServiceWorkerModule.register('ngsw-worker.js', {enabled: environment.production})
   ],
-  providers: [GameService, {
-    provide: HAMMER_GESTURE_CONFIG,
-    useClass: MyHammerConfig
-  }],
+  providers: [
+    GameService,
+    StorageService,
+    {
+      provide: HAMMER_GESTURE_CONFIG,
+      useClass: MyHammerConfig
+    }],
   bootstrap: [AppComponent]
 })
 export class AppModule {

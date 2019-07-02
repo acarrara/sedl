@@ -22,7 +22,7 @@ export const world1 = [
   'w', 'w', 'w', 'w', 'w', 'p', 'p', 'w', 'w', 'w', 'w', 'w', 'w', 'w', 'w', 'w',
   'w', 'w', 'w', 'w', 'w', 'w', 'w', 'w', 'w', 'w', 'w', 'w', 'w', 'w', 'w', 'w',
 ];
-const board: () => Board = () => new Board([
+const politics1: string[] = [
   U, U, U, U, U, U, U, U, U, U, U, U, U, V, U, U,
   U, U, U, U, U, U, U, U, U, U, U, U, V, V, V, U,
   U, U, U, U, U, U, U, U, U, U, U, U, U, V, U, U,
@@ -39,12 +39,11 @@ const board: () => Board = () => new Board([
   U, U, U, U, U, U, U, U, U, U, U, U, U, U, U, U,
   U, U, U, U, U, U, U, U, U, U, U, U, U, U, U, U,
   U, U, U, U, U, U, U, U, U, U, U, U, U, U, U, U,
-], [...world1]);
+];
 
-const lords: (newBoard) => Lord[] =
-  (newBoard: Board) => lordsJson.map(lordJson => new Lord(lordJson.id, lordJson.name, lordJson.color, lordJson.treasure, newBoard));
+const lords: () => Lord[] =
+  () => lordsJson.map(lordJson => new Lord(lordJson.id, lordJson.name, lordJson.color, lordJson.treasure));
 
 export const game1: () => Game = () => {
-  const newBoard = board();
-  return new Game(newBoard, lords(newBoard));
+  return new Game(new Board(world1, politics1), lords());
 };

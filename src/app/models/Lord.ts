@@ -5,14 +5,18 @@ import {ActiveAction, PassiveAction} from './Action';
 
 export class Lord {
 
-  public static UNKNOWN: Lord = new Lord('u', 'unknown', 'unknown', 0, null);
+  public static UNKNOWN: Lord = new Lord('u');
 
   private static REGIONS_PER_SETTLEMENT = 100;
 
-  availableSettlements = 2;
-  rushed: boolean;
+  public board: Board;
 
-  constructor(public id: string, public name: string, public color: string, public treasure: number, public board: Board) {
+  constructor(public id: string,
+              public name = 'unknown',
+              public color = 'unknown',
+              public treasure = 0,
+              public rushed = false,
+              public availableSettlements = 2) {
   }
 
   activeActionOn(region: Region) {
