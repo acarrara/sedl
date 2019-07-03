@@ -23,6 +23,10 @@
   background-color: rgba($f-color-foreground, .5);
 }
 
+.u {
+  background-color: $background-color;
+}
+
 .s .cell--sustenance {
   transform: translate(-32%, 20%);
 }

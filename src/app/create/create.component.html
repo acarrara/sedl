@@ -1,0 +1,18 @@
+<se-modal size="s" name="create">
+  <div style="display: flex; width: 100%; align-items: center; justify-content: center; flex-direction: column">
+    <aside style="display: flex; width: 100%; align-items: center; justify-content: center">
+      <button *ngFor="let type of ['p','f','h','m','w']" class="button  button--small  button--default"
+              (click)="currentSeed(type)">
+        <se-cell class="cell  cell--statistics" [seed]="type"></se-cell>
+      </button>
+    </aside>
+    <div class="board" [seGrid]="dimension" sePinchAndZoom>
+      <se-cell (tap)="onTap(i)"
+               (press)="onPress(i)"
+               (mouseenter)="onEnter(i, $event)"
+               (contextmenu)="$event.preventDefault()"
+               class="cell" *ngFor="let region of regions; let i = index"
+               [seed]="region.type"></se-cell>
+    </div>
+  </div>
+</se-modal>

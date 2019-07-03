@@ -4,4 +4,5 @@
   <se-about></se-about>
   <se-new></se-new>
   <se-win *ngIf="(game.game$ | async).winner" [winner]="(game.game$ | async).winner"></se-win>
+  <se-create></se-create>
 </div>

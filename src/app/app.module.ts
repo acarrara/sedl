@@ -26,6 +26,7 @@ import {LordColorsDirective} from './lord-colors.directive';
 import {RankPipe} from './rank.pipe';
 import {StorageService} from './storage.service';
 import {HeraldService} from './herald.service';
+import {CreateComponent} from './create/create.component';
 
 export class MyHammerConfig extends HammerGestureConfig {
   overrides = {
@@ -56,6 +57,7 @@ export class MyHammerConfig extends HammerGestureConfig {
     SupportComponent,
     ActionsComponent,
     ControlsComponent,
+    CreateComponent,
     PinchAndZoomDirective,
     LordColorsDirective,
     RankPipe
