@@ -28,6 +28,8 @@ export interface ActiveAction extends SuperAction {
   cost(region: Region);
 
   triggered(): TriggeredAction[];
+
+  shortName(): string;
 }
 
 export class ColonizeAction implements ActiveAction {
@@ -56,6 +58,10 @@ export class ColonizeAction implements ActiveAction {
 
   triggered(): TriggeredAction[] {
     return [];
+  }
+
+  shortName(): string {
+    return 'L';
   }
 }
 
@@ -89,6 +95,10 @@ export class ConquerAction implements ActiveAction {
   triggered(): TriggeredAction[] {
     return this.triggeredActions;
   }
+
+  shortName(): string {
+    return 'Q';
+  }
 }
 
 export class EmptyAction implements ActiveAction {
@@ -111,6 +121,10 @@ export class EmptyAction implements ActiveAction {
 
   triggered(): TriggeredAction[] {
     return [];
+  }
+
+  shortName(): string {
+    return 'E';
   }
 }
 
@@ -140,6 +154,10 @@ export class FortifyAction implements ActiveAction {
 
   triggered(): TriggeredAction[] {
     return [];
+  }
+
+  shortName(): string {
+    return 'F';
   }
 }
 
@@ -200,6 +218,10 @@ export class WithdrawAction implements ActiveAction {
   triggered(): TriggeredAction[] {
     return [];
   }
+
+  shortName(): string {
+    return 'W';
+  }
 }
 
 export class SettleAction implements ActiveAction {
@@ -223,6 +245,10 @@ export class SettleAction implements ActiveAction {
 
   triggered(): TriggeredAction[] {
     return [];
+  }
+
+  shortName(): string {
+    return 'S';
   }
 }
 
@@ -261,6 +287,10 @@ export class RushAction implements ActiveAction {
   triggered(): TriggeredAction[] {
     return [];
   }
+
+  shortName(): string {
+    return 'R';
+  }
 }
 
 export class RuleAction implements TriggeredAction {
@@ -283,5 +313,31 @@ export class RuleAction implements TriggeredAction {
     const {board: {regions: {[index]: region}}, board} = rulingLord;
     return region.isSettlement() &&
       !board.reachableBy(ruledLord, region);
+  }
+}
+
+export class PassAction implements ActiveAction {
+
+  can(lord: Lord, region: Region) {
+    return true;
+  }
+
+  cost(region: Region) {
+    return 0;
+  }
+
+  name() {
+    'Pass';
+  }
+
+  run(lord: Lord, region: Region) {
+  }
+
+  shortName(): string {
+    return 'P';
+  }
+
+  triggered(): TriggeredAction[] {
+    return [];
   }
 }

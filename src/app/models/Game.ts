@@ -2,6 +2,7 @@ import {Board} from './Board';
 import {Lord} from './Lord';
 import {Actions} from './Actions';
 import {Region} from './Region';
+import {ActiveAction} from './Action';
 
 export class Game {
 
@@ -9,7 +10,7 @@ export class Game {
 
   public winner: Lord;
 
-  constructor(public board: Board, public lords: Lord[], public lordIndex = 0) {
+  constructor(public board: Board, public lords: Lord[], public lordIndex = 0, public history: string[] = []) {
     this.lords.map(lord => lord.board = board);
   }
 
@@ -29,6 +30,10 @@ export class Game {
     if (this.currentLord().treasure >= Game.WIN_BY_MONEY_THRESHOLD) {
       this.winGame();
     }
+  }
+
+  public record(log: string) {
+    this.history.push(log);
   }
 
   public lordAt(region: Region) {

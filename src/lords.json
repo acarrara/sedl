@@ -1,24 +1,24 @@
 [
   {
-    "id": "c1",
+    "id": "l1",
     "name": "Charle",
     "color": "210",
     "treasure": 50
   },
   {
-    "id": "c2",
+    "id": "l2",
     "name": "Caesar",
     "color": "0",
     "treasure":  50
   },
   {
-    "id": "c3",
+    "id": "l3",
     "name": "Ivan",
     "color": "145",
     "treasure":  50
   },
   {
-    "id": "c4",
+    "id": "l4",
     "name": "Napoleon",
     "color": "65",
     "treasure":  50

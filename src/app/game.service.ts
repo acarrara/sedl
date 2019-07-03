@@ -4,6 +4,8 @@ import {BehaviorSubject, Observable} from 'rxjs';
 import {Region} from './models/Region';
 import {Game} from './models/Game';
 import {StorageService} from './storage.service';
+import {Actions} from './models/Actions';
+import {Log} from './models/Log';
 
 @Injectable()
 export class GameService {
@@ -15,21 +17,16 @@ export class GameService {
 
   private regionsSubject: BehaviorSubject<Region[]>;
   private lordSubject: BehaviorSubject<Lord>;
-  private actionsSubject: BehaviorSubject<any>;
+  private actionsSubject: BehaviorSubject<Log>;
   private gameSubject: BehaviorSubject<Game>;
 
   private game: Game;
 
   constructor(private storage: StorageService) {
-  }
-
-  public load(): void {
-    this.game = this.storage.load();
-
-    this.regionsSubject = new BehaviorSubject(this.game.board.regions);
-    this.lordSubject = new BehaviorSubject(this.game.lords[0]);
-    this.actionsSubject = new BehaviorSubject({});
-    this.gameSubject = new BehaviorSubject(this.game);
+    this.regionsSubject = new BehaviorSubject(null);
+    this.lordSubject = new BehaviorSubject(null);
+    this.actionsSubject = new BehaviorSubject(null);
+    this.gameSubject = new BehaviorSubject(null);
 
     this.regions$ = this.regionsSubject.asObservable();
     this.lord$ = this.lordSubject.asObservable();
@@ -37,11 +34,19 @@ export class GameService {
     this.game$ = this.gameSubject.asObservable();
   }
 
+  public load(): void {
+    this.game = this.storage.load();
+  }
+
   public action(region: Region) {
     const regionLord: Lord = this.game.lordAt(region);
-    if (this.game.currentLord().activeAction(region, regionLord)) {
+    const index = this.game.board.regions.indexOf(region);
+    const activeAction = this.game.currentLord().activeActionOn(region);
+    const activeActionRun = this.game.currentLord().activeAction(region, regionLord);
+    if (activeActionRun) {
       this.regionsSubject.next(this.game.board.regions);
-      this.actionsSubject.next({});
+      const log = new Log(activeAction, index);
+      this.actionsSubject.next(log);
     }
   }
 
@@ -50,32 +55,36 @@ export class GameService {
     this.gameSubject.next(game);
     this.lordSubject.next(game.lords[0]);
     this.regionsSubject.next(game.board.regions);
+    this.actionsSubject.next(null);
   }
 
   public start() {
     this.load();
+    this.gameSubject.next(this.game);
+    this.regionsSubject.next(this.game.board.regions);
     this.lordSubject.next(this.game.currentLord());
-    this.actionsSubject.next(this.game.currentLord());
+    this.actionsSubject.next(new Log(Actions.PASS));
     this.storage.save(this.game);
   }
 
   public pass(): void {
     this.game.pass();
     this.lordSubject.next(this.game.currentLord());
-    this.actionsSubject.next(this.game.currentLord());
+    this.actionsSubject.next(new Log(Actions.PASS));
     this.storage.save(this.game);
   }
 
   public settle(region: Region) {
+    const index = this.game.board.regions.indexOf(region);
     if (this.game.currentLord().settle(region)) {
       this.regionsSubject.next(this.game.board.regions);
-      this.actionsSubject.next({});
+      this.actionsSubject.next(new Log(Actions.SETTLE, index));
     }
   }
 
   public rush() {
     if (this.game.currentLord().rush()) {
-      this.actionsSubject.next({});
+      this.actionsSubject.next(new Log(Actions.RUSH));
     }
   }
 }

@@ -6,11 +6,13 @@ import {
   EmptyAction,
   FortifyAction,
   HarvestAction,
+  PassAction,
   PassiveAction,
   RuleAction,
   RushAction,
   SettleAction,
-  SustainAction, TriggeredAction,
+  SustainAction,
+  TriggeredAction,
   WithdrawAction
 } from './Action';
 
@@ -25,6 +27,7 @@ export class Actions {
   public static WITHDRAW: ActiveAction = new WithdrawAction();
   public static SETTLE: ActiveAction = new SettleAction();
   public static RUSH: ActiveAction = new RushAction();
+  public static PASS: ActiveAction = new PassAction();
 
   public static HARVEST: PassiveAction = new HarvestAction();
   public static SUSTAIN: PassiveAction = new SustainAction();

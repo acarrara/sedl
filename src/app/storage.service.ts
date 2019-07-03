@@ -14,19 +14,27 @@ export class StorageService {
       lords: game.lords,
       world: game.board.world,
       politics: game.board.regions.map(region => region.lord),
-      lordIndex: game.lordIndex
+      lordIndex: game.lordIndex,
+      history: game.history,
+      details: game.board.regions.map(region => ({impregnable: region.impregnable, sustenance: region.sustenance}))
     }, (key, value) => key === 'board' ? undefined : value));
   }
 
   public load(): Game {
     if (localStorage.getItem(StorageService.SEDL_KEY) !== null) {
       const loaded: any = JSON.parse(localStorage.getItem(StorageService.SEDL_KEY));
-      const {lords, world, politics, lordIndex} = loaded;
-      return new Game(
+      const {lords, world, politics, lordIndex, history, details} = loaded;
+      const game = new Game(
         new Board(world, politics),
         lords.map(current =>
           new Lord(current.id, current.name, current.color, current.treasure, current.rushed, current.availableSettlements)),
-        lordIndex);
+        lordIndex,
+        history);
+      game.board.regions.forEach((region, index) => ({
+        impregnable: region.impregnable,
+        sustenance: region.sustenance
+      } = details[index]));
+      return game;
     }
     return game3();
   }

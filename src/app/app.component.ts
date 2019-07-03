@@ -1,6 +1,7 @@
 import {ChangeDetectionStrategy, Component, OnInit} from '@angular/core';
 import {GameService} from './game.service';
 import {game3} from './data/game3';
+import {HeraldService} from './herald.service';
 
 @Component({
   selector: 'se-app',
@@ -9,7 +10,7 @@ import {game3} from './data/game3';
 })
 export class AppComponent implements OnInit {
 
-  constructor(public game: GameService) {
+  constructor(public game: GameService, public herald: HeraldService) {
   }
 
   ngOnInit(): void {

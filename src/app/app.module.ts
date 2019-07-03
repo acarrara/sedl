@@ -25,6 +25,7 @@ import {ControlsComponent} from './controls/controls.component';
 import {LordColorsDirective} from './lord-colors.directive';
 import {RankPipe} from './rank.pipe';
 import {StorageService} from './storage.service';
+import {HeraldService} from './herald.service';
 
 export class MyHammerConfig extends HammerGestureConfig {
   overrides = {
@@ -66,6 +67,7 @@ export class MyHammerConfig extends HammerGestureConfig {
   providers: [
     GameService,
     StorageService,
+    HeraldService,
     {
       provide: HAMMER_GESTURE_CONFIG,
       useClass: MyHammerConfig
