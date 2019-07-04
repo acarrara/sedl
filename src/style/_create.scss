@@ -8,6 +8,8 @@
 .create__buttons {
   @include flex-center();
 
+  background-color: $primary-color-background;
+
   width: 100%;
 
   z-index: 960;

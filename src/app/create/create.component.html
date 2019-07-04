@@ -26,12 +26,18 @@
           </span>
         </label>
       </div>
-      <div class="create__group">
+      <div class="create__group" style="align-self: stretch">
         <button class="button  button--default" (click)="startCreatedGame()" [disabled]="!canStart()">
-         <span class="button__content">
-        <se-cell seed="n" class="cell  cell--icon"></se-cell>
-        <span>Start</span>
-      </span>
+          <span class="button__content">
+            <se-cell seed="n" class="cell  cell--icon"></se-cell>
+            <span>Start</span>
+          </span>
+        </button>
+        <button class="button  button--default" (click)="reset()">
+          <span class="button__content">
+            <se-cell seed="n" class="cell  cell--icon"></se-cell>
+            <span>Reset</span>
+          </span>
         </button>
       </div>
     </aside>

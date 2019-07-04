@@ -13,9 +13,9 @@ import {GameService} from '../game.service';
 export class CreateComponent implements OnInit {
 
   public game: Game;
-  public dimension = 12;
-  public brushSize = 1;
-  public seed = 'p';
+  public dimension;
+  public brushSize;
+  public seed;
 
   private lords: Lord[] = lordsJson.map(lordJson => new Lord(lordJson.id, lordJson.name, lordJson.color, lordJson.treasure));
 
@@ -23,6 +23,13 @@ export class CreateComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    this.reset();
+  }
+
+  public reset() {
+    this.dimension = 12;
+    this.brushSize = 1;
+    this.seed = 'p';
     this.game = new Game(
       new Board(
         new Array(this.dimension * this.dimension).fill('u'),
