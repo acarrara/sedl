@@ -15,8 +15,7 @@ export class CreateComponent implements OnInit {
   public game: Game;
   public dimension = 12;
   public brushSize = 1;
-
-  private seed = 'p';
+  public seed = 'p';
 
   private lords: Lord[] = lordsJson.map(lordJson => new Lord(lordJson.id, lordJson.name, lordJson.color, lordJson.treasure));
 
@@ -34,7 +33,7 @@ export class CreateComponent implements OnInit {
   }
 
   onTap(i: number) {
-    if(this.brushSize === 3) {
+    if (this.brushSize === 3) {
       this.game.board.grid.getNeighbourhood(i).forEach(current => this.paint(current));
     } else {
       this.paint(i);
