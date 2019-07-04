@@ -1,5 +1,9 @@
 import {ChangeDetectionStrategy, Component, OnInit} from '@angular/core';
-import {Region} from '../models/Region';
+import {Game} from '../models/Game';
+import {Board} from '../models/Board';
+import {Lord} from '../models/Lord';
+import lordsJson from '../../lords.json';
+import {GameService} from '../game.service';
 
 @Component({
   selector: 'se-create',
@@ -8,19 +12,29 @@ import {Region} from '../models/Region';
 })
 export class CreateComponent implements OnInit {
 
-  public regions: Region[];
+  public game: Game;
   public dimension = 12;
 
-  private seed: string;
+  private seed = 'p';
+
+  private lords: Lord[] = lordsJson.map(lordJson => new Lord(lordJson.id, lordJson.name, lordJson.color, lordJson.treasure));
+
+  constructor(private gameService: GameService) {
+  }
 
   ngOnInit(): void {
-    this.regions = new Array(this.dimension * this.dimension)
-      .fill(0)
-      .map(() => new Region('u', 'u', false, false));
+    this.game = new Game(
+      new Board(
+        new Array(this.dimension * this.dimension).fill('u'),
+        new Array(this.dimension * this.dimension).fill('u'),
+      ),
+      []
+    );
   }
 
   onTap(i: number) {
-    this.regions[i].type = this.seed;
+    this.game.board.regions[i].type = this.seed;
+    this.game.board.world[i] = this.seed;
   }
 
   onEnter(i: number, $event: MouseEvent) {
@@ -34,6 +48,27 @@ export class CreateComponent implements OnInit {
   }
 
   onPress(i: number) {
-    this.regions[i].type = 's';
+    const currentLords = this.game.lords.length;
+    if (currentLords < this.lords.length) {
+      const {id, name, color, treasure} = this.lords[currentLords];
+      const settler = new Lord(id, name, color, treasure);
+      settler.board = this.game.board;
+      const settledRegion = this.game.board.regions[i];
+      settledRegion.lord = settler.id;
+      settledRegion.type = 's';
+      this.game.board.world[i] = 's';
+      this.game.board.getNeighbours(settledRegion).forEach(region => region.lord = settler.id);
+      this.game.board.updateNeighbourhood(settledRegion);
+      this.game.lords.push(settler);
+    }
+  }
+
+  canStart() {
+    return this.game.board.regions.every(region => region.type !== 'u') && this.game.lords.length > 1;
+  }
+
+  startCreatedGame() {
+    this.gameService.newGame(this.game);
+    window.location.href = '#';
   }
 }

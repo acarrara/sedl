@@ -1,0 +1,12 @@
+.create {
+  @include flex-center();
+  flex-direction: column;
+
+  width: 100%;
+}
+
+.create__buttons {
+  @include flex-center();
+
+  width: 100%;
+}
