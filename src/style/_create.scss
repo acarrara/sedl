@@ -9,4 +9,41 @@
   @include flex-center();
 
   width: 100%;
+
+  z-index: 960;
+}
+
+.create__button-option {
+  width: 1px;
+  height: 1px;
+  position: absolute;
+  left: -9999px;
+}
+
+.create__button-option:focus + label, .create__button-option:checked + label {
+  --saturation-delta-focus: 25%;
+  --lightness-delta-focus: 35%;
+
+  outline: 0;
+
+  @include lord-color("focus");
+  box-shadow: 0 0 0 $spacing-s var(--lord-color-focus);
+}
+
+.create__group + .create__group {
+  margin-left: $spacing-m;
+}
+
+@media only screen and (max-width: $breakpoint) {
+
+  .create__buttons {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .create__group + .create__group {
+    margin-left: 0;
+    margin-top: $spacing-m;
+  }
+
 }

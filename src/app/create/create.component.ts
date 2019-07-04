@@ -14,6 +14,7 @@ export class CreateComponent implements OnInit {
 
   public game: Game;
   public dimension = 12;
+  public brushSize = 1;
 
   private seed = 'p';
 
@@ -33,6 +34,14 @@ export class CreateComponent implements OnInit {
   }
 
   onTap(i: number) {
+    if(this.brushSize === 3) {
+      this.game.board.grid.getNeighbourhood(i).forEach(current => this.paint(current));
+    } else {
+      this.paint(i);
+    }
+  }
+
+  private paint(i: number) {
     this.game.board.regions[i].type = this.seed;
     this.game.board.world[i] = this.seed;
   }

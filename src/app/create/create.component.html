@@ -1,16 +1,39 @@
 <se-modal size="s" name="create">
   <div class="create">
     <aside class="create__buttons">
-      <button *ngFor="let type of ['p','f','h','m','w']" class="button  button--small  button--default"
-              (click)="currentSeed(type)">
-        <se-cell class="cell  cell--statistics" [seed]="type"></se-cell>
-      </button>
-      <button class="button  button--default" (click)="startCreatedGame()" [disabled]="!canStart()">
+      <div class="create__group">
+        <ng-container *ngFor="let type of ['p','f','h','m','w']">
+          <input [checked]="type === 'p'" type="radio" name="seed" (click)="currentSeed(type)" id="seed-{{type}}"
+                 class="create__button-option">
+          <label for="seed-{{type}}" class="button  button--small  button--default">
+            <se-cell class="cell  cell--statistics" [seed]="type"></se-cell>
+          </label>
+        </ng-container>
+      </div>
+      <div class="create__group">
+        <input checked type="radio" name="size" (click)="brushSize = 1" id="brush-1" class="create__button-option">
+        <label for="brush-1" class="button  button--small  button--default">
+          <span class="button__content">
+            <se-cell class="cell  cell--statistics" [seed]="seed"></se-cell>
+            <span>1</span>
+          </span>
+        </label>
+        <input type="radio" name="size" (click)="brushSize = 3" id="brush-3" class="create__button-option">
+        <label for="brush-3" class="button  button--small  button--default">
+          <span class="button__content">
+            <se-cell class="cell  cell--statistics" [seed]="seed"></se-cell>
+            <span>+</span>
+          </span>
+        </label>
+      </div>
+      <div class="create__group">
+        <button class="button  button--default" (click)="startCreatedGame()" [disabled]="!canStart()">
          <span class="button__content">
         <se-cell seed="n" class="cell  cell--icon"></se-cell>
         <span>Start</span>
       </span>
-      </button>
+        </button>
+      </div>
     </aside>
     <div class="board" [seGrid]="dimension" sePinchAndZoom style="max-width: 100%">
       <se-cell [seRegion]="region"

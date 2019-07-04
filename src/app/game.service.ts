@@ -56,6 +56,7 @@ export class GameService {
     this.lordSubject.next(game.lords[0]);
     this.regionsSubject.next(game.board.regions);
     this.actionsSubject.next(null);
+    this.storage.save(game);
   }
 
   public start() {
