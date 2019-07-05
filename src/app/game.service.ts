@@ -64,15 +64,13 @@ export class GameService {
     this.gameSubject.next(this.game);
     this.regionsSubject.next(this.game.board.regions);
     this.lordSubject.next(this.game.currentLord());
-    this.actionsSubject.next(new Log(Actions.PASS));
-    this.storage.save(this.game);
   }
 
   public pass(): void {
+    this.actionsSubject.next(new Log(Actions.PASS));
+    this.storage.saveHistory(this.game.history);
     this.game.pass();
     this.lordSubject.next(this.game.currentLord());
-    this.actionsSubject.next(new Log(Actions.PASS));
-    this.storage.save(this.game);
   }
 
   public settle(region: Region) {

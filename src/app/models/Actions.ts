@@ -29,10 +29,24 @@ export class Actions {
   public static RUSH: ActiveAction = new RushAction();
   public static PASS: ActiveAction = new PassAction();
 
+  public static ACTIVE_ACTIONS: {[key: string]: ActiveAction} = {
+    [Actions.COLONIZE.shortName()]: Actions.COLONIZE,
+    [Actions.CONQUER.shortName()]: Actions.CONQUER,
+    [Actions.EMPTY.shortName()]: Actions.EMPTY,
+    [Actions.FORTIFY.shortName()]: Actions.FORTIFY,
+    [Actions.WITHDRAW.shortName()]: Actions.WITHDRAW,
+    [Actions.SETTLE.shortName()]: Actions.SETTLE,
+    [Actions.RUSH.shortName()]: Actions.RUSH,
+    [Actions.PASS.shortName()]: Actions.PASS
+  };
+
   public static HARVEST: PassiveAction = new HarvestAction();
   public static SUSTAIN: PassiveAction = new SustainAction();
   public static DESERT: PassiveAction = new DesertAction();
 
   public static getPassiveActions = (): PassiveAction[] => [Actions.DESERT, Actions.HARVEST, Actions.SUSTAIN];
 
+  static lookupByShortName(shortName: string) {
+    return this.ACTIVE_ACTIONS[shortName];
+  }
 }
