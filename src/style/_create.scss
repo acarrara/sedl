@@ -5,7 +5,7 @@
   width: 100%;
 }
 
-.create__buttons {
+.create__tools {
   @include flex-center();
 
   background-color: $primary-color-background;
@@ -15,14 +15,18 @@
   z-index: 960;
 }
 
-.create__button-option {
+.create__tool {
+  @include flex-center();
+}
+
+.create__tool-option {
   width: 1px;
   height: 1px;
   position: absolute;
   left: -9999px;
 }
 
-.create__button-option:focus + label, .create__button-option:checked + label {
+.create__tool-option:focus + label, .create__tool-option:checked + label {
   --saturation-delta-focus: 25%;
   --lightness-delta-focus: 35%;
 
@@ -32,20 +36,34 @@
   box-shadow: 0 0 0 $spacing-s var(--lord-color-focus);
 }
 
-.create__group + .create__group {
+.create__tools + .create__tools {
+  margin-top: $spacing-m;
+}
+
+.create__tool + .create__tool {
   margin-left: $spacing-m;
+}
+
+.create_tool-title {
+  padding: $spacing-m;
 }
 
 @media only screen and (max-width: $breakpoint) {
 
-  .create__buttons {
+  .create__tools {
     flex-direction: column;
     align-items: center;
   }
 
-  .create__group + .create__group {
+  .create__tool + .create__tool {
     margin-left: 0;
     margin-top: $spacing-m;
   }
 
+  .create__buttons {
+    align-self: stretch;
+    flex-direction: column;
+  }
+
 }
+

@@ -1,41 +1,43 @@
 <se-modal size="s" name="create">
   <div class="create">
-    <aside class="create__buttons">
-      <div class="create__group">
+    <aside class="create__tools">
+      <div class="create__tool">
+        <span class="create_tool-title">Terrain</span>
         <ng-container *ngFor="let type of ['p','f','h','m','w']">
           <input [checked]="type === 'p'" type="radio" name="seed" (click)="currentSeed(type)" id="seed-{{type}}"
-                 class="create__button-option">
+                 class="create__tool-option">
           <label for="seed-{{type}}" class="button  button--small  button--default">
             <se-cell class="cell  cell--statistics" [seed]="type"></se-cell>
           </label>
         </ng-container>
       </div>
-      <div class="create__group">
-        <input checked type="radio" name="size" (click)="brushSize = 1" id="brush-1" class="create__button-option">
+      <div class="create__tool">
+        <span class="create_tool-title">Brush</span>
+        <input checked type="radio" name="size" (click)="brushSize = 1" id="brush-1" class="create__tool-option">
         <label for="brush-1" class="button  button--small  button--default">
           <span class="button__content">
-            <se-cell class="cell  cell--statistics" [seed]="seed"></se-cell>
-            <span>1</span>
+            <se-cell class="cell  cell--statistics" seed="single"></se-cell>
           </span>
         </label>
-        <input type="radio" name="size" (click)="brushSize = 3" id="brush-3" class="create__button-option">
+        <input type="radio" name="size" (click)="brushSize = 3" id="brush-3" class="create__tool-option">
         <label for="brush-3" class="button  button--small  button--default">
           <span class="button__content">
-            <se-cell class="cell  cell--statistics" [seed]="seed"></se-cell>
-            <span>+</span>
+            <se-cell class="cell  cell--statistics" seed="cross"></se-cell>
           </span>
         </label>
       </div>
-      <div class="create__group" style="align-self: stretch">
+    </aside>
+    <aside class="create__tools">
+      <div class="create__tool  create__buttons">
         <button class="button  button--default" (click)="startCreatedGame()" [disabled]="!canStart()">
           <span class="button__content">
-            <se-cell seed="n" class="cell  cell--icon"></se-cell>
+            <se-cell seed="start" class="cell  cell--icon"></se-cell>
             <span>Start</span>
           </span>
         </button>
         <button class="button  button--default" (click)="reset()">
           <span class="button__content">
-            <se-cell seed="n" class="cell  cell--icon"></se-cell>
+            <se-cell seed="reset" class="cell  cell--icon"></se-cell>
             <span>Reset</span>
           </span>
         </button>
