@@ -58,24 +58,32 @@ export class Game {
   }
 
   public applyHistory() {
-    this.history.map(actionAsString => ({
+    this.history
+      .map(actionAsString => this.hydrate(actionAsString))
+      .forEach(hydratedAction => this.applyHydratedAction(hydratedAction));
+  }
+
+  public applyHydratedAction(hydratedAction) {
+    const lordIndex: number = this.lords.findIndex(lord => lord.id === hydratedAction.lordId);
+    this.lordIndex = lordIndex;
+    const action: ActiveAction = Actions.lookupByShortName(hydratedAction.shortName);
+    const region = this.board.regions[hydratedAction.index];
+    if (action === Actions.RUSH) {
+      this.currentLord().rush();
+    } else if (action === Actions.PASS) {
+      this.pass();
+    } else if (action === Actions.SETTLE) {
+      this.currentLord().settle(region);
+    } else {
+      this.currentLord().activeAction(region, this.lordAt(region));
+    }
+  }
+
+  public hydrate(actionAsString) {
+    return {
       lordId: actionAsString.substr(0, 2),
       shortName: actionAsString.substr(2, 1),
       index: actionAsString.substr(3)
-    })).forEach(hydratedLog => {
-      const lordIndex: number = this.lords.findIndex(lord => lord.id === hydratedLog.lordId);
-      this.lordIndex = lordIndex;
-      const action: ActiveAction = Actions.lookupByShortName(hydratedLog.shortName);
-      const region = this.board.regions[hydratedLog.index];
-      if (action === Actions.RUSH) {
-        this.currentLord().rush();
-      } else if (action === Actions.PASS) {
-        this.pass();
-      } else if (action === Actions.SETTLE) {
-        this.currentLord().settle(region);
-      } else {
-        this.currentLord().activeAction(region, this.lordAt(region));
-      }
-    });
+    };
   }
 }

@@ -27,6 +27,7 @@ import {RankPipe} from './rank.pipe';
 import {StorageService} from './storage.service';
 import {HeraldService} from './herald.service';
 import {CreateComponent} from './create/create.component';
+import {ReplayComponent} from './replay/replay.component';
 
 export class MyHammerConfig extends HammerGestureConfig {
   overrides = {
@@ -58,6 +59,7 @@ export class MyHammerConfig extends HammerGestureConfig {
     ActionsComponent,
     ControlsComponent,
     CreateComponent,
+    ReplayComponent,
     PinchAndZoomDirective,
     LordColorsDirective,
     RankPipe

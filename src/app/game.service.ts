@@ -36,6 +36,7 @@ export class GameService {
 
   public load(): void {
     this.game = this.storage.load();
+    this.game.applyHistory();
   }
 
   public action(region: Region) {

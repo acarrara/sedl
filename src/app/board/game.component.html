@@ -23,7 +23,7 @@
       class="board" [seGrid]="dimension()" sePinchAndZoom>
       <se-cell [seRegion]="region"
                [sustenance]="region.sustenance"
-               [id]="(gameService.game$ | async).lordAt(region).id"
+               [id]="game.lordAt(region).id"
                [i]="i"
                (press)="gameService.settle(region)"
                (tap)="action(region)"

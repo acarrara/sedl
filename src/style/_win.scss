@@ -16,7 +16,12 @@
 }
 
 @media only screen and (max-width: $breakpoint) {
+
   .win__icon {
     width: $spacing-l-vw;
+  }
+
+  .win__element {
+    flex-direction: column;
   }
 }

@@ -33,7 +33,6 @@ export class StorageService {
         0,
         []);
       game.history = JSON.parse(localStorage.getItem(StorageService.SEDL_HISTORY_KEY));
-      game.applyHistory();
       return game;
     }
     const defaultGame = game3();

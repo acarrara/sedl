@@ -41,4 +41,8 @@ export class Grid {
     return [this.north(i), this.east(i), this.south(i), this.west(i)]
       .filter(index => !this.outOfBoundaries(index));
   }
+
+  size() {
+    return this.dim;
+  }
 }

@@ -1,0 +1,11 @@
+<section style="max-width: 100%"
+  class="board" [seGrid]="game.board.grid.size()" sePinchAndZoom>
+  <se-cell [seRegion]="region"
+           [sustenance]="region.sustenance"
+           [id]="game.lordAt(region).id"
+           [i]="i"
+           (contextmenu)="$event.preventDefault()"
+           [impregnable]="region.impregnable"
+           class="cell" *ngFor="let region of game.board.regions; let i = index"
+           [seed]="game.board.world[i]"></se-cell>
+</section>
