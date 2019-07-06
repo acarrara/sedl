@@ -1,0 +1,36 @@
+<table class="ranking__table">
+  <tbody>
+  <tr *ngFor="let lord of lords; let i = index">
+    <th>
+      <div class="ranking__header">
+        <span *ngIf="showIndex">{{i + 1}}</span>
+        <strong class="ranking__name">{{lord.name}}</strong>
+      </div>
+    </th>
+    <td>
+      <div class="ranking__cell">
+        <se-cell class="cell  cell--statistics" seed="s"></se-cell>
+        <span class="ranking__quantity">{{lord.settlements()}}</span>
+      </div>
+    </td>
+    <td>
+      <div class="ranking__cell">
+        <se-cell class="cell  cell--statistics" seed="c"></se-cell>
+        <span class="ranking__quantity">{{lord.treasure}}</span>
+      </div>
+    </td>
+    <td>
+      <div class="ranking__cell">
+        <se-cell class="cell  cell--statistics" seed="g"></se-cell>
+        <span class="ranking__quantity">{{lord.worth()}}</span>
+      </div>
+    </td>
+    <td>
+      <div class="ranking__cell">
+        <se-cell class="cell  cell--statistics  {{lord.id}}" seed="d"></se-cell>
+        <span class="ranking__quantity">{{lord.debt()}}</span>
+      </div>
+    </td>
+  </tr>
+  </tbody>
+</table>

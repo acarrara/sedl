@@ -4,8 +4,6 @@ import {AppComponent} from './app.component';
 import {CellComponent} from './cell.component';
 import {RegionDirective} from './region.directive';
 import {GridDirective} from './grid.directive';
-import {LordStatisticsComponent} from './lord-statistics/lord-statistics.component';
-import {LordStatisticsElementComponent} from './lord-statistics/lord-statistics-element.component';
 import {GameService} from './game.service';
 import {LogoComponent} from './logo/logo.component';
 import {PinchAndZoomDirective} from './pinch-and-zoom.directive';
@@ -28,6 +26,8 @@ import {StorageService} from './storage.service';
 import {HeraldService} from './herald.service';
 import {CreateComponent} from './create/create.component';
 import {ReplayComponent} from './replay/replay.component';
+import {RankingComponent} from './ranking/ranking.component';
+import {RankingTableComponent} from './ranking/ranking-table.component';
 
 export class MyHammerConfig extends HammerGestureConfig {
   overrides = {
@@ -45,8 +45,6 @@ export class MyHammerConfig extends HammerGestureConfig {
     CellComponent,
     WorldPreviewComponent,
     WinComponent,
-    LordStatisticsComponent,
-    LordStatisticsElementComponent,
     RegionDirective,
     GridDirective,
     LogoComponent,
@@ -60,6 +58,8 @@ export class MyHammerConfig extends HammerGestureConfig {
     ControlsComponent,
     CreateComponent,
     ReplayComponent,
+    RankingComponent,
+    RankingTableComponent,
     PinchAndZoomDirective,
     LordColorsDirective,
     RankPipe

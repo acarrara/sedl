@@ -40,24 +40,6 @@
   <se-controls side="bottom">
     <se-region-statistics [lord]="gameService.lord$ | async"
                           [region]="currentRegion"></se-region-statistics>
-    <div class="lord-ranking">
-      <div class="lord-ranking__dropdown" [attr.data-collapsed]="rankingCollapsed">
-        <button class="button  button--default  button--small" (click)="toggleRanking()">
-          <div class="button__content">
-            <se-cell class="cell  cell--icon" seed="e"></se-cell>
-          </div>
-        </button>
-        <div class="lord-ranking__list">
-          <se-lord-statistics class="lord-ranking__lord" [lord]="lord"
-                              *ngFor="let lord of (game.lords | seRank)"></se-lord-statistics>
-        </div>
-      </div>
-      <button class="button  button--default  button--small" (click)="toggleRanking()">
-        <div class="button__content">
-          <se-cell class="cell  cell--icon" seed="k"></se-cell>
-        </div>
-      </button>
-      <se-lord-statistics class="lord-ranking__lord" [lord]="gameService.lord$ | async"></se-lord-statistics>
-    </div>
+    <se-ranking class="lord-ranking"  ></se-ranking>
   </se-controls>
 </div>

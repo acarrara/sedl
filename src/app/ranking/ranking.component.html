@@ -1,0 +1,13 @@
+<div class="ranking">
+  <div class="modal  lord-ranking__dropdown" [attr.data-collapsed]="collapsed">
+    <section class="ranking__container">
+      <se-ranking-table [showIndex]="true" [lords]="(gameService.game$ | async).lords | seRank"></se-ranking-table>
+    </section>
+  </div>
+  <button class="button  button--default  button--small  ranking__toggle" (click)="toggleRanking()">
+    <div class="button__content">
+      <se-cell class="cell  cell--icon" seed="k"></se-cell>
+    </div>
+  </button>
+  <se-ranking-table style="flex-grow: 1" [lords]="[gameService.lord$ | async]"></se-ranking-table>
+</div>

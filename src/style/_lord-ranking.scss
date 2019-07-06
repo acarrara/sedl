@@ -3,23 +3,16 @@
 }
 
 .lord-ranking__dropdown {
-  display: flex;
-  align-items: flex-start;
-  justify-content: space-between;
-
   position: absolute;
-  bottom: 0;
+  bottom: 100%;
   right: 0;
-
-  background-color: $primary-color-background;
-
-  border-bottom: var(--lord-color) solid $spacing-m;
-
-  padding: $spacing-l;
 
   z-index: 800;
 
-  box-shadow: 0 1px 4px 0 $shadow-color;
+  @include lord-color();
+
+  border-top: $spacing-m solid var(--lord-color);
+  padding-top: $spacing-m;
 
   @include transition-fast();
 
@@ -31,10 +24,6 @@
 }
 
 .lord-ranking__list {
-  display: flex;
-  flex-direction: column;
-  align-items: flex-end ;
-
   padding-left: $spacing-m;
 }
 
