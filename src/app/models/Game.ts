@@ -3,10 +3,12 @@ import {Lord} from './Lord';
 import {Actions} from './Actions';
 import {Region} from './Region';
 import {ActiveAction} from './Action';
+import {Log} from './Log';
 
 export class Game {
 
   private static WIN_BY_MONEY_THRESHOLD = 500;
+  private static STEP_INTERVAL = 500;
 
   public winner: Lord;
 
@@ -14,7 +16,7 @@ export class Game {
     this.lords.map(lord => lord.board = board);
   }
 
-  currentLord() {
+  public currentLord() {
     return this.lords[this.lordIndex];
   }
 
@@ -45,45 +47,51 @@ export class Game {
     return this.lords[lordIndex];
   }
 
-  private otherLords() {
-    return this.lords.filter(lord => lord !== this.currentLord());
-  }
-
   public shiftLord() {
     this.lordIndex = (this.lordIndex + 1) % this.lords.length;
+  }
+
+  public applyHistory() {
+    this.history
+      .map(logAsString => Log.deserialize(logAsString))
+      .forEach(log => this.applyAction(log));
+  }
+
+  public applySteppedHistory(onSuccess: () => void, onComplete: () => void) {
+    let index = 0;
+    const interval = setInterval(() => {
+      if (index < this.history.length) {
+        const hydrated = Log.deserialize(this.history[index]);
+        this.applyAction(hydrated);
+        index += 1;
+        onSuccess();
+      } else {
+        onComplete();
+        clearInterval(interval);
+      }
+    }, Game.STEP_INTERVAL);
   }
 
   private winGame() {
     this.winner = this.currentLord();
   }
 
-  public applyHistory() {
-    this.history
-      .map(actionAsString => this.hydrate(actionAsString))
-      .forEach(hydratedAction => this.applyHydratedAction(hydratedAction));
+  private otherLords() {
+    return this.lords.filter(lord => lord !== this.currentLord());
   }
 
-  public applyHydratedAction(hydratedAction) {
-    const lordIndex: number = this.lords.findIndex(lord => lord.id === hydratedAction.lordId);
-    this.lordIndex = lordIndex;
-    const action: ActiveAction = Actions.lookupByShortName(hydratedAction.shortName);
-    const region = this.board.regions[hydratedAction.index];
+  private applyAction(log: Log) {
+    this.lordIndex = this.lords.findIndex(lord => lord.id === log.lordId);
+    const action: ActiveAction = log.action;
     if (action === Actions.RUSH) {
       this.currentLord().rush();
     } else if (action === Actions.PASS) {
       this.pass();
     } else if (action === Actions.SETTLE) {
-      this.currentLord().settle(region);
+      this.currentLord().settle(this.board.regions[log.index]);
     } else {
+      const region = this.board.regions[log.index];
       this.currentLord().activeAction(region, this.lordAt(region));
     }
-  }
-
-  public hydrate(actionAsString) {
-    return {
-      lordId: actionAsString.substr(0, 2),
-      shortName: actionAsString.substr(2, 1),
-      index: actionAsString.substr(3)
-    };
   }
 }

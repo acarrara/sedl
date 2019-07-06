@@ -1,11 +1,19 @@
 import {ActiveAction} from './Action';
+import {Actions} from './Actions';
 
 export class Log {
 
-  constructor(public action: ActiveAction, public index?: number) {
+  constructor(public lordId: string, public action: ActiveAction, public index?: number) {
   }
 
-  serialize(id: string) {
-    return id + this.action.shortName() + (this.index === undefined ? '' : this.index);
+  public static deserialize(logAsString: string) {
+    return new Log(
+      logAsString.substr(0, 2),
+      Actions.lookupByShortName(logAsString.substr(2, 1)),
+      Number(logAsString.substr(3)));
+  }
+
+  serialize() {
+    return this.lordId + this.action.shortName() + (this.index === undefined ? '' : this.index);
   }
 }

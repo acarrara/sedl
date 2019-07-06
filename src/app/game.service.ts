@@ -12,7 +12,7 @@ export class GameService {
 
   public regions$: Observable<Region[]>;
   public lord$: Observable<Lord>;
-  public actions$: Observable<any>;
+  public actions$: Observable<Log>;
   public game$: Observable<Game>;
 
   private regionsSubject: BehaviorSubject<Region[]>;
@@ -46,8 +46,7 @@ export class GameService {
     const activeActionRun = this.game.currentLord().activeAction(region, regionLord);
     if (activeActionRun) {
       this.regionsSubject.next(this.game.board.regions);
-      const log = new Log(activeAction, index);
-      this.actionsSubject.next(log);
+      this.actionsSubject.next(new Log(this.game.currentLord().id, activeAction, index));
     }
   }
 
@@ -68,7 +67,7 @@ export class GameService {
   }
 
   public pass(): void {
-    this.actionsSubject.next(new Log(Actions.PASS));
+    this.actionsSubject.next(new Log(this.game.currentLord().id, Actions.PASS));
     this.storage.saveHistory(this.game.history);
     this.game.pass();
     this.lordSubject.next(this.game.currentLord());
@@ -78,13 +77,13 @@ export class GameService {
     const index = this.game.board.regions.indexOf(region);
     if (this.game.currentLord().settle(region)) {
       this.regionsSubject.next(this.game.board.regions);
-      this.actionsSubject.next(new Log(Actions.SETTLE, index));
+      this.actionsSubject.next(new Log(this.game.currentLord().id, Actions.SETTLE, index));
     }
   }
 
   public rush() {
     if (this.game.currentLord().rush()) {
-      this.actionsSubject.next(new Log(Actions.RUSH));
+      this.actionsSubject.next(new Log(this.game.currentLord().id, Actions.RUSH));
     }
   }
 }

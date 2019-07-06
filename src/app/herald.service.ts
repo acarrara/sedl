@@ -15,7 +15,7 @@ export class HeraldService {
 
   public record(log: Log): void {
     if (log) {
-      this.game.record(log.serialize(this.game.currentLord().id));
+      this.game.record(log.serialize());
     }
   }
 }
