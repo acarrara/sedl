@@ -22,10 +22,6 @@ export class NewComponent implements OnInit {
     this.games = [game3(), game2(), game1(), ...this.storage.loadCreatedGames()];
   }
 
-  dimension(world: string[]) {
-    return Math.sqrt(world.length);
-  }
-
   description(current: Game) {
     return '(' + current.board.grid.size() + 'x' + current.board.grid.size() + ')';
   }
