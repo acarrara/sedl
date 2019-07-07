@@ -45,5 +45,5 @@ const lords: () => Lord[] =
   () => lordsJson.map(lordJson => new Lord(lordJson.id, lordJson.name, lordJson.color, lordJson.treasure));
 
 export const game1: () => Game = () => {
-  return new Game(new Board(world1, politics1), lords());
+  return new Game('Large', new Board(world1, politics1), lords());
 };

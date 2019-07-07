@@ -12,7 +12,7 @@ export class Game {
 
   public winner: Lord;
 
-  constructor(public board: Board, public lords: Lord[], public lordIndex = 0, public history: string[] = []) {
+  constructor(public name: string, public board: Board, public lords: Lord[], public lordIndex = 0, public history: string[] = []) {
     this.lords.map(lord => lord.board = board);
   }
 

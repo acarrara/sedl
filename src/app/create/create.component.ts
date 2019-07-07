@@ -4,6 +4,7 @@ import {Board} from '../models/Board';
 import {Lord} from '../models/Lord';
 import lordsJson from '../../lords.json';
 import {GameService} from '../game.service';
+import {StorageService} from '../storage/storage.service';
 
 @Component({
   selector: 'se-create',
@@ -19,7 +20,7 @@ export class CreateComponent implements OnInit {
 
   private lords: Lord[] = lordsJson.map(lordJson => new Lord(lordJson.id, lordJson.name, lordJson.color, lordJson.treasure));
 
-  constructor(private gameService: GameService) {
+  constructor(private gameService: GameService, private storage: StorageService) {
   }
 
   ngOnInit(): void {
@@ -31,6 +32,7 @@ export class CreateComponent implements OnInit {
     this.brushSize = 1;
     this.seed = 'p';
     this.game = new Game(
+      'Custom',
       new Board(
         new Array(this.dimension * this.dimension).fill('u'),
         new Array(this.dimension * this.dimension).fill('u'),
@@ -78,7 +80,7 @@ export class CreateComponent implements OnInit {
     }
   }
 
-  canStart() {
+  isPlayable() {
     return this.game.board.regions.every(region => region.type !== 'u') && this.game.lords.length > 1;
   }
 
@@ -88,6 +90,6 @@ export class CreateComponent implements OnInit {
   }
 
   save() {
-    console.log('saved');
+    this.storage.saveCreatedGame(this.game);
   }
 }

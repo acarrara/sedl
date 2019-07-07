@@ -5,4 +5,6 @@ export interface Store {
   load(key: string): string;
 
   has(key: string): boolean;
+
+  keys(): string[];
 }

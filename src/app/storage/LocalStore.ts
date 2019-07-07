@@ -13,4 +13,8 @@ export class LocalStore implements Store {
   has(key: string): boolean {
     return localStorage.getItem(key) !== null;
   }
+
+  keys(): string[] {
+    return Object.keys(localStorage);
+  }
 }

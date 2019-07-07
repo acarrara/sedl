@@ -35,13 +35,13 @@
             <span>Reset</span>
           </span>
         </button>
-        <button class="button  button--default" (click)="save()">
+        <button class="button  button--default" (click)="save()" [disabled]="!isPlayable()">
           <span class="button__content">
             <se-cell seed="save" class="cell  cell--icon"></se-cell>
             <span>Save</span>
           </span>
         </button>
-        <button class="button  button--default" (click)="startCreatedGame()" [disabled]="!canStart()">
+        <button class="button  button--default" (click)="startCreatedGame()" [disabled]="!isPlayable()">
           <span class="button__content">
             <se-cell seed="start" class="cell  cell--icon"></se-cell>
             <span>Start</span>
