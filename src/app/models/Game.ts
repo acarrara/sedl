@@ -94,4 +94,8 @@ export class Game {
       this.currentLord().activeAction(region, this.lordAt(region));
     }
   }
+
+  public isPlayable() {
+    return this.board.regions.every(region => region.type !== 'u') && this.lords.length > 1 && this.name;
+  }
 }

@@ -1,55 +1,73 @@
-<se-modal size="s" name="create">
+<se-modal size="l" name="create">
   <div class="create">
-    <aside class="create__tools">
-      <div class="create__tool">
-        <span class="create_tool-title">Terrain</span>
-        <ng-container *ngFor="let type of ['p','f','h','m','w']">
-          <input [checked]="type === 'p'" type="radio" name="seed" (click)="currentSeed(type)" id="seed-{{type}}"
-                 class="create__tool-option">
-          <label for="seed-{{type}}" class="button  button--small  button--default">
-            <se-cell class="cell  cell--statistics" [seed]="type"></se-cell>
+    <aside class="create__header">
+      <div class="create__tools">
+        <div class="create__tool">
+          <label>
+            <span class="create__tool-title">Name</span>
+            <input class="create__input  create__input--name" #nameInput (input)="onNameInput()" maxlength="16"
+                   [defaultValue]="game.name"/>
           </label>
-        </ng-container>
+        </div>
+        <div class="create__tool">
+          <label>
+            <span class="create__tool-title">Size</span>
+            <input class="create__input  create__input--size" #sizeInput type="number"
+                   (input)="onSizeInput()" max="20" min="8" step="2" [defaultValue]="size"/>
+          </label>
+        </div>
       </div>
-      <div class="create__tool">
-        <span class="create_tool-title">Brush</span>
-        <input checked type="radio" name="size" (click)="brushSize = 1" id="brush-1" class="create__tool-option">
-        <label for="brush-1" class="button  button--small  button--default">
+      <div class="create__tools">
+        <div class="create__tool">
+          <span class="create__tool-title">Terrain</span>
+          <ng-container *ngFor="let type of ['p','f','h','m','w']">
+            <input [checked]="type === 'p'" type="radio" name="seed" (click)="currentSeed(type)" id="seed-{{type}}"
+                   class="create__tool-option">
+            <label for="seed-{{type}}" class="button  button--small  button--default">
+              <se-cell class="cell  cell--statistics" [seed]="type"></se-cell>
+            </label>
+          </ng-container>
+        </div>
+        <div class="create__tool">
+          <span class="create__tool-title">Brush</span>
+          <input checked type="radio" name="size" (click)="brushSize = 1" id="brush-1" class="create__tool-option">
+          <label for="brush-1" class="button  button--small  button--default">
           <span class="button__content">
             <se-cell class="cell  cell--statistics" seed="single"></se-cell>
           </span>
-        </label>
-        <input type="radio" name="size" (click)="brushSize = 3" id="brush-3" class="create__tool-option">
-        <label for="brush-3" class="button  button--small  button--default">
+          </label>
+          <input type="radio" name="size" (click)="brushSize = 3" id="brush-3" class="create__tool-option">
+          <label for="brush-3" class="button  button--small  button--default">
           <span class="button__content">
             <se-cell class="cell  cell--statistics" seed="cross"></se-cell>
           </span>
-        </label>
+          </label>
+        </div>
       </div>
-    </aside>
-    <aside class="create__tools">
-      <div class="create__tool  create__buttons">
-        <button class="button  button--default" (click)="reset()">
+      <div class="create__tools">
+        <div class="create__tool  create__buttons">
+          <button class="button  button--default" (click)="reset()">
           <span class="button__content">
             <se-cell seed="reset" class="cell  cell--icon"></se-cell>
             <span>Reset</span>
           </span>
-        </button>
-        <button class="button  button--default" (click)="save()" [disabled]="!isPlayable()">
+          </button>
+          <button class="button  button--default" (click)="save()" [disabled]="!game.isPlayable()">
           <span class="button__content">
             <se-cell seed="save" class="cell  cell--icon"></se-cell>
             <span>Save</span>
           </span>
-        </button>
-        <button class="button  button--default" (click)="startCreatedGame()" [disabled]="!isPlayable()">
+          </button>
+          <button class="button  button--default" (click)="startCreatedGame()" [disabled]="!game.isPlayable()">
           <span class="button__content">
             <se-cell seed="start" class="cell  cell--icon"></se-cell>
             <span>Start</span>
           </span>
-        </button>
+          </button>
+        </div>
       </div>
     </aside>
-    <div class="board" [seGrid]="dimension" sePinchAndZoom style="max-width: 100%">
+    <div class="board" [seGrid]="size" sePinchAndZoom style="max-width: 100%">
       <se-cell [seRegion]="region"
                (tap)="onTap(i)"
                (press)="onPress(i)"

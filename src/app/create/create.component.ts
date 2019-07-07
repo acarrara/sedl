@@ -1,4 +1,4 @@
-import {ChangeDetectionStrategy, Component, OnInit} from '@angular/core';
+import {ChangeDetectionStrategy, Component, ElementRef, OnInit, ViewChild} from '@angular/core';
 import {Game} from '../models/Game';
 import {Board} from '../models/Board';
 import {Lord} from '../models/Lord';
@@ -14,9 +14,14 @@ import {StorageService} from '../storage/storage.service';
 export class CreateComponent implements OnInit {
 
   public game: Game;
-  public dimension;
+  public size;
   public brushSize;
   public seed;
+
+  @ViewChild('nameInput', {static: true})
+  private nameInput: ElementRef;
+  @ViewChild('sizeInput', {static: true})
+  private sizeInput: ElementRef;
 
   private lords: Lord[] = lordsJson.map(lordJson => new Lord(lordJson.id, lordJson.name, lordJson.color, lordJson.treasure));
 
@@ -28,14 +33,14 @@ export class CreateComponent implements OnInit {
   }
 
   public reset() {
-    this.dimension = 12;
+    this.size = 12;
     this.brushSize = 1;
     this.seed = 'p';
     this.game = new Game(
       'Custom',
       new Board(
-        new Array(this.dimension * this.dimension).fill('u'),
-        new Array(this.dimension * this.dimension).fill('u'),
+        new Array(this.size * this.size).fill('u'),
+        new Array(this.size * this.size).fill('u'),
       ),
       []
     );
@@ -80,10 +85,6 @@ export class CreateComponent implements OnInit {
     }
   }
 
-  isPlayable() {
-    return this.game.board.regions.every(region => region.type !== 'u') && this.game.lords.length > 1;
-  }
-
   startCreatedGame() {
     this.gameService.newGame(this.game);
     window.location.href = '#';
@@ -91,5 +92,21 @@ export class CreateComponent implements OnInit {
 
   save() {
     this.storage.saveCreatedGame(this.game);
+  }
+
+  onNameInput() {
+    this.game.name = this.nameInput.nativeElement.value;
+  }
+
+  onSizeInput() {
+    this.size = this.sizeInput.nativeElement.value;
+    this.game = new Game(
+      this.game.name,
+      new Board(
+        new Array(this.size * this.size).fill('u'),
+        new Array(this.size * this.size).fill('u'),
+      ),
+      []
+    );
   }
 }

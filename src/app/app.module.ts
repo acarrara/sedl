@@ -1,5 +1,5 @@
 import {BrowserModule, HAMMER_GESTURE_CONFIG, HammerGestureConfig} from '@angular/platform-browser';
-import {NgModule} from '@angular/core';
+import {Injectable, NgModule} from '@angular/core';
 import {AppComponent} from './app.component';
 import {CellComponent} from './cell.component';
 import {RegionDirective} from './region.directive';
@@ -29,6 +29,7 @@ import {RankingComponent} from './ranking/ranking.component';
 import {RankingTableComponent} from './ranking/ranking-table.component';
 import {StorageService} from './storage/storage.service';
 
+@Injectable()
 export class MyHammerConfig extends HammerGestureConfig {
   overrides = {
     swipe: {direction: Hammer.DIRECTION_ALL}, // override default settings

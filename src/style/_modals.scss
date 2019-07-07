@@ -36,6 +36,11 @@
   height: 80vh;
 }
 
+.modal--s {
+  width: $spacing-s-vw;
+  height: 80vh;
+}
+
 .modal__header {
   display: flex;
   justify-content: space-between;
