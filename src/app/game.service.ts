@@ -3,9 +3,9 @@ import {Lord} from './models/Lord';
 import {BehaviorSubject, Observable} from 'rxjs';
 import {Region} from './models/Region';
 import {Game} from './models/Game';
-import {StorageService} from './storage.service';
 import {Actions} from './models/Actions';
 import {Log} from './models/Log';
+import {StorageService} from './storage/storage.service';
 
 @Injectable()
 export class GameService {

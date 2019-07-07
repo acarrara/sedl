@@ -86,4 +86,8 @@ export class CreateComponent implements OnInit {
     this.gameService.newGame(this.game);
     window.location.href = '#';
   }
+
+  save() {
+    console.log('saved');
+  }
 }

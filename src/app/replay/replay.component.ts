@@ -1,6 +1,6 @@
 import {ChangeDetectionStrategy, ChangeDetectorRef, Component, EventEmitter, OnInit, Output} from '@angular/core';
-import {StorageService} from '../storage.service';
 import {Game} from '../models/Game';
+import {StorageService} from '../storage/storage.service';
 
 @Component({
   selector: 'se-replay',

@@ -2,6 +2,28 @@
 
   display: flex;
 
+  & .ranking__dropdown {
+    position: absolute;
+    bottom: 100%;
+    right: 0;
+
+    z-index: 800;
+
+    @include lord-color();
+
+    padding-top: $spacing-m;
+
+    border-top: $spacing-m solid var(--lord-color);
+
+    @include transition-fast();
+
+    &[data-collapsed="true"] {
+      opacity: 0;
+      transform: translateY(10%);
+      pointer-events: none;
+    }
+  }
+
   & .ranking__container {
     padding-bottom: $spacing-l;
     padding-left: $spacing-l;
@@ -48,5 +70,9 @@
 
   .ranking__name {
     display: none;
+  }
+
+  .ranking__dropdown {
+    left: 0;
   }
 }

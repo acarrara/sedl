@@ -22,12 +22,12 @@ import {ActionsComponent} from './actions/actions.component';
 import {ControlsComponent} from './controls/controls.component';
 import {LordColorsDirective} from './lord-colors.directive';
 import {RankPipe} from './rank.pipe';
-import {StorageService} from './storage.service';
 import {HeraldService} from './herald.service';
 import {CreateComponent} from './create/create.component';
 import {ReplayComponent} from './replay/replay.component';
 import {RankingComponent} from './ranking/ranking.component';
 import {RankingTableComponent} from './ranking/ranking-table.component';
+import {StorageService} from './storage/storage.service';
 
 export class MyHammerConfig extends HammerGestureConfig {
   overrides = {

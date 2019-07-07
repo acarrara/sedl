@@ -29,16 +29,22 @@
     </aside>
     <aside class="create__tools">
       <div class="create__tool  create__buttons">
-        <button class="button  button--default" (click)="startCreatedGame()" [disabled]="!canStart()">
-          <span class="button__content">
-            <se-cell seed="start" class="cell  cell--icon"></se-cell>
-            <span>Start</span>
-          </span>
-        </button>
         <button class="button  button--default" (click)="reset()">
           <span class="button__content">
             <se-cell seed="reset" class="cell  cell--icon"></se-cell>
             <span>Reset</span>
+          </span>
+        </button>
+        <button class="button  button--default" (click)="save()">
+          <span class="button__content">
+            <se-cell seed="save" class="cell  cell--icon"></se-cell>
+            <span>Save</span>
+          </span>
+        </button>
+        <button class="button  button--default" (click)="startCreatedGame()" [disabled]="!canStart()">
+          <span class="button__content">
+            <se-cell seed="start" class="cell  cell--icon"></se-cell>
+            <span>Start</span>
           </span>
         </button>
       </div>

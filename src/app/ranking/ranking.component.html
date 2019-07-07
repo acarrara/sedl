@@ -1,5 +1,5 @@
 <div class="ranking">
-  <div class="modal  lord-ranking__dropdown" [attr.data-collapsed]="collapsed">
+  <div class="modal  ranking__dropdown" [attr.data-collapsed]="collapsed">
     <section class="ranking__container">
       <se-ranking-table [showIndex]="true" [lords]="(gameService.game$ | async).lords | seRank"></se-ranking-table>
     </section>
