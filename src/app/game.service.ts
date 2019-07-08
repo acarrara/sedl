@@ -10,12 +10,10 @@ import {StorageService} from './storage/storage.service';
 @Injectable()
 export class GameService {
 
-  public regions$: Observable<Region[]>;
   public lord$: Observable<Lord>;
   public actions$: Observable<Log>;
   public game$: Observable<Game>;
 
-  private regionsSubject: BehaviorSubject<Region[]>;
   private lordSubject: BehaviorSubject<Lord>;
   private actionsSubject: BehaviorSubject<Log>;
   private gameSubject: BehaviorSubject<Game>;
@@ -23,12 +21,10 @@ export class GameService {
   private game: Game;
 
   constructor(private storage: StorageService) {
-    this.regionsSubject = new BehaviorSubject(null);
     this.lordSubject = new BehaviorSubject(null);
     this.actionsSubject = new BehaviorSubject(null);
     this.gameSubject = new BehaviorSubject(null);
 
-    this.regions$ = this.regionsSubject.asObservable();
     this.lord$ = this.lordSubject.asObservable();
     this.actions$ = this.actionsSubject.asObservable();
     this.game$ = this.gameSubject.asObservable();
@@ -45,7 +41,6 @@ export class GameService {
     const activeAction = this.game.currentLord().activeActionOn(region);
     const activeActionRun = this.game.currentLord().activeAction(region, regionLord);
     if (activeActionRun) {
-      this.regionsSubject.next(this.game.board.regions);
       this.actionsSubject.next(new Log(this.game.currentLord().id, activeAction, index));
     }
   }
@@ -54,7 +49,6 @@ export class GameService {
     this.game = game;
     this.gameSubject.next(game);
     this.lordSubject.next(game.lords[0]);
-    this.regionsSubject.next(game.board.regions);
     this.actionsSubject.next(null);
     this.storage.save(game);
   }
@@ -62,7 +56,6 @@ export class GameService {
   public start() {
     this.load();
     this.gameSubject.next(this.game);
-    this.regionsSubject.next(this.game.board.regions);
     this.lordSubject.next(this.game.currentLord());
   }
 
@@ -76,7 +69,6 @@ export class GameService {
   public settle(region: Region) {
     const index = this.game.board.regions.indexOf(region);
     if (this.game.currentLord().settle(region)) {
-      this.regionsSubject.next(this.game.board.regions);
       this.actionsSubject.next(new Log(this.game.currentLord().id, Actions.SETTLE, index));
     }
   }

@@ -5,6 +5,7 @@ import {Lord} from '../models/Lord';
 import {game3} from '../data/game3';
 import {Store} from './Store';
 import {LocalStore} from './LocalStore';
+import {BehaviorSubject, Observable} from 'rxjs';
 
 @Injectable()
 export class StorageService {
@@ -13,7 +14,16 @@ export class StorageService {
   private static SEDL_HISTORY_KEY = 'sedl.history';
   private static SEDL_CUSTOM_KEY_PREFIX = 'sedl.custom.';
 
+  public savedGames$: Observable<Game[]>;
+
   private store: Store = new LocalStore();
+  private savedGamesSubject: BehaviorSubject<Game[]>;
+
+  constructor() {
+    this.savedGamesSubject = new BehaviorSubject<Game[]>(null);
+    this.savedGames$ = this.savedGamesSubject.asObservable();
+    this.savedGamesSubject.next(this.loadCreatedGames());
+  }
 
   public save(game: Game): void {
     this.saveWithKey(StorageService.SEDL_GAME_KEY, game);
@@ -46,23 +56,28 @@ export class StorageService {
   private loadWithKey(key: string) {
     const loaded: any = JSON.parse(this.store.load(key));
     const {name, lords, world, politics} = loaded;
-    const game = new Game(
+    return new Game(
       name,
       new Board(world, politics),
       lords.map(current =>
         new Lord(current.id, current.name, current.color, current.treasure, current.rushed, current.availableSettlements)),
       0,
       []);
-    return game;
   }
 
   saveCreatedGame(game: Game) {
     this.saveWithKey(StorageService.SEDL_CUSTOM_KEY_PREFIX + game.name, game);
+    this.savedGamesSubject.next(this.loadCreatedGames());
   }
 
-  loadCreatedGames(): Game[] {
+  private loadCreatedGames(): Game[] {
     return this.store.keys()
       .filter(key => key.startsWith(StorageService.SEDL_CUSTOM_KEY_PREFIX))
       .map(key => this.loadWithKey(key));
+  }
+
+  delete(game: Game) {
+    this.store.delete(StorageService.SEDL_CUSTOM_KEY_PREFIX + game.name);
+    this.savedGamesSubject.next(this.loadCreatedGames());
   }
 }

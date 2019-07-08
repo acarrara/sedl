@@ -1,15 +1,33 @@
 <se-modal name="new" size="m">
   <p>Choose a world:</p>
-  <div class="worlds">
-    <a class="worlds__card" href="#" *ngFor="let current of games" (click)="game.newGame(current)">
-      <em class="worlds__title">{{current.name}}
-        <br/>{{description(current)}}</em>
-      <se-world-preview [seGrid]="current.board.grid.size()" [world]="current.board.world"
-                        class="worlds__preview"></se-world-preview>
-    </a>
-    <a class="worlds__card" href="#create-modal">
-      <em class="worlds__title">Create...<br/>(12x12)</em>
-      <se-world-preview [seGrid]="2" [world]="['p', 'w', 'h', 'm']" class="worlds__preview"></se-world-preview>
-    </a>
-  </div>
+  <ul class="worlds">
+    <li class="worlds__card" *ngFor="let current of defaults"
+        (click)="game.newGame(current)">
+      <em class="worlds__title">{{current.name}} {{description(current)}}</em>
+      <a href="#" (click)="game.newGame(current)">
+        <se-world-preview [seGrid]="current.board.grid.size()" [world]="current.board.world"
+                          class="worlds__preview"></se-world-preview>
+      </a>
+    </li>
+    <li class="worlds__card" *ngFor="let current of storage.savedGames$ | async">
+      <div class="worlds__title">
+        <em>{{current.name}} {{description(current)}}</em>
+        <button class="button  button--default  button--small" (click)="deleteGame(current)">
+          <span class="button__content">
+            <se-cell seed="e" class="cell  cell--icon"></se-cell>
+          </span>
+        </button>
+      </div>
+      <a href="#" (click)="game.newGame(current)">
+        <se-world-preview [seGrid]="current.board.grid.size()" [world]="current.board.world"
+                          class="worlds__preview"></se-world-preview>
+      </a>
+    </li>
+    <li class="worlds__card">
+      <em class="worlds__title">Create...</em>
+      <a href="#create-modal">
+        <se-world-preview [seGrid]="2" [world]="['p', 'w', 'h', 'm']" class="worlds__preview"></se-world-preview>
+      </a>
+    </li>
+  </ul>
 </se-modal>

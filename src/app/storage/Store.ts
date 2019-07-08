@@ -7,4 +7,6 @@ export interface Store {
   has(key: string): boolean;
 
   keys(): string[];
+
+  delete(key: string);
 }

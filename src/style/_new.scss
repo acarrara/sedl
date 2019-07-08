@@ -49,6 +49,11 @@
 }
 
 .worlds__title {
+  @include flex-align-center();
+  justify-content: space-between;
+
+  width: 100%;
+
   margin-bottom: $spacing-l;
 }
 

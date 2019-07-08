@@ -17,4 +17,8 @@ export class LocalStore implements Store {
   keys(): string[] {
     return Object.keys(localStorage);
   }
+
+  delete(key: string) {
+    localStorage.removeItem(key);
+  }
 }
