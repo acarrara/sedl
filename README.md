@@ -1,3 +1,5 @@
+[![codecov](https://codecov.io/gh/acarrara/sedl/branch/master/graph/badge.svg)](https://codecov.io/gh/acarrara/sedl)
+
 # SEDL!
 ## Overview
 SEDL! is a turn-based game simulating a clash of civilizations.
