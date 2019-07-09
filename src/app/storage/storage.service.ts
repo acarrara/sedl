@@ -50,6 +50,7 @@ export class StorageService {
     }
     const defaultGame = game3();
     this.save(defaultGame);
+    this.saveHistory([]);
     return defaultGame;
   }
 

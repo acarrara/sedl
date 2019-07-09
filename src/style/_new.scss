@@ -57,11 +57,14 @@
   margin-bottom: $spacing-l;
 }
 
+.create-button {
+  margin-bottom: $spacing-l;
+}
+
+.worlds__link {
+  width: 100%;
+}
 
 @media only screen and (max-width: $breakpoint) {
 
-}
-
-.create-button {
-  margin-bottom: $spacing-l;
 }

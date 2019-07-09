@@ -8,7 +8,7 @@ import {ChangeDetectionStrategy, Component, Input} from '@angular/core';
 export class ModalComponent {
 
   @Input()
-  public size;
+  public size = 'l';
 
   @Input()
   public name: string;

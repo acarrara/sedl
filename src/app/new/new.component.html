@@ -10,7 +10,7 @@
     <li class="worlds__card" *ngFor="let current of defaults"
         (click)="game.newGame(current)">
       <em class="worlds__title">{{current.name}} {{description(current)}}</em>
-      <a href="#" (click)="game.newGame(current)">
+      <a href="#" class="worlds__link" (click)="game.newGame(current)">
         <se-world-preview [seGrid]="current.board.grid.size()" [world]="current.board.world"
                           class="worlds__preview"></se-world-preview>
       </a>
@@ -24,7 +24,7 @@
           </span>
         </button>
       </div>
-      <a href="#" (click)="game.newGame(current)">
+      <a href="#" class="worlds__link" (click)="game.newGame(current)">
         <se-world-preview [seGrid]="current.board.grid.size()" [world]="current.board.world"
                           class="worlds__preview"></se-world-preview>
       </a>

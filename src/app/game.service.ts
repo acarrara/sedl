@@ -51,6 +51,7 @@ export class GameService {
     this.lordSubject.next(game.lords[0]);
     this.actionsSubject.next(null);
     this.storage.save(game);
+    this.storage.saveHistory([]);
   }
 
   public start() {
