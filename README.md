@@ -1,4 +1,5 @@
 [![codecov](https://codecov.io/gh/acarrara/sedl/branch/master/graph/badge.svg)](https://codecov.io/gh/acarrara/sedl)
+[![Build Status](https://travis-ci.org/acarrara/sedl.svg?branch=master)](https://travis-ci.org/acarrara/sedl)
 
 # SEDL!
 ## Overview
