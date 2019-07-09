@@ -5,7 +5,7 @@
 SEDL! is a turn-based game simulating a clash of civilizations.
 
 <p align="center">
-  <img src="https://github.com/acarrara/sedl/blob/master/arc/assets/SEDL.png" alt="SEDL" />
+  <img src="https://github.com/acarrara/sedl/blob/master/src/assets/SEDL.png" alt="SEDL" />
 </p>
 
 There are two players, called *Lords*. They live in the same world and fight for survival. 
