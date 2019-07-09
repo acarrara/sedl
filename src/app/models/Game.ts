@@ -4,6 +4,7 @@ import {Actions} from './Actions';
 import {Region} from './Region';
 import {ActiveAction} from './Action';
 import {Log} from './Log';
+import {GameStatistics} from './GameStatistics';
 
 export class Game {
 
@@ -97,5 +98,23 @@ export class Game {
 
   public isPlayable() {
     return this.board.regions.every(region => region.type !== 'u') && this.lords.length > 1 && this.name;
+  }
+
+  buildStatistics() {
+    const logs: Log[] = this.history.map(serialized => Log.deserialize(serialized));
+    const gameStatistics = new GameStatistics();
+    gameStatistics.ySteps = this.board.regions.length;
+    gameStatistics.xSteps = logs.filter(log => log.action === Actions.PASS).length;
+    this.lords.forEach(lord => gameStatistics[lord.id] = []);
+
+    logs.forEach(log => {
+      this.applyAction(log);
+      if (log.action === Actions.PASS) {
+        this.lords.forEach(lord => gameStatistics[lord.id].push(
+          this.board.regions.filter(region => region.lord === lord.id).length)
+        );
+      }
+    });
+    return gameStatistics;
   }
 }

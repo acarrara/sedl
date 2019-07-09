@@ -6,6 +6,7 @@
     "start": "ng serve --port 1111",
     "build": "ng build --prod",
     "test": "ng test && codecov",
+    "test-local": "ng test",
     "lint": "ng lint --fix",
     "e2e": "ng e2e"
   },
