@@ -1,5 +1,11 @@
 <se-modal name="new" size="m">
-  <p>Choose a world:</p>
+  <a class="button  button--default  create-button" href="#create">
+    <span class="button__content">
+      <se-cell class="cell  cell--icon" seed="create"></se-cell>
+      <span>Create new</span>
+    </span>
+  </a>
+  <p>Or choose a game:</p>
   <ul class="worlds">
     <li class="worlds__card" *ngFor="let current of defaults"
         (click)="game.newGame(current)">
@@ -21,12 +27,6 @@
       <a href="#" (click)="game.newGame(current)">
         <se-world-preview [seGrid]="current.board.grid.size()" [world]="current.board.world"
                           class="worlds__preview"></se-world-preview>
-      </a>
-    </li>
-    <li class="worlds__card">
-      <em class="worlds__title">Create...</em>
-      <a href="#create-modal">
-        <se-world-preview [seGrid]="2" [world]="['p', 'w', 'h', 'm']" class="worlds__preview"></se-world-preview>
       </a>
     </li>
   </ul>

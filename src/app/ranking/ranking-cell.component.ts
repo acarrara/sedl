@@ -1,16 +1,15 @@
 import {ChangeDetectionStrategy, Component, Input} from '@angular/core';
 
 @Component({
-  selector: 'se-modal',
-  templateUrl: 'modal.component.html',
+  selector: 'se-ranking-cell',
+  templateUrl: 'ranking-cell.component.html',
   changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class ModalComponent {
+export class RankingCellComponent {
 
   @Input()
-  public size;
-
+  public quantity: number;
   @Input()
-  public name: string;
+  public seed: string;
 
 }

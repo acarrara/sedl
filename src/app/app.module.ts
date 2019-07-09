@@ -28,6 +28,8 @@ import {ReplayComponent} from './replay/replay.component';
 import {RankingComponent} from './ranking/ranking.component';
 import {RankingTableComponent} from './ranking/ranking-table.component';
 import {StorageService} from './storage/storage.service';
+import {RankingCellComponent} from './ranking/ranking-cell.component';
+import {StatisticsComponent} from './statistics/statistics.component';
 
 @Injectable()
 export class MyHammerConfig extends HammerGestureConfig {
@@ -61,6 +63,8 @@ export class MyHammerConfig extends HammerGestureConfig {
     ReplayComponent,
     RankingComponent,
     RankingTableComponent,
+    RankingCellComponent,
+    StatisticsComponent,
     PinchAndZoomDirective,
     LordColorsDirective,
     RankPipe

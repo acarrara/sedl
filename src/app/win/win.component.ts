@@ -13,13 +13,18 @@ export class WinComponent implements AfterViewInit {
 
   public replay = false;
   public pause = false;
+  public statistics = false;
 
   ngAfterViewInit(): void {
-    window.location.href = '#win-modal';
+    window.location.href = '#win';
   }
 
   toggleReplay() {
     this.replay = !this.replay;
+  }
+
+  toggleStatistics() {
+    this.statistics = !this.statistics;
   }
 
   togglePause() {

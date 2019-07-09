@@ -8,28 +8,16 @@
       </div>
     </th>
     <td>
-      <div class="ranking__cell">
-        <se-cell class="cell  cell--statistics" seed="s"></se-cell>
-        <span class="ranking__quantity">{{lord.settlements()}}</span>
-      </div>
+      <se-ranking-cell seed="s" [quantity]="lord.settlements()"></se-ranking-cell>
     </td>
     <td>
-      <div class="ranking__cell">
-        <se-cell class="cell  cell--statistics" seed="c"></se-cell>
-        <span class="ranking__quantity">{{lord.treasure}}</span>
-      </div>
+      <se-ranking-cell seed="c" [quantity]="lord.treasure"></se-ranking-cell>
     </td>
     <td>
-      <div class="ranking__cell">
-        <se-cell class="cell  cell--statistics" seed="g"></se-cell>
-        <span class="ranking__quantity">{{lord.worth()}}</span>
-      </div>
+      <se-ranking-cell seed="g" [quantity]="lord.worth()"></se-ranking-cell>
     </td>
     <td>
-      <div class="ranking__cell">
-        <se-cell class="cell  cell--statistics  {{lord.id}}" seed="d"></se-cell>
-        <span class="ranking__quantity">{{lord.debt()}}</span>
-      </div>
+      <se-ranking-cell class="{{lord.id}}" seed="d" [quantity]="lord.debt()"></se-ranking-cell>
     </td>
   </tr>
   </tbody>
