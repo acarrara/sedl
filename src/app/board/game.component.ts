@@ -42,4 +42,8 @@ export class GameComponent {
   toggleMenu() {
     this.collapsed = !this.collapsed;
   }
+
+  trackBy(index, element) {
+    return index;
+  }
 }

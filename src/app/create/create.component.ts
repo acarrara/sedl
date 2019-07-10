@@ -14,9 +14,10 @@ import {StorageService} from '../storage/storage.service';
 export class CreateComponent implements OnInit {
 
   public game: Game;
-  public size;
-  public brushSize;
-  public seed;
+  public size: number;
+  public brushType: string;
+  public seed: string;
+  public collapsed = true;
 
   @ViewChild('nameInput', {static: true})
   private nameInput: ElementRef;
@@ -34,7 +35,7 @@ export class CreateComponent implements OnInit {
 
   public reset() {
     this.size = 12;
-    this.brushSize = 1;
+    this.brushType = 'single';
     this.seed = 'p';
     this.game = new Game(
       'Custom',
@@ -47,7 +48,7 @@ export class CreateComponent implements OnInit {
   }
 
   onTap(i: number) {
-    if (this.brushSize === 3) {
+    if (this.brushType === 'cross') {
       this.game.board.grid.getNeighbourhood(i).forEach(current => this.paint(current));
     } else {
       this.paint(i);
@@ -108,5 +109,14 @@ export class CreateComponent implements OnInit {
       ),
       []
     );
+  }
+
+  fill(type: string) {
+    this.game.board.world.fill(type);
+    this.game.board.regions.forEach(region => region.type = type);
+  }
+
+  toggleCollapsed() {
+    this.collapsed = !this.collapsed;
   }
 }

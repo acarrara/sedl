@@ -5,7 +5,44 @@
   width: 100%;
 }
 
+.create__container {
+  position: relative;
+  width: 100%;
+
+  margin-bottom: $spacing-l;
+}
+
+.create__selected {
+  align-self: stretch;
+  @include flex-align-center();
+
+  & > * + * {
+    margin-left: $spacing-l;
+  }
+
+  & > button {
+    margin-left: auto;
+  }
+}
+
 .create__header {
+  position: absolute;
+  top: 0;
+  left: 0;
+
+  z-index: 800;
+
+  padding: $spacing-l;
+
+  @include transition-fast();
+  @include standard-shadow();
+
+  &[data-collapsed="true"] {
+    opacity: 0;
+    transform: translateY(-10%);
+    pointer-events: none;
+  }
+
   @include flex-center();
   flex-direction: column;
 
@@ -110,4 +147,3 @@
   }
 
 }
-

@@ -5,6 +5,7 @@ import {Region} from './Region';
 import {ActiveAction} from './Action';
 import {Log} from './Log';
 import {Statistics} from './Statistics';
+import {Series} from './Series';
 
 export class Game {
 
@@ -110,11 +111,16 @@ export class Game {
     logs.forEach(log => {
       this.applyAction(log);
       if (log.action === Actions.PASS) {
-        this.lords.forEach(lord => statistics.series[lord.id].push(
-          this.board.regions.filter(region => region.lord === lord.id).length)
-        );
+        this.addValuesToSeries(statistics.series);
       }
     });
+    this.addValuesToSeries(statistics.series);
     return statistics;
+  }
+
+  private addValuesToSeries(series: Series) {
+    this.lords.forEach(lord => series[lord.id].push(
+      this.board.regions.filter(region => region.lord === lord.id).length)
+    );
   }
 }
