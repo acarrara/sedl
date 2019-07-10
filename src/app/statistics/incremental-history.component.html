@@ -1,6 +1,6 @@
 <svg attr.viewBox="0 0 {{width}} {{height}}">
-  <path class="cell--sustenance-l4" [attr.d]="path(['l1', 'l2', 'l3', 'l4'])"></path>
-  <path class="cell--sustenance-l3" [attr.d]="path(['l1', 'l2', 'l3'])"></path>
-  <path class="cell--sustenance-l2" [attr.d]="path(['l1', 'l2'])"></path>
-  <path class="cell--sustenance-l1" [attr.d]="path(['l1'])"></path>
+  <path *ngFor="let serieId of seriesIds.slice().reverse(); let i = index"
+        class="cell--sustenance-{{serieId}}"
+        [attr.d]="path(i)"
+  ></path>
 </svg>

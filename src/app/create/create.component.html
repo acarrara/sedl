@@ -1,4 +1,4 @@
-<se-modal size="l" name="create">
+<se-modal size="l" name="create" [overflow]="false">
   <div class="create">
     <aside class="create__header">
       <div class="create__tools">
@@ -12,8 +12,10 @@
         <div class="create__tool">
           <label>
             <span class="create__tool-title">Size</span>
-            <input class="create__input  create__input--size" #sizeInput type="number"
-                   (input)="onSizeInput()" max="20" min="8" step="2" [defaultValue]="size"/>
+            <select class="create__input  create__input--size" name="size" #sizeInput (input)="onSizeInput()">
+              <option *ngFor="let value of [8, 10, 12, 14, 16, 18, 20]"
+                      [attr.selected]="value === size ? '' : null">{{value}}</option>
+            </select>
           </label>
         </div>
       </div>

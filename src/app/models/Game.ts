@@ -4,7 +4,7 @@ import {Actions} from './Actions';
 import {Region} from './Region';
 import {ActiveAction} from './Action';
 import {Log} from './Log';
-import {GameStatistics} from './GameStatistics';
+import {Statistics} from './Statistics';
 
 export class Game {
 
@@ -102,19 +102,19 @@ export class Game {
 
   buildStatistics() {
     const logs: Log[] = this.history.map(serialized => Log.deserialize(serialized));
-    const gameStatistics = new GameStatistics();
-    gameStatistics.ySteps = this.board.regions.length;
-    gameStatistics.xSteps = logs.filter(log => log.action === Actions.PASS).length;
-    this.lords.forEach(lord => gameStatistics[lord.id] = []);
+    const statistics = new Statistics();
+    statistics.ySteps = this.board.regions.length;
+    statistics.xSteps = logs.filter(log => log.action === Actions.PASS).length;
+    this.lords.forEach(lord => statistics.series[lord.id] = []);
 
     logs.forEach(log => {
       this.applyAction(log);
       if (log.action === Actions.PASS) {
-        this.lords.forEach(lord => gameStatistics[lord.id].push(
+        this.lords.forEach(lord => statistics.series[lord.id].push(
           this.board.regions.filter(region => region.lord === lord.id).length)
         );
       }
     });
-    return gameStatistics;
+    return statistics;
   }
 }

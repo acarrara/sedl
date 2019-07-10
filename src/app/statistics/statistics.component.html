@@ -1,3 +1,10 @@
-<div style="width: 100%" class="statistics">
-  <se-incremental-history *ngIf="stats" width="150" height="100" [stats]="stats"></se-incremental-history>
+<div class="statistics">
+  <em class="statistics__title">Domain sizes over turns</em>
+  <div class="statistics__container">
+    <se-incremental-history *ngIf="stats"
+                            width="150"
+                            height="100"
+                            initialY="5"
+                            [stats]="stats"></se-incremental-history>
+  </div>
 </div>

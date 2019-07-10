@@ -1,5 +1,5 @@
 import {ChangeDetectionStrategy, Component, Input, OnInit} from '@angular/core';
-import {GameStatistics} from '../models/GameStatistics';
+import {Statistics} from '../models/Statistics';
 
 @Component({
   selector: 'se-incremental-history',
@@ -8,11 +8,15 @@ import {GameStatistics} from '../models/GameStatistics';
 })
 export class IncrementalHistoryComponent implements OnInit {
   @Input()
-  width: number;
+  public width: number;
   @Input()
-  height: number;
+  public height: number;
   @Input()
-  stats: GameStatistics;
+  public stats: Statistics;
+  @Input()
+  public initialY: number;
+
+  public seriesIds: string[];
 
   private xUnit: number;
   private yUnit: number;
@@ -20,17 +24,23 @@ export class IncrementalHistoryComponent implements OnInit {
   ngOnInit(): void {
     this.xUnit = this.width / this.stats.xSteps;
     this.yUnit = this.height / this.stats.ySteps;
+    this.seriesIds = Object.keys(this.stats.series);
   }
 
-  path(serieIds: string[]) {
-    const series: number[][] = serieIds.map(id => this.stats[id]);
+  path(index: number) {
+    const series: number[][] = this.getSerieIds(index).map(id => this.stats.series[id]);
+    this.initialY = 5;
     return series[0].reduce(
       (previous, current, i) => previous + ' L ' + (this.xUnit * (i + 1)) + ' ' + this.current(series, i),
-      'M0 0 V ' + (this.yUnit * 5 * serieIds.length)
+      'M0 0 V ' + (this.yUnit * this.initialY * this.getSerieIds(index).length)
     ) + ' V -' + this.current(series, series[0].length - 1) + ' H 0';
   }
 
   private current(series: number[][], index: number) {
     return series.reduce((previousValue, currentValue) => previousValue + currentValue[index], 0) * this.yUnit;
+  }
+
+  private getSerieIds(index: number): string[] {
+    return this.seriesIds.slice(0, this.seriesIds.length - index);
   }
 }

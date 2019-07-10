@@ -1,5 +1,5 @@
 <div class="modal-container" id="{{name}}">
-  <aside class="modal  modal--{{size}}">
+  <aside class="modal  modal--{{size}}" [class.modal--no-overflow]="!overflow">
     <header class="modal__header">
       <se-logo></se-logo>
       <a href="#" class="button  button--default  button--small">

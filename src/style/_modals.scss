@@ -54,12 +54,19 @@
   border-top: $spacing-m solid var(--lord-color);
 }
 
+
 .modal__container {
   flex-grow: 1;
 
   padding: $spacing-l;
 
   overflow: auto;
+}
+
+.modal.modal--no-overflow {
+  .modal__container {
+    overflow: hidden;
+  }
 }
 
 @media only screen and (max-width: $breakpoint) {

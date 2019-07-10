@@ -13,4 +13,7 @@ export class ModalComponent {
   @Input()
   public name: string;
 
+  @Input()
+  public overflow = true;
+
 }

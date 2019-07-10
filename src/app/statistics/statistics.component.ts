@@ -1,5 +1,5 @@
 import {ChangeDetectionStrategy, Component, OnInit} from '@angular/core';
-import {GameStatistics} from '../models/GameStatistics';
+import {Statistics} from '../models/Statistics';
 import {StorageService} from '../storage/storage.service';
 
 @Component({
@@ -9,7 +9,7 @@ import {StorageService} from '../storage/storage.service';
 })
 export class StatisticsComponent implements OnInit {
 
-  public stats: GameStatistics;
+  public stats: Statistics;
 
   constructor(private storage: StorageService) {
   }

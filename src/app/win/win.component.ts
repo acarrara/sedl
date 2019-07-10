@@ -11,20 +11,15 @@ export class WinComponent implements AfterViewInit {
   @Input()
   public winner: Lord;
 
-  public replay = false;
+  public display = 'win';
   public pause = false;
-  public statistics = false;
 
   ngAfterViewInit(): void {
     window.location.href = '#win';
   }
 
-  toggleReplay() {
-    this.replay = !this.replay;
-  }
-
-  toggleStatistics() {
-    this.statistics = !this.statistics;
+  setDisplay(display: string) {
+    this.display = display;
   }
 
   togglePause() {

@@ -1,4 +1,17 @@
 .statistics {
+  width: 100%;
+
+  @include flex-align-center();
+  flex-direction: column;
+}
+
+.statistics__title {
+  margin-bottom: $spacing-l;
+}
+
+.statistics__container {
+  width: 100%;
+
   background-color: $background-color;
 
   @include small-shadow();
