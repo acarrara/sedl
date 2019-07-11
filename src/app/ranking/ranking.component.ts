@@ -13,7 +13,7 @@ export class RankingComponent {
   constructor(public gameService: GameService) {
   }
 
-  toggleRanking() {
+  public toggleRanking() {
     this.collapsed = !this.collapsed;
   }
 

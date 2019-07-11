@@ -29,15 +29,6 @@ export class StorageService {
     this.saveWithKey(StorageService.SEDL_GAME_KEY, game);
   }
 
-  private saveWithKey(key: string, game: Game) {
-    this.store.save(key, JSON.stringify({
-      name: game.name,
-      lords: game.lords,
-      world: game.board.world,
-      politics: game.board.regions.map(region => region.lord)
-    }, (current, value) => current === 'board' ? undefined : value));
-  }
-
   public saveHistory(history: string[]) {
     this.store.save(StorageService.SEDL_HISTORY_KEY, JSON.stringify(history));
   }
@@ -54,6 +45,25 @@ export class StorageService {
     return defaultGame;
   }
 
+  public saveCreatedGame(game: Game) {
+    this.saveWithKey(StorageService.SEDL_CUSTOM_KEY_PREFIX + game.name, game);
+    this.savedGamesSubject.next(this.loadCreatedGames());
+  }
+
+  public delete(game: Game) {
+    this.store.delete(StorageService.SEDL_CUSTOM_KEY_PREFIX + game.name);
+    this.savedGamesSubject.next(this.loadCreatedGames());
+  }
+
+  private saveWithKey(key: string, game: Game) {
+    this.store.save(key, JSON.stringify({
+      name: game.name,
+      lords: game.lords,
+      world: game.board.world,
+      politics: game.board.regions.map(region => region.lord)
+    }, (current, value) => current === 'board' ? undefined : value));
+  }
+
   private loadWithKey(key: string) {
     const loaded: any = JSON.parse(this.store.load(key));
     const {name, lords, world, politics} = loaded;
@@ -66,19 +76,9 @@ export class StorageService {
       []);
   }
 
-  saveCreatedGame(game: Game) {
-    this.saveWithKey(StorageService.SEDL_CUSTOM_KEY_PREFIX + game.name, game);
-    this.savedGamesSubject.next(this.loadCreatedGames());
-  }
-
   private loadCreatedGames(): Game[] {
     return this.store.keys()
       .filter(key => key.startsWith(StorageService.SEDL_CUSTOM_KEY_PREFIX))
       .map(key => this.loadWithKey(key));
-  }
-
-  delete(game: Game) {
-    this.store.delete(StorageService.SEDL_CUSTOM_KEY_PREFIX + game.name);
-    this.savedGamesSubject.next(this.loadCreatedGames());
   }
 }

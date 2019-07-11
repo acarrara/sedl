@@ -10,12 +10,12 @@ export class CellComponent {
   @Input()
   public seed: string;
   @Input()
-  sustenance: boolean;
+  public sustenance: boolean;
   @Input()
-  id: string;
+  public id: string;
   @Input()
-  impregnable: boolean;
+  public impregnable: boolean;
   @Input()
-  i: number;
+  public i: number;
 
 }

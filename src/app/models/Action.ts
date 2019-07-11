@@ -34,7 +34,7 @@ export interface ActiveAction extends SuperAction {
 
 export class ColonizeAction implements ActiveAction {
 
-  cost(region: Region) {
+  public cost(region: Region) {
     return region.cost();
   }
 
@@ -52,15 +52,15 @@ export class ColonizeAction implements ActiveAction {
     lord.board.updateNeighbourhood(newRegion);
   }
 
-  name() {
+  public name() {
     return 'Colonize';
   }
 
-  triggered(): TriggeredAction[] {
+  public triggered(): TriggeredAction[] {
     return [];
   }
 
-  shortName(): string {
+  public shortName(): string {
     return 'L';
   }
 }
@@ -70,71 +70,71 @@ export class ConquerAction implements ActiveAction {
   constructor(private triggeredActions: TriggeredAction[]) {
   }
 
-  cost(region: Region) {
+  public cost(region: Region) {
     return region.conquerCost();
   }
 
-  name() {
+  public name() {
     return 'Conquer';
   }
 
-  run(lord: Lord, region: Region) {
+  public run(lord: Lord, region: Region) {
     lord.treasure -= this.cost(region);
     const newRegion = region.tamedBy(lord);
     lord.board.change(region, newRegion);
     lord.board.updateNeighbourhood(newRegion);
   }
 
-  can(lord: Lord, region: Region) {
+  public can(lord: Lord, region: Region) {
     return !region.impregnable && !region.belongsTo(lord) &&
       lord.canTame() &&
       lord.canReach(region) &&
       lord.treasure >= this.cost(region);
   }
 
-  triggered(): TriggeredAction[] {
+  public triggered(): TriggeredAction[] {
     return this.triggeredActions;
   }
 
-  shortName(): string {
+  public shortName(): string {
     return 'Q';
   }
 }
 
 export class EmptyAction implements ActiveAction {
 
-  cost(region: Region) {
+  public cost(region: Region) {
     return 0;
   }
 
-  can(lord: Lord, region: Region) {
+  public can(lord: Lord, region: Region) {
     return false;
   }
 
-  run(lord: Lord, region: Region) {
+  public run(lord: Lord, region: Region) {
     // do nothing
   }
 
-  name() {
+  public name() {
     return 'Reach';
   }
 
-  triggered(): TriggeredAction[] {
+  public triggered(): TriggeredAction[] {
     return [];
   }
 
-  shortName(): string {
+  public shortName(): string {
     return 'E';
   }
 }
 
 export class FortifyAction implements ActiveAction {
 
-  cost(region: Region) {
+  public cost(region: Region) {
     return region.cost();
   }
 
-  can(lord: Lord, region: Region) {
+  public can(lord: Lord, region: Region) {
     return !region.sustenance &&
       !region.impregnable &&
       region.isFortifiable() &&
@@ -143,122 +143,122 @@ export class FortifyAction implements ActiveAction {
       lord.treasure >= this.cost(region);
   }
 
-  run(lord: Lord, region: Region) {
+  public run(lord: Lord, region: Region) {
     lord.treasure -= region.sustenanceCost();
     region.sustenance = true;
   }
 
-  name() {
+  public name() {
     return 'Fortify';
   }
 
-  triggered(): TriggeredAction[] {
+  public triggered(): TriggeredAction[] {
     return [];
   }
 
-  shortName(): string {
+  public shortName(): string {
     return 'F';
   }
 }
 
 export class HarvestAction implements PassiveAction {
 
-  run(lord: Lord) {
+  public run(lord: Lord) {
     const worth = lord.worth();
     const harvested = lord.rushed ? Math.floor(worth / 2) : worth;
     lord.treasure += harvested;
     lord.rushed = false;
   }
 
-  name() {
+  public name() {
     return 'Harvest';
   }
 }
 
 export class SustainAction implements PassiveAction {
 
-  run(lord: Lord) {
+  public run(lord: Lord) {
     if (lord.debt() > lord.treasure) {
       this.abandonFortifications(lord);
     }
     lord.treasure = Math.max(lord.treasure - lord.debt(), 0);
   }
 
+  public name() {
+    return 'Sustain';
+  }
+
   private abandonFortifications(lord: Lord) {
     lord.board.regions.filter(region => region.sustenance && region.isFortifiable() && region.belongsTo(lord))
       .forEach(region => region.sustenance = false);
-  }
-
-  name() {
-    return 'Sustain';
   }
 }
 
 export class WithdrawAction implements ActiveAction {
 
-  cost(region: Region) {
+  public cost(region: Region) {
     return 0;
   }
 
-  can(lord: Lord, region: Region) {
+  public can(lord: Lord, region: Region) {
     return region.belongsTo(lord) &&
       lord.canReach(region) &&
       region.isFortifiable() &&
       region.sustenance;
   }
 
-  run(lord: Lord, region: Region) {
+  public run(lord: Lord, region: Region) {
     region.sustenance = false;
   }
 
-  name() {
+  public name() {
     return 'Withdraw';
   }
 
-  triggered(): TriggeredAction[] {
+  public triggered(): TriggeredAction[] {
     return [];
   }
 
-  shortName(): string {
+  public shortName(): string {
     return 'W';
   }
 }
 
 export class SettleAction implements ActiveAction {
 
-  cost(region: Region) {
+  public cost(region: Region) {
     return 0;
   }
 
-  can(lord: Lord, region: Region) {
+  public can(lord: Lord, region: Region) {
     return region.isFortifiable() && region.belongsTo(lord) && lord.canSettle();
   }
 
-  name() {
+  public name() {
     return 'Settle';
   }
 
-  run(lord: Lord, region: Region) {
+  public run(lord: Lord, region: Region) {
     lord.board.change(region, region.settle());
     lord.availableSettlements--;
   }
 
-  triggered(): TriggeredAction[] {
+  public triggered(): TriggeredAction[] {
     return [];
   }
 
-  shortName(): string {
+  public shortName(): string {
     return 'S';
   }
 }
 
 export class DesertAction implements PassiveAction {
 
-  name() {
+  public name() {
     return 'Desert';
   }
 
-  run(lord: Lord) {
+  public run(lord: Lord) {
     lord.board.regions.filter(region => region.impregnable && region.belongsTo(lord))
       .forEach(region => region.impregnable = false);
     lord.board.regions.filter(region => region.sustenance && region.belongsTo(lord) && !lord.canReach(region))
@@ -267,39 +267,39 @@ export class DesertAction implements PassiveAction {
 }
 
 export class RushAction implements ActiveAction {
-  can(lord: Lord, region: Region) {
+  public can(lord: Lord, region: Region) {
     return !lord.rushed;
   }
 
-  cost(region: Region) {
+  public cost(region: Region) {
     return 0;
   }
 
-  name() {
+  public name() {
     return 'Rush';
   }
 
-  run(lord: Lord, region: Region) {
+  public run(lord: Lord, region: Region) {
     lord.treasure += Math.floor(lord.worth() / 5);
     lord.rushed = true;
   }
 
-  triggered(): TriggeredAction[] {
+  public triggered(): TriggeredAction[] {
     return [];
   }
 
-  shortName(): string {
+  public shortName(): string {
     return 'R';
   }
 }
 
 export class RuleAction implements TriggeredAction {
 
-  name() {
+  public name() {
     'Rule';
   }
 
-  run(rulingLord: Lord, ruledLord: Lord, index: number) {
+  public run(rulingLord: Lord, ruledLord: Lord, index: number) {
     const board: Board = rulingLord.board;
     board.getDomain(index, ruledLord).forEach(current => {
       const region = board.regions[current];
@@ -309,7 +309,7 @@ export class RuleAction implements TriggeredAction {
     });
   }
 
-  isTriggered(rulingLord: Lord, ruledLord: Lord, index: number) {
+  public isTriggered(rulingLord: Lord, ruledLord: Lord, index: number) {
     const {board: {regions: {[index]: region}}, board} = rulingLord;
     return region.isSettlement() &&
       !board.reachableBy(ruledLord, region);
@@ -318,26 +318,26 @@ export class RuleAction implements TriggeredAction {
 
 export class PassAction implements ActiveAction {
 
-  can(lord: Lord, region: Region) {
+  public can(lord: Lord, region: Region) {
     return true;
   }
 
-  cost(region: Region) {
+  public cost(region: Region) {
     return 0;
   }
 
-  name() {
+  public name() {
     'Pass';
   }
 
-  run(lord: Lord, region: Region) {
+  public run(lord: Lord, region: Region) {
   }
 
-  shortName(): string {
+  public shortName(): string {
     return 'P';
   }
 
-  triggered(): TriggeredAction[] {
+  public triggered(): TriggeredAction[] {
     return [];
   }
 }

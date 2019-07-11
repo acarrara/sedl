@@ -14,15 +14,15 @@ export class WinComponent implements AfterViewInit {
   public display = 'win';
   public pause = false;
 
-  ngAfterViewInit(): void {
+  public ngAfterViewInit(): void {
     window.location.href = '#win';
   }
 
-  setDisplay(display: string) {
+  public setDisplay(display: string) {
     this.display = display;
   }
 
-  togglePause() {
+  public togglePause() {
     this.pause = !this.pause;
   }
 }

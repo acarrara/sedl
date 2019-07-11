@@ -19,7 +19,7 @@ export class Lord {
               public availableSettlements = 2) {
   }
 
-  activeActionOn(region: Region) {
+  public activeActionOn(region: Region) {
     if (this.board.getNeighbours(region).every(neighbour => !neighbour.belongsTo(this))) {
       return Actions.EMPTY;
     } else if (region.lord === Region.UNCHARTED.lord) {
@@ -46,26 +46,17 @@ export class Lord {
     action.run(this);
   }
 
-  private runAction(action: ActiveAction, region: Region, currentLord?: Lord) {
-    const index = this.board.regions.indexOf(region);
-    action.run(this, region);
-
-    action.triggered()
-      .filter(current => current.isTriggered(this, currentLord, index))
-      .forEach(current => current.run(this, currentLord, index));
-  }
-
-  canTame() {
+  public canTame() {
     const tamedRegions = this.board.regions.filter(region => region.belongsTo(this));
     const settlements = tamedRegions.filter(region => region.isSettlement()).length;
     return tamedRegions.length < settlements * Lord.REGIONS_PER_SETTLEMENT;
   }
 
-  canReach(region: Region) {
+  public canReach(region: Region) {
     return this.board.reachableBy(this, region);
   }
 
-  settle(region: Region) {
+  public settle(region: Region) {
     const canAct = Actions.SETTLE.can(this, region);
     if (canAct) {
       this.runAction(Actions.SETTLE, region);
@@ -73,11 +64,11 @@ export class Lord {
     return canAct;
   }
 
-  canSettle(): boolean {
+  public canSettle(): boolean {
     return this.availableSettlements > 0;
   }
 
-  rush() {
+  public rush() {
     const canAct = Actions.RUSH.can(this, undefined);
     if (canAct) {
       this.runAction(Actions.RUSH, undefined);
@@ -85,31 +76,40 @@ export class Lord {
     return canAct;
   }
 
-  canPlay(): boolean {
+  public canPlay(): boolean {
     return this.board.regions.some(region => region.isSettlement() && region.belongsTo(this));
   }
 
-  worth() {
+  public worth() {
     return this.board.regions
       .filter(region => region.belongsTo(this) && this.canReach(region))
       .map(region => region.worth())
       .reduce((previousValue, currentValue) => previousValue + currentValue, 0);
   }
 
-  debt() {
+  public debt() {
     return this.board.regions
       .filter(region => region.sustenance && region.belongsTo(this))
       .map(region => region.sustenanceCost())
       .reduce((previousValue, currentValue) => previousValue + currentValue, 0);
   }
 
-  settlements() {
+  public settlements() {
     return this.board.regions
       .filter(region => region.isSettlement() && region.belongsTo(this))
       .reduce(previousValue => previousValue + 1, 0);
   }
 
-  canRush() {
+  public canRush() {
     return Actions.RUSH.can(this, undefined);
+  }
+
+  private runAction(action: ActiveAction, region: Region, currentLord?: Lord) {
+    const index = this.board.regions.indexOf(region);
+    action.run(this, region);
+
+    action.triggered()
+      .filter(current => current.isTriggered(this, currentLord, index))
+      .forEach(current => current.run(this, currentLord, index));
   }
 }

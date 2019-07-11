@@ -14,7 +14,7 @@ export class StatisticsComponent implements OnInit {
   constructor(private storage: StorageService) {
   }
 
-  ngOnInit(): void {
+  public ngOnInit(): void {
     const game = this.storage.load();
     this.stats = game.buildStatistics();
   }

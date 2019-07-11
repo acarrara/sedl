@@ -42,7 +42,7 @@ export class Grid {
       .filter(index => !this.outOfBoundaries(index));
   }
 
-  size() {
+  public size() {
     return this.dim;
   }
 }

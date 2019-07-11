@@ -13,7 +13,7 @@ export class AppComponent implements OnInit {
   constructor(public game: GameService, public herald: HeraldService) {
   }
 
-  ngOnInit(): void {
+  public ngOnInit(): void {
     this.game.start();
   }
 }

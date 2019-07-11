@@ -2,23 +2,23 @@ import {Store} from './Store';
 
 export class LocalStore implements Store {
 
-  load(key: string): string {
+  public load(key: string): string {
     return localStorage.getItem(key);
   }
 
-  save(key: string, value: string) {
+  public save(key: string, value: string) {
     localStorage.setItem(key, value);
   }
 
-  has(key: string): boolean {
+  public has(key: string): boolean {
     return localStorage.getItem(key) !== null;
   }
 
-  keys(): string[] {
+  public keys(): string[] {
     return Object.keys(localStorage);
   }
 
-  delete(key: string) {
+  public delete(key: string) {
     localStorage.removeItem(key);
   }
 }

@@ -11,7 +11,7 @@ export class GridDirective implements OnChanges {
   constructor(private el: ElementRef) {
   }
 
-  ngOnChanges(): void {
+  public ngOnChanges(): void {
     this.el.nativeElement.style.setProperty('--grid-dimension', this.seGrid);
   }
 

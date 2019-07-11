@@ -1,3 +1,3 @@
 export class Series {
-  ['serieKey']: number[];
+  public ['serieKey']: number[];
 }

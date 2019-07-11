@@ -7,7 +7,7 @@ import {Lord} from './models/Lord';
 })
 export class RankPipe implements PipeTransform {
 
-  transform(value: Lord[], ...args: any[]): Lord[] {
+  public transform(value: Lord[], ...args: any[]): Lord[] {
     return [...value].sort((a, b) => b.worth() - a.worth());
   }
 

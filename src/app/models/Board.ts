@@ -35,33 +35,8 @@ export class Board {
     return [...visited];
   }
 
-  private visit(index: number, lord: Lord, visited: Set<number>) {
-    this.grid.getNeighbours(index)
-      .filter(current => !visited.has(current) && this.regions[current].belongsTo(lord))
-      .forEach(current => {
-        visited.add(current);
-        this.visit(current, lord, visited);
-      });
-  }
-
   public reachableBy(lord: Lord, region: Region) {
     return this.isReachable(lord, region, []);
-  }
-
-  private isReachable(lord: Lord, region: Region, visited: Region[]) {
-    if (visited.indexOf(region) !== -1) {
-      return false;
-    }
-    if (region.belongsTo(lord) && region.isSettlement()) {
-      return true;
-    }
-    if (region.belongsTo(lord)) {
-      visited.push(region);
-    }
-    return this.grid.getNeighbours(this.regions.indexOf(region))
-      .map(current => this.regions[current])
-      .filter(current => current.belongsTo(lord))
-      .some(current => this.isReachable(lord, current, visited));
   }
 
   public borderNorth(position: number): boolean {
@@ -84,15 +59,7 @@ export class Board {
     return this.regions[position].hasSameOwner(this.getSafeRegion(other));
   }
 
-  private getSafeRegion(other: number) {
-    return this.grid.outOfBoundaries(other) ? Region.UNCHARTED : this.regions[other];
-  }
-
-  private borders(position: number): Borders {
-    return new Borders(this.borderNorth(position), this.borderEast(position), this.borderSouth(position), this.borderWest(position));
-  }
-
-  getNeighbours(region: Region) {
+  public getNeighbours(region: Region) {
     const i: number = this.regions.indexOf(region);
     return [
       this.getSafeRegion(this.grid.north(i)),
@@ -102,10 +69,43 @@ export class Board {
     ];
   }
 
-  change(region: Region, newRegion: Region) {
+  public change(region: Region, newRegion: Region) {
     const i: number = this.regions.indexOf(region);
     this.regions[i] = newRegion;
     this.world[i] = newRegion.type;
+  }
+
+  private visit(index: number, lord: Lord, visited: Set<number>) {
+    this.grid.getNeighbours(index)
+      .filter(current => !visited.has(current) && this.regions[current].belongsTo(lord))
+      .forEach(current => {
+        visited.add(current);
+        this.visit(current, lord, visited);
+      });
+  }
+
+  private isReachable(lord: Lord, region: Region, visited: Region[]) {
+    if (visited.indexOf(region) !== -1) {
+      return false;
+    }
+    if (region.belongsTo(lord) && region.isSettlement()) {
+      return true;
+    }
+    if (region.belongsTo(lord)) {
+      visited.push(region);
+    }
+    return this.grid.getNeighbours(this.regions.indexOf(region))
+      .map(current => this.regions[current])
+      .filter(current => current.belongsTo(lord))
+      .some(current => this.isReachable(lord, current, visited));
+  }
+
+  private getSafeRegion(other: number) {
+    return this.grid.outOfBoundaries(other) ? Region.UNCHARTED : this.regions[other];
+  }
+
+  private borders(position: number): Borders {
+    return new Borders(this.borderNorth(position), this.borderEast(position), this.borderSouth(position), this.borderWest(position));
   }
 
 }

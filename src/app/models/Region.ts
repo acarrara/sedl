@@ -75,6 +75,12 @@ export class Region {
     }
   }
 
+  public settle() {
+    const region = new Region(this.lord, 's', false, true);
+    region.borders = this.borders;
+    return region;
+  }
+
   private baseCost() {
     switch (this.type) {
       case 'm':
@@ -92,11 +98,5 @@ export class Region {
       default:
         return 0;
     }
-  }
-
-  settle() {
-    const region = new Region(this.lord, 's', false, true);
-    region.borders = this.borders;
-    return region;
   }
 }

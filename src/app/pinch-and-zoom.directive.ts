@@ -34,6 +34,11 @@ export class PinchAndZoomDirective {
     this.lastPosY = this.posY < this.maxPosY ? this.posY : this.maxPosY;
   }
 
+  @HostListener('pinchend')
+  public onPinchEnd() {
+    this.lastScale = this.scale;
+  }
+
   private transform($event: any) {
     if (this.scale !== 1) {
       this.posX = this.lastPosX + ($event.deltaX / this.scale);
@@ -55,11 +60,6 @@ export class PinchAndZoomDirective {
       this.element.nativeElement.style.transform =
         'scale3d(' + this.scale + ', ' + this.scale + ', 1) translate3d(' + this.posX + 'px,' + this.posY + 'px, 0)';
     }
-  }
-
-  @HostListener('pinchend')
-  public onPinchEnd() {
-    this.lastScale = this.scale;
   }
 
 }

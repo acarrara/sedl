@@ -10,7 +10,7 @@ export class SupportComponent {
   @Output()
   public selection: EventEmitter<any> = new EventEmitter(false);
 
-  clicked() {
+  public clicked() {
     this.selection.emit(null);
   }
 }

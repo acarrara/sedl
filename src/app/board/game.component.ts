@@ -24,26 +24,26 @@ export class GameComponent {
   constructor(public gameService: GameService) {
   }
 
-  action(region: Region) {
+  public action(region: Region) {
     this.gameService.action(region);
   }
 
-  actionEnter(region: Region, $event: MouseEvent) {
+  public actionEnter(region: Region, $event: MouseEvent) {
     this.currentRegion = region;
     if ($event.buttons === 1) {
       this.action(region);
     }
   }
 
-  dimension() {
+  public dimension() {
     return Math.sqrt(this.game.board.regions.length);
   }
 
-  toggleMenu() {
+  public toggleMenu() {
     this.collapsed = !this.collapsed;
   }
 
-  trackBy(index, element) {
+  public trackBy(index, element) {
     return index;
   }
 }

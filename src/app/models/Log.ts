@@ -13,7 +13,7 @@ export class Log {
       Number(logAsString.substr(3)));
   }
 
-  serialize() {
+  public serialize() {
     return this.lordId + this.action.shortName() + (this.index === undefined ? '' : this.index);
   }
 }

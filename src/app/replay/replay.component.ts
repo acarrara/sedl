@@ -17,7 +17,7 @@ export class ReplayComponent implements OnInit {
   constructor(private storage: StorageService, private cdr: ChangeDetectorRef) {
   }
 
-  ngOnInit(): void {
+  public ngOnInit(): void {
     this.game = this.storage.load();
 
     this.game.applySteppedHistory(() => this.cdr.detectChanges(), () => this.stop.emit());

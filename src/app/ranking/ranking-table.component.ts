@@ -20,11 +20,11 @@ export class RankingTableComponent implements OnInit, OnDestroy {
   constructor(private gameService: GameService, private cdr: ChangeDetectorRef) {
   }
 
-  ngOnInit(): void {
+  public ngOnInit(): void {
     this.subscription = this.gameService.actions$.subscribe(() => this.cdr.detectChanges());
   }
 
-  ngOnDestroy(): void {
+  public ngOnDestroy(): void {
     if (this.subscription) {
       this.subscription.unsubscribe();
     }

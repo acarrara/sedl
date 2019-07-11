@@ -18,11 +18,11 @@ export class NewComponent {
   constructor(public game: GameService, public storage: StorageService) {
   }
 
-  description(current: Game) {
+  public description(current: Game) {
     return '(' + current.board.grid.size() + 'x' + current.board.grid.size() + ')';
   }
 
-  deleteGame(current: Game) {
+  public deleteGame(current: Game) {
     this.storage.delete(current);
   }
 }

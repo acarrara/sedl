@@ -74,6 +74,27 @@ export class Game {
     }, Game.STEP_INTERVAL);
   }
 
+  public isPlayable() {
+    return this.board.regions.every(region => region.type !== 'u') && this.lords.length > 1 && this.name;
+  }
+
+  public buildStatistics() {
+    const logs: Log[] = this.history.map(serialized => Log.deserialize(serialized));
+    const statistics = new Statistics();
+    statistics.ySteps = this.board.regions.length;
+    statistics.xSteps = logs.filter(log => log.action === Actions.PASS).length;
+    this.lords.forEach(lord => statistics.series[lord.id] = []);
+
+    logs.forEach(log => {
+      this.applyAction(log);
+      if (log.action === Actions.PASS) {
+        this.addValuesToSeries(statistics.series);
+      }
+    });
+    this.addValuesToSeries(statistics.series);
+    return statistics;
+  }
+
   private winGame() {
     this.winner = this.currentLord();
   }
@@ -95,27 +116,6 @@ export class Game {
       const region = this.board.regions[log.index];
       this.currentLord().activeAction(region, this.lordAt(region));
     }
-  }
-
-  public isPlayable() {
-    return this.board.regions.every(region => region.type !== 'u') && this.lords.length > 1 && this.name;
-  }
-
-  buildStatistics() {
-    const logs: Log[] = this.history.map(serialized => Log.deserialize(serialized));
-    const statistics = new Statistics();
-    statistics.ySteps = this.board.regions.length;
-    statistics.xSteps = logs.filter(log => log.action === Actions.PASS).length;
-    this.lords.forEach(lord => statistics.series[lord.id] = []);
-
-    logs.forEach(log => {
-      this.applyAction(log);
-      if (log.action === Actions.PASS) {
-        this.addValuesToSeries(statistics.series);
-      }
-    });
-    this.addValuesToSeries(statistics.series);
-    return statistics;
   }
 
   private addValuesToSeries(series: Series) {

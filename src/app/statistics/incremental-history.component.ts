@@ -21,13 +21,13 @@ export class IncrementalHistoryComponent implements OnInit {
   private xUnit: number;
   private yUnit: number;
 
-  ngOnInit(): void {
+  public ngOnInit(): void {
     this.xUnit = this.width / this.stats.xSteps;
     this.yUnit = this.height / this.stats.ySteps;
     this.seriesIds = Object.keys(this.stats.series);
   }
 
-  path(index: number) {
+  public path(index: number) {
     const series: number[][] = this.getSerieIds(index).map(id => this.stats.series[id]);
     this.initialY = 5;
     return series[0].reduce(

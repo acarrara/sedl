@@ -46,7 +46,7 @@ export class Actions {
 
   public static getPassiveActions = (): PassiveAction[] => [Actions.DESERT, Actions.HARVEST, Actions.SUSTAIN];
 
-  static lookupByShortName(shortName: string) {
+  public static lookupByShortName(shortName: string) {
     return this.ACTIVE_ACTIONS[shortName];
   }
 }

@@ -18,7 +18,7 @@ export class ActionsComponent {
   constructor(public game: GameService) {
   }
 
-  clicked() {
+  public clicked() {
     this.selection.emit(null);
   }
 

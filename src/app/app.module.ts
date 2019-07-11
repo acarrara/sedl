@@ -34,7 +34,7 @@ import {IncrementalHistoryComponent} from './statistics/incremental-history.comp
 
 @Injectable()
 export class MyHammerConfig extends HammerGestureConfig {
-  overrides = {
+  public overrides = {
     swipe: {direction: Hammer.DIRECTION_ALL}, // override default settings
     pan: {direction: Hammer.DIRECTION_ALL},
     press: {time: 1001},

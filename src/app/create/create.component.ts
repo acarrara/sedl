@@ -29,7 +29,7 @@ export class CreateComponent implements OnInit {
   constructor(private gameService: GameService, private storage: StorageService) {
   }
 
-  ngOnInit(): void {
+  public ngOnInit(): void {
     this.reset();
   }
 
@@ -47,7 +47,7 @@ export class CreateComponent implements OnInit {
     );
   }
 
-  onTap(i: number) {
+  public onTap(i: number) {
     if (this.brushType === 'cross') {
       this.game.board.grid.getNeighbourhood(i).forEach(current => this.paint(current));
     } else {
@@ -55,22 +55,17 @@ export class CreateComponent implements OnInit {
     }
   }
 
-  private paint(i: number) {
-    this.game.board.regions[i].type = this.seed;
-    this.game.board.world[i] = this.seed;
-  }
-
-  onEnter(i: number, $event: MouseEvent) {
+  public onEnter(i: number, $event: MouseEvent) {
     if ($event.buttons === 1) {
       this.onTap(i);
     }
   }
 
-  currentSeed(seed: string) {
+  public currentSeed(seed: string) {
     this.seed = seed;
   }
 
-  onPress(i: number) {
+  public onPress(i: number) {
     const currentLords = this.game.lords.length;
     if (currentLords < this.lords.length) {
       const {id, name, color, treasure} = this.lords[currentLords];
@@ -86,20 +81,20 @@ export class CreateComponent implements OnInit {
     }
   }
 
-  startCreatedGame() {
+  public startCreatedGame() {
     this.gameService.newGame(this.game);
     window.location.href = '#';
   }
 
-  save() {
+  public save() {
     this.storage.saveCreatedGame(this.game);
   }
 
-  onNameInput() {
+  public onNameInput() {
     this.game.name = this.nameInput.nativeElement.value;
   }
 
-  onSizeInput() {
+  public onSizeInput() {
     this.size = this.sizeInput.nativeElement.value;
     this.game = new Game(
       this.game.name,
@@ -111,12 +106,17 @@ export class CreateComponent implements OnInit {
     );
   }
 
-  fill(type: string) {
+  public fill(type: string) {
     this.game.board.world.fill(type);
     this.game.board.regions.forEach(region => region.type = type);
   }
 
-  toggleCollapsed() {
+  public toggleCollapsed() {
     this.collapsed = !this.collapsed;
+  }
+
+  private paint(i: number) {
+    this.game.board.regions[i].type = this.seed;
+    this.game.board.world[i] = this.seed;
   }
 }

@@ -14,7 +14,7 @@ export class RegionStatisticsComponent {
   @Input()
   public lord: Lord;
 
-  getLabel() {
+  public getLabel() {
     switch (this.region.type) {
       case 's':
         return 'settlement';
@@ -33,11 +33,11 @@ export class RegionStatisticsComponent {
     }
   }
 
-  getAction() {
+  public getAction() {
     return this.lord.activeActionOn(this.region);
   }
 
-  canRun() {
+  public canRun() {
     return this.getAction().can(this.lord, this.region);
   }
 }

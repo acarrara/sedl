@@ -16,7 +16,7 @@ export class LordColorsDirective implements OnChanges {
   constructor(private element: ElementRef) {
   }
 
-  ngOnChanges(changes: SimpleChanges): void {
+  public ngOnChanges(changes: SimpleChanges): void {
     if (changes.lords) {
       changes.lords.currentValue
         .forEach(lord => this.setProperty(lord.id, lord.color));

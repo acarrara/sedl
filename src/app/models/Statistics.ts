@@ -1,7 +1,7 @@
 import {Series} from './Series';
 
 export class Statistics {
-  xSteps: number;
-  ySteps: number;
-  series: Series = new Series();
+  public xSteps: number;
+  public ySteps: number;
+  public series: Series = new Series();
 }
