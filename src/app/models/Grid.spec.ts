@@ -68,4 +68,13 @@ describe('Grid', () => {
 
   });
 
+  describe('size', () => {
+
+    it('should return the grid size', () => {
+      const grid: Grid = new Grid(16);
+
+      expect(grid.size()).toEqual(16);
+    });
+  });
+
 });

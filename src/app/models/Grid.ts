@@ -1,36 +1,36 @@
 export class Grid {
 
-  constructor(private dim: number) {
+  constructor(private gridSize: number) {
   }
 
   public north(position: number) {
-    const y = position % this.dim;
-    const x = Math.floor(position / this.dim);
-    return (x - 1) * this.dim + y;
+    const y = position % this.gridSize;
+    const x = Math.floor(position / this.gridSize);
+    return (x - 1) * this.gridSize + y;
   }
 
   public south(position: number) {
-    const y = position % this.dim;
-    const x = Math.floor(position / this.dim);
-    return (x + 1) * this.dim + y;
+    const y = position % this.gridSize;
+    const x = Math.floor(position / this.gridSize);
+    return (x + 1) * this.gridSize + y;
   }
 
   public east(position: number) {
-    if ((position + 1) % this.dim === 0) {
+    if ((position + 1) % this.gridSize === 0) {
       return -1;
     }
     return position + 1;
   }
 
   public west(position: number) {
-    if (position % this.dim === 0) {
+    if (position % this.gridSize === 0) {
       return -1;
     }
     return position - 1;
   }
 
   public outOfBoundaries(position: number) {
-    return position < 0 || position >= this.dim * this.dim;
+    return position < 0 || position >= this.gridSize * this.gridSize;
   }
 
   public getNeighbourhood(i: number) {
@@ -43,6 +43,6 @@ export class Grid {
   }
 
   public size() {
-    return this.dim;
+    return this.gridSize;
   }
 }

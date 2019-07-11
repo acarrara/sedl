@@ -126,4 +126,46 @@ describe('Region', () => {
       expect(tamedRegion).toEqual(new Region('anotherLord', 'p', false, true));
     });
   });
+
+  describe('sustenanceCost', () => {
+
+    it('should return the sustenance cost', () => {
+      const aRegion = new Region('lord', 'p', false, false);
+
+      expect(aRegion.sustenanceCost()).toEqual(4);
+    });
+  });
+
+  describe('conquerCost', () => {
+
+    it('should return the conquer cost', () => {
+      const aRegion = new Region('lord', 'p', false, false);
+
+      expect(aRegion.conquerCost()).toEqual(8);
+    });
+
+    it('should return the conquer cost when fortified', () => {
+      const aRegion = new Region('lord', 'p', true, false);
+
+      expect(aRegion.conquerCost()).toEqual(16);
+    });
+  });
+
+  describe('worth', () => {
+
+    it('should return the worth', () => {
+      const aRegion = new Region('lord', 'p', true, false);
+
+      expect(aRegion.worth()).toEqual(1);
+    });
+  });
+
+  describe('cost', () => {
+
+    it('should return the colonization cost', () => {
+      const aRegion = new Region('lord', 'p', false, false);
+
+      expect(aRegion.cost()).toEqual(4);
+    });
+  });
 });
