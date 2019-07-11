@@ -10,7 +10,7 @@ export class Log {
     return new Log(
       logAsString.substr(0, 2),
       Actions.lookupByShortName(logAsString.substr(2, 1)),
-      Number(logAsString.substr(3)));
+      logAsString.length > 3 ? Number(logAsString.substr(3)) : undefined);
   }
 
   public serialize() {
