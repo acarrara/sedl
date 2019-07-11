@@ -56,7 +56,7 @@ export class Board {
   }
 
   public borderAt(position: number, other: number): boolean {
-    return this.regions[position].hasSameOwner(this.getSafeRegion(other));
+    return this.regions[position].hasDifferentOwner(this.getSafeRegion(other));
   }
 
   public getNeighbours(region: Region) {

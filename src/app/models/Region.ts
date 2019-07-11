@@ -1,5 +1,6 @@
 import {Borders} from './Borders';
 import {Lord} from './Lord';
+import {Economy} from './Economy';
 
 export class Region {
 
@@ -20,7 +21,7 @@ export class Region {
     return new Region(this.lord, this.type, this.sustenance, this.impregnable);
   }
 
-  public hasSameOwner(other: Region) {
+  public hasDifferentOwner(other: Region) {
     return other !== undefined && this.lord !== Region.UNCHARTED.lord && other.lord !== this.lord;
   }
 
@@ -36,43 +37,12 @@ export class Region {
     return this.type === 's';
   }
 
-  public conquerCost() {
-    return this.cost() * 2;
-  }
-
   public isFortifiable() {
     return this.type !== 's' && this.type !== 'w';
   }
 
-  public cost() {
-    return this.baseCost() * (this.sustenance as any + 1);
-  }
-
-  public sustenanceCost(): number {
-    if (this.type === 's') {
-      return 4;
-    } else {
-      return this.baseCost();
-    }
-  }
-
   public worth() {
-    switch (this.type) {
-      case 'm':
-        return 3;
-      case 'f':
-        return 2;
-      case 'p':
-        return 1;
-      case 'h':
-        return 1;
-      case 'w':
-        return 1;
-      case 's':
-        return 0;
-      default:
-        return 0;
-    }
+    return Economy.worth(this.type);
   }
 
   public settle() {
@@ -81,22 +51,15 @@ export class Region {
     return region;
   }
 
-  private baseCost() {
-    switch (this.type) {
-      case 'm':
-        return 10;
-      case 'f':
-        return 8;
-      case 'p':
-        return 4;
-      case 'h':
-        return 6;
-      case 'w':
-        return 6;
-      case 's':
-        return 0;
-      default:
-        return 0;
-    }
+  public sustenanceCost() {
+    return Economy.sustenanceCost(this.type);
+  }
+
+  public cost() {
+    return Economy.cost(this.type, this.sustenance);
+  }
+
+  public conquerCost() {
+    return Economy.conquerCost(this.type, this.sustenance);
   }
 }

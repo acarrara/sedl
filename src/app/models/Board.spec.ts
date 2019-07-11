@@ -99,7 +99,7 @@ describe('Board', () => {
 
   });
 
-  it('should compute needed header letters', () => {
+  xit('should compute needed header letters', () => {
     const sources: string[] = ['SEDL!', 'Actions', 'Harvesting', 'Sustaining', 'Colonize', 'Conquer', 'Fortify',
       'Settle', 'Rush', 'Terrain values', 'Plain', 'Water', 'Hill', 'Mountain', 'Settlement', 'Forest'];
 
