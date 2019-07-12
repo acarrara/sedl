@@ -49,4 +49,35 @@ describe('Game', () => {
   });
 
 
+  describe('pass', () => {
+
+    it('should make the current lord win the game when it has more than 500 coins', () => {
+      const lords: Lord[] = [new Lord('l1'), new Lord('l2', 'lord', 'aColor', 600)];
+      const game: Game = new Game('aGame', new Board(['s', 'p', 'p', 's'], ['l1', 'u', 'u', 'l2']), lords);
+
+      game.pass();
+
+      expect(game.winner).toBe(lords[1]);
+    });
+
+    it('should pass the turn when no one wins', () => {
+      const lords: Lord[] = [new Lord('l1'), new Lord('l2')];
+      const game: Game = new Game('aGame', new Board(['s', 'p', 'p', 's'], ['l1', 'u', 'u', 'l2']), lords);
+
+      game.pass();
+
+      expect(game.currentLord()).toBe(lords[1]);
+      expect(game.winner).toBeUndefined();
+    });
+
+    it('should make the current lord win the game', () => {
+      const lords: Lord[] = [new Lord('l1'), new Lord('l2', 'lord', 'aColor', 600)];
+      const game: Game = new Game('aGame', new Board(['s', 'p', 'p', 'p'], ['l1', 'u', 'u', 'l2']), lords);
+
+      game.pass();
+
+      expect(game.winner).toBe(lords[0]);
+    });
+  });
 });
+
