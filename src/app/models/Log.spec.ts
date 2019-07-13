@@ -1,5 +1,5 @@
 import {Log} from './Log';
-import {Actions} from './Actions';
+import {Actions} from './actions/Actions';
 
 describe('Log', () => {
 

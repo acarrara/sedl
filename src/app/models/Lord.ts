@@ -1,7 +1,8 @@
 import {Region} from './Region';
-import {Actions} from './Actions';
+import {Actions} from './actions/Actions';
 import {Board} from './Board';
-import {ActiveAction, PassiveAction} from './Action';
+import {PassiveAction} from './actions/PassiveAction';
+import {ActiveAction} from './actions/ActiveAction';
 
 export class Lord {
 

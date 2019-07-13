@@ -1,20 +1,18 @@
-import {
-  ActiveAction,
-  ColonizeAction,
-  ConquerAction,
-  DesertAction,
-  EmptyAction,
-  FortifyAction,
-  HarvestAction,
-  PassAction,
-  PassiveAction,
-  RuleAction,
-  RushAction,
-  SettleAction,
-  SustainAction,
-  TriggeredAction,
-  WithdrawAction
-} from './Action';
+import {TriggeredAction} from './TriggeredAction';
+import {PassiveAction} from './PassiveAction';
+import {ActiveAction} from './ActiveAction';
+import {ColonizeAction} from './ColonizeAction';
+import {ConquerAction} from './ConquerAction';
+import {EmptyAction} from './EmptyAction';
+import {FortifyAction} from './FortifyAction';
+import {CollectAction} from './CollectAction';
+import {SustainAction} from './SustainAction';
+import {WithdrawAction} from './WithdrawAction';
+import {SettleAction} from './SettleAction';
+import {DesertAction} from './DesertAction';
+import {RushAction} from './RushAction';
+import {RuleAction} from './RuleAction';
+import {PassAction} from './PassAction';
 
 export class Actions {
 
@@ -40,11 +38,11 @@ export class Actions {
     [Actions.PASS.shortName()]: Actions.PASS
   };
 
-  public static HARVEST: PassiveAction = new HarvestAction();
+  public static COLLECT: PassiveAction = new CollectAction();
   public static SUSTAIN: PassiveAction = new SustainAction();
   public static DESERT: PassiveAction = new DesertAction();
 
-  public static getPassiveActions = (): PassiveAction[] => [Actions.DESERT, Actions.HARVEST, Actions.SUSTAIN];
+  public static getPassiveActions = (): PassiveAction[] => [Actions.DESERT, Actions.COLLECT, Actions.SUSTAIN];
 
   public static lookupByShortName(shortName: string) {
     return this.ACTIVE_ACTIONS[shortName];

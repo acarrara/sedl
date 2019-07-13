@@ -1,11 +1,11 @@
 import {Board} from './Board';
 import {Lord} from './Lord';
-import {Actions} from './Actions';
+import {Actions} from './actions/Actions';
 import {Region} from './Region';
-import {ActiveAction} from './Action';
 import {Log} from './Log';
 import {Statistics} from './Statistics';
 import {Series} from './Series';
+import {ActiveAction} from './actions/ActiveAction';
 
 export class Game {
 

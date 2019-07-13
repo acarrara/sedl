@@ -3,7 +3,7 @@ import {Lord} from './models/Lord';
 import {BehaviorSubject, Observable} from 'rxjs';
 import {Region} from './models/Region';
 import {Game} from './models/Game';
-import {Actions} from './models/Actions';
+import {Actions} from './models/actions/Actions';
 import {Log} from './models/Log';
 import {StorageService} from './storage/storage.service';
 

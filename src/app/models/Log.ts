@@ -1,5 +1,5 @@
-import {ActiveAction} from './Action';
-import {Actions} from './Actions';
+import {Actions} from './actions/Actions';
+import {ActiveAction} from './actions/ActiveAction';
 
 export class Log {
 
