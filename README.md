@@ -1,5 +1,6 @@
-[![codecov](https://codecov.io/gh/acarrara/sedl/branch/master/graph/badge.svg)](https://codecov.io/gh/acarrara/sedl)
 [![Build Status](https://travis-ci.org/acarrara/sedl.svg?branch=master)](https://travis-ci.org/acarrara/sedl)
+[![codecov](https://codecov.io/gh/acarrara/sedl/branch/master/graph/badge.svg)](https://codecov.io/gh/acarrara/sedl)
+[![Netlify Status](https://api.netlify.com/api/v1/badges/900ef89b-6b80-4e39-8fc0-f3b3b721c13e/deploy-status)](https://app.netlify.com/sites/nifty-shockley-8c8682/deploys)
 
 # SEDL!
 ## Overview
