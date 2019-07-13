@@ -2,6 +2,7 @@ import {Board} from './Board';
 import {Lord} from './Lord';
 import {from} from 'rxjs';
 import {flatMap} from 'rxjs/operators';
+import {Region} from './Region';
 
 describe('Board', () => {
 
@@ -73,7 +74,7 @@ describe('Board', () => {
       expect(canSettle).toBeFalsy();
     });
 
-    it('should return true', () => {
+    it('should return false', () => {
       const canSettle = settlingBoard.reachableBy(lord, settlingBoard.regions[10]);
 
       expect(canSettle).toBeFalsy();
@@ -96,7 +97,86 @@ describe('Board', () => {
 
       expect(canSettle).toBeTruthy();
     });
+  });
 
+  describe('getDomain', () => {
+
+    const settlingBoard = new Board([
+      'p', 'p', 'p', 'p',
+      's', 'p', 'p', 'p',
+      'p', 'p', 'p', 'p',
+      'p', 'p', 's', 'p'
+    ], [
+      'r', 'r', 'r', 'u',
+      'r', 'r', 'u', 'u',
+      'u', 'r', 'u', 'u',
+      'u', 'u', 'r', 'u'
+    ]);
+
+    it('should return the whole domain', () => {
+
+      const domain: number[] = settlingBoard.getDomain(4, new Lord('r'));
+
+      expect(domain.length).toEqual(6);
+      expect(domain).toContain(0);
+      expect(domain).toContain(1);
+      expect(domain).toContain(2);
+      expect(domain).toContain(4);
+      expect(domain).toContain(5);
+      expect(domain).toContain(9);
+    });
+
+    it('should return only the settlement', () => {
+
+      const domain: number[] = settlingBoard.getDomain(14, new Lord('r'));
+
+      expect(domain.length).toEqual(0);
+    });
+
+  });
+
+  describe('getNeighbours', () => {
+
+    const settlingBoard = new Board([
+      'p', 'p', 'p', 'p',
+      's', 'p', 'p', 'p',
+      'p', 'p', 'p', 'p',
+      'p', 'p', 's', 'p'
+    ], [
+      'r', 'r', 'r', 'u',
+      'r', 'r', 'u', 'u',
+      'u', 'r', 'u', 'u',
+      'u', 'u', 'r', 'u'
+    ]);
+
+    it('should return 4 neighbours', () => {
+      const neighbours = settlingBoard.getNeighbours(settlingBoard.regions[5]);
+
+      expect(neighbours.length).toEqual(4);
+      expect(neighbours).toContain(settlingBoard.regions[1]);
+      expect(neighbours).toContain(settlingBoard.regions[4]);
+      expect(neighbours).toContain(settlingBoard.regions[6]);
+      expect(neighbours).toContain(settlingBoard.regions[9]);
+    });
+
+    it('should return 3 neighbours', () => {
+      const neighbours = settlingBoard.getNeighbours(settlingBoard.regions[2]);
+
+      expect(neighbours.length).toEqual(4);
+      expect(neighbours).toContain(settlingBoard.regions[1]);
+      expect(neighbours).toContain(settlingBoard.regions[3]);
+      expect(neighbours).toContain(settlingBoard.regions[6]);
+      expect(neighbours).toContain(Region.UNCHARTED);
+    });
+
+    it('should return 2 neighbours', () => {
+      const neighbours = settlingBoard.getNeighbours(settlingBoard.regions[0]);
+
+      expect(neighbours.length).toEqual(4);
+      expect(neighbours).toContain(settlingBoard.regions[1]);
+      expect(neighbours).toContain(settlingBoard.regions[4]);
+      expect(neighbours).toContain(Region.UNCHARTED);
+    });
   });
 
   xit('should compute needed header letters', () => {
@@ -109,11 +189,11 @@ describe('Board', () => {
       flatMap(source => from(source.split('')))
     ).subscribe(char => allChars.add(char));
 
-    const set: string = [...allChars]
+    const result: string = [...allChars]
       .filter(value => value !== ' ')
       .reduce((previousValue, currentValue) => previousValue.concat(currentValue), '');
 
-    console.log(set);
+    console.log(result);
   });
 
 });

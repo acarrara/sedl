@@ -1,6 +1,7 @@
 import {Game} from './Game';
 import {Board} from './Board';
 import {Lord} from './Lord';
+import {Statistics} from './Statistics';
 
 describe('Game', () => {
 
@@ -77,6 +78,41 @@ describe('Game', () => {
       game.pass();
 
       expect(game.winner).toBe(lords[0]);
+    });
+  });
+
+  describe('applyHistory', () => {
+
+    it('should apply history', () => {
+      const lords: Lord[] = [new Lord('l1'), new Lord('l2', 'lord', 'aColor', 600)];
+      const game: Game = new Game('aGame', new Board(['s', 'p', 'p', 's'], ['l1', 'u', 'u', 'l2']), lords);
+      game.history = ['l1R', 'l1P', 'l2L2', 'l2S2', 'l2L1', 'l2Q0', 'l2P'];
+
+      game.applyHistory();
+
+      expect(game.winner).toBe(lords[1]);
+      expect(game.board.regions[0].lord).toEqual('l2');
+      expect(game.board.regions[1].lord).toEqual('l2');
+      expect(game.board.regions[2].lord).toEqual('l2');
+      expect(lords[1].treasure).toEqual(577);
+    });
+  });
+
+  describe('buildStatistics', () => {
+
+    it('should build statistics object', () => {
+      const lords: Lord[] = [new Lord('l1'), new Lord('l2', 'lord', 'aColor', 600)];
+      const game: Game = new Game('aGame', new Board(['s', 'p', 'p', 's'], ['l1', 'u', 'u', 'l2']), lords);
+      game.history = ['l1R', 'l1P', 'l2L2', 'l2S2', 'l2L1', 'l2Q0', 'l2P'];
+      const expected = new Statistics();
+      expected.xSteps = 2;
+      expected.ySteps = 4;
+      expected.series[lords[0].id] = [1, 0, 0];
+      expected.series[lords[1].id] = [1, 4, 4];
+
+      const stats = game.buildStatistics();
+
+      expect(stats).toEqual(expected);
     });
   });
 });

@@ -27,5 +27,19 @@ describe('SustainAction', () => {
       expect(aLord.board.regions[2].sustenance).toBeTruthy();
       expect(aLord.treasure).toEqual(0);
     });
+
+    it('should abandon all the Lord fortifications', () => {
+      const aLord = new Lord('l1');
+      aLord.board = new Board(['p', 'm', 'm', 'h'], ['l1', 'l1', 'l1', 'u']);
+      aLord.treasure = 0;
+      aLord.board.regions[1].sustenance = true;
+      aLord.board.regions[2].sustenance = true;
+
+      Actions.SUSTAIN.run(aLord);
+
+      expect(aLord.board.regions[1].sustenance).toBeFalsy();
+      expect(aLord.board.regions[2].sustenance).toBeFalsy();
+      expect(aLord.treasure).toEqual(0);
+    });
   });
 });
