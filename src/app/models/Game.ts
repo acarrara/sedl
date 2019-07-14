@@ -8,9 +8,9 @@ import {Series} from './Series';
 import {ActiveAction} from './actions/ActiveAction';
 
 export class Game {
+  public static STEP_INTERVAL = 500;
 
   private static WIN_BY_MONEY_THRESHOLD = 500;
-  private static STEP_INTERVAL = 500;
 
   public winner: Lord;
 
@@ -59,7 +59,7 @@ export class Game {
       .forEach(log => this.applyAction(log));
   }
 
-  public applySteppedHistory(onSuccess: () => void, onComplete: () => void) {
+  public applySteppedHistory(onSuccess: () => void, onComplete: () => void, step: number) {
     let index = 0;
     const interval = setInterval(() => {
       if (index < this.history.length) {
@@ -71,7 +71,7 @@ export class Game {
         onComplete();
         clearInterval(interval);
       }
-    }, Game.STEP_INTERVAL);
+    }, step);
   }
 
   public isPlayable() {

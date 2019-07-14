@@ -20,6 +20,6 @@ export class ReplayComponent implements OnInit {
   public ngOnInit(): void {
     this.game = this.storage.load();
 
-    this.game.applySteppedHistory(() => this.cdr.detectChanges(), () => this.stop.emit());
+    this.game.applySteppedHistory(() => this.cdr.detectChanges(), () => this.stop.emit(), Game.STEP_INTERVAL);
   }
 }

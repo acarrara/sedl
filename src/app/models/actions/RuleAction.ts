@@ -5,7 +5,7 @@ import {Board} from '../Board';
 export class RuleAction implements TriggeredAction {
 
   public name() {
-    'Rule';
+    return 'Rule';
   }
 
   public run(rulingLord: Lord, ruledLord: Lord, index: number) {

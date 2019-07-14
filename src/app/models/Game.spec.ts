@@ -2,6 +2,7 @@ import {Game} from './Game';
 import {Board} from './Board';
 import {Lord} from './Lord';
 import {Statistics} from './Statistics';
+import {async} from '@angular/core/testing';
 
 describe('Game', () => {
 
@@ -113,6 +114,63 @@ describe('Game', () => {
       const stats = game.buildStatistics();
 
       expect(stats).toEqual(expected);
+    });
+  });
+
+  describe('applySteppedHistory', () => {
+
+    it('should apply stepped history', async(() => {
+      const lords: Lord[] = [new Lord('l1'), new Lord('l2', 'lord', 'aColor', 600)];
+      const game: Game = new Game('aGame', new Board(['s', 'p', 'p', 's'], ['l1', 'u', 'u', 'l2']), lords);
+      game.history = ['l1R', 'l1P', 'l2L2', 'l2S2', 'l2L1', 'l2Q0', 'l2P'];
+
+      game.applySteppedHistory(() => {
+      }, () => {
+        expect(game.winner).toBe(lords[1]);
+        expect(game.board.regions[0].lord).toEqual('l2');
+        expect(game.board.regions[1].lord).toEqual('l2');
+        expect(game.board.regions[2].lord).toEqual('l2');
+        expect(lords[1].treasure).toEqual(577);
+      }, 1);
+    }));
+  });
+
+  describe('isPlayable', () => {
+
+    it('should be playable', () => {
+      const game: Game = new Game(
+        'aName',
+        new Board(['s'], ['l1']),
+        [new Lord('l1'), new Lord('l2')]);
+
+      expect(game.isPlayable()).toBeTruthy();
+    });
+
+    it('should not be playable when there is one lord', () => {
+      const game: Game = new Game(
+        'aName',
+        new Board(['s'], ['l1']),
+        [new Lord('l1')]);
+
+      expect(game.isPlayable()).toBeFalsy();
+    });
+
+    it('should not be playable when there is uncharted land', () => {
+      const game: Game = new Game(
+        'aName',
+        new Board(['u'], ['l1']),
+        [new Lord('l1'), new Lord('l2')]);
+
+      expect(game.isPlayable()).toBeFalsy();
+    });
+
+    it('should not be playable when it has no name', () => {
+      const game: Game = new Game(
+        '',
+        new Board(['p'], ['l1']),
+        [new Lord('l1'), new Lord('l2')]);
+
+      expect(game.isPlayable()).toBeFalsy();
     });
   });
 });

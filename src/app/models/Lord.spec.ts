@@ -1,5 +1,6 @@
 import {Lord} from './Lord';
 import {Board} from './Board';
+import {Actions} from './actions/Actions';
 
 describe('Lord', () => {
   const lord: Lord = new Lord('l1');
@@ -96,6 +97,50 @@ describe('Lord', () => {
       aLord.settle(aLord.board.regions[1]);
 
       expect(aLord.board.regions[1].isSettlement()).toBeTruthy();
+    });
+  });
+
+  describe('activeActionOn', () => {
+    const aLord = new Lord('l1');
+
+    beforeEach(() => {
+      aLord.board = new Board(['s', 'm', 'm', 'm'], ['l1', 'u', 'l2', 'u']);
+    });
+
+    it('should do nothing when unreachable', () => {
+      const activeAction = aLord.activeActionOn(aLord.board.regions[3]);
+
+      expect(activeAction).toEqual(Actions.EMPTY);
+    });
+
+    it('should colonize', () => {
+      const activeAction = aLord.activeActionOn(aLord.board.regions[1]);
+
+      expect(activeAction).toEqual(Actions.COLONIZE);
+    });
+
+    it('should conquer', () => {
+      const activeAction = aLord.activeActionOn(aLord.board.regions[2]);
+
+      expect(activeAction).toEqual(Actions.CONQUER);
+    });
+
+    it('should withdraw', () => {
+      aLord.board.regions[1].lord = 'l1';
+      aLord.board.regions[1].sustenance = true;
+
+      const activeAction = aLord.activeActionOn(aLord.board.regions[1]);
+
+      expect(activeAction).toEqual(Actions.WITHDRAW);
+    });
+
+    it('should fortify', () => {
+      aLord.board.regions[1].lord = 'l1';
+      aLord.board.regions[1].sustenance = false;
+
+      const activeAction = aLord.activeActionOn(aLord.board.regions[1]);
+
+      expect(activeAction).toEqual(Actions.FORTIFY);
     });
   });
 });
