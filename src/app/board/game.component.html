@@ -1,5 +1,5 @@
 <div class="wrapper" (document:keydown.space)="gameService.pass()">
-  <se-controls side="top" [attr.data-collapsed]="collapsed">
+  <se-controls [seCurrentLordColor]="gameService.lord$ | async" side="top" [attr.data-collapsed]="collapsed">
     <div class="controls__menu-container">
       <se-logo></se-logo>
       <div>
@@ -37,7 +37,7 @@
       <se-cell *ngFor="let seed of backSeeds" [seed]="seed"></se-cell>
     </div>
   </div>
-  <se-controls side="bottom">
+  <se-controls [seCurrentLordColor]="gameService.lord$ | async" side="bottom">
     <se-region-statistics [lord]="gameService.lord$ | async"
                           [region]="currentRegion"></se-region-statistics>
     <se-ranking></se-ranking>

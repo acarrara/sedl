@@ -1,6 +1,6 @@
 <se-modal size="l" name="create" [overflow]="false">
   <div class="create">
-    <div class="create__selected">
+    <div class="create__selected" [seCurrentLordColor]="gameService.lord$ | async">
       <span>{{game.name}}</span>
       <span>{{size}}x{{size}}</span>
       <se-cell class="cell  cell--icon" [seed]="seed"></se-cell>
@@ -9,7 +9,7 @@
         <se-cell class="cell  cell--icon" seed="edit"></se-cell>
       </button>
     </div>
-    <div class="create__container">
+    <div class="create__container" [seCurrentLordColor]="gameService.lord$ | async">
       <aside class="create__header" [attr.data-collapsed]="collapsed">
         <div class="create__tools">
           <div class="create__tool">

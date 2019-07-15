@@ -1,4 +1,4 @@
-<div class="colorful" seLordColors [currentLord]="game.lord$ | async" [lords]="(game.game$ | async).lords">
+<div class="colorful" [seLordColors]="(game.game$ | async).lords">
   <se-game [game]="game.game$ | async"></se-game>
   <se-help></se-help>
   <se-about></se-about>

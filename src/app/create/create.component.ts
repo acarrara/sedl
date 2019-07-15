@@ -26,7 +26,7 @@ export class CreateComponent implements OnInit {
 
   private lords: Lord[] = lordsJson.map(lordJson => new Lord(lordJson.id, lordJson.name, lordJson.color, lordJson.treasure));
 
-  constructor(private gameService: GameService, private storage: StorageService) {
+  constructor(public gameService: GameService, private storage: StorageService) {
   }
 
   public ngOnInit(): void {

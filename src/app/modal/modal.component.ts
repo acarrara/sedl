@@ -1,4 +1,5 @@
 import {ChangeDetectionStrategy, Component, Input} from '@angular/core';
+import {GameService} from '../game.service';
 
 @Component({
   selector: 'se-modal',
@@ -15,5 +16,8 @@ export class ModalComponent {
 
   @Input()
   public overflow = true;
+
+  constructor(public gameService: GameService) {
+  }
 
 }

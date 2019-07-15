@@ -4,21 +4,18 @@ import {Lord} from './models/Lord';
 // tslint:disable:no-input-rename
 
 @Directive({
-  selector: '[seLordColors]'
+  selector: '[seCurrentLordColor]'
 })
-export class LordColorsDirective implements OnChanges {
+export class CurrentLordColorDirective implements OnChanges {
 
-  @Input('seLordColors')
-  public lords: Lord[];
+  @Input('seCurrentLordColor')
+  public currentLord: Lord;
 
   constructor(private element: ElementRef) {
   }
 
   public ngOnChanges(changes: SimpleChanges): void {
-    if (changes.lords) {
-      changes.lords.currentValue
-        .forEach(lord => this.setProperty(lord.id, lord.color));
-    }
+    this.setProperty('lord', changes.currentLord.currentValue.color);
   }
 
   private setProperty(lord: string, color: string) {
