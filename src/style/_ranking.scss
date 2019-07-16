@@ -7,7 +7,7 @@
     bottom: 100%;
     right: 0;
 
-    z-index: 800;
+    z-index: $z-index-controls;
 
     @include lord-color();
 

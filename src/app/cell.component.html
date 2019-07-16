@@ -5,7 +5,7 @@
     stroke: var(--{{id}}-color);
     }
   </style>
-  <use [attr.href]="'#' + seed"></use>
+  <use [attr.href]="'assets/symbols.svg#' + seed"></use>
   <use [ngClass]="{'cell--impregnable': impregnable}"
-       class="cell--sustenance" id="sustenance-{{i}}" *ngIf="sustenance || impregnable" href="#b"></use>
+       class="cell--sustenance" id="sustenance-{{i}}" *ngIf="sustenance || impregnable" href="assets/symbols.svg#b"></use>
 </svg>

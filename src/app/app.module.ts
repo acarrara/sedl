@@ -32,6 +32,7 @@ import {RankingCellComponent} from './ranking/ranking-cell.component';
 import {StatisticsComponent} from './statistics/statistics.component';
 import {IncrementalHistoryComponent} from './statistics/incremental-history.component';
 import {CurrentLordColorDirective} from './current-lord-color.directive';
+import {BackgroundComponent} from './background/background.component';
 
 @Injectable()
 export class MyHammerConfig extends HammerGestureConfig {
@@ -71,6 +72,7 @@ export class MyHammerConfig extends HammerGestureConfig {
     PinchAndZoomDirective,
     LordColorsDirective,
     CurrentLordColorDirective,
+    BackgroundComponent,
     RankPipe
   ],
   imports: [

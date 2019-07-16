@@ -30,7 +30,7 @@
   top: 0;
   left: 0;
 
-  z-index: 800;
+  z-index: $z-index-controls;
 
   padding: $spacing-l;
 
@@ -55,8 +55,6 @@
   @include flex-center();
 
   width: 100%;
-
-  z-index: 960;
 }
 
 .create__tool {

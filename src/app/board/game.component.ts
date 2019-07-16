@@ -14,11 +14,6 @@ export class GameComponent {
   public game: Game;
 
   public currentRegion: Region;
-  public backSeeds = [
-    'm', 'f', 'w', 'h', 'p', 'm', 'f', 'w', 'h',
-    'p', 'm', 'f', 'w', 'h', 'p', 'm', 'f', 'w',
-    'h', 'p', 'm', 'f', 'w', 'h', 'p', 'm', 'f',
-    'w', 'h', 'p'];
   public collapsed = true;
 
   constructor(public gameService: GameService) {
