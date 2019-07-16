@@ -1,9 +1,3 @@
-$m-color-foreground: #c8963e;
-$h-color-foreground: #e3c567;
-$p-color-foreground: #b6be9c;
-$w-color-foreground: #327cad;
-$f-color-foreground: #6ca285;
-
 $lords: (
   l1,
   l2,
@@ -28,10 +22,9 @@ $background-color-disabled: #888;
 
 $background-color: #ededed;
 $shadow-color: #999;
+$shadow-on-background-color: darken($background-color, 50%);
 
 $primary-color-background: #fafafa;
-
-$shadow-on-background-color: darken($background-color, 50%);
 
 $m-color-foreground: #c8963e;
 $h-color-foreground: #e3c567;
@@ -68,11 +61,14 @@ $lightness-base: 40%;
 }
 
 .colorful {
-  @include lord-color();
-
   @each $lord-id in $lords {
     --#{$lord-id}-color: hsl(var(--#{$lord-id}-hue), var(--saturation-delta, #{$saturation-base}), var(--lightness-delta, #{$lightness-base}));
   }
 }
 
 $breakpoint: 1024px;
+
+$z-index-bottom: 0;
+$z-index-game: 100;
+$z-index-modal: 0;
+$z-index-widget: 0;

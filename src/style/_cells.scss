@@ -36,10 +36,12 @@
 }
 
 .cell {
+  display: block;
+
   border-color: transparent;
   border-width: $spacing-s;
   border-style: solid;
-  display: block;
+
   border-radius: $spacing-s;
 
   cursor: pointer;

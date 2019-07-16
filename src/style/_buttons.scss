@@ -16,8 +16,8 @@
 
   @include transition-fast();
   @include small-shadow();
-
   @include lord-color();
+
   background-color: var(--lord-color);
 
   &:hover, &[disabled] {

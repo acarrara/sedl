@@ -1,96 +1,77 @@
 <se-modal size="l" name="help">
   <section class="help">
-    <p>SEDL! is a turn-based game simulating a clash of civilizations.</p>
+    <p>SEDL! is a turn based strategic game. You're a Lord and you rule over a settlement and some land in a virgin
+      world. Other Lords are trying to stand out in this world. Your goal is to rule them all and their settlements.</p>
     <p align="center">
       <img style="max-width: 100%" src="assets/SEDL.png" alt="SEDL"/>
     </p>
-    <p>There are two players, called <em>Lords</em>. They live in the same world and fight for survival.
-      Every Lord starts with one <em>settlement</em> on a <em>region</em>. The goal of a Lord is to control all the
-      settlements in
-      the world.</p>
 
-    <p>A <em>domain</em> is a set of adjacent regions. A region could be <em>plain</em>, <em>water</em>,
-      <em>forest</em>, <em>hill</em>, <em>mountain</em>, or
-      <em>settlement</em>.</p>
+    <p>Your people live in your settlements. Settlements have a sustenance cost — your people need to eat. To sustain
+      your settlements, you need to collect goods from your land.</p>
 
-    <p>A Lord harvest their domains at the beginning of their turn. Goods provide coins. Lords spend coins to expand
-      their domain.</p>
+    <p>Your explorers have charted the world in regions. They have found five types of land: plain, hill, mountain,
+      forest, and water. Each one has its advantages and weaknesses. See the table at the bottom to see the worth and
+      the
+      costs of all them.</p>
 
-    <p>Lords can <em>colonize</em>, <em>conquer</em>, <em>settle</em> and <em>fortify</em> regions. They can do
-      these only on regions next to a
-      domain containing at least a settlement. Lords can <em>rush</em>, too.</p>
+    <p>You start ruling over a settlement and its surrounding regions. This is your initial domain — a domain is a set
+      of
+      regions controlled by a settlement. Your people collect goods from your domain the the beginning of your turn.
+      They
+      convert them into coins for your treasury; then you pay your sustenance costs.</p>
 
-    <h2>Terrains</h2>
+    <p>Your domain is wide enough to sustain your settlement, but you won't go far with it. You need to expand your
+      domain
+      if you want to rule over the world. Use coins from your treasury to tame more regions.</p>
 
-    <h3>Plain</h3>
-    <p>Standard terrain. Easiest to colonize and conquer, low in resources — food.</p>
+    <p>You tame a land by colonization or by conquest. Colonize regions next to your domain when they don't belong to a
+      Lord. Conquer regions next to your domain when they do belong to another Lord. Each type of land has a
+      colonization
+      cost; conquering that region will cost you double. A tamed region enters your domain and is impregnable until your
+      next turn. Your people will collect goods from the new region at the beginning of your next turn.</p>
 
-    <h3>Water</h3>
-    <p>Easy to colonize and conquer, low in resources — food. Lords can’t build settlements on water.</p>
+    <p>Remember that you need your people to collect goods from a region. If another Lord cut off some regions from your
+      domain, your people won't be able to reach them. You won't collect goods from them as long as they don't belong to
+      a
+      domain. Those regions will recognize you as their Lord though: they won't resign.</p>
 
-    <h3>Forest</h3>
-    <p>Some difficulty to colonize and conquer, medium resources — wood, food.</p>
+    <p>You can't stop other Lords from conquering your regions in their turn, but you can make the task harder. Fortify
+      a
+      region to double the conquest cost. Remember that you can't fortify water and settlements!
+      Fortifications are great, but they have a cost — the same as the colonization cost. You must sustain this cost in
+      every turn. When you don't need a fortification anymore, you can withdraw your forces from it. Withdrawing won't
+      cost anything. Your forces will withdraw from a fortified region if you lose control over it.</p>
 
-    <h3>Hill</h3>
-    <p>Some difficulty to colonize and conquer, low resources — food.</p>
+    <p>If you can't pay for your fortifications at the beginning of your turn, all your forces will withdraw. Then you
+      can
+      fortify your regions again, based on your resources. If you still don't have enough money, then you can't sustain
+      your
+      settlements. Your people will get angry and won't work for you until the next turn.</p>
 
-    <h3>Mountain</h3>
-    <p>Hard to colonize and conquer, rich in resources — wood, iron.</p>
+    <p>Sometimes you need more money to reach your goals. You can ask your people to rush — they will collect more goods
+      in
+      that turn, and add 20% of your worth to your treasury. But this is a perilous move — you will collect your money,
+      but
+      you will wear out your people. Your domain will need some rest, too. You will collect half your worth in the next
+      turn, giving time to your domain and your people to rest.</p>
 
-    <h3>Settlement</h3>
-    <p>Settlements are at the mercy of troops if invaded. They also give no resources. They have a maintenance cost —
-      Lord's peasants live here.
-      Every settlement and its people can sustain up to 100 regions. A Lord needs another settlement to conquer or
-      colonize more regions.</p>
+    <p>A settlement and its people can sustain up to 100 regions — what can you do to expand your domain further? Build
+      another settlement! This also means that you can still collect goods if another Lord cuts your domain. You can
+      build
+      up to two more settlements, but you can control more of them by conquest.</p>
 
-    <p>If a Lord loses all of their settlements, they lose the game.</p>
+    <p>But pay attention! Even though a new settlement is impregnable until your next turn, they are very weak. If a
+      Lord
+      conquers a region next to a settlement, they can take the settlement too for free. And if the settlement is the
+      only
+      one in that domain, the Lord will win the whole domain too! To avoid this pitfall, try to keep more than one
+      settlement in every domain. If a Lord conquers a settlement, the domain is still yours, as it's reachable from the
+      other settlement.
+      When you lose control over all your settlements, you can't do anything and you lose.</p>
 
-    <h2>Actions</h2>
-    <h3>Harvesting</h3>
-    <p>Harvesting happens at the beginning of each turn. The Lord's peasants collect their goods and transform them into
-      coins.
-      Every type of region has a different worth in coins. The amount collected is the sum of every region's worth.</p>
+    <p>Time to rule the world, good luck and have fun!</p>
 
-    <h3>Sustaining</h3>
-    <p>Lords must sustain settlements and fortified regions. After the harvesting, Lords pay the sustenance costs.
-      If they don't have enough coins, they must pay for settlements first, so they revoke every fortification.
-      If they can't still pay for settlements, the peasants will revolt against the Lord and won't do anything more
-      until
-      the next turn.
-      Harvesting happens before the sustenance payments, so it wont't affect the treasure.</p>
-
-    <h3>Colonize</h3>
-    <p>Every type of terrain has a different colonization cost. Lords can only colonize regions next to a domain
-      containing at least a settlement.
-      A colonized plot joins immediately the Lord's domain.
-      Once colonized, a region is impregnable for one turn.</p>
-
-    <h3>Conquer</h3>
-    <p>Cost of conquer in a normal environment for regions is the colonization cost, double.
-      Lords can only conquer enemy regions next to a domain containing at least a settlement.
-      Once conquered, a region is impregnable for one turn.</p>
-
-    <h3>Fortify</h3>
-    <p>Lords can fortify every colonizable region in their domain — not settlements.
-      Fortification doubles the cost of conquer for every enemy on that region.</p>
-
-    <p>Its cost is equal to the cost of colonization for that region.
-      Lords must sustain ongoing fortifications. they can revoke the fortifications, too.</p>
-
-    <p>A Lord cannot fortify an already fortified region.</p>
-
-    <h3>Settle</h3>
-    <p>Lord can build a settlement on a region. They can only do it twice — they can still own more than three by
-      conquer.
-      When a Lord owns all the settlements on the map, they win the game.
-      The region is no more colonizable and doesn’t farm. Lords must sustain settlements.</p>
-
-    <h3>Rush</h3>
-    <p>A Lord can rush whenever he wants in their turn, but only once per turn.</p>
-
-    <p>Rush means that a Lord harvest more for that turn, but ignoring a correct seeding for the next one.
-      Rush adds 20% of the harvest income for that turn, but also halves the income of the following Lord's turn.</p>
-    <h2>Terrain values</h2>
+    <h2>Land worths and costs</h2>
     <table class="help__table">
       <thead>
       <tr>
@@ -130,10 +111,10 @@
       <tr>
         <th>Forest</th>
         <td>2</td>
-        <td>8</td>
-        <td>16</td>
-        <td>32</td>
-        <td>8</td>
+        <td>6</td>
+        <td>12</td>
+        <td>24</td>
+        <td>6</td>
       </tr>
       <tr>
         <th>Mountain</th>

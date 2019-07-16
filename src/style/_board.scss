@@ -10,17 +10,18 @@ $board-size: 36em;
 }
 
 .board {
-  background-color: $primary-color-background;
   display: grid;
   grid-template-rows: repeat(var(--grid-dimension, 8), 1fr);
   grid-template-columns: repeat(var(--grid-dimension, 8), 1fr);
   width: $board-size;
 
-  @include standard-shadow();
-
   padding: $spacing-m;
 
-  z-index: 100;
+  background-color: $primary-color-background;
+
+  @include standard-shadow();
+
+  z-index: $z-index-game;
 }
 
 .wrapper {

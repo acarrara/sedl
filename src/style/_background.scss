@@ -1,7 +1,9 @@
 .background {
   @include full-screen();
+
   background-color: $background-color;
-  z-index: 0;
+
+  z-index: $z-index-bottom;
 
   display: flex;
   flex-wrap: wrap;

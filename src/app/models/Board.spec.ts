@@ -179,9 +179,8 @@ describe('Board', () => {
     });
   });
 
-  xit('should compute needed header letters', () => {
-    const sources: string[] = ['SEDL!', 'Actions', 'Harvesting', 'Sustaining', 'Colonize', 'Conquer', 'Fortify',
-      'Settle', 'Rush', 'Terrain values', 'Plain', 'Water', 'Hill', 'Mountain', 'Settlement', 'Forest'];
+  it('should compute needed header letters', () => {
+    const sources: string[] = ['SEDL!', 'Land worths and costs'];
 
     const allChars: Set<string> = new Set<string>();
 
