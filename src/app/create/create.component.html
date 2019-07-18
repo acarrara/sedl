@@ -87,7 +87,7 @@
                (press)="onPress(i)"
                (mouseenter)="onEnter(i, $event)"
                (contextmenu)="$event.preventDefault()"
-               class="cell" *ngFor="let region of game.board.regions; let i = index"
+               class="cell  cell--interactive" *ngFor="let region of game.board.regions; let i = index"
                [seed]="region.type"></se-cell>
     </div>
   </div>

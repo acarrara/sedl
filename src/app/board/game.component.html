@@ -30,7 +30,7 @@
                (mouseenter)="actionEnter(region, $event)"
                (contextmenu)="$event.preventDefault()"
                [impregnable]="region.impregnable"
-               class="cell" *ngFor="let region of game.board.regions; let i = index; trackBy: trackBy"
+               class="cell  cell--interactive" *ngFor="let region of game.board.regions; let i = index; trackBy: trackBy"
                [seed]="game.board.world[i]"></se-cell>
     </main>
   </div>

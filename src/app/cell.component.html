@@ -1,5 +1,5 @@
 <svg class="cell__svg  {{seed}}" viewBox="0 0 1 1">
-  <style type="text/css">
+  <style *ngIf="sustenance || impregnable" type="text/css">
     #sustenance-{{i}}:not(.cell--impregnable) {
     fill: var(--{{id}}-color);
     stroke: var(--{{id}}-color);

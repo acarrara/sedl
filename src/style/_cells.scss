@@ -44,11 +44,14 @@
 
   border-radius: $spacing-s;
 
-  cursor: pointer;
 
   @include transition-fast();
 
-  &:hover {
+  &.cell--interactive {
+    cursor: pointer;
+  }
+
+  &.cell--interactive:hover {
     transform: translateY(-$spacing-s);
     @include standard-shadow();
   }

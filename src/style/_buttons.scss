@@ -43,6 +43,7 @@
 
   &[disabled] {
     color: $background-color-disabled;
+    stroke: $background-color-disabled;
     box-shadow: none;
 
     cursor: not-allowed;
@@ -50,6 +51,8 @@
 }
 
 .button--default {
+  stroke: $text-color;
+
   --lightness-delta: 50%;
   --saturation-delta: -50%;
 
@@ -69,6 +72,7 @@
   --lightness-delta: 0%;
 
   color: $background-color;
+  stroke: $background-color;
 
   &:hover {
     --saturation-delta-hover: -10%;
