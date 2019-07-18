@@ -1,5 +1,6 @@
 .background {
   @include full-screen();
+  position: fixed;
 
   background-color: $background-color;
 
@@ -8,9 +9,7 @@
   display: flex;
   flex-wrap: wrap;
 
-  position: fixed;
-
-  opacity: 0.3;
+  opacity: 0.25;
 
   & > * {
     width: 25%;

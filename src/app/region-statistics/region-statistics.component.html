@@ -3,12 +3,12 @@
     <se-cell class="cell  cell--statistics" [seed]="region.type"></se-cell>
   </span>
   <span class="region-statistics__element">
-      <se-cell class="cell  cell--statistics" seed="g"></se-cell>
+      <se-cell class="cell  cell--statistics" seed="collect"></se-cell>
       <span>{{region.worth()}}</span>
   </span>
   <span class="region-statistics__element">
     <span>{{canRun() ? 'You can' : 'You can\'t'}} {{getAction().name()| lowercase}}</span>
-    <se-cell *ngIf="canRun()" class="cell  cell--statistics" seed="c"></se-cell>
+    <se-cell *ngIf="canRun()" class="cell  cell--statistics" seed="coin"></se-cell>
     <span *ngIf="canRun()">{{getAction().cost(region)}}</span>
     <span style="margin-left: 4px">
       (<span *ngIf="region?.impregnable">impregnable </span>

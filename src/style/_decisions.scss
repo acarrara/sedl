@@ -26,11 +26,32 @@ $shadow-on-background-color: darken($background-color, 50%);
 
 $primary-color-background: #fafafa;
 
-$m-color-foreground: #c8963e;
-$h-color-foreground: #e3c567;
-$p-color-foreground: #b6be9c;
-$w-color-foreground: #327cad;
-$f-color-foreground: #6ca285;
+$land-saturation-foreground: 40;
+$land-saturation-background: 40;
+
+$land-lightness-foreground: 55;
+$land-lightness-background: 75;
+
+$m-hue: 30;
+$h-hue: 60;
+$p-hue: 90;
+$f-hue: 150;
+$w-hue: 210;
+
+$m-color-foreground: hsl($m-hue, $land-saturation-foreground, $land-lightness-foreground);
+$m-color-background: hsl($m-hue, $land-saturation-background, $land-lightness-background);
+
+$h-color-foreground: hsl($h-hue, $land-saturation-foreground, $land-lightness-foreground);
+$h-color-background: hsl($h-hue, $land-saturation-background, $land-lightness-background);
+
+$p-color-foreground: hsl($p-hue, $land-saturation-foreground, $land-lightness-foreground);
+$p-color-background: hsl($p-hue, $land-saturation-background, $land-lightness-background);
+
+$f-color-foreground: hsl($f-hue, $land-saturation-foreground, $land-lightness-foreground);
+$f-color-background: hsl($f-hue, $land-saturation-background, $land-lightness-background);
+
+$w-color-foreground: hsl($w-hue, $land-saturation-foreground, $land-lightness-foreground);
+$w-color-background: hsl($w-hue, $land-saturation-background, $land-lightness-background);
 
 $spacing-unit: 1px;
 $spacing-xxs: 1 * $spacing-unit;

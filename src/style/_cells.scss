@@ -1,26 +1,26 @@
 .m {
   stroke: $m-color-foreground;
-  background-color: rgba($m-color-foreground, .5);
+  background-color: $m-color-background;
 }
 
 .h {
   stroke: $h-color-foreground;
-  background-color: rgba($h-color-foreground, .5);
+  background-color: $h-color-background;
 }
 
 .p {
   stroke: $p-color-foreground;
-  background-color: rgba($p-color-foreground, .5);
-}
-
-.w {
-  stroke: $w-color-foreground;
-  background-color: rgba($w-color-foreground, .5);
+  background-color: $p-color-background;
 }
 
 .f {
   stroke: $f-color-foreground;
-  background-color: rgba($f-color-foreground, .5);
+  background-color: $f-color-background;
+}
+
+.w {
+  stroke: $w-color-foreground;
+  background-color: $w-color-background;
 }
 
 .u {

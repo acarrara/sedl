@@ -1,12 +1,12 @@
 <button class="button  button--primary" (click)="game.pass(); clicked()">
       <span class="button__content">
-        <se-cell seed="o" class="cell  cell--icon"></se-cell>
+        <se-cell seed="done" class="cell  cell--icon"></se-cell>
         <span class="button__label">Pass</span>
       </span>
 </button>
 <button class="button  button--default" (click)="game.rush(); clicked()" [disabled]="!lord.canRush()">
        <span class="button__content">
-        <se-cell seed="l" class="cell  cell--icon"></se-cell>
+        <se-cell seed="rush" class="cell  cell--icon"></se-cell>
         <span>Rush</span>
       </span>
 </button>

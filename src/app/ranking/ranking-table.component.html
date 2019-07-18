@@ -11,13 +11,13 @@
       <se-ranking-cell seed="s" [quantity]="lord.settlements()"></se-ranking-cell>
     </td>
     <td>
-      <se-ranking-cell seed="c" [quantity]="lord.treasure"></se-ranking-cell>
+      <se-ranking-cell seed="coin" [quantity]="lord.treasure"></se-ranking-cell>
     </td>
     <td>
-      <se-ranking-cell seed="g" [quantity]="lord.worth()"></se-ranking-cell>
+      <se-ranking-cell seed="collect" [quantity]="lord.worth()"></se-ranking-cell>
     </td>
     <td>
-      <se-ranking-cell class="{{lord.id}}" seed="d" [quantity]="lord.debt()"></se-ranking-cell>
+      <se-ranking-cell class="{{lord.id}}" seed="debt" [quantity]="lord.debt()"></se-ranking-cell>
     </td>
   </tr>
   </tbody>

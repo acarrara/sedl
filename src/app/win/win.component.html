@@ -1,6 +1,6 @@
 <se-modal name="win" [style.--lord-hue]="winner.color">
   <div class="win__element">
-    <se-cell *ngIf="display === 'win'" class="cell  win__icon  {{winner.id}}" seed="a"></se-cell>
+    <se-cell *ngIf="display === 'win'" class="cell  win__icon  {{winner.id}}" seed="medal"></se-cell>
     <se-replay style="max-width: 100%" *ngIf="display === 'replay'" (stop)="togglePause()"></se-replay>
     <se-statistics style="width: 100%" *ngIf="display === 'statistics'"></se-statistics>
   </div>
@@ -10,7 +10,7 @@
   <div class="win__element">
     <a class="button  button--default" href="#new">
            <span class="button__content">
-            <se-cell seed="n" class="cell  cell--icon"></se-cell>
+            <se-cell seed="new" class="cell  cell--icon"></se-cell>
             <span>New</span>
           </span>
     </a>
