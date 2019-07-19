@@ -1,4 +1,6 @@
 .controls {
+  position: relative;
+
   flex-grow: 0;
 
   width: 100%;
@@ -10,7 +12,7 @@
 
   background-color: $primary-color-background;
 
-  box-shadow: 0 1px $spacing-s 0 $shadow-on-background-color;
+  box-shadow: 0 $spacing-xxs $spacing-s 0 $shadow-on-background-color;
 
   z-index: $z-index-controls;
 
@@ -19,101 +21,54 @@
   @include lord-color();
 }
 
+[data-collapsed="true"] .controls__section {
+  opacity: 0;
+  transform: translateY(-10%);
+  pointer-events: none;
+}
+
 .controls--top {
   border-top: $spacing-m solid var(--lord-color);
 }
 
 .controls--bottom {
   border-bottom: $spacing-m solid var(--lord-color);
-  position: relative;
-}
-
-.controls__menu {
-  display: none;
 }
 
 .controls__section {
-  position: relative;
+  position: absolute;
+  right: 0;
+  top: 100%;
+
+  padding: $spacing-l;
+
   @include flex-align-center();
 
   background-color: $primary-color-background;
 
   @include transition-fast();
+  @include standard-shadow();
 
-  & > * + * {
-    margin-left: $spacing-xxl;
-    display: block;
+  .button + .button {
+    margin-left: 0;
+    margin-top: $spacing-l;
   }
 }
 
-.controls__menu-container {
-  display: flex;
-  justify-content: space-between;
-}
-
-.controls__anchor {
-  position: relative;
+.controls__actions {
+  @include flex-center();
 }
 
 @media only screen and (max-width: $breakpoint) {
 
-  .controls {
-    width: 100%;
+  .controls--bottom {
     flex-direction: column;
   }
 
-  .controls__anchor {
-    width: 100%;
-
-    & .button--primary {
-      display: none;
+  .controls__actions {
+    .button + .button {
+      margin-top: 0;
     }
-  }
-
-  .controls__menu-container {
-    padding: $spacing-l;
-  }
-
-  .controls--top {
-    position: absolute;
-    padding: 0;
-  }
-
-  .controls__section {
-    flex-direction: column;
-
-    position: absolute;
-    left: 0;
-    right: 0;
-    top: 0;
-
-    padding-top: $spacing-l;
-
-    @include standard-shadow();
-
-    & > * {
-      width: 100%;
-    }
-
-    & > * + * {
-      margin-top: $spacing-l;
-      margin-left: 0;
-    }
-  }
-
-  .controls__menu-container {
-    width: 100%;
-  }
-
-  .controls__menu {
-    display: initial;
-  }
-
-  [data-collapsed="true"] .controls__section {
-    opacity: 0;
-    transform: translateY(-10%);
-    pointer-events: none;
-    width: 100%;
   }
 
 }

@@ -58,7 +58,8 @@
 }
 
 .create__tool {
-  @include flex-center();
+  display: flex;
+  width: 100%;
 }
 
 .create__tool-option {
@@ -86,13 +87,7 @@
   margin-left: $spacing-m;
 }
 
-.create__tool-title {
-  padding: $spacing-m;
-}
-
 .create__input {
-  margin-left: $spacing-l;
-
   font-size: inherit;
   font-family: inherit;
   color: inherit;
@@ -113,6 +108,12 @@
     box-shadow: 0 0 0 $spacing-s var(--lord-color-focus);
 
   }
+}
+
+.create__tool-title {
+  flex-basis: 4em;
+  flex-grow: 0;
+  padding: $spacing-m;
 }
 
 .create__input--name {

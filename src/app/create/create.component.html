@@ -13,20 +13,22 @@
       <aside class="create__header" [attr.data-collapsed]="collapsed">
         <div class="create__tools">
           <div class="create__tool">
-            <label>
-              <span class="create__tool-title">Name</span>
-              <input class="create__input  create__input--name" #nameInput (input)="onNameInput()" maxlength="16"
-                     [defaultValue]="game.name"/>
+            <label for="nameInput" class="create__tool-title">
+              <span>Name</span>
             </label>
+            <input id="nameInput" class="create__input  create__input--name" #nameInput (input)="onNameInput()"
+                   maxlength="16"
+                   [defaultValue]="game.name"/>
           </div>
           <div class="create__tool">
-            <label>
-              <span class="create__tool-title">Size</span>
-              <select class="create__input  create__input--size" name="size" #sizeInput (input)="onSizeInput()">
-                <option *ngFor="let value of [8, 10, 12, 14, 16, 18, 20]"
-                        [attr.selected]="value === size ? '' : null">{{value}}</option>
-              </select>
+            <label for="sizeInput" class="create__tool-title">
+              <span>Size</span>
             </label>
+            <select id="sizeInput" class="create__input  create__input--size" name="size" #sizeInput
+                    (input)="onSizeInput()">
+              <option *ngFor="let value of [8, 10, 12, 14, 16, 18, 20]"
+                      [attr.selected]="value === size ? '' : null">{{value}}</option>
+            </select>
           </div>
         </div>
         <div class="create__tools">

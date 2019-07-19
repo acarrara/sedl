@@ -1,21 +1,26 @@
 <div class="wrapper" (document:keydown.space)="gameService.pass()">
   <se-controls [seCurrentLordColor]="gameService.lord$ | async" side="top" [attr.data-collapsed]="collapsed">
-    <div class="controls__menu-container">
       <se-logo></se-logo>
-      <div>
-        <button class="button  button--primary  button--small  controls__menu" (click)="gameService.pass()">
-          <se-cell seed="done" class="cell  cell--icon"></se-cell>
+      <div class="controls__actions">
+        <button class="button  button--primary  button--action" (click)="gameService.pass()">
+          <span class="button__content">
+            <se-cell seed="done" class="cell  cell--icon"></se-cell>
+            <span class="button__title">Pass</span>
+          </span>
         </button>
-        <button class="button  button--default  button--small  controls__menu" (click)="toggleMenu()">
+        <button class="button  button--default  button--action" (click)="gameService.rush()"
+                [disabled]="!(gameService.lord$ | async).canRush()">
+          <span class="button__content">
+            <se-cell seed="rush" class="cell  cell--icon"></se-cell>
+            <span class="button__title">Rush</span>
+          </span>
+        </button>
+        <button class="button  button--default  button--small" (click)="toggleMenu()">
           <se-cell class="cell  cell--icon" seed="menu"></se-cell>
         </button>
       </div>
-    </div>
-    <div class="controls__anchor">
-      <div class="controls__section">
-        <se-actions [lord]="gameService.lord$ | async" (selection)="toggleMenu()"></se-actions>
-        <se-support (selection)="toggleMenu()"></se-support>
-      </div>
+    <div class="controls__section">
+      <se-support (selection)="toggleMenu()"></se-support>
     </div>
   </se-controls>
   <div class="board-container">
@@ -30,7 +35,8 @@
                (mouseenter)="actionEnter(region, $event)"
                (contextmenu)="$event.preventDefault()"
                [impregnable]="region.impregnable"
-               class="cell  cell--interactive" *ngFor="let region of game.board.regions; let i = index; trackBy: trackBy"
+               class="cell  cell--interactive"
+               *ngFor="let region of game.board.regions; let i = index; trackBy: trackBy"
                [seed]="game.board.world[i]"></se-cell>
     </main>
   </div>

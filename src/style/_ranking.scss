@@ -17,6 +17,8 @@
 
     @include transition-fast();
 
+    box-shadow: 0 $spacing-m 0 0 $primary-color-background, 0 $spacing-xxs $spacing-s 0 $shadow-on-background-color;
+
     &[data-collapsed="true"] {
       opacity: 0;
       transform: translateY(10%);

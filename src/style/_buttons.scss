@@ -103,37 +103,35 @@
   padding: $spacing-s;
 
   box-shadow: none;
+
+  &.button--default {
+    background-color: initial;
+  }
 }
 
 @media only screen and (max-width: $breakpoint) {
 
-  .button {
-    margin: 0;
-    width: 100%;
-    border-radius: 0;
-    flex-basis: initial;
-
-    box-shadow: none;
-
-    &.button--default {
-      --lightness-delta: 60%;
-    }
-  }
-
   .button + .button {
     margin-left: 0;
+    margin-top: $spacing-l;
   }
 
-  .button--small {
+  .button--small, .button--action {
     width: initial;
     border-radius: $spacing-s;
   }
 
-  .button--small + .button--small {
+  .button--small + .button--small, .button--action + .button--action, .button--action + .button--small  {
     margin-left: $spacing-m;
   }
-}
 
-.button--small.button--default {
-  background-color: initial;
+  .button--action {
+    padding: $spacing-s;
+
+    box-shadow: none;
+
+    .button__title {
+      display: none;
+    }
+  }
 }
