@@ -22,6 +22,25 @@
   }
 }
 
+.help__image {
+  max-width: 100%;
+}
+
+.help__hint {
+  width: 100%;
+
+  padding: $spacing-l;
+
+  --lightness-delta-highlight: 50%;
+
+  @include lord-color();
+  @include lord-color('highlight');
+
+  background-color: var(--lord-color-highlight);
+  border-left: solid $spacing-s var(--lord-color);
+  border-radius: $spacing-s;
+}
+
 @media only screen and (max-width: $breakpoint) {
 
   .help__table {

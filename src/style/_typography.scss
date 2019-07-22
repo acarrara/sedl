@@ -28,7 +28,12 @@ body {
   line-height: 1.45;
 }
 
-p {
+figure {
+  @include flex-align-center();
+  flex-direction: column;
+}
+
+p, figure {
   margin-bottom: 1.25em;
 }
 
@@ -58,7 +63,7 @@ h5 {
   font-size: 1.2em;
 }
 
-small, .text_small {
+small, .text_small, figcaption {
   font-size: 0.833em;
 }
 

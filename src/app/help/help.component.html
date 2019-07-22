@@ -2,72 +2,95 @@
   <section class="help">
     <p>SEDL! is a turn based strategic game. You're a Lord and you rule over a settlement and some land in a virgin
       world. Other Lords are trying to stand out in this world. Your goal is to rule them all and their settlements.</p>
-    <p align="center">
-      <img style="max-width: 100%" src="assets/SEDL.png" alt="SEDL"/>
-    </p>
+    <figure>
+      <img class="help__image" src="assets/SEDL.png" alt="SEDL"/>
+    </figure>
 
     <p>Your people live in your settlements. Settlements have a sustenance cost — your people need to eat. To sustain
       your settlements, you need to collect goods from your land.</p>
 
     <p>Your explorers have charted the world in regions. They have found five types of land: plain, hill, mountain,
       forest, and water. Each one has its advantages and weaknesses. See the table at the bottom to see the worth and
-      the
-      costs of all them.</p>
+      the costs of all them.</p>
 
     <p>You start ruling over a settlement and its surrounding regions. This is your initial domain — a domain is a set
-      of
-      regions controlled by a settlement. Your people collect goods from your domain the the beginning of your turn.
-      They
-      convert them into coins for your treasury; then you pay your sustenance costs.</p>
+      of regions controlled by a settlement. Your people collect goods from your domain the the beginning of your turn.
+      They convert them into coins for your treasury; then you pay your sustenance costs.</p>
+
+    <figure>
+      <img class="help__image" src="assets/before.png" alt="Starting domain"/>
+      <figcaption>A domain is a set of regions controlled by a settlement.</figcaption>
+    </figure>
 
     <p>Your domain is wide enough to sustain your settlement, but you won't go far with it. You need to expand your
-      domain
-      if you want to rule over the world. Use coins from your treasury to tame more regions.</p>
+      domain if you want to rule over the world. Use coins from your treasury to tame more regions.</p>
 
-    <p>You tame a land by colonization or by conquest. Colonize regions next to your domain when they don't belong to a
-      Lord. Conquer regions next to your domain when they do belong to another Lord. Each type of land has a
-      colonization
-      cost; conquering that region will cost you double. A tamed region enters your domain and is impregnable until your
-      next turn. Your people will collect goods from the new region at the beginning of your next turn.</p>
+    <p class="help__hint" [seCurrentLordColor]="game.lord$ | async">Pinch the map to zoom in and out. Pan it to move
+      along your domains.</p>
+
+    <p>You tame a land by colonization or conquest. Colonize regions next to your domain when they don't belong to a
+      Lord.</p>
+
+    <figure>
+      <img class="help__image" src="assets/colonize.png" alt="Domain expansion by colonization"/>
+      <figcaption>Colonizing a region.</figcaption>
+    </figure>
+
+    <p>Conquer regions next to your domain when they do belong to another Lord.</p>
+
+    <figure>
+      <img class="help__image" src="assets/conquer.png" alt="Domain expansion by conquest"/>
+      <figcaption>Conquering a region.</figcaption>
+    </figure>
+
+    <p> Each type of land has a colonization cost; conquering that region will cost you double. A tamed region enters
+      your domain and is impregnable until your next turn. Your people will collect goods from the new region at the
+      beginning of your next turn.</p>
+
+    <p class="help__hint" [seCurrentLordColor]="game.lord$ | async">Tap a region next to your domain to conquer or
+      colonize it.</p>
 
     <p>Remember that you need your people to collect goods from a region. If another Lord cut off some regions from your
       domain, your people won't be able to reach them. You won't collect goods from them as long as they don't belong to
-      a
-      domain. Those regions will recognize you as their Lord though: they won't resign.</p>
+      a domain. Those regions will recognize you as their Lord though: they won't resign.</p>
+
+    <figure>
+      <img class="help__image" src="assets/isolated.png" alt="A domain and some isolated regions"/>
+      <figcaption>People from the settlement can't reach the regions on the left.</figcaption>
+    </figure>
 
     <p>You can't stop other Lords from conquering your regions in their turn, but you can make the task harder. Fortify
-      a
-      region to double the conquest cost. Remember that you can't fortify water and settlements!
+      a region to double its conquest cost. Remember that you can't fortify water and settlements!
       Fortifications are great, but they have a cost — the same as the colonization cost. You must sustain this cost in
-      every turn. When you don't need a fortification anymore, you can withdraw your forces from it. Withdrawing won't
-      cost anything. Your forces will withdraw from a fortified region if you lose control over it.</p>
+      every turn. When you don't need a fortification anymore, you can withdraw your forces from the region.
+      Withdrawing won't cost anything. Your forces will withdraw from a fortified region if you lose control over
+      it.</p>
+
+    <p class="help__hint" [seCurrentLordColor]="game.lord$ | async">Tap a region in your domain to fortify it. Tap it
+      again to withdraw your forces from there.</p>
 
     <p>If you can't pay for your fortifications at the beginning of your turn, all your forces will withdraw. Then you
-      can
-      fortify your regions again, based on your resources. If you still don't have enough money, then you can't sustain
-      your
-      settlements. Your people will get angry and won't work for you until the next turn.</p>
+      can fortify your regions again, based on your resources. If you still don't have enough money, then you can't
+      sustain your settlements. Your people will get angry and won't work for you until the next turn.</p>
 
     <p>Sometimes you need more money to reach your goals. You can ask your people to rush — they will collect more goods
-      in
-      that turn, and add 20% of your worth to your treasury. But this is a perilous move — you will collect your money,
-      but
-      you will wear out your people. Your domain will need some rest, too. You will collect half your worth in the next
-      turn, giving time to your domain and your people to rest.</p>
+      in that turn, and add 20% of your worth to your treasury. But this is a perilous move — you will collect your
+      money, but you will wear out your people. Your domain will need some rest, too. You will collect half your worth
+      in the next turn, giving time to your domain and your people to rest.</p>
 
     <p>A settlement and its people can sustain up to 100 regions — what can you do to expand your domain further? Build
-      another settlement! This also means that you can still collect goods if another Lord cuts your domain. You can
-      build
-      up to two more settlements, but you can control more of them by conquest.</p>
+      another settlement! If you have more settlements in your domain, you won't fear other Lords cutting your domain in
+      half. You can build up to two more settlements, but you can control more conquering them.</p>
+
+    <p class="help__hint" [seCurrentLordColor]="game.lord$ | async">Press and hold a region in your domain to build a
+      settlement.</p>
 
     <p>But pay attention! Even though a new settlement is impregnable until your next turn, they are very weak. If a
-      Lord
-      conquers a region next to a settlement, they can take the settlement too for free. And if the settlement is the
-      only
-      one in that domain, the Lord will win the whole domain too! To avoid this pitfall, try to keep more than one
-      settlement in every domain. If a Lord conquers a settlement, the domain is still yours, as it's reachable from the
-      other settlement.
-      When you lose control over all your settlements, you can't do anything and you lose.</p>
+      Lord conquers a region next to a settlement, they can take the settlement too for free. And if the settlement is
+      the only one in that domain, the Lord will win the whole domain too! To avoid this pitfall, try to keep more than
+      one settlement in every domain. If a Lord conquers one of the settlements, the domain is still yours, as it's
+      reachable from other settlements. When you lose control over all your settlements, you can't do anything and you
+      lose.</p>
 
     <p>Time to rule the world, good luck and have fun!</p>
 
