@@ -3,24 +3,24 @@
     "id": "l1",
     "name": "Charle",
     "color": "210",
-    "treasure": 50
+    "treasure": 20
   },
   {
     "id": "l2",
     "name": "Caesar",
     "color": "0",
-    "treasure":  50
+    "treasure":  20
   },
   {
     "id": "l3",
     "name": "Ivan",
     "color": "145",
-    "treasure":  50
+    "treasure":  20
   },
   {
     "id": "l4",
     "name": "Napoleon",
     "color": "65",
-    "treasure":  50
+    "treasure":  20
   }
 ]

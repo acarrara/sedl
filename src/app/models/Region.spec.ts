@@ -147,7 +147,7 @@ describe('Region', () => {
     it('should return the conquer cost when fortified', () => {
       const aRegion = new Region('lord', 'p', true, false);
 
-      expect(aRegion.conquerCost()).toEqual(16);
+      expect(aRegion.conquerCost()).toEqual(24);
     });
   });
 

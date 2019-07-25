@@ -1,4 +1,7 @@
 import {ChangeDetectionStrategy, Component} from '@angular/core';
+import {Land} from '../models/Land';
+
+const types = Land.LANDS.map(land => land.type);
 
 @Component({
   selector: 'se-background',
@@ -7,9 +10,5 @@ import {ChangeDetectionStrategy, Component} from '@angular/core';
 })
 export class BackgroundComponent {
 
-  public backSeeds = [
-    'm', 'f', 'w', 'h', 'p', 'm', 'f', 'w', 'h',
-    'p', 'm', 'f', 'w', 'h', 'p', 'm', 'f', 'w',
-    'h', 'p', 'm', 'f', 'w', 'h', 'p', 'm', 'f',
-    'w', 'h', 'p', 'm', 'f', 'w', 'h', 'p', 'm'];
+  public backSeeds = [...types, ...types, ...types, ...types, ...types];
 }

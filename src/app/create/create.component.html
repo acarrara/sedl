@@ -34,7 +34,7 @@
         <div class="create__tools">
           <div class="create__tool">
             <span class="create__tool-title">Terrain</span>
-            <ng-container *ngFor="let type of ['p','f','h','m','w']">
+            <ng-container *ngFor="let type of ['p','f','h','m','w', 'l']">
               <input [checked]="type === 'p'" type="radio" name="seed"
                      (click)="currentSeed(type)" id="seed-{{type}}" class="create__tool-option">
               <label for="seed-{{type}}" class="button  button--small  button--default">

@@ -37,6 +37,7 @@ $h-hue: 60;
 $p-hue: 90;
 $f-hue: 150;
 $w-hue: 210;
+$l-hue: 270;
 
 $m-color-foreground: hsl($m-hue, $land-saturation-foreground, $land-lightness-foreground);
 $m-color-background: hsl($m-hue, $land-saturation-background, $land-lightness-background);
@@ -52,6 +53,9 @@ $f-color-background: hsl($f-hue, $land-saturation-background, $land-lightness-ba
 
 $w-color-foreground: hsl($w-hue, $land-saturation-foreground, $land-lightness-foreground);
 $w-color-background: hsl($w-hue, $land-saturation-background, $land-lightness-background);
+
+$l-color-foreground: hsl($l-hue, $land-saturation-foreground, $land-lightness-foreground);
+$l-color-background: hsl($l-hue, $land-saturation-background, $land-lightness-background);
 
 $spacing-unit: 1px;
 $spacing-xxs: 1 * $spacing-unit;

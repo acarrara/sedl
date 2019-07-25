@@ -60,7 +60,14 @@
     </figure>
 
     <p>You can't stop other Lords from conquering your regions in their turn, but you can make the task harder. Fortify
-      a region to double its conquest cost. Remember that you can't fortify water and settlements!
+      a region to triple its conquest cost. Remember that you can't fortify water and settlements!</p>
+
+    <figure>
+      <img class="help__image" src="assets/fortify.png" alt="A region being fortified"/>
+      <figcaption>Fortifying a region.</figcaption>
+    </figure>
+
+    <p>
       Fortifications are great, but they have a cost — the same as the colonization cost. You must sustain this cost in
       every turn. When you don't need a fortification anymore, you can withdraw your forces from the region.
       Withdrawing won't cost anything. Your forces will withdraw from a fortified region if you lose control over
@@ -107,53 +114,13 @@
       </tr>
       </thead>
       <tbody>
-      <tr>
-        <th>Plain</th>
-        <td>1</td>
-        <td>4</td>
-        <td>8</td>
-        <td>16</td>
-        <td>4</td>
-      </tr>
-      <tr>
-        <th>Water</th>
-        <td>1</td>
-        <td>6</td>
-        <td>12</td>
-        <td>24</td>
-        <td>6</td>
-      </tr>
-      <tr>
-        <th>Hill</th>
-        <td>1</td>
-        <td>6</td>
-        <td>12</td>
-        <td>24</td>
-        <td>6</td>
-      </tr>
-      <tr>
-        <th>Forest</th>
-        <td>2</td>
-        <td>6</td>
-        <td>12</td>
-        <td>24</td>
-        <td>6</td>
-      </tr>
-      <tr>
-        <th>Mountain</th>
-        <td>3</td>
-        <td>10</td>
-        <td>20</td>
-        <td>40</td>
-        <td>10</td>
-      </tr>
-      <tr>
-        <th>Settlement</th>
-        <td>0</td>
-        <td>0</td>
-        <td>0</td>
-        <td>0</td>
-        <td>4</td>
+      <tr *ngFor="let land of lands">
+        <th>{{land.name | titlecase}}</th>
+        <td>{{land.worth}}</td>
+        <td>{{land.cost}}</td>
+        <td>{{conquerCost(land, false)}}</td>
+        <td>{{conquerCost(land, true)}}</td>
+        <td>{{sustenanceCost(land)}}</td>
       </tr>
       </tbody>
     </table>

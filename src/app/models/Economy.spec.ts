@@ -50,11 +50,11 @@ describe('Economy', () => {
     });
 
     it('should return every land type conquer cost when fortified', () => {
-      expect(Economy.conquerCost('m', true)).toEqual(40);
-      expect(Economy.conquerCost('f', true)).toEqual(24);
-      expect(Economy.conquerCost('p', true)).toEqual(16);
-      expect(Economy.conquerCost('w', true)).toEqual(24);
-      expect(Economy.conquerCost('h', true)).toEqual(24);
+      expect(Economy.conquerCost('m', true)).toEqual(60);
+      expect(Economy.conquerCost('f', true)).toEqual(36);
+      expect(Economy.conquerCost('p', true)).toEqual(24);
+      expect(Economy.conquerCost('w', true)).toEqual(36);
+      expect(Economy.conquerCost('h', true)).toEqual(36);
       expect(Economy.conquerCost('s', true)).toEqual(0);
     });
   });

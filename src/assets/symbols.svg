@@ -27,6 +27,14 @@
       <path d="M52 75 v -50" fill="transparent" stroke-width="10" stroke-linecap="round" stroke-linejoin="round"></path>
       <path d="M67 65 v -30" fill="transparent" stroke-width="6" stroke-linecap="round" stroke-linejoin="round"></path>
     </symbol>
+    <symbol id="l" viewBox="0 0 100 100">
+      <path d="M15 35 q 5 5, 10 0 q 5 -5, 10 0 q 5 5, 10 0 q 5 -5, 10 0 q 5 5, 10 0 q 5 -5, 10 0"
+            fill="transparent" stroke-width="6" stroke-linecap="round" stroke-linejoin="round"></path>
+      <path d="M20 50 q 5 5, 10 0 q 5 -5, 10 0 q 5 5, 10 0 q 5 -5, 10 0 q 5 5, 10 0 q 5 -5, 10 0"
+            fill="transparent" stroke-width="6" stroke-linecap="round" stroke-linejoin="round"></path>
+      <path d="M25 65 q 5 5, 10 0 q 5 -5, 10 0 q 5 5, 10 0 q 5 -5, 10 0 q 5 5, 10 0 q 5 -5, 10 0"
+            fill="transparent" stroke-width="6" stroke-linecap="round" stroke-linejoin="round"></path>
+    </symbol>
     <symbol id="s" viewBox="0 0 100 100">
       <path d="M0 100 v -100 h 20 v 15 h 20 v -15 h 20 v 15 h 20 v -15 h 20 v 100 h -100" stroke-width="1" stroke="#ccc"
             fill="#ccc"></path>

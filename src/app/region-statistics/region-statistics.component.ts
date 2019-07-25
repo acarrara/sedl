@@ -1,6 +1,7 @@
 import {ChangeDetectionStrategy, Component, Input} from '@angular/core';
 import {Region} from '../models/Region';
 import {Lord} from '../models/Lord';
+import {Land} from '../models/Land';
 
 @Component({
   selector: 'se-region-statistics',
@@ -14,23 +15,13 @@ export class RegionStatisticsComponent {
   @Input()
   public lord: Lord;
 
+  private labels = Land.LANDS.reduce((labels, land) => {
+    labels[land.type] = land.name;
+    return labels;
+  }, {});
+
   public getLabel() {
-    switch (this.region.type) {
-      case 's':
-        return 'settlement';
-      case 'w':
-        return 'water';
-      case 'p':
-        return 'plain';
-      case 'h':
-        return 'hill';
-      case 'f':
-        return 'forest';
-      case 'm':
-        return 'mountain';
-      default:
-        return 'Unknown';
-    }
+    return this.labels[this.region.type];
   }
 
   public getAction() {

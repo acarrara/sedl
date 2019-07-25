@@ -1,22 +1,16 @@
+import {Land} from './Land';
+
 export class Economy {
 
-  private static WORTHS = {
-    m: 3,
-    f: 2,
-    p: 1,
-    h: 1,
-    w: 1,
-    s: 0
-  };
+  private static WORTHS = Land.LANDS.reduce((worths, land) => {
+    worths[land.type] = land.worth;
+    return worths;
+  }, {});
 
-  private static COSTS = {
-    m: 10,
-    f: 6,
-    h: 6,
-    w: 6,
-    p: 4,
-    s: 0
-  };
+  private static COSTS = Land.LANDS.reduce((costs, land) => {
+    costs[land.type] = land.cost;
+    return costs;
+  }, {});
 
   private static SUSTENANCES = Object.keys(Economy.COSTS).reduce((o, k) => {
     o[k] = k === 's' ? 4 : Economy.COSTS[k];
@@ -28,7 +22,7 @@ export class Economy {
   }
 
   public static cost(type: string, sustenance: boolean) {
-    return Economy.baseCost(type) * (sustenance as any + 1);
+    return Economy.baseCost(type) * (sustenance ? 3 : 1);
   }
 
   public static sustenanceCost(type: string): number {
